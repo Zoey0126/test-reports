@@ -1,0 +1,250 @@
+[
+ {
+  "issue_key": "HERO-68133",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68133_20260914_092415.docx",
+  "template": "report",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68133",
+   "summary": "Report - TMS039 - Add Syndicate Owner Indicator field",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "User Story\n\nAs a report user, I want the \"Syndicate Owner Indicator\" field added to the TMS039 Override Date Limitation for Advance Booking report so that I can identify each reservation's syndicate owner status at a glance.\n\nCurrent Behavior\n\nThe TMS039 Override Date Limitation for Advance Booking report does not display the \"Syndicate Owner Indicator\" field. The value is stored in the TMS reservation record (DB field hkjc_resv_members: rmem_syndicate_owner_indicator, ref. HERO-64070, HERO-67705) but is not surfaced in this report.\n\nExpected Behavior\n\nThe TMS039 Override Date Limitation for Advance Booking report should display a new \"Syndicate Owner Indicator\" column placed to the LEFT of the \"Syndicate Owner\" field. The column should render the following values from the database:\n\n- Y = Yes → display \"Y\"\n\n- N = No → display \"N\"\n\n- empty = reservation uses an offline profile with no Syndicate Owner Indicator → display blank\n\nThe field must be visible to all users who can currently access this report, and must appear in both the on-screen display and all printed/exported formats (e.g., PDF, Excel).\n\nAcceptance Criteria\n\nAdd Syndicate Owner Indicator column\n\n- Given the user opens the TMS039 Override Date Limitation for Advance Booking report\n\n- When the report is generated\n\n- Then a new column named \"Syndicate Owner Indicator\" is displayed to the LEFT of the \"Syndicate Owner\" field\n\n- And the column is visible to all users who can currently access this report\n\n- And the column appears in the on-screen display and in all printed/exported formats (PDF, Excel)\n\nDisplay indicator values\n\n- Given a reservation has a Syndicate Owner Indicator value in the database\n\n- When the report is generated\n\n- Then the cell displays \"Y\" when the DB value is Y\n\n- And the cell displays \"N\" when the DB value is N\n\n- But the cell is left blank when the DB value is empty (reservation uses an offline profile with no Syndicate Owner Indicator)\n\nHandle unexpected DB values\n\n- Given the DB field hkjc_resv_members: rmem_syndicate_owner_indicator contains a value other than Y, N, or empty (e.g., null, whitespace, or an unexpected character)\n\n- When the report is generated\n\n- Then the cell is left blank and the report does not error or crash\n\nSupporting Evidence\n\nDB field: hkjc_resv_members: rmem_syndicate_owner_indicator (to be confirmed with TMS team)\n\nRelated tickets: HERO-64070, HERO-67705 (Syndicate Owner Indicator field added to TMS reservation record)\n\nRequested Timeline\n\nAligned with Priority: Medium\n\nNotes: No fixed deadline provided by requester.\n\nOriginal Description (preserved by INF Prod. Studio)\n\nBackground\n\nSyndicate Owner Indicator field is added to TMS reservation record (ref. HERO-64070, HERO-67705). It is also needed to show in several reports.\n\nRequirement\n\nIn the 10 reports below,\n\n| TMS009 Special Booking List (By Outlet)\n\n| TMS015 Pre-Race Booking List\n\n| TMS016 Post-Race Booking List\n\n| TMS020 Waiting List Report\n\n| TMS022 Master Pre-Race Booking List\n\n| TMS024 Waiting List Extraction\n\n| TMS025 Unsuccessful Waiting List Report (By Outlet)\n\n| TMS035 Waiting List Report (Owner Box)\n\n| TMS037 Master Pre-Race Booking List with Contact Information\n\n| TMS039 Override Date Limitation for Advance Booking\n\nTo add \"Syndicate Owner Indicator\" field on the LEFT of \"Syndicate Owner” field.\n\ne.g.\n\nNote: DB field is hkjc_resv_members: rmem_syndicate_owner_indicator (Please confirm with TMS team)",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Elvar Wu",
+     "email": "elvar.wu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67812",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67812_20260914_092415.docx",
+  "template": "report",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67812",
+   "summary": "Report - POS015 Discount Report By Check - Apply decimal place and thousands separator per Report Format Configuration",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "User Story\n\nAs a report user, I want the POS015 Discount Report By Check to format the Item Department column values according to the active Report Format Configuration (Decimal Place and Thousand Separator) so that the report output is consistent, accurate, and readable across all output formats and environments.\n\nCurrent Behavior\n\nThe POS015 Discount Report By Check on both HQ and Local currently displays numeric values in the Item Department columns with decimal places (e.g., trailing zeros) and fails to apply thousands separators, even though the configuration has been set up under System Configuration > Report Module. The report ignores the configured Decimal Place and Thousand Separator settings.\n\nExpected Behavior\n\nThe POS015 Discount Report By Check should format all numeric values in the Item Department columns based on the active Report Format Configuration under System Configuration > Report Module. The formatting must respect the exact decimal-place count defined in the configuration (e.g., a setting of 2 keeps 10.50 as 10.50; a setting of 0 removes all decimals) and apply thousands separators when enabled. The same formatting must be applied identically across all output formats (on-screen, PDF, Excel/CSV) and must behave identically whether generated from HQ or Local, since both read from the same Report Format Configuration. Only newly generated reports reflect configuration changes; previously saved or exported reports remain unchanged.\n\nAcceptance Criteria\n\nApply decimal place and thousands separator formatting to Item Department columns\n\n- Given the Report Format Configuration under System Configuration > Report Module defines a Decimal Place count and a Thousand Separator setting\n\n- When the POS015 Discount Report By Check is generated\n\n- Then all numeric values in the Item Department columns are displayed with exactly the configured decimal-place count\n\n- And thousands separators are applied to all relevant numeric values when the Thousand Separator setting is enabled\n\n- But if the Thousand Separator setting is disabled, no thousands separators are applied\n\n- But if the Decimal Place count is set to 0, all decimal places are removed (e.g., 10.50 becomes 11 when rounded, or 10 when truncated per existing rounding rules)\n\nConsistent formatting across all output formats\n\n- Given the Report Format Configuration is set\n\n- When the POS015 Discount Report By Check is generated in any output format (on-screen, PDF, Excel/CSV)\n\n- Then the decimal place and thousands separator formatting is applied identically across all output formats\n\n- But if any output format cannot render the configured formatting, the report still displays the value without corrupting or dropping the underlying numeric data\n\nIdentical behavior on HQ and Local\n\n- Given the POS015 Discount Report By Check is generated from either the HQ backend or a local store terminal\n\n- When both environments read from the same Report Format Configuration\n\n- Then both HQ and Local produce identical formatted output for the same underlying data\n\nConfiguration changes apply to newly generated reports only\n\n- Given the Report Format Configuration is modified\n\n- When a new POS015 Discount Report By Check is generated after the change\n\n- Then the new report reflects the updated formatting\n\n- And previously saved or exported reports remain unchanged\n\n- But if a report is regenerated after the configuration change, it reflects the new formatting\n\nSupporting Evidence\n\nReport module current configuration sample provided in the original ticket.\n\nRequested Timeline\n\nAligned with Priority: Medium\n\nPreferred Quarter: Not specified\n\nTarget Version: Not specified\n\nNotes: Scope is strictly limited to the POS015 Discount Report By Check; other reports will be handled in separate tickets.\n\nAlternatives Considered\n\nNot specified by requester.\n\nOriginal Description (preserved by INF Prod. Studio)\n\nEnhancement Details\n\nPOS015 Discount Report by Check\n\nSupport to follow the setting: System Configuration>Report Module>Format Configuration>'Decimal Place' & 'Thousand Separator'\n\nUser Story\n\nItem Department columns show values with decimal places without thousand separator as below sample.\n\n_______________________________________________________________________________________________\n\n- Current Behavior: The POS015 Discount Report By Check currently displays numeric values with decimal places (e.g., trailing zeros) and fails to apply thousands separators, even though the configuration has been set up under System Configuration > Report Module.\n\nReport module current configuration\n\nL3 Support advice enhancement:\n\n- Expected Behavior:The POS015 Discount Report By Check should dynamically format all numeric values based on the active Report Format Configuration under System Configuration > Report Module (removing trailing decimal places and applying thousands separators).\n\n- Acceptance Criteria{}AC 1: All numeric and monetary fields in the POS015 report output remove trailing decimal zeros in accordance with the active Report Format Configuration under System Configuration.\n\nAC 2: Thousands separators are correctly applied to all relevant numeric columns across all output formats (on-screen display, PDF, Excel/CSV).\n\nAC 3: Any modifications to the Report Format Configuration under System Configuration immediately apply to newly generated POS015 reports.",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Mila Cao",
+     "email": "mila.cao@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67800",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67800_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-67800",
+   "summary": "POS202 Discount Detail Report - optimize loading performance",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "",
+   "refinement_notes": "",
+   "release_notes": "New Function:\nDescription:\nConfiguration / Parameter:\nResult / Sample:\nEnhancement:\nDescription:\nConfiguration / Parameter:\nResult / Sample:\nBug Fixing:\nDescription:\n[Jira-67800] - POS202 Discount Detail Report - optimize loading performance\nIssues description:\nPOS202 Discount Detail Report - optimize loading performance\nConfiguration / Parameter:\nResult / Sample:\nBefore\nAfter",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Orianna Wen",
+     "email": "orianna.wen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67789",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67789_20260914_092415.docx",
+  "template": "report",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67789",
+   "summary": "TMS015 report - Support to show Generate Type of SMS and destination ",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Enhancement:\n\n1. Show actual receive phone number for SMS instead of reservation record if triggered manually, refer to the destination in message record.\n\n2. Add new column \"Generate Type\" to indicate system auto‑sent SMS and manually‑sent SMS, if auto trigger = System, if triggered manually = Manual.\n\nzoho#1899129\n\nBackground\n\nUsers may manually enter a new phone number and send SMS against an existing booking record in the system. However, records triggered by manual SMS sending cannot be identified in the TMS015 report.\n\nEnhancement Requirements\n\n(Issue 1 & 2 correspond to Image 1‑2; Issue 3 corresponds to Image 3)\n\n- TMS015 cannot distinguish between manually‑sent and auto‑sent SMS records at present.\n\n- The TMS015 report only displays the original booking phone number, instead of the actual phone number used for manual SMS sending.\n\n- Add the field Generate Type from TMS booking records into the TMS015 report.",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Aimee Wang",
+     "email": "aimee.wang@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67731",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67731_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-67731",
+   "summary": " #1811112 - TR: incorrect passerby file format",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Ticket ID: #1811112\n\nSubject: TR: incorrect passerby file format\n\nDepartment: Infrasys Support\n\nURL: https://support-intl.shijigroup.com/agent/shijigroupintl/infrasys-support/tickets/details/255139000965682341\n\nCase Description\n\nvendor: gc_passerby_export\n\nThe content format in the passerby file \"SLPR_POS1_20260401_5.zip\" is incorrect, and the errors maybe caused by the following situations:\n\n1. The title appears multiple times.\n\n2. The content appears multiple times.\n\n3. Wrong unzip password.\n\n4. The POS code has not been configured in Book360.",
+   "refinement_notes": "",
+   "release_notes": "Bug fixing: [Jira-67731] incorrect passerby file format\nDescription:\n-      The gc_passerby_export interface produced an incorrect passerby ZIP/LST file format (sample file: SLPR_POS1_20260401_5.zip).\n-      Symptoms included duplicated title/header lines, duplicated content rows, failure to unzip with the configured password, and Book360 rejecting the POS code.\n-      Root cause: the LST file was always opened in append mode and the ZIP archive was created without overwrite, so a retry or leftover local file duplicated the header and rows; ZIP encryption used AES-256, which many unzip tools treat as a wrong password; POS_Code was written as the outlet name instead of the Outlet Mapping value.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\n-      Ensure Additional Setup > Outlet Mapping is configured as [outlet_code],[Book360 POS code] so POS_Code is exported correctly.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before:\n-      The exported passerby file could contain duplicated headers/content, and the ZIP could not be unzipped correctly with the configured password.\n-      After:\n-      The export file can be generated correctly, and duplicated headers and unzip failures no longer occur.",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Zephyr Ji",
+     "email": "zephyr.ji@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kathy Kuang",
+     "email": "kathy.kuang@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-64461",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-64461_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-64461",
+   "summary": "POS006 Detail Check Report - Optimize loading performance",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Orianna Wen",
+     "email": "orianna.wen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-64286",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-64286_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-64286",
+   "summary": "POS225 OC/ENT Discount Report - Missing summary section",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Caused by: In the Crosstab script function onPrepareCell(cell, reportContext), call: cell.getStyle().setDisplay(\"none\");",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Mila Cao",
+     "email": "mila.cao@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-63574",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-63574_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-63574",
+   "summary": "CUS026 Detail Check Listing Report (ANZ) | Optimize loading performance",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Ticket ID: #1774993\n\nSubject: [TYOHC] Report Extraction Taking Too Long/ Infrasys POS　レポート作成時間がかかりすぎる件\n\nDepartment: Infrasys Support\n\nURL: https://support-intl.shijigroup.com/agent/shijigroupintl/infrasys-support/tickets/details/255139000943438293",
+   "refinement_notes": "",
+   "release_notes": "Enhancement: [HERO-63574] CUS026 Detail Check Listing Report (ANZ) | Optimize loading performance\nDescriptions:\nOptimize the loading performance of report CUS026 \"Detail Check Listing Report (ANZ)\".\nPreviously, when users ran CUS026 for a larger date range, multiple outlets, or a high volume of checks, the report result could take a long time to load.\nAfter this enhancement, CUS026 loads and returns the report result faster. Report parameters, layout, and data meaning are not changed. Users can still select the same parameters and get the same report content as before.\nConfiguration / Parameter:\nNo special configuration or parameter is required.\nThis case only improves the loading performance of CUS026. No new report parameter and no new system setting is added.\nField Definition:\nThis case does not involve field definition.\nNo report field / column is added, removed, or renamed. Existing CUS026 fields keep the same meaning.\nResult / Sample:\nAfter enhancement:\n- CUS026 returns the report result faster than before under the same parameter conditions.\n- The report data, layout, and field meaning remain the same as before.\nBefore Fixed\nAfter Fixed",
+   "qc_info": {
+    "qc_tester": {
+     "name": "More Luo",
+     "email": "more.luo@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ }
+]

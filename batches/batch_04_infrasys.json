@@ -1,0 +1,246 @@
+[
+ {
+  "issue_key": "HERO-67285",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67285_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-67285",
+   "summary": "TMS2.0 - Searching data trigger WAF interception, and the popped prompt message has no translation.",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Test Environment: HQ1\n\nScenario 1\n\n-Test Step\n\n- Go to TMS Operation >Search View, fill in \"'!@#\" in a search field.\n\n- Click the [Search] button.\n\n-Actual Result\n\nA dialog pops up showing \"access_denied_request_violates_security_policy\", and the error message is not translated.\n\nScenario 2\n\n-Test Step\n\n- Go to TMS Operation >Current View > Walk In, right-click the page to open Developer Tools, then switch to the Network panel\n\n- Fill in \"'!@#\" in the member info field, it will auto-search the member.\n\n-Actual Result\n\nAn HTTP 403 error is observed in the browser network requests, but no pop-up message is displayed. This issue also exists on search fields of other pages, e.g., New Page, Member View.",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-67285] TMS2.0 - Searching data trigger WAF interception, and the popped prompt message has no translation\nDescriptions:\nSearching for a member during reservation triggers WAF interception, but no error message is displayed\nThe error response returned when WAF interception is triggered on the search view is not translated\nSetup:\nGo to TMS Operation >Search View, fill in \"'!@#\" in a search field\nClick the [Search] button, the error message that appears when WAF interception is triggered supports translation.\nGo to TMS Operation Walk In/New reservation view/Member view\nFill in \"'!@#\" in the member info field, it will auto-search the member\nAfter WAF interception is triggered, an error message will pop up",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Sooki Shan",
+     "email": "sooki.shan@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Johnson Liu",
+     "email": "johnson.liu@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67026",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67026_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-67026",
+   "summary": "TMS2.0/TMSgAPI - When only special character values in certain fields can successfully save the reservation",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "TMSgAPI- 6.8.0\n\nStep：\n\n1. Create a reservation using the API, fill in non numeric symbols(letter/characters/emoji) in adults, chlidren, gender\n\nActual Result：\n\nReturn success, unexpectedly created a reservation with 0 adults.\n\nExpected Result:\n\nPrevent saving reservations when these fields contain emoji?",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing : [Jira-67026] TMSgAPI - When only special character values in certain fields can successfully save the reservation\nDescription:\nAdd validation for adults and children counts in the Open API and Operation API: adults should be ≥ 1, and children should be ≥ 0.\nSetup:\nCall open API new reservation\nCall operation API new reservation\nScenario 1: Import reservation still allows audit=0\nTMS reservation data\nTable Management System> Reservation Tools> Import and Export,import reservation and Download Result File",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Johnson Liu",
+     "email": "johnson.liu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-62835",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-62835_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-62835",
+   "summary": "TMS 2.0 - Incorrect table used to mark arrival when table changed & WS disconnected",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Email/ ZOHO Title:\n\n/\n\nUse Case:\n\nUser claimed that they want to mark arrival to 61A, but it marked 60 to POS side\n\nSteps to Reproduce:\n\nMake a booking with table [1A]>change table via quick table change in reservation list [2A] > mark arrival\n\nCurrent Result:\n\nUsed the old table [1A] to mark arrival [Unexpected]\n\nExpected Result:\n\nUse the most updated table [2A] to mark arrival [Expected]\n\nRoot Cause [Optional]:\n\nwhen WS disconnected, this function always uses the record which stored in frontend.\n\nI suggest creating an internal API that uses the reservation ID to retrieve the corresponding reservation tables and display them in the dialog. Please note that it is not advisable to have a loader shown before the dialog, as this can contribute to a slower experience for the operator.",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Elvar Wu",
+     "email": "elvar.wu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-57546",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-57546_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-57546",
+   "summary": "TMS2.0 - Rebranding - New login page for Profile Management",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "New Feature",
+   "is_bug": false,
+   "description": "20250811 updates:\n\napply background image to Profile Management login page\n\n[Ref. URL capture from hqqccn1 | https://test-multi-hq.hero-cloud.cn/accounts/hqqccn1/img/login/BG@2x.jpg ]\n\nadd config for user to upload background\n\nEnhancement Details:\n\nUpdate Product Name and Logo in Profile Management\n\nProduct Name from \"Infrasys Cloud\" to \"Infrasys POS\"\n\nProduct Logo (please refer to HERO-51172 for new logo)\n\n[Ref. Material URL | Infrasys-POS ]\n\n- Login\n\n- General page header\n\nAdd Module Name \"Profile Management\" in login page",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-57546] TMS2.0 - Rebranding - New login page for Profile Management\nDescription:\nThe Profile Management login page now uses the same login UI as the Admin login page.\nAdministrators can upload a custom login background image for Profile Management in Member Configuration.\nIn Enterprise mode, sub config zones can override this background image for their own zone.\nSetup:\nProfile Management > Login\nView the new login UI(Default login background image using admin)\nSystem Management> System Configuration > Global Settings,edit Custom Login Background Image and save\nView Profile Management > Login\nSystem Management> System Configuration > Member Module,edit Custom Login Background Image and save\nView Profile Management > Login\nScenario 1: Background image override for profile management is supported in sub config zone.\nThe background image cannot be edited when the sub config zone does not have an active Shop.\nWhen the sub config zone overrides, it uses its own background image.\nIf no background image is set in the sub config zone, using the background image of the current config zone global setting\nIf the current config zone global setting does not have a background image set, obtain the background image of the member module of the Supreme Config Zone\nIf the member module of Supreme Config Zone does not have a background image set, use the background image of Supreme Config Zone global setting\nScenario 2: Profile management login also supports enabling Authentication\nScenario 3: Profile management login also supports resetting password\nScenario 4: After modifying the background image and saving it successfully, an audit log will be generated\nAudit Logs Management> Audit Logs,view audit log",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Sooki Shan",
+     "email": "sooki.shan@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Johnson Liu",
+     "email": "johnson.liu@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67802",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-67802_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67802",
+   "summary": "API Cloud Modification - Allow KDS to trigger POS mark delivery for printing",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Enhancement:\n\nCreate New POSgAPI for mark delivery\n\nUse API Cloud Portal to let Shiji KDS interface to trigger the mark delivery action by providing corresponding item id/ item unique key / check number. (item id is mandatory when shiji_kds interface is attached to outlet)\n\nAdd interface code (vchar 128) as request parameter in POS mark delivery API.\n\nIf interface_code = shiji_KDS, the employee id and emlpoyee password will follow the application user number.\n\nSystem can mark delivery for items only when the items exist in the check and have not marked before.\n\nResponse:\n\n- without error\n\n- with warning: Fail to mark delivery for part of items\n\n- with error: Fail to mark delivery",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS API Release Notes\nversion 1.2.115.0\nReleased at 07 October 2026\nConfidential and Internal Use Only\nInfrasys POS API Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< POSGAPI – 10.21.0 >>> (INFRASYS POS VERSION 1.2.115.0 OR ABOVE)\t3\nInfrasys POS Release Summary\n<<< POSGAPI – 10.21.0 >>> (INFRASYS POS VERSION 1.2.115.0 OR ABOVE)\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\n| 1.2.115.0 | [JIRA-67802] API Cloud Modification - Allow KDS to trigger POS mark delivery for printing |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.115.0 | 2026-10-07 |\n| Sample :  New Functions :  Enhancements :  Descriptions : Descriptions  Swagger : Swagger  Setup : Setup Bug Fixing : |\n********************************************************************************\n# <<< POSGAPI – 10.21.0 >>> (INFRASYS POS VERSION 1.2.115.0 OR ABOVE)\nEnhancements: [JIRA-67802] API Cloud Modification - Allow KDS to trigger POS mark delivery for printing\nDescription:\nNew API Functions\nMark delivery for a check from a reservation: Mark delivery of a shop-outlet for a check from a reservation\nSwagger:\nPOST /shops/{shopCode}/outlets/{outletCode}/checks/{checkNo}/mark_deliveries\nRequest Parameters\n| Parameter | Value |\n| shopCode | 0001 |\n| outletCode | 1001 |\n| checkNo | 0008 |\n| mark_delivery | {   \"interface_code\": \"string\",   \"applied_user_no\": \"string\",   \"items\": [     {       \"id\": \"string\",       \"unique_key\": \"string\",       \"child_items\": [         {           \"id\": \"string\",           \"unique_key\": \"string\"         }       ]     }   ],   \"vendor_uuid\": \"string\" } |\nExpected Response\n| {   \"status\": \"string\",   \"data\": {     \"message\": \"string\",     \"time\": \"string\",     \"warning\": \"string\",     \"warning_details\": {       \"items\": [         {           \"id\": \"string\",           \"unique_key\": \"string\",           \"message\": \"string\",           \"child_items\": [             {               \"id\": \"string\",               \"unique_key\": \"string\",               \"message\": \"string\"             }           ]         }       ]     }   } } |\nRelease: 20261007 - <<< 1.2.115.0 >>>\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-66893",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-66893_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-66893",
+   "summary": "POS Export - BI Interface - Add pos_check_extra_infos data file (2/2)",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "User Story\n\nAs an MGM compliance and audit stakeholder, I want the Infrasys BI interface to export a new pos_check_extra_infos data file so that we can meet external regulatory and audit reporting requirements.\n\nCurrent Behavior\n\nThe Infrasys BI interface does not currently export a pos_check_extra_infos data file. The pos_check_extra_infos table exists in the database but its data is not included in any BI export. MGM receives the existing set of BI export files only, and there is no mechanism to extract pos_check_extra_infos data for external reporting purposes.\n\nExpected Behavior\n\nThe Infrasys BI interface exports a new pos_check_extra_infos data file (e.g., real_pos_check_extra_infos_20260330090841.csv) as a brand-new file added to the existing set of BI export files. Existing files remain unchanged. The file is delivered via SFTP to the same server and directory path used by existing BI export files, on the same daily batch schedule.\n\nThe single CSV file contains data from three sections, each with its own filter logic:\n\nckei_section = 'pms' and ckei_by = 'payment' and coalesce(ckei_status,'') <> 'd'\n\nckei_section= discount\n\nckei_variable= member_number、reference\n\nckei_section=discount_reason\n\nckei_variable= id\n\nAcceptance Criteria\n\nExport pos_check_extra_infos data file on daily batch schedule\n\n- Given the BI export job runs on its scheduled daily batch\n\n- When the job generates the pos_check_extra_infos export\n\n- Then a single CSV file is produced (e.g., real_pos_check_extra_infos_YYYYMMDDHHMMSS.csv) containing data from all three sections: pms/payment, discount, and discount_reason\n\n- And the file is delivered via SFTP to the same server and directory path as the existing BI export files\n\n- And all existing BI export files are generated and delivered unchanged\n\n- But if no records match the filter criteria for a given batch, an empty file with headers only is still produced and delivered\n\nApply section-specific row-level filters to exported records\n\n- Given records exist in the pos_check_extra_infos source table\n\n- When the export file is generated\n\n- Then for the pms/payment section, only records where ckei_section = 'pms' AND ckei_by = 'payment' AND ckei_status IS NOT NULL AND ckei_status <> '' AND ckei_status <> 'd' are included\n\n- And for the discount section, only records where ckei_section = 'discount' AND ckei_status IS NOT NULL AND ckei_status <> '' AND ckei_status <> 'd' are included\n\n- And for the discount_reason section, only records where ckei_section = 'discount_reason' AND ckei_status IS NOT NULL AND ckei_status <> '' AND ckei_status <> 'd' are included\n\n- But records with ckei_status IS NULL, ckei_status = '' (empty string), or ckei_status = 'd' are excluded from all sections regardless of ckei_section or ckei_by values\n\nFile naming and format consistency\n\n- Given the BI export job completes successfully\n\n- When the pos_check_extra_infos file is written to the export destination\n\n- Then the file name follows the pattern real_pos_check_extra_infos_YYYYMMDDHHMMSS.csv\n\n- And the file uses the same CSV format, encoding, and delimiter conventions as the existing BI export files\n\n- And the file includes a header row with column names matching the variable names from the source data\n\nSupporting Evidence\n\nRequested by KDI team for the MGM project. The export supports MGM's external reporting requirement for regulatory or audit purposes.\n\nExample file name: real_pos_check_extra_infos_20260330090841.csv\n\nDelivery: SFTP to same server and directory path as existing BI export files, on the same daily batch schedule.\n\nRequested Timeline\n\nAligned with Priority: Medium\n\nPreferred Quarter: Q2 2026\n\nNotes: Delivery on same schedule as existing BI export files (daily batch). Regulatory/audit driver — if a firm regulatory deadline emerges, priority should be re-evaluated. No known dependencies on other tickets; the pos_check_extra_infos table already exists in the database.\n\nAlternatives Considered\n\n- Exporting each section (pms/payment, discount, discount_reason) as separate files — rejected in favor of a single combined file per requester confirmation.\n\n- Applying the ckei_section = 'pms' AND ckei_by = 'payment' filter globally to all rows — rejected; the filter is section-specific. Discount and discount_reason sections use only the ckei_status filter (no ckei_section/ckei_by restriction beyond their own section identifiers).\n\n- Modifying an existing BI export file to include this data — rejected; this is a brand-new file to avoid disrupting existing downstream consumers.\n\n- Filtering columns on the pms/payment section — rejected; all columns from the pos_check_extra_infos table are exported for pms/payment records per requester confirmation.\n\nOriginal Description (preserved by INF Prod. Studio)\n\nrequest by KDI team for MGM project, Infrasys BI interface needs to support pos_check_extra_infos\n\nAdd a parameter to control the export file.\n\nrequire data filter in 1 file:\n\nexample file name=real_pos_check_extra_infos_20260330090841.csv\n\nckei_section = 'pms' and ckei_by = 'payment' and coalesce(ckei_status,'') <> 'd'\n\nckei_section: discount\n\nckei_variable: member_number、reference\n\nckei_section: discount_reason\n\nckei_variable: id",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS Platform Release Notes\nversion 1.2.115.0\nReleased at 07 October 2026\nConfidential and Internal Use Only\nInfrasys POS Platform Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\n| 1.2.115.0 | [Jira-66893] POS Export - BI Interface - Add pos_check_extra_infos data file (2/2) |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.115.0 | 2026-10-07 |\n| Sample :  New Functions :  Enhancements :   Descriptions : Descriptions  Setup : Setup Bug Fixing: |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nEnhancements:[Jira-66893] POS Export - BI Interface - Add pos_check_extra_infos data file (2/2)\nDescription:\nThe Infrasys BI interface exports a new pos_check_extra_infos data file (e.g., real_pos_check_extra_infos_20260330090841.csv) as a brand-new file added to the existing set of BI export files.\nExisting files remain unchanged\nThe single CSV file contains data from three sections, each with its own filter logic:\nckei_section = 'pms' and ckei_by = 'payment' and coalesce(ckei_status,'') <> 'd'\nckei_section= discount\nckei_variable= member_number、reference\nckei_section=discount_reason\nckei_variable= id\nSetup:\nGo to System Management > Scheduled Tasks\nAdded a BI interface and included the corresponding parameters as required.\nWait for the Scheduled Tasks to run automatically, or click the \"Run\" button on the view page.\nOnce Infrasys BI has finished running, the exported files can be found on the FTP server.\nIn the exported files, the folder contains `pos_check_extra_infos.csv` regardless of whether the prefix is ​​\"real\" or \"full\".\nThe data in pos_check_extra_infos.csv complies with the following filtering rules:\nckei_section = 'pms' and ckei_by = 'payment' and coalesce(ckei_status,'') <> 'd'\nckei_section= discount\nckei_variable= member_number、reference\nckei_section=discount_reason\nckei_variable= id\nif no records match the filter criteria for a given batch, an empty file with headers only is still produced and delivered\nRelease: 20261007 <<< 1.2.115.0>>>\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Orianna Wen",
+     "email": "orianna.wen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-66818",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-66818_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-66818",
+   "summary": "KDS2.0 - UI Handling - Change the design of KDS settings page",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [],
+   "issue_type": "New Feature",
+   "is_bug": false,
+   "description": "",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nKDS Release Notes\nversion [Not Included In STD Release]\n[Not Included In STD Release]\nConfidential and Internal Use Only\nKDS Release Notes\nversion [Not Included In STD Release]\nTable of Contents\n<<< [Not Included In STD Release] >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\n| [Not Included In STD Release] | [JIRA-66818] KDS2.0 - UI Handling - Change the design of KDS settings paget |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.xxx.0 | 2026-xx-xx |\n| Sample:  New Functions:  Descriptions: Descriptions  Setup: Setup  Enhancements: Descriptions: Descriptions  Setup: Setup  Bug Fixing:  Descriptions: Descriptions  Setup: Setup |\n********************************************************************************\n# <<< [Not Included In STD Release] >>>\nNew Functions: [JIRA-66818] KDS2.0 - UI Handling - Change the design of KDS settings page\nDescriptions:\nEnhance the UI of the KDS settings page\nSetup:\nIn the new KDS layout, the settings page can be opened from the top right corner of the screen. It is popped up as a drop-down menu.\nThe settings include device settings, display settings, connectivity settings, ticket settings, session settings, logs, and system information.\nThe functions of the pages stay the same as the old layout. This task only changes the style of the settings page.\nRelease: [Not Included In STD Release]\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Orianna Wen",
+     "email": "orianna.wen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-66733",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-66733_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-66733",
+   "summary": "[Bugfix] MenuMediaObject is empty in data release if there is no menu_menus record for the config zone",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "CORE"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Current Behaviour\n\nWhen publishing menu data for a config zone, if one parent of menu_media_objects (e.g. menu_menus) has no records to export while other parents (e.g. menu_items, menu_attributes) do, the later empty-parent export rewrites menu_media_objects.csv in write mode (header only). This truncates the CSV and removes media rows already exported from the other parents. The outlet then receives an empty menu_media_objects table after data release.\n\nExpected Behaviour\n\nmenu_media_objects.csv should retain all media rows exported from parents that have data. An empty parent (no primary keys) should only ensure the CSV header exists if the file is missing, and must not wipe rows already written by other parents.",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS Platform Release Notes\nversion 1.2.115.0\nReleased at 07 October 2026\nConfidential and Internal Use Only\nInfrasys POS Platform Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.115.0 | [Jira-66733] [Bugfix] MenuMediaObject is empty in data release if there is no menu_menus record for the config zone |\nRelease History\n| Version | Release Date |\n| 1.2.115.0 | 2026-10-07 |\n| Sample :  New Functions :  Enhancements :  Bug Fixing: Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nBug Fixing:[Jira- 66733] [Bugfix] MenuMediaObject is empty in data release if there is no menu_menus record for the config zone\nDescription:\nFixed an issue where an export file could be cleared when it was written by multiple parent data sources and a later parent had no data to export.\nThe issue caused data already written to the export file to be cleared when a subsequent empty export processed the same file in header-only mode.\nAfter this fix, an empty export no longer clears existing data in the export file.\nSetup:\nWhen publishing menu data for a config zone, a table has multiple parent data sources (e.g. menu_media_objects).\nOne parent data source (e.g. menu_menus) has no records to export, while other parent data sources (e.g. menu_items and menu_attributes) have records to export\nAfter the fix, verify that the data exported by the previous parent is retained when the subsequent parent has no data to export.\nRelease: 20261007 <<< 1.2.115.0>>>\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Niko Xie",
+     "email": "niko.xie@shijigroup.com"
+    }
+   }
+  }
+ }
+]

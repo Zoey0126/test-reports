@@ -1,0 +1,248 @@
+[
+ {
+  "issue_key": "HERO-67583",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67583_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67583",
+   "summary": "KDS2-DEV-03-2-20: Get tickets which within last 24 hours",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "CORE"
+   ],
+   "issue_type": "New Feature",
+   "is_bug": false,
+   "description": "Goal\n\nChange GET /api/kds/v1/getTickets so it returns all non-delivered, non-void (active/working) tickets plus delivered and void tickets modified within the last 24 hours, replacing the current fixed “last 50” count limit. Add pagination so clients can fetch large result sets in pages.\n\nSuccess criteria\n\n- Active/working tickets (statuses other than delivered and void/cancelled) are returned in full — not limited by the 24-hour window or pagination count cap.\n\n- Delivered tickets are included only if ticket.modified >= now - 24 hours.\n\n- Void/cancelled tickets are included only if ticket.modified >= now - 24 hours.\n\n- The fixed limits DELIVERED_TICKET_RETRIEVE_LIMIT (50) and VOID_TICKET_RETRIEVE_LIMIT (50) are removed or replaced by the time filter.\n\n- API accepts pagination params (e.g. page, pageSize) and returns page metadata (e.g. total count, current page, page size).\n\n- Existing clients without pagination params get sensible defaults (e.g. page 0, default page size).\n\n- OpenAPI docs updated to describe the combined result set, time filter, and pagination behavior.\n\nImplementation notes\n\n- Result set composition: Merge three groups:\n\n- All active/working tickets for the display (unchanged behavior).\n\n- Delivered tickets where modified >= now - 24 hours.\n\n- Void/cancelled tickets where modified >= now - 24 hours.\n\n- Primary touchpoints: TicketApiControllerV1, TicketApiServiceImpl, TicketServiceImpl, and TicketEntryRepository queries (findLastXDeliveredTicketIds, findLastXFullyVoidedTicketIds, etc.).\n\n- Time filter: Use Ticket.modified >= Instant.now().minus(24, HOURS) for delivered and void tickets only.\n\n(Note: “modified <= current - 24 hours” would mean older than 24h; for “last 24 hours” the condition should be >=.)\n\n- Replace count-based queries in getTicketEntriesFromLastXDeliveredTicket / getTicketEntriesFromLastXVoidTicket with time-filtered queries; add/use a DB index on (shop_id, modified) if needed for performance.\n\n- Pagination scope: Apply pagination to the combined response (active + recent delivered + recent void), or paginate only delivered/void while always returning all active tickets. Page size is set to 500 by default.\n\n- Response shape: Extend TicketsMessage or wrap it with pagination fields (page, pageSize, totalElements, totalPages).",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nKDS Release Notes\nversion [Not Included In STD Release]\n[Not Included In STD Release]\nConfidential and Internal Use Only\nKDS Release Notes\nversion [Not Included In STD Release]\nTable of Contents\n<<< [Not Included In STD Release] >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\n| [Not Included In STD Release] | [JIRA-67583] KDS2-DEV-03-2-20: Get tickets which within last 24 hours |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.xxx.0 | 2026-xx-xx |\n| Sample:  New Functions:  Descriptions: Descriptions  Setup: Setup  Enhancements: Descriptions: Descriptions  Setup: Setup  Bug Fixing:  Descriptions: Descriptions  Setup: Setup |\n********************************************************************************\n# <<< [Not Included In STD Release] >>>\nNew Functions: [JIRA-67583] KDS2-DEV-03-2-20: Get tickets which within last 24 hours\nDescriptions:\nRestrain the tickets that are delivered/voided (inactive) to be kept in KDS client to be 24 hours. Active tickets shall be kept to always show until it is inactive.\nKDS Backend Client API\nUpdated KDS client API, splits getTicket API by the ticket types (active/inactive).\nNew required “type” parameter. The parameter must be active|inactive.\ntype=active — all working tickets for the display (not fully delivered, not void). The full list is returned; page and pageSize are ignored.\ntype=inactive — delivered and void/cancelled tickets whose ticket.modified is within the last 24 hours, newest first. Paginated (page default 1, pageSize default 500).\nKDS Client\nKDS Client will automatically call the two types of getTickets API together when trying to load tickets. It also handles to automatically getting all inactive tickets in all pages when there is more than one page.\nTickets will be reloaded when doing client initialization after login or clicking the “Reload” button on the top right corner of the tickets listing screen. Old tickets that are not in the API response will be deleted. So inactive tickets will be kept for at least 24 hours and until a reload/initialization action is triggered.\nSetup:\nNo setup required.\nRelease: [Not Included In STD Release]\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Arsinoe Xie",
+     "email": "arsinoe.xie@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-55108",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-55108_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-55108",
+   "summary": " KDS2.0 - Order Handling - Pantry Message and Rush Order ",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "KDS"
+   ],
+   "issue_type": "New Feature",
+   "is_bug": false,
+   "description": "POS Function:\n\n- Pantry Message (Item Level)\n\n- Pantry Message for Check (Check Level)\n\n-\n\n- 256 characters limitation for message content (Item Level & Check Level)\n\n- Replace the old message with new message (Item Level)\n\n- Latest Pantry message will show on top of the list (Check Level)\n\n- Display in both Expo and Station Screen accordingly\n\n- Older pantry messages should show in ticket history\n\n- Latest Pantry message will show on top of the list/replace old message according to setup can be Phrase 2\n\n3. Rush Order:\n\n4. Rush Order for Multiple Items\n\n\"Rush Order\" + \"the time it sent from POS\" and \"count\" under the line item\n\n- No Check level rush order\n\n- Item level rush order only\n\n- Show Rush time and no. of Rushes\n\n- Display in both Expo and Station Screen accordingly\n\n- time format can be hh:mm:ss\n\n- in 24hr/12hr format according to setup can be Phrase 2\n\nAcceptance Criteria\n\n- As a kitchen staff, I would like to see and be aware the Pantry Message (Check Level and Item Level) received in both KDS expo and station screen\n\n- As a kitchen staff, I would like to see and be aware the Show Rush time and number of Rushes received in both KDS expo and station screen\n\n- As a kitchen staff, I would like to see all Pantry Message history and send time in ticket details (Phrase 2)\n\n- As a kitchen staff, I would like to see all Rush Order history and send time in ticket details (Phrase 2)",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nKDS Release Notes\nversion [Not Included In STD Release]\n[Not Included In STD Release]\nConfidential and Internal Use Only\nKDS Release Notes\nversion [Not Included In STD Release]\nTable of Contents\n<<< [Not Included In STD Release] >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\n| [Not Included In STD Release] | [JIRA- 55108] KDS2.0 - Order Handling - Pantry Message and Rush Order |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.xxx.0 | 2026-xx-xx |\n| Sample:  New Functions:  Descriptions: Descriptions  Setup: Setup  Enhancements: Descriptions: Descriptions  Setup: Setup  Bug Fixing:  Descriptions: Descriptions  Setup: Setup |\n********************************************************************************\n# <<< [Not Included In STD Release] >>>\nNew Functions: [JIRA- 55108] KDS2.0 - Order Handling - Pantry Message and Rush Order\nDescriptions:\nPantry Message Display\nDisplay the latest pantry message on the ticket or ticket item.\nPantry messages support up to 256 characters.\nDisplay pantry message on both Expo and Station screens.\nRush order\nSupports rush ticket items only.\nDisplay the initial rush timestamp and the total number of times the item has been marked as Rush.\nDisplay rush information on both Expo and Station screens.\nSetup:\nRush Ticket: not supported\nRush Ticket Items:\nWhen a ticket is marked as Rush for the first time, the \"Rush (1)\" indicator and rush time are displayed.\nFor the second Rush assignment, the rush count is increased to \"Rush (2)\", while the rush timestamp remains unchanged and shows the initial Rush time.\nAdd pantry message for ticket\nWhen a pantry message is added for the first time, the pantry message and its creation timestamp are displayed on the ticket.\nWhen a pantry message is added for the second time or later, the two most recent pantry messages and their corresponding timestamps are displayed on the ticket.\nAdd pantry message for ticket item\nWhen a pantry message is added, the latest pantry message and its corresponding timestamp are displayed on the ticket item.\nRelease: [Not Included In STD Release]\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Arsinoe Xie",
+     "email": "arsinoe.xie@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68370",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68370_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68370",
+   "summary": "Issues of POS WSPS feature",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Issue1: Unable to take the WSPS Role after click \"Start WSPS\" button\n\nIssue2: Display ’Standby‘ status in wrong situation\n\nExpected result: System auto change the WSPS status from 'Running' to 'Standby' when WSPS Role assigned but no contact for > 90s\n\nActual result:\n\n1. unable to auto change status to 'Standby' when WSPS Role assigned but no contact for > 90s\n\n2. dipslay status = 'Standby' after click 'Start WSPS' button on unassigned-role POS\n\nIssue3: the action button on Print Service Information panel is not works for the selected Online Device but the current login POS\n\nExpected result: the action button works for the selected POS on the Online Devives bar\n\nActual result: the action button always works for current loging POS even select other POS",
+   "refinement_notes": "",
+   "release_notes": "# Enhancements: [Jira-68370] POS Launcher / POS Client (Windows) - Issues of POS WSPS feature\n\n## Descriptions\n\nImproves reliability and clarity of **Workstation Printing Service (WSPS)** for outlets using embedded print on POS workstations.\n\n### Panel status\n\n- Status is clearer while a station takes up the print role:\n  - **Starting** — role assigned; printing has not started yet  \n    *(was: often looked like Standby right after Start)*\n  - **Running** — print traffic is active\n  - **Standby** — no activity for about **90 seconds**  \n    *(was: Standby did not always appear when the holder went silent)*\n- Status refreshes while the panel stays open  \n  *(was: health could look stale until the panel was reopened)*\n\n### Panel actions\n\n- **Start**\n  - Select any eligible online station, then start WSPS on that station  \n    *(was: Start mainly acted on the current workstation)*\n- **Pause / Restore**\n  - Still only on **this** workstation\n\n### Who can hold the WSPS role\n\n- Eligibility follows the **Enable Embed Printing Core Service** setting only  \n  *(was: also required a Windows client)*\n- Stations with the setting **Disable** are not nominated\n\n### Launcher behaviour\n\n- WSPS runs only when the launcher has a valid WSPS port configured\n- If that port cannot be opened:\n  - POS login and normal launcher service continue\n  - WSPS stays off for that session  \n    *(was: a WSPS port failure could block the whole launcher)*\n\n## Setup\n\n- Deploy the updated **POS launcher** and **POS Client (Windows)** together  \n  *(altered: both sides must match so the embed-print Enable / Disable setting is recognized correctly)*",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Jacqueline Wei",
+     "email": "jacqueline.wei@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Eric Fang",
+     "email": "eric.fang@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68252",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68252_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68252",
+   "summary": "IP2COM - Recover USB printing after printer power-off; cleaner service stop; optional auto-restart for long disconnect",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Background\n\nWhen a USB kitchen printer is powered off while idle, printing may stay unavailable after power-on until the IP2COM service is restarted manually. This change improves automatic recovery and makes service stop release resources cleanly.\n\nWhat it does\n\n- After USB printer power-off / power-on, reconnects more reliably and can resume printing without a manual service restart\n\n- Speeds reconnect when the USB device is plugged in or powered on again\n\n- Uses shorter reconnect waits at first, then longer waits if the device stays offline (USB only; other device types keep existing behaviour)\n\n- Optional DisconnectWatchdog (off by default): if reconnect keeps failing for a long time, can restart the IP2COM service, with longer waits between restarts overnight so the service is not restarted every few minutes\n\n- Service stop / force-stop closes printers, network connections, and related work properly before exit\n\n- Clearer logs for expected disconnects; less noise when debug is off\n\n- Small HTML printer spacing fix (  handling)\n\nSetup\n\n- New option: disconnect_watchdog under [setup] — leave 0 unless the site needs auto service restart on long disconnect",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [HERO-68252] Recover USB printing after printer power-off; cleaner service stop; optional auto-restart for long disconnect\nDescriptions:\nIP2COM improves how it handles USB printers that disconnect and come back.\nService stop and restart now release printer and network connections more cleanly.\nAn optional Disconnect Watchdog can restart the IP2COM service automatically if a device stays disconnected for a long time. It is off by default.\nWhen enabled, early retries are more frequent; if the device stays offline longer, later restarts become much less frequent, so the PC is not disrupted every few minutes.\nStill disconnected after an automatic service restart, later restarts wait longer each time (about 5 minutes for the first six, then 30 minutes, 1 hour, 2 hours, 4 hours, and up to 8 hours).\nFeatures:\nUSB reconnect reliability improvements\nUSB printers may disconnect or be power-cycled during normal operation.\nDue to OS limitations, automatic reconnecting was not always reliable and sometimes required an IP2COM service restart.\nThis update improves automatic reconnect handling and adds optional recovery for extended disconnects.\nExpected behavior\nShort USB disconnects\nPrinter reconnects automatically.\nPrinting resumes without manual IP2COM restart.\nLong USB disconnects\nWatchdog disabled: continues retrying reconnect indefinitely.\nWatchdog enabled: perform controlled service restarts with progressively longer retry intervals.\nNotes for implementation / support:\nApplies to USB printers used with IP2COM.\nOther printer device types keep their previous reconnect handling and timing.\nSetup:\nIn config.ini, under [setup], add restart_service_on_long_disconnect for on / off the feature\nDefault: restart_service_on_long_disconnect=0, which keeps Disconnect Watchdog off.\nSet restart_service_on_long_disconnect=1 only if the site needs automatic IP2COM service restart after a long reconnect failure.\nExisting option restart_service_on_init_error is unchanged and remains separate from Disconnect Watchdog.\nRecommendation: keep restart_service_on_long_disconnect=0 for most sites. Turn it on only if a long disconnect still needs a service restart and the site accepts occasional automatic restarts of IP2COM, affecting all devices on that service.",
+   "qc_info": {
+    "qc_tester": {
+     "name": "More Luo",
+     "email": "more.luo@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68236",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68236_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68236",
+   "summary": "Simple Smart Station - Fail to leave standalone mode if unable to connect to master server upon launcher starts",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "It is related to Simple Smart Station model.\n\nWhen starting the smart station launcher, if smart station cannot connect to master server, it is unable to leave standalone mode if the connection to master server is recovered.\n\nWorkflow\n\n1. Smart station under standalone mode\n\n2. Restart the launcher service while it is unable to connect to the master server\n\n3. Login to the smart station\n\n4. Click “leave standalone mode” while it is able to connect to the master server\n\n5. Dialog box shown “Fail to connect to server master”\n\nExpected Result:\n\nLeave standalone mode pass if the connection to master server is recovered.",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-68236] Fail to leave standalone mode in Simple Smart Station if unable to connect to master server upon launcher starts\nDescriptions:\nIt is related to Simple Smart Station model\nWhen starting the smart station launcher, if smart station is unable to connect to master server, it is unable to leave standalone mode after the connection to master server is recovered.\nWorkflow\n1. Smart station is under standalone mode\n2. Restart the launcher service while it is unable to connect to the master server\n3. Login to the smart station\n4. Click “Leave standalone mode” while it is able to connect to the master server\n5. Dialog box shown “Fail to connect to server master”\nExpected result:\nLeave standalone mode pass if the connection to master server is recovered\nIt is fixed in current version\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Ryan Xie",
+     "email": "ryan.xie@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Eric Fang",
+     "email": "eric.fang@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67875",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67875_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67875",
+   "summary": "POS Feature - Digital Dine - Support Prepaid Amount and Tips display on Table Card, Check Total, Ordering Basket, and printed documents (POS Dev)",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Enhancement Detail\n\n- POS Dev case for https://jira.shijidev.com/browse/HERO-66050",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-67875/Epic-66050] POS Feature - Digital Dine - Support Prepaid Amount and Tips display on Table Card, Check Total, Ordering Basket, and printed documents (POS Dev)\nDescriptions:\nSystem supports displaying default payment total and default payment tips total on the following screens:\nTable floor plan and card view\nOrdering basket extra information\nWhole check view\nDefault payments which become check payments after they are added to the cashier will not be counted towards default payment total and default payment tips\nPrinting variables for default payment total and default payment tips are also supported\nSetup:\nSet ordering basket extra information under Config by Location\nGo to Infrasys POS platform: POS System  Ordering Setup  Config by Location\nSelect setup “Display Check Extra Information in Ordering Basket”\nClick “Add New” to add new record\nSelect\nApply To = Target location\nAll Locations = For all locations\nShop = For a specific shop\nOutlet = For a specific outlet\nStation = For a specific station\nShop = Target shop (available only if “Shop” is chosen in the row “Apply To”)\nOutlet = Target outlet (available only if “Outlet” is chosen in the row “Apply To”)\nStation = Target station (available only if “Station” is chosen in the row “Apply To”)\nClick “Add Row”\nSelect\nDisplay Information = Pre-Paid / Pre-Paid Tips\nClick “Save” to save the record\nSet switch check info under Config by Location\nGo to Infrasys POS platform: POS System  Ordering Setup  Config by Location\nSelect setup “Switch Check Info Setting”\nClick “Add New” to add a new record\nSelect\nApply To = Target location\nAll Locations = For all locations\nShop = For a specific shop\nOutlet = For a specific outlet\nStation = For a specific station\nShop = Target shop (available only if “Shop” is chosen in the row “Apply To”)\nOutlet = Target outlet (available only if “Outlet” is chosen in the row “Apply To”)\nStation = Target station (available only if “Station” is chosen in the row “Apply To”)\nPre-Paid = Yes\nPre-Paid Tips = Yes\nClick “Save” to save the record\nSet check info authorities\nGo to Infrasys POS platform: POS System  Authority Control  Set Check Info Authorities\nClick the edit icon of the target rule under “Variable” to edit the visibility of each check info\nSelect “Visibility” as “Yes” for “Pre-Paid” and “Pre-Paid Tips”\nClick “Save” to save the record\nAdd printing variable\nGo to Infrasys POS platform: POS System  Printing Setup  Print Formats\nClick “Add New” to add record OR select existing check or receipt format\nSelect the tab “Print Format”\nAdd the printing variables\n| Printing Variable | Loop belonged to | Available Slip | Description |\n| PrePaidAmount | N/A | Guest Check Receipt | Default payment amount total |\n| PrePaidTips | N/A | Guest Check Receipt | Default payment tips total |\nDefine other printing content accordingly\nClick “Save” to save the record",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Yannis Liu",
+     "email": "yannis.liu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67667",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67667_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67667",
+   "summary": "Android POS App - Apply Goggle Play policy for camera permission, feature declaration, and compliance",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Description\n\nThe Android POS application currently has unmanaged camera permission declarations and implementation gaps that risk runtime crashes (SecurityException), unintended Google Play installation restrictions on non-camera hardware, and compliance alignment regarding data safety.\n\nKey Observations\n\n- Implicit Feature Declaration: The app declares <uses-permission android:name=\"android.permission.CAMERA\" /> in the AndroidManifest.xml without an explicit <uses-feature> tag, causing Google Play to implicitly set android:required=\"true\".\n\n- Runtime Permission Handling: Camera APIs may be invoked without robust runtime permission checks, risking a SecurityException on devices running Android 6.0 (API level 23) and higher.\n\n- Data Safety Declaration:\n\n- Collected Camera Frames: The Google Play Data Safety form must accurately reflect how camera frames/photos are handled (e.g., ephemeral local processing for barcode scanning without server upload).\n\n- [Updated 02/09/2026] App Interactions: App interaction data is collected for app functionality.\n\nTechnical Impacts\n\n- Installation Restrictions: Devices without a built-in camera are currently blocked from installing the POS app due to the implicit android:required=\"true\" hardware feature requirement.\n\n- App Stability / Crashes: Executing camera operations without checking and requesting runtime permissions leads to unhandled SecurityException crashes.\n\nFollow-Up:\n\nExplicitly Declare Camera Hardware Feature\n\n- Define camera hardware is needed explicitly\n\nImplement Runtime Permission Checks\n\n- Ensure camera permission is validated before invoking any camera intent or hardware API.\n\n- Implement standard permission request flows with graceful denial handling.\n\nGoogle Play Data Safety & Disclosure Alignment\n\n- [Updated 02/09/2026] App Interactions\n\n- App interaction data is collected for app functionality and is therefore declared as 'Collected' under App Activity > App Interactions in the Play Console.\n\n- Update the Google Play Console Data Safety form accordingly\n\n- Camera Frames\n\n- Confirm and document that camera frames are processed ephemerally on-device (live barcode scanning) and are not persistently stored or transmitted to external servers.\n\n- Update the Google Play Console Data Safety form accordingly.\n\n- [Updated 02/09/2026] The Google Play Console's 'Photos and videos' disclosure applies only to raw image or video file transmissions. Since our Android app processes camera frames locally on-device and only sends the parsed string value to the backend, no media files are collected. Leaving the 'Photos and videos' category undeclared is still remain safe.\n\n-\n\n- References: Understand app privacy & security practices with Google Play's Data safety section - Computer - Google Play Help",
+   "refinement_notes": "",
+   "release_notes": "## Enhancements: [Jira-67667] Android POS App - Apply Goggle Play policy for camera permission, feature declaration, and compliance\nDescriptions:\nThe POS Client App validates camera access upon invocation and prompts the user for runtime camera permission if not previously granted\nThe POS Client App request user permission if the camera permission is not granted\nIf the user does not allow the app to access camera, the app will resume until the camera permission is granted\nAsks for camera permission only once; if the user refuses, it will not prompt again, including on the next app launch\nThe POS Client App has updated the manifest to explicitly declare camera hardware requirements for device compatibility\nThe POS Client App has declared that App interaction will be collected for App functionality purposes under data safety section\nThe POS Client App has declared App Interactions as \"Collected\" under the App Activity section in the Google Play Console to support app functionality\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Zoey Xie",
+     "email": "zoey.xie@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Zoey Xie",
+     "email": "zoey.xie@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67538",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67538_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67538",
+   "summary": "Cloud hosted (Offline Mode) [Phase 3] - Support sync park order",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "New Feature",
+   "is_bug": false,
+   "description": "Cloud Hosted Phase 3 - Highest Priority POS Function keys\n\nThe following POS functions are required to be fully supported in Offline Controller (Smartstation / SS) during Cloud-hosted (CH) downtime.\n\nPark Order - core function for Digital Dine\n\nExpectation:\n\nPark Order records should be synced between Cloud Hosted and Offline Controller.\n\n- When Cloud Hosted (CH) is unreachable, and after switching to SS + MQ activation. Then SS will start receiving new park order records from MQ.\n\n- Upon CH recovery and operation switch back from SS to CH, park orders created in SS should be sync back to CH. CH should work as the primary and receiving new park orders from Digital Dine (POSgAPI).",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-67538] Cloud hosted (Offline Mode) [Phase 3] - Support sync park order\nDescriptions:\nIt is available for Simple Smart Station model with offline mode\nSystem supports to sync park order files between Cloud Hosted (CH) and Smart Station (SS)\nIf not in standalone mode, system will sync parking orders from CH to SS\nWhen leaving standalone mode, system will sync parking orders from SS to CH\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Ryan Xie",
+     "email": "ryan.xie@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Eric Fang",
+     "email": "eric.fang@shijigroup.com"
+    }
+   }
+  }
+ }
+]

@@ -1,0 +1,244 @@
+[
+ {
+  "issue_key": "HERO-68378",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68378_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68378",
+   "summary": "Update external libraries of device manager v2 in 2026 Q4",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "It is available for device manager v2\n\nBelow external libraries are updated:\n\n| Library\n| Update to target version\n\n| jackson-core\n| 2.22.2\n\n| jackson-databind\n| 2.22.2\n\n| log4j-api\n| 2.26.1\n\n| log4j-core\n| 2.26.1",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-68378] Update external libraries of device manager v2 in 2026 Q4 (Sam)\nDescriptions:\nBelow external libraries are upgraded in device manager v2:\njackson-core\njackson-databind\nlog4j-api\nlog4j-core\n| Library | Update to target version |\n| jackson-core | 2.22.2 |\n| jackson-databind | 2.22.2 |\n| log4j-api | 2.26.1 |\n| log4j-core | 2.26.1 |\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Forrest Lin",
+     "email": "forrest.lin@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67723",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-67723_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67723",
+   "summary": "POS Interface - General V3 - Add payment details in /vouchers/redeem/prepare ",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "INTERFACE",
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Enhancement Details\n\nIncert require validation between voucher type and payment method before allowing the redemption. The enhnacement allow external integrations to validate voucher-to-payment-method mapping and reject invalid redemption scenarios before the redemption transaction is completed.\n\n- Interface Type = Membership Interface\n\n- Vendor key: general_v3\n\n- Include payment details in the payload sent to\n\n/v3/{companyName}/vouchers/redeem/prepare\n\n- \"itemType\": \"\",\n\n\"itemSubType\": \"\",\n\n\"itemCode\": \"\",\n\n\"itemName\": \"\",\n\n\"itemDescription\": \"\",\n\n\"itemCategory\": \"\",\n\n\"itemSerialNumber\": \"\",\n\n\"itemInventoryCode\": \"\",\n\n\"itemDepartmentCode\": \"\",\n\n\"itemChargeCode\": \"\",\n\n\"itemChargeCodeGroup\": \"\",\n\n\"itemizerId\": \"\",\n\n\"itemTotal\":\n\n- Specification: https://loyaltygw-uat.hero-cloud.com/docs/generic/request-transaction-payload/\n\nUpdated on 24 Aug 2026\n\n- Agree to add setup 2 and default \"Yes\"\n\nOriginal Request / Use Case / Background\n\n- add payment details to /vouchers/redeem/prepare\n\n- requested payment information:\n\n\"itemType\": \"\",\n\n\"itemSubType\": \"\",\n\n\"itemCode\": \"\",\n\n\"itemName\": \"\",\n\n\"itemDescription\": \"\",\n\n\"itemCategory\": \"\",\n\n\"itemSerialNumber\": \"\",\n\n\"itemInventoryCode\": \"\",\n\n\"itemDepartmentCode\": \"\",\n\n\"itemChargeCode\": \"\",\n\n\"itemChargeCodeGroup\": \"\",\n\n\"itemizerId\": \"\",\n\n\"itemTotal\":\n\nCurrent Behave\n\n- When making redeem call to v3 to /vouchers/redeem/prepare infrasys do not send payment detail\n\n- But when we use generate negative check function to call /vouchers/refund/prepare we do get the payment details\n\n- Example call\n\nRedeem\n\n2026 - 08 - 07 11: 55: 43 Membership_packet: (general_v3, id: 116)[To External] >>>  >> {\n\n\"checkNumber\": \"00003074\",\n\n\"checkDate\": \"2026-08-07T12:16:35.000+0200\",\n\n\"checkOpenTime\": \"2026-08-07T12:16:35.000+0200\",\n\n\"checkCloseTime\": \"\",\n\n\"checkReopenTime\": \"\",\n\n\"checkTotal\":\n\n{         \"discountTotal\": 0,         \"itemDiscountTotal\": 0,         \"subTotal\": 19.33,         \"total\": 23,         \"serviceChargeTotal\": 0,         \"taxTotal\": 0,         \"inclusiveTaxTotal\": 3.67,         \"tipTotal\": 0,         \"currencyCode\": \"EUR\"     }\n\n,\n\n\"checkItems\": [{\n\n\"itemType\": \"MenuItem\",\n\n\"itemSubType\": \"\",\n\n\"itemCode\": \"LHH-001-0064-0003\",\n\n\"itemName\": \"Barbarie duck breast from the grill\",\n\n\"itemDescription\": \"\",\n\n\"itemCategory\": \"10\",\n\n\"itemSerialNumber\": \"\",\n\n\"itemInventoryCode\": \"\",\n\n\"itemDepartmentCode\": \"1\",\n\n\"itemChargeCode\": \"\",\n\n\"itemChargeCodeGroup\": \"\",\n\n\"itemizerId\": \"Food\",\n\n\"itemTotal\":\n\n{                 \"discountTotal\": 0,                 \"itemDiscountTotal\": 0,                 \"subTotal\": 19.3277310924,                 \"total\": 23,                 \"serviceChargeTotal\": 0,                 \"taxTotal\": 0,                 \"inclusiveTaxTotal\": 3.6722689076,                 \"tipTotal\": 0,                 \"currencyCode\": \"\"             }\n\n,\n\n\"quantity\": 1,\n\n\"sequence\": 1,\n\n\"userToken\": \"\",\n\n\"unitPrice\": \"\",\n\n\"roundNumber\": \"\",\n\n\"parentItemSequence\": 0,\n\n\"parentItemType\": \"\"\n\n}\n\n],\n\n\"transactionNumber\": \"7b627b84-2d77-492e-a58d-1ae0709e5c6e\",\n\n\"transactionDateTime\": \"2026-08-07T11:55:43.000+00:00\",\n\n\"description\": \"\",\n\n\"tableNumber\": \"102\",\n\n\"roomNumber\": \"\",\n\n\"reservationNumber\": \"\",\n\n\"totalGuests\": 1,\n\n\"totalMembers\": 0,\n\n\"guestRemarks\": \"\",\n\n\"internalRemarks\": \"\",\n\n\"orderTypeCode\": \"\",\n\n\"mealPeriodCode\": \"2\",\n\n\"orderChannelCode\": \"\",\n\n\"currentRound\": 0,\n\n\"voucherSerialNumber\": \"API26073UK5WQ\",\n\n\"requestCompletionId\": \"eyJ2b3VjaGVyIjp7InNlcmlhbE51bWJlciI6IkFQSTI2MDczVUs1V1EiLCJ0eXBlIjoxLCJuYW1lIjoiVGVzdCBSb21hbnRpc2NoZXMgV29jaGVuZW5kZSIsInN0YXR1cyI6MSwidmFsaWRVbnRpbCI6IjIwMjgtMDYtMzAgMDA6MDA6MDAiLCJpbml0aWFsQW1vdW50Ijo5MCwiY3VycmVudEFtb3VudCI6OTAsImN1cnJlbmN5Q29kZSI6IkVVUiIsImlzUmVjaGFyZ2VBbGxvd2VkIjpmYWxzZX0sImJvb2tpbmdJZCI6IjAwMDAzMDc0IiwicmVmZXJlbmNlSWQiOjE3ODYxMDQyMTQ5MzZ9\",\n\n\"voucherAmountToRedeem\": \"23\"\n\n}\n\n2026 - 08 - 07 11: 55: 44 Membership_packet: (general_v3, id: 116)[From External] <<  <<  < {\n\n\"vouchers\": [{\n\n\"voucherSerialNumber\": \"API26073UK5WQ\",\n\n\"name\": \"Test Romantisches Wochenende\",\n\n\"category\": \"VoucherAmount\",\n\n\"code\": \"VA00\",\n\n\"status\": \"Available\",\n\n\"quantity\": 1,\n\n\"amount\":\n\n{                 \"totalAmount\": 67,                 \"currencyCode\": \"EUR\"             }\n\n,\n\n\"validityDateStart\": \"2026-08-07T12:03:36.126+00:00\",\n\n\"validityDateEnd\": \"2028-06-30T00:00:00+00:00\",\n\n\"isStackingAllowed\": false,\n\n\"isPromotion\": false\n\n}\n\n],\n\n\"requestCompletionId\": \"eyJyZWRlbXB0aW9uSWQiOiIxNzg2MTA0MjE1LTI4MDg5IiwicmVmZXJlbmNlSWQiOjE3ODYxMDQyMTYxMjd9\"\n\n}\n\nRefund\n\n2026 - 08 - 07 12: 00: 04 Membership_packet: (general_v3, id: 116)[Connection url]: https: //loyaltygw-uat.hero-cloud.com/vNext/api/v3/INCERTDEV/vouchers/refund/prepare\n\n2026 - 08 - 07 12: 00: 04 Membership_packet: (general_v3, id: 116)[Header]: [\"accept: application\\/json\", \"content-Type: application\\/json-patch+json\", \"AKey: F9DC0A05-BD44-4664-BFF7-22BCE67199C2\", \"Session: 2b49ee26-17c3-434d-aa3b-846595df9c25\", \"TraceId: 1A225C77-A708-4FA6-CB92-5D3FFB83C806\", \"IsRetry: false\", \"RequestContext: eyJlbXBsb3llZUlkIjoiOTAzMSIsImVtcGxveWVlRmlyc3ROYW1lIjoiVG9tYXN6IiwiZW1wbG95ZWVMYXN0TmFtZSI6IkpvendpY2tpIiwiZW1wbG95ZWVQcmVmZXJyZWROYW1lIjoiSm96d2lja2kiLCJwcm9wZXJ0eUNvZGUiOiJMSEgiLCJmYWNpbGl0eUNvZGUiOiJMSEgiLCJmYWNpbGl0eVR5cGUiOiIiLCJmYWNpbGl0eU5hbWUiOiJBbHN0ZXJWSUVXIiwic3RhdGlvbiI6IlNUQVRJT05UT01BU1oifQ==\"]\n\n2026 - 08 - 07 12: 00: 04 Membership_packet: (general_v3, id: 116)[To External] >>>  >> {\n\n\"checkNumber\": \"00003074\",\n\n\"checkDate\": \"2026-08-07T12:16:35.000+0200\",\n\n\"checkOpenTime\": \"2026-08-07T12:16:35.000+0200\",\n\n\"checkCloseTime\": \"2026-08-07T13:55:42.000+0200\",\n\n\"checkReopenTime\": \"\",\n\n\"checkTotal\":\n\n{         \"discountTotal\": 0,         \"itemDiscountTotal\": 0,         \"subTotal\": 19.33,         \"total\": 23,         \"serviceChargeTotal\": 0,         \"taxTotal\": 0,         \"inclusiveTaxTotal\": 3.67,         \"tipTotal\": 0,         \"currencyCode\": \"EUR\"     }\n\n,\n\n\"checkItems\": [{\n\n\"itemType\": \"MenuItem\",\n\n\"itemSubType\": \"\",\n\n\"itemCode\": \"LHH-001-0064-0003\",\n\n\"itemName\": \"Barbarie duck breast from the grill\",\n\n\"itemDescription\": \"\",\n\n\"itemCategory\": \"10\",\n\n\"itemSerialNumber\": \"\",\n\n\"itemInventoryCode\": \"\",\n\n\"itemDepartmentCode\": \"1\",\n\n\"itemChargeCode\": \"\",\n\n\"itemChargeCodeGroup\": \"\",\n\n\"itemizerId\": \"Food\",\n\n\"itemTotal\":\n\n{                 \"discountTotal\": 0,                 \"itemDiscountTotal\": 0,                 \"subTotal\": 19.3277310924,                 \"total\": 23,                 \"serviceChargeTotal\": 0,                 \"taxTotal\": 0,                 \"inclusiveTaxTotal\": 3.6722689076,                 \"tipTotal\": 0,                 \"currencyCode\": \"\"             }\n\n,\n\n\"quantity\": 1,\n\n\"sequence\": 1,\n\n\"userToken\": \"\",\n\n\"unitPrice\": \"\",\n\n\"roundNumber\": \"\",\n\n\"parentItemSequence\": 0,\n\n\"parentItemType\": \"\"\n\n}, {\n\n\"itemType\": \"Payment\",\n\n\"itemSubType\": \"Voucher\",\n\n\"itemCode\": \"INCERTPAY\",\n\n\"itemName\": \"INCERT Payment\",\n\n\"itemDescription\": \"INCERT Payment\",\n\n\"itemCategory\": \"\",\n\n\"itemSerialNumber\": \"API26073UK5WQ\",\n\n\"itemInventoryCode\": \"\",\n\n\"itemDepartmentCode\": \"\",\n\n\"itemChargeCode\": \"\",\n\n\"itemChargeCodeGroup\": \"\",\n\n\"itemizerId\": \"\",\n\n\"itemTotal\":\n\n{                 \"discountTotal\": 0,                 \"itemDiscountTotal\": 0,                 \"subTotal\": 0,                 \"total\": 23,                 \"serviceChargeTotal\": 0,                 \"taxTotal\": 0,                 \"inclusiveTaxTotal\": 0,                 \"tipTotal\": 0,                 \"currencyCode\": \"EUR\"             }\n\n,\n\n\"quantity\": 1,\n\n\"sequence\": 2,\n\n\"userToken\": \"\",\n\n\"unitPrice\": \"\",\n\n\"roundNumber\": \"\",\n\n\"parentItemSequence\": 0,\n\n\"parentItemType\": \"\"\n\n}\n\n],\n\n\"transactionNumber\": \"7b627b84-2d77-492e-a58d-1ae0709e5c6e\",\n\n\"transactionDateTime\": \"2026-08-07T12:00:04.000+00:00\",\n\n\"description\": \"\",\n\n\"tableNumber\": \"102\",\n\n\"roomNumber\": \"\",\n\n\"reservationNumber\": \"\",\n\n\"totalGuests\": 1,\n\n\"totalMembers\": 0,\n\n\"guestRemarks\": \"\",\n\n\"internalRemarks\": \"\",\n\n\"orderTypeCode\": \"\",\n\n\"mealPeriodCode\": \"2\",\n\n\"orderChannelCode\": \"\",\n\n\"currentRound\": 0,\n\n\"voucherSerialNumber\": \"API26073UK5WQ\",\n\n\"requestCompletionId\": \"eyJyZWRlbXB0aW9uSWQiOiIxNzg2MTA0MjE1LTI4MDg5IiwicmVmZXJlbmNlSWQiOjE3ODYxMDQyMTYxMjd9\"\n\n}\n\nUse Case\n\nWith Incert integration we have two types of vouchers. Regular and Sponsored, for each of voucher we need to use one specific payment method A and B.\n\nRegular Voucher = Incert Payment A\n\nSponsoring Voucher = Incert Payment B\n\nWe need to be able to prevent transaction when a regular voucher is redeemed with incet payment B or sponsoring voucher redeemed with incert payment A\n\nWhen Infrasys make a call  /vouchers/redeem/prepare to middleware to validate the voucher it doesn't send the payment details for example payment method code,\n\nwithout this information we cannot recognize if user used the correct payment.\n\nExpected Behave\n\nI want to see payment details during voucher/redeem/prepare",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-67723] POS Interface - General V3 - Add payment details in /vouchers/redeem/prepare (Iris Chan)\nDescriptions:\nIt is available for General V3 membership interface\nSystem supports adding unsaved payment details into transaction payload on external API request “Prepare Redeem Voucher” by new interface payment setting “Add Unsaved Payments Into Transaction Payload For Prepare Redeem Voucher” with default value as “Yes”\nWorkflow\n1. Open a printed check with General V3 member attached\n2. Click function “Paid” to go to cashier\n3. Select target payment method attached with General V3 membership interface\n4. If interface setting “Payment Type” of target payment method does not exist or value is not set as “By input voucher number” or “By input voucher number and member number”, system follows existing workflow for continue operation. Workflow stops here\n5. If interface setting “Payment Type” of target payment method exists with value as “By input voucher number” or “By input voucher number and member number”, system triggers external API request “Prepare Redeem Voucher”\n6. If new interface setting “Add Unsaved Payments Into Transaction Payload For Prepare Redeem Voucher” of target payment method does not exist or value as “No”, system follows existing workflow to prepare the transaction payload for external API request “Prepare Redeem Voucher”\n7. If new interface setting “Add Unsaved Payments Into Transaction Payload For Prepare Redeem Voucher” of target payment method exist with value as “Yes”, system adds the payment details of the selected payment method in step 3 into the transaction payload for external API request “Prepare Redeem Voucher”\n8. System continues operation\nSetup:\nSetup for adding unsaved payment details into transaction payload on prepare redeem voucher\nGo to Infrasys POS platform: POS System à Interface Configurations à Payment Settings\nClick “Add New” to configure a new setup\nSelect\nApply To\nAll Locations – For all locations\nShop – For a specific shop\nOutlet – For a specific outlet\nStation – For a specific station\nShop = Target shop (available only if “Shop” is chosen in the row “Apply To”)\nOutlet = Target outlet (available only if “Outlet” is chosen in the row “Apply To”)\nStation = Target station (available only if “Station” is chosen in the row “Apply To”)\nInterface = Target General V3 membership interface\nPayment Type = By input voucher number / By input voucher number and member number\nAdd Unsaved Payments Into Transaction Payload For Prepare Redeem Voucher = Yes\nClick “Save” to save the record\nFor detailed setup of General V3 (HMC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_64_0(Infrasys Cloud v1.2.64.0).docx”\nEnhancements: [Jira-25567,Jira-25568,Jira-25570,Jira-25571,Jira-27361,Jira-27362,Jira-27883,Jira-28134/Epic-24544] POS Feature – Support HMC online interface\nFor detailed setup of General V3 (DailyPoint) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_69_0(Infrasys Cloud v1.2.69.0).docx”\nEnhancements: [Jira-28111,Jira-28112,Jira-28176,Jira-28177,Jira-28178,Jira-28191,Jira-30071/Epic-26097] Infrasys Integration for DailyPoint Loyalty system\nFor detailed setup of General V3 (AWE) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_71_0(Infrasys Cloud v1.2.71.0).docx”\nEnhancements: [Jira-30611,Jira-31678] POS – Support for Interface with new CRM system for AWE using General v3\nFor detailed setup of General V3 (Eber) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_73_0(Infrasys Cloud v1.2.73.0).docx”\nEnhancements: [Jira-28224,Jira-28226,Jira-29512,Jira-29513,Jira-31128,Jira-31129,Jira-31130,Jira-31131/Epic-27926] POS Interface - Middleware v3 - [Eber]\nFor detailed setup of General V3 (CIRSA) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_74_0(Infrasys Cloud v1.2.74.0).docx”\nEnhancements: [Jira-30523,Jira-31808,Jira-31810,Jira-31811,Jira-31812,Jira-31813,Jira-31814/Epic-22215] POS Interface - Cirsa - Player Tracking integration\nFor detailed setup of General V3 (Eber) membership interface coupon mapping setting, please refer to “Infrasys_cloud_pos_release_note_1_0_76_0(Infrasys Cloud v1.2.76.0).docx”\nEnhancements: [Jira-34365/Epic-27926] POS Interface - Middleware v3 - [Eber] Enhance Coupon Mapping with POS\nFor detailed setup of General V3 (HMC) membership interface adjust tips operation, please refer to “Infrasys_cloud_pos_release_note_1_0_77_0(Infrasys Cloud v1.2.77.0).docx”\nEnhancements: [Jira-34645] POS - Allow for Adjust Tips with General V3 Interface Member (without post to HMC interface)\nFor detailed setup of General V3 (MCC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_81_0(Infrasys Cloud v1.2.81.0).docx”\nEnhancements: [Jira-30186,Jira-30187,Jira-30188/Epic-29236] POS Interface - CRM - MCC under general_v3\nFor detailed setup of General V3 (MCC) membership interface auto apply first item discount, please refer to “Infrasys_cloud_pos_release_note_1_0_83_0(Infrasys Cloud v1.2.83.0).docx”\nEnhancements: [Jira-38660/Epic-29236] POS Interface - CRM Middleware V3 - Show discount list and auto apply first item discount\nFor detailed setup of General V3 (HardRock) membership interface , please refer to “Infrasys_cloud_pos_release_note_1_0_83_0(Infrasys Cloud v1.2.83.0).docx”\nEnhancements: [Jira-36242,Jira-37136,Jira-37137,Jira-37138,Jira-37139,Jira-37140,Jira-37141,Jira-37142/Epic-25448] POS Interface - Middleware v3 - [HardRock] Coupon Redemption\nFor detailed setup of General V3 (MCC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_85_0(Infrasys Cloud v1.2.85.0).docx”\nEnhancements: [Jira-41639/Epic-29236] POS Interface - CRM Middleware V3 - Show discount list and auto apply first item discount by External API (v1.2.81 Hotfix included)\nFor detailed setup of General V3 (AWE) membership interface support SVC Coupon Enquiry with discount code only, please refer to “Infrasys_cloud_pos_release_note_1_0_86_0(Infrasys Cloud v1.2.86.0).docx”\nEnhancements: [Jira-41378] POS interface – General v3 membership interface – Vsoloop integration enhancement\nFor detailed setup of General V3 (COMO) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_87_0(Infrasys Cloud v1.2.87.0).docx”\nEnhancements: [Jira-42370,Jira-42578/Epic-32687] POS Interface - Middleware v3 - [COMO] Call discounts/query on Discount Tab\nFor detailed setup of auto apply coupon for SVC Coupon Enquiry, please refer to “Infrasys_cloud_pos_release_note_1_0_88_0(Infrasys Cloud v1.2.88.0).docx”\nEnhancement: [Jira-43124] POS - Automation of \"Apply Coupon\" after searching for valid coupon (Vsoloop)\nFor detailed setup of Activation / Deactivation (Refund All Items) Coupon, please refer to “Infrasys_cloud_pos_release_note_1_0_89_0(Infrasys Cloud v1.2.89.0).docx”\nEnhancements: [Jira-44796,Jira44797/Epic-43675] POS Interface - Middleware v3 - Activation/Deactivation Coupon (Phase 1 Dev 2/2)\nFor detailed setup of displaying message before coupon enquiry for SVC Coupon Enquiry, please refer to “Infrasys_cloud_pos_release_note_1_0_94_0(Infrasys Cloud v1.2.94.0).docx”\nEnhancements [Jira-48543/Epic-47999] POS - Additional information display at General V3 membership interface coupon enquiry page\nFor detailed setup of “Membership Registration”, please refer to “Infrasys_cloud_pos_release_note_1_0_94_0(Infrasys Cloud v1.2.94.0).docx”\nEnhancements: [Jira-46584,Jira-46585,Jira-46586,Jira-46587,Jira-46588/Epic-43413] Loyalty Middleware Interface - Integration to IHG Apigee (Phase 1)\nFor detailed setup of “Member Enquiry” and “Member List”, please refer to “Infrasys_cloud_pos_release_note_1_0_98_0(Infrasys Cloud v1.2.98.0).docx”\nEnhancements: [Jira-50436, Jira-51398, Jira-51297, Jira-51298/Epic-47101] POS Interface - Middleware CRM - [Basic9] Enhance Member Inquiry & Add Member Listing (INF-1010)",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Phoebe Chen",
+     "email": "phoebe.chen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67356",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-67356_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67356",
+   "summary": "POS - LPS Debit Card - Mask balances and show \"Card is not valid\" for invalid cards",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "New Feature",
+   "is_bug": false,
+   "description": "User Story\n\nAs a POS user performing an LPS Debit Card enquiry, I want the enquiry result screen to show a standardized \"Card is not valid\" message and mask balances for invalid cards, so that I am not misled into thinking an invalid card has a usable balance.\n\nCurrent Behavior\n\nThe LPS Debit Card enquiry result screen displays the exact status string returned from the middleware verbatim (e.g., \"Freeze\", blank). For most non-Normal statuses the card is actually invalid, yet the screen still shows the balance as 0.00, which misleads users into thinking the card has a usable balance.\n\nExpected Behavior\n\nThe LPS Debit Card enquiry result screen presents a standardized status display. When the card is valid (status \"Normal\"), the current display is unchanged. When the card is invalid (status \"PendingSales\", \"isExpired\" true, or any other non-Normal status), the screen shows a clear \"Card is not valid\" message and masks Card Balance, Gift Balance, and Total Balance as ***. When isExpired=true co-occurs with a non-Normal status string, the \"Expired (Card is not valid)\" message always takes precedence. This is a display-only change: the user can still proceed with any action as before, and all users see the masked balances with no override. Only the LPS Debit Card enquiry result screen is in scope. The Expiry Date is not shown on the enquiry result screen; it appears only in the interface log.\n\nMasking is controlled by a new setup option under Interface Control > LPS Debit Card loyalty interface > General Setup:\n\n- Setup name: Mask Check Value Result Balance\n\n- Dropdown options: No (Default), Yes\n\n- When \"Yes\", invalid cards show *** balances; when \"No\" (default), invalid cards show raw balances.\n\n- This option is not available for card status \"Normal\" (Normal always shows raw balances unchanged).\n\nAcceptance Criteria\n\nNormal status unchanged\n\n- Given the LPS Debit Card enquiry returns status 'Normal'\n\n- When the enquiry result screen is displayed\n\n- Then the current enquiry result display is shown with no modification\n\nExpired card\n\n- Given the LPS Debit Card enquiry returns 'isExpired' as true and the 'Mask Check Value Result Balance' option is 'Yes'\n\n- When the enquiry result screen is displayed\n\n- Then the status shows 'Expired (Card is not valid)' in English or 'Expired (此卡已失效)' in Chinese\n\n- And Card Balance, Gift Balance, and Total Balance display as ***\n\n- But if the returned status is also non-Normal (e.g., 'PendingSales'), the 'Expired (Card is not valid)' message still takes precedence\n\nPendingSales status\n\n- Given the LPS Debit Card enquiry returns status 'PendingSales', 'isExpired' is not true, and the 'Mask Check Value Result Balance' option is 'Yes'\n\n- When the enquiry result screen is displayed\n\n- Then the status shows 'PendingSales (Card is not valid)' in English or 'PendingSales (此卡已失效)' in Chinese\n\n- And Card Balance, Gift Balance, and Total Balance display as ***\n\nOther non-Normal status\n\n- Given the LPS Debit Card enquiry returns a status that is not 'Normal' or 'PendingSales', 'isExpired' is not true, and the 'Mask Check Value Result Balance' option is 'Yes'\n\n- When the enquiry result screen is displayed\n\n- Then the status shows '\n{Returned status from interface} (Card is not valid)' in English or '{Returned status from interface}\n\n(此卡已失效)' in Chinese\n\n- And Card Balance, Gift Balance, and Total Balance display as ***\n\n- But if the returned status is blank or empty, the status shows only '(Card is not valid)' in English or '(此卡已失效)' in Chinese with no status name prefix\n\nMasking option set to No\n\n- Given the LPS Debit Card enquiry returns an invalid status (non-Normal) and the 'Mask Check Value Result Balance' option is 'No'\n\n- When the enquiry result screen is displayed\n\n- Then the status message is shown as described for the invalid status\n\n- But Card Balance, Gift Balance, and Total Balance display raw values instead of ***\n\nSupporting Evidence\n\nReference attachments: Workflow 67356.png. The ticket references example screenshots and interface logs for each status case: \"Status - Normal - no change required.png\" (Case 1), \"Status - PendingSales - change required.png\" (Case 2), \"IsExpired is true - change required.png\" (Case 3), \"Other status and not expired - change required.png\" (Case 4), plus \"Status is Freeze - Invalid.png\" and \"No status - Invalid.png\" (blank/other status examples).\n\nRequested Timeline\n\nAligned with Priority: Medium\n\nPreferred Quarter: not specified\n\nTarget Version: not specified\n\nNotes: no deadline provided by requester\n\nAlternatives Considered\n\nConsidered showing the raw status string only versus a standardized \"Card is not valid\" message; the standardized message was chosen to avoid misleading users. Also considered an override to reveal unmasked balances for troubleshooting, but rejected per requirement that all users see masked balances.\n\nOriginal Description (preserved by INF Prod. Studio)\n\nVendor Key\n\nlps_debit_card\n\nUser Story\n\nCurrently, the enquiry result screen will display the exact status returned from Middleware but for users, most of the status represent the card is inactive and currently though the card is invalid, it is showing the balance as 0.00 which is misleading\n\nAttached the example of current enquiry result screen -\n\nAttached Status is Freeze - Invalid.png and No status - Invalid.png\n\nRequirement\n\nIt is required to have a standard screen to show the status from the enquiry result\n\nBelow listed all the cases:\n\nCase 1: the status returned is 'Normal' (no modification required)\n\nAttached Status - Normal - no change required.png display the current enquiry result\n\nAttached also the interface log for this situation - Log for card 6363402333320413207 - normal (no change required).txt\n\nCase 2: the status returned is 'PendingSales'\n\nStatus display as \"PendingSales (Card is not valid)\" [English], \"PendingSales (此卡已失效)\" [中文]\n\n- Card Balance, Gift Balance, Total Balance should display as ***\n\nAttached Status - PendingSales - change required.png display the current enquiry result\n\nAttached also the interface log for this situation - Log for card 6363402333310443221 - pendingsales (change required).txt\n\nCase 3: 'isExpired' return 'true\n\n- The status should display 'Expired (Card is not valid)' (English) or 'Expired (此卡已失效)' (中文)\n\n- Card Balance, Gift Balance, Total Balance should display as ***\n\n- Should display the Expiry Date based on the response\n\nAttached IsExpired is true - change required.png is the sample of the required change\n\nAttached also the interface log for this situation - Log for card 6363401529210066547 - expired (change required).txt\n\nCase 4: The status returned is not 'Normal' or 'PendingSales' and the 'IsEquired' is not true\n\n- The status should display '{Returned status from interface} (Card is not valid)' (English) or '{Returned status from interface} (此卡已失效)' (Chinese)\n\n- Card Balance, Gift Balance, Total Balance should display as ***\n\nAttached Other status and not expired - change required.png is the sample of the required change\n\nAttached also the interface log for this situation - Log for card 6363405895560084436 - other or no status (change required).txt",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-67356] POS - LPS Debit Card - Mask balances and show \"Card is not valid\" for invalid cards (Teresa)\nDescriptions:\nIt is available for LPS Debit Card loyalty interface\nSystem displays the status message and masking balance values on corresponding card status on the enquiry result display screen\nWorkflow\n1. Open check\n2. Click function “Loyalty SVC Check Value” or “Loyalty SVC Check Value (Key-in)”\n3. Swipe card or manual input card number\n4. System follows existing workflow to trigger external party API for enquiry card details\n5. If value of status from external party returned is “Normal” and “PendingSales”, system follows existing behaviour for displaying “Normal” and “PendingSales” on status and go to step 7\n6. If value of status from external party returned is not “Normal” and “PendingSales”, system displays value of status with specific status message\nFormat in English: <Value of status from external party> (Card is not valid)\nFormat in Traditional Chinese: <Value of status from external party> (此卡已失效)\n7. If the setup “Mask Check Value Result Balance” does not exist or value set as “No” or status is “Normal” and “PendingSales”, system follows existing behavior for displaying value of “Card Balance”, “Gift Balance” and “Total Balance”\n8. If setup “Mask Check Value Result Balance” exists and value set as “Yes” and status is not “Normal” and “PendingSales”, system displays value of “Card Balance”, “Gift Balance” and “Total Balance” with masked value “***”\nSetup:\nSet up for mask check value result balance\nGo to Infrasys POS platform: Interface Control à Interfaces\nSelect target LPS Debit Card interface setting\nClick “Add New” to configure a new record or select an existing interface record\nFill in the setup below\n| Field Name | Description | Mandatory |\n| General Setup | General Setup | General Setup |\n| Mask Check Value Result Balance | Indicator for mask check value result balance  Options provided Yes No (Default value) | Yes |\nClick “Save” to save the record\nFor detailed setup for LPS Debit Card loyalty interface, please refer to “Infrasys_cloud_pos_release_note_1_0_68_0(Infrasys Cloud v1.2.68.0).docx”\nEnhancements: [Jira-29103,Jira-29104,Jira-29678/Epic-22260] POS Feature - Debit Card interface with LPS (Phase 3)",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Phoebe Chen",
+     "email": "phoebe.chen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-66641",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-66641_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-66641",
+   "summary": "POS-TMS Interface - Support to return Payment total and Room charge payment for third party CRM integration ",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS",
+    "RESERVATION"
+   ],
+   "issue_type": "New Feature",
+   "is_bug": false,
+   "description": "20260720 Update:\n\nSuggested body return to TMS by thankYouMsg as below:\n\n[chks_payments_total] => 70\n\n[payment_details] => array(\n\narray(\n\n[code] => \"0001\",\n\n[amount] => 50.00,\n\n[type] => \"cash\"\n\n),\n\narray(\n\n[code] => \"0002\",\n\n[amount] => 20.00,\n\n[type] => \"credit_card\"\n\n),\n\n),\n\n20260713 Update:\n\nIt is request to store all payment info into HQ in oder for future requirements from other customer.\n\nRequest body:\n\n- Check Total (existing)\n\n- Payment Total\n\n- Payment code\n\n- Payment amount\n\n- Payment Tips amount\n\nUser Story:\n\nAs a CRM system operator at Swire Hotels (China properties), I want the POS to include payment total and room charge amount in the check-completion message sent to TMS, so that the CRM can pull complete reservation payment data without manual reconciliation.\n\nCurrent Behavior:\n\nAfter a reservation is completed at the POS, the POS sends a check-completion message to TMS containing only the check total, check number. Payment breakdown details — including total payment across all tender types and the amount settled specifically via room charge — are not transmitted, requiring CRM operators to manually reconcile payment data. Currently, release payment, void check, adjust payment after completion will update the check total through thank you message. Void payment will not update the check total.\n\nExpected Behavior:\n\nAfter a reservation is completed at the POS, the POS sends a check-completion message to TMS containing the following fields:\n\n- Check total (existing)\n\n- Check number (existing)\n\n- Payment total — the sum of all tender types applied to the check (new)\n\n- Room charge amount — the total amount settled via the room charge payment method at checkout (new)\n\nThe extended message must be backward-compatible with TMS instances that do not yet consume the new fields.\n\nAcceptance Criteria:\n\n- Payment total includes all tender types\n\n- Room charge amount reflects only room charge payment\n\n- Existing fields remain unchange\n\n- Returns zero value when no payment is applied\n\n- Returns zero room charge value when room charge payment is not used\n\n- Backward compatibility — TMS should ignores unknown fields without error for verison before this case released\n\n- Release payment, void check, adjust payment after completion will update the check total\n\n- Void payment will not update the check total",
+   "refinement_notes": "HERO-66641 — Feature Refinement Note\n\n:root {\n--text: #1a1a1a;\n--muted: #555;\n--border: #ccc;\n--head: #1e3a5f;\n--new: #b45309;\n--bg: #fff;\n--table-head: #f0f4f8;\n}\n* { box-sizing: border-box; }\nbody {\nfont-family: \"Segoe UI\", Calibri, Arial, sans-serif;\nfont-size: 11pt;\nline-height: 1.45;\ncolor: var(--text);\nmax-width: 210mm;\nmargin: 0 auto;\npadding: 16mm 18mm;\nbackground: var(--bg);\n}\nh1 {\nfont-size: 16pt;\ncolor: var(--head);\nborder-bottom: 2px solid var(--head);\npadding-bottom: 8px;\nmargin: 0 0 12px;\n}\nh2 {\nfont-size: 13pt;\ncolor: var(--head);\nmargin: 22px 0 10px;\npadding-bottom: 4px;\nborder-bottom: 1px solid var(--border);\n}\nh3 {\nfont-size: 11.5pt;\ncolor: var(--head);\nmargin: 16px 0 8px;\n}\n.badge {\ndisplay: inline-block;\nfont-size: 9pt;\nfont-weight: 600;\npadding: 2px 8px;\nborder-radius: 3px;\nbackground: #dbeafe;\ncolor: #1e40af;\n}\n.note-inline {\nfont-size: 10pt;\ncolor: var(--muted);\nmargin: 0 0 20px;\npadding: 10px 12px;\nbackground: #f8fafc;\nborder-left: 4px solid var(--border);\n}\ntable {\nwidth: 100%;\nborder-collapse: collapse;\nmargin: 10px 0 16px;\nfont-size: 10pt;\n}\nth, td {\nborder: 1px solid var(--border);\npadding: 6px 8px;\ntext-align: left;\nvertical-align: top;\n}\nth { background: var(--table-head); font-weight: 600; }\nol, ul { margin: 8px 0; padding-left: 22px; }\nli { margin: 4px 0; }\n.new { color: var(--new); font-weight: 600; }\n.workflow-meta { font-size: 10pt; color: var(--muted); margin: 6px 0 10px; }\n.workflow-meta strong { color: var(--text); }\n.workflow-block { margin-bottom: 16px; }\n.footer {\nmargin-top: 28px;\npadding-top: 12px;\nborder-top: 1px solid var(--border);\nfont-size: 9pt;\ncolor: var(--muted);\n}\n@media print {\nbody { padding: 12mm; max-width: none; }\nh2 { page-break-after: avoid; }\ntable, .workflow-block { page-break-inside: avoid; }\n}\n\nFeature Refinement Note\n\nHERO-66641   POS - TMS Interface - Support payment total and room charge amount in check-completion message\n\nStatus: Final — version-02 — 2026-08-19\n\nRegional / PO / support export (sections 1–9). Developers use refinement-functional (full note, sections 1–12).\n\n1. Summary (target of the enhancement)\n\nExtend the existing Thankyou Message from POS to internal TMS so the message includes payment summary and per-payment details needed by CRM (e.g. Swire Hotels China).\n\nScope changed (2026-08-19) (vs original JIRA request for payment total + room charge amount only). Added: payment name, payment code. Removed: payment tips. The Thankyou Message must include:\n\n- Payment total — sum of all payments applied to the check\n\n- For each applied payment: payment code, payment amount, and payment name (language for payment name — TBC-2)\n\nTrigger logic for Thankyou Message is unchanged — only the message content is extended.\n\nOut of scope: Payment tips in Thankyou Message; new setup; new operator messages; changes to when Thankyou Message fires.\n\n2. Support scope (in scope / out of scope)\n\n| Category | In scope | Out of scope | Support note\n\n|\n\n3. Detailed workflow\n\nWorkflow: Thankyou Message — include payment total and per-payment details\n\nAvailability: Existing Thankyou Message (check attached with reservation; existing trigger events unchanged)\n\nRestrictions: No change to when Thankyou Message is fired. No dedicated waiter function key — system-fired as today.\n\n- Check has reservation attached (from mark arrival) and an existing Thankyou Message trigger occurs (e.g. check fully settled, check released, adjust payment after settled, or check voided after settled — per existing rules).\n\n- System fires Thankyou Message to internal TMS using the existing trigger logic (unchanged).\n\n- 【Changed】 Thankyou Message content includes payment total (all payments applied to the check) and, for each applied payment: payment code, payment amount, and payment name. Payment tips are not included. Language for payment name is TBC-2.\n\n- Internal TMS receives the message per the updated TMS specification (TBC-1 resolved in round 2).\n\n4. New setup required\n\nNone — confirmed in version-01; no change recorded in round-2 refinement or manday.\n\n| Setup name | Location (HQ / POS) | Purpose | Options / values | Default\n\n|\n\n5. Existing setup\n\nNone — confirmed in version-01; no change recorded in round-2 refinement or manday.\n\n| Setup name | Location | Effect on this enhancement | Regional relevance\n\n|\n\n6. Printing content required\n\n| Printing variable | Meaning | Source\n\n|\n\n| Print formats affected | Out of scope\n\n|\n\nNone required for this enhancement.\n\n7. Operator-facing messages (errors, warnings, prompts)\n\nNo new operator messages — confirmed in version-01; no change recorded in round-2 refinement or manday.\n\n| ID | Type | Scenario (when shown) | Message text | User action\n\n|\n\n8. Study scope\n\nFunctional study\n\n- None recorded in manday meeting.\n\nTechnical study\n\n- None recorded in manday meeting.\n\n9. TBC questions\n\n| ID | Question | Owner | Status\n\n| TBC-2\n| Which language should be used for payment name in Thankyou Message\n| PO\n| Open\n\nTBC-1 resolved (see Decision log below).\n\nAppendix — Decision log\n\n| ID | Question | Decision | Date\n\n| TBC-1\n| TMS specification for accepting the new Thankyou Message information\n| Specification updated. Round-2 field list: payment total; per payment: payment code, payment amount, payment name. Payment tips removed.\n| 2026-08-19\n\nHERO-66641 · version-02 · 2026-08-19 · Generated for JIRA upload",
+   "release_notes": "Enhancements: [Jira-66641] POS-TMS Interface - Support to return Payment total and Room charge payment for third party CRM integration (Ryan Li)\nDescription:\nIt is available for API function call to Internal TMS Module\nThe \"Thank You Message\" API of the TMS module supports the following new fields:\nPayment total\nPayment detail\nPayment code\nPayment amount\nPayment type\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Sooki Shan",
+     "email": "sooki.shan@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Johnson Liu",
+     "email": "johnson.liu@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-62064",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-62064_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-62064",
+   "summary": "POS Interface - Add the userId and userName for the 3 API calls to FAS Deposits System",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Background:-\n\nThe following API enhancements are necessary. Each API call must return the information of the staff/user who performed the action in Infrasys Cloud POS:\n\n• genDeposit\n\n• writeOffDeposit\n\n• voidTransaction\n\nThe returned fields must include at minimum:\n\n• userId – Staff ID\n\n• userName – Staff Name\n\n→ This is essential for the deposit system to accurately record who performed each action (payment / write-off / void), ensuring proper auditability and reporting.\n\nAs-is:-\n\nThere is no userId (Staff ID) and userName (Staff Name) for the following API calls who performed the action in Infrasys Cloud POS:\n\n• genDeposit\n\n• writeOffDeposit\n\n• voidTransaction\n\nTo-be:-\n\nIt is needed to have There is no userId (Staff ID) and userName (Staff Name) for the following API calls who performed the action in Infrasys Cloud POS:\n\n• genDeposit\n\n• writeOffDeposit\n\n• voidTransaction",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-62064/Epic-47408] POS Interface - Add the userId and userName for the 3 API calls to FAS Deposits System (Iris Lui)\nDescriptions:\nIt is available for FAS advance order interface\nSystem supports to provide user number and username of current POS operator when performing below FAS API calls to external party:\ngenDeposit\nwriteOffDeposit\nvoidTransaction\nIf current operator of POS is not authorized to perform corresponding advance order functions and approval from another user is required, system provides the user number and name of the user who approved the functions in API calls\nSystem supports to provide modify user when performing below FAS API calls to external party, value and format follow existing field in “genDeposit” API:\nwriteOffDeposit\nvoidTransaction\nSetup:\nFor detailed setup of FAS Advance order interface, please refer to “Infrasys_cloud_pos_release_note_1_0_100_0(Infrasys Cloud v1.2.100.0).docx”\nNew Functions: [Jira-47961,Jira-47962,Jira-50457,Jira-50458,Jira-52906,Jira-53395,Jira-53396,Jira-53400,Jira-54327,Jira-54472,Jira-54941/Epic-47408] POS interface - API Integration with FAS Taiwan Deposits System",
+   "qc_info": {
+    "qc_tester": null,
+    "qc_reviewer": null
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68744",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68744_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68744",
+   "summary": "POS Interface - VOYT Integration - Fix 'DishUpCall' issues",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "KDS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "1. \"pantryMessage\" filed format is incorrect.\n\nIssue 1-1: If no pantry message is applied to the item, the fields are still present and have \"null\".\n\nIssue 1-2: If pantry message is applied to the item, each fields by language 1~5 are enclosed by [ ].\n\nIssue 1-3: The value in language 4 is incorrectly English whereas the value in language 2 is incorrectly in Japanese even the Language Configuration have Japanese in Language 4.\n\n2. \"itemPrintQCode1~10\" filed value and format are incorrect.\n\nIssue 2-1: System set the item print queue ID instead of Code where VOYT requires the code.\n\nIssue 2-2: System set \"0\" at \"itemPrintQCode2~10\" even the item have no print queues.\n\n3. Some fileds with no value are present.\n\nThe not a mandatory fields with no value or the languages not in use are not required to be present and should be removed.\n\nExpected",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Yannis Liu",
+     "email": "yannis.liu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68692",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68692_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68692",
+   "summary": "[Tech] PII - PII Search Tool - Disable anonymize member data in TMS/Reservation application",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "CORE"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "When using the PII Search Tool to query expiring data in TMS/Reservation, the results display expiring reservations, the corresponding members, and the messages sent.\n\nThe corresponding member information is provided for reference only and must not be anonymized, because only that specific reservation is expiring—not the member itself.\n\nPlease remove(disable) the checkbox option for member information to prevent the member from being mistakenly anonymized during TMS/Reservation anonymization processes.",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-68692] [Tech] PII – PII Search Tool – Disable anonymize member data in TMS/Reservation application\nDescription:\nDisabled “Anonymize” button for member information to prevent the member from being mistakenly anonymized during TMS/Reservation anonymization processes.\nAdd an alert message “Member data cannot be anonymized in this application” under [PII Data (Member)]\nSetup:\nBackend: [PII Management > Search Tools] page, set “Application” to TMS/Reservation, and input conditions to search some records with member.\nTicked some reservation records\nAnd then ticked some member records.\nUnticked all member records.\nInput conditions to search expired records with member, click “Select All Expired Records In Current Page” button.\nThe member has expired data.\nThe member does not have expired data.\nChange “Application” to Member, search records. Ticked some records to click “Anonymize”button.",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68668",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68668_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68668",
+   "summary": "TMS 2.0 - Authority Ask Password field not masked",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Use Case:\n\nTMS 2.0 Function Authority dialog (title: Authority : Ask Password). User must enter a password to proceed. Password must stay masked while typing.\n\nSteps to Reproduce:\n\n- Log in to TMS 2.0.\n\n- Run a function whose outlet function authority is Ask Password (e.g. confirm / void / similar).\n\n- Dialog opens. Focus the Password field and type.\n\nCurrent Result:\n\nPassword is shown as plaintext (e.g. 51 visible). Input stays type=text after the first keystroke. [Unexpected]\n\nExpected Result:\n\nPassword is masked (dots/asterisks) for the whole input. [Expected]\n\nRoot Cause [Optional]:\n\nreact/Tms/operation/src/components/Authority/AuthorityDialog.jsx used an autofill workaround from r17917 (leto_li, JIRA #11401): render type=text then set event.target.type = password in onFocus.\n\nThat survived on React 16/18 because React skipped rewriting type when the prop was still text. After HERO-65836 (React 19.2.5), updateInput() writes node.type from props on every commit, so the first setState on typing forces the field back to text.\n\nHKJC AuthorityDialog already uses type=password. Login (UserLogin.tsx) uses React-controlled type and is not affected. This is the only TMS 2.0 hit of the DOM type mutation.\n\nFix:\n\nSet type=password in JSX. Remove handleFocus. Keep autocomplete=new-password for Chrome autofill.",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Aimee Wang",
+     "email": "aimee.wang@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    }
+   }
+  }
+ }
+]

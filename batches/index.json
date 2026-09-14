@@ -1,0 +1,199 @@
+[
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_01_api_portal.json",
+  "template": "api_portal",
+  "sprint_folders": [
+   "Sprint20260824-20260904"
+  ],
+  "count": 1,
+  "issue_keys": [
+   "HERO-67229"
+  ],
+  "bug_keys": []
+ },
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_02_infrasys.json",
+  "template": "infrasys",
+  "sprint_folders": [
+   "Sprint20260824-20260904"
+  ],
+  "count": 8,
+  "issue_keys": [
+   "HERO-67583",
+   "HERO-55108",
+   "HERO-68370",
+   "HERO-68252",
+   "HERO-68236",
+   "HERO-67875",
+   "HERO-67667",
+   "HERO-67538"
+  ],
+  "bug_keys": [
+   "HERO-68370",
+   "HERO-68236"
+  ]
+ },
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_03_infrasys.json",
+  "template": "infrasys",
+  "sprint_folders": [
+   "Sprint20260824-20260904"
+  ],
+  "count": 8,
+  "issue_keys": [
+   "HERO-62908",
+   "HERO-55900",
+   "HERO-68315",
+   "HERO-68311",
+   "HERO-68259",
+   "HERO-68171",
+   "HERO-68002",
+   "HERO-67950"
+  ],
+  "bug_keys": [
+   "HERO-68315",
+   "HERO-68311",
+   "HERO-68259",
+   "HERO-68171",
+   "HERO-68002",
+   "HERO-67950"
+  ]
+ },
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_04_infrasys.json",
+  "template": "infrasys",
+  "sprint_folders": [
+   "Sprint20260824-20260904",
+   "Sprint20260907-20260918"
+  ],
+  "count": 8,
+  "issue_keys": [
+   "HERO-67285",
+   "HERO-67026",
+   "HERO-62835",
+   "HERO-57546",
+   "HERO-67802",
+   "HERO-66893",
+   "HERO-66818",
+   "HERO-66733"
+  ],
+  "bug_keys": [
+   "HERO-67285",
+   "HERO-67026",
+   "HERO-62835",
+   "HERO-66733"
+  ]
+ },
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_05_infrasys.json",
+  "template": "infrasys",
+  "sprint_folders": [
+   "Sprint20260907-20260918"
+  ],
+  "count": 8,
+  "issue_keys": [
+   "HERO-68800",
+   "HERO-68680",
+   "HERO-68637",
+   "HERO-68624",
+   "HERO-68516",
+   "HERO-68491",
+   "HERO-68415",
+   "HERO-68414"
+  ],
+  "bug_keys": [
+   "HERO-68800",
+   "HERO-68637",
+   "HERO-68624"
+  ]
+ },
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_06_infrasys.json",
+  "template": "infrasys",
+  "sprint_folders": [
+   "Sprint20260907-20260918"
+  ],
+  "count": 8,
+  "issue_keys": [
+   "HERO-68378",
+   "HERO-67723",
+   "HERO-67356",
+   "HERO-66641",
+   "HERO-62064",
+   "HERO-68744",
+   "HERO-68692",
+   "HERO-68668"
+  ],
+  "bug_keys": [
+   "HERO-68692",
+   "HERO-68668"
+  ]
+ },
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_07_infrasys.json",
+  "template": "infrasys",
+  "sprint_folders": [
+   "Sprint20260907-20260918"
+  ],
+  "count": 5,
+  "issue_keys": [
+   "HERO-68573",
+   "HERO-68494",
+   "HERO-68456",
+   "HERO-68065",
+   "HERO-67826"
+  ],
+  "bug_keys": [
+   "HERO-68065",
+   "HERO-67826"
+  ]
+ },
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_08_report.json",
+  "template": "report",
+  "sprint_folders": [
+   "Sprint20260824-20260904"
+  ],
+  "count": 8,
+  "issue_keys": [
+   "HERO-68133",
+   "HERO-67812",
+   "HERO-67800",
+   "HERO-67789",
+   "HERO-67731",
+   "HERO-64461",
+   "HERO-64286",
+   "HERO-63574"
+  ],
+  "bug_keys": [
+   "HERO-67800",
+   "HERO-67731",
+   "HERO-64461",
+   "HERO-64286",
+   "HERO-63574"
+  ]
+ },
+ {
+  "batch_file": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports/batches/batch_09_report.json",
+  "template": "report",
+  "sprint_folders": [
+   "Sprint20260824-20260904",
+   "Sprint20260907-20260918"
+  ],
+  "count": 6,
+  "issue_keys": [
+   "HERO-60071",
+   "HERO-68131",
+   "HERO-67801",
+   "HERO-64013",
+   "HERO-54055",
+   "HERO-50978"
+  ],
+  "bug_keys": [
+   "HERO-60071",
+   "HERO-67801",
+   "HERO-64013",
+   "HERO-50978"
+  ]
+ }
+]

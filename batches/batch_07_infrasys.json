@@ -1,0 +1,152 @@
+[
+ {
+  "issue_key": "HERO-68573",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68573_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68573",
+   "summary": "[Tech] PII - PII Member Anonymization Text Change",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "CORE"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Requirement:\n\nWhen performing PII anonymization (whether manually or via scheduled job), replace the original \"{Erased PII Data}\" text with \"[ANONYMIZED-YYYYMMDD]\".",
+   "refinement_notes": "",
+   "release_notes": "Enhancement: [Jira-68573] [Tech] PII – PII Member Anonymization Text Change\nDescription:\nWhen performing PII anonymization (whether manually or via scheduled job), replace the original “{Erased PII Data}\" text with \"[ANONYMIZED-YYYYMMDD]\".\nPreviously anonymized records continue to display {Erased PII Data}.\n[Member Management > Members > Anonymized Member > View Details > Date of Birth] page, the current record displays [ANONYMIZED-YYYYMMDD], while the previous record displays {Erased PII Data}.\nSetup:\nProfile Management: [Profile Listing > Create Profile] page, create two records which booker information and additional email/phone both are input.\nMember A\nMember B\nTMS Operation: [New Reservation] page, make a reservation with message and create member.\nReservation Operation: [New Reservation] page, make a reservation with message and create member.\nDB: [pii_data_properties] table, query a record which is created by member. Modify “dpro_expiry_time” field to expired time.\nBackend: [PII Management > Schedule Expired Data Anonymization > Add New] page, add a record to anonymize member.\nWait for the shell process to complete. Go to [PII Management > Search Tools > Member Module] page, search for records. (One record has been anonymized)\nTicked one record to click “Anonymize” button.\nChange “Application” to TMS or Reservation, search some records.\nTicked one reservation, one member and one message to click “Anonymize” button.\nTMS\n\n\nReservation\nSearch for some records that were previously anonymized.\n[Member Management > Members] page, select a member record that has just been anonymized to view the details. Check “Date of Birth” value.\nGo back to listing page and select a previously anonymized member record to view the details. Check “Date of Birth” value.",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68494",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68494_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68494",
+   "summary": "[Tech] TMS Remove un-used CakeLog and Normalization Log File Name - Dev",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Background\n\nThis case is focusing on finding out those unwanted debug log, and remove it.",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68456",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68456_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68456",
+   "summary": "[Tech] Impact of Changing RabbitMQ createQueue durable from false to true on TMS sendMessageToMQ - Dev",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "CORE",
+    "RESERVATION"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Changing the durable parameter in createQueue from false to true does not directly alter WebSocket connection behavior or real-time transmission performance.\n\nHowever, it changes the semantics of whether queues and messages survive broker restarts, which indirectly affects how WebSocket clients experience reconnections and service restarts.\n\nDirect Impact: On the WebSocket Connection Itself\n\n- WebSocket connection establishment, heartbeats, and reconnection logic: These are primarily determined by the client SDK, the server-side WebSocket handling (e.g., Spring WebSocket, STOMP over WebSocket), and the network layer, and are not directly related to whether the queue is durable.\n\n- Real-time latency and throughput: According to RabbitMQ documentation, in most cases, whether a queue is durable does not significantly affect throughput or latency; differences are only noticeable in scenarios with extremely high-frequency queue creation/deletion.\n\nIn other words, simply changing an existing queue from non-durable to durable will not cause currently connected WebSocket clients to suddenly become slower or change their connection behavior.\n\nIndirect Impact: Semantic Changes for WebSocket Use Cases\n\nThe key difference lies in whether messages persist after restarts and reconnections:\n\ndurable = false (Original Setting)\n\n- The queue exists only in memory; after a broker restart, the queue is deleted and all messages inside it are lost.\n\n- Implications for WebSocket clients:\n\n-\n\n- If the client briefly disconnects but the broker does not restart, messages may still remain in the queue (depending on whether you use temporary/auto-delete queues).\n\n-\n\n- Once the broker restarts (deployment, failure, upgrade), all messages buffered in that queue are lost; after reconnection, the client will only receive messages produced after the restart.\n\n- This is more suitable for “real-time state” scenarios, such as:\n\n-\n\n- Real-time notifications, latest chat messages, live dashboard data, where only “current and future” data is needed and historical backfill is not required.\n\ndurable = true (New Setting)\n\n- The queue definition is persisted to disk and automatically recreated after a broker restart; if messages are also sent as persistent (delivery mode 2), those messages will be restored after restart.\n\n- Implications for WebSocket clients:\n\n-\n\n- After a broker restart, when a client re-subscribes to the same durable queue, it can continue to receive previously unconsumed persistent messages (provided the messages themselves are persistent and the client has a proper ack mechanism).\n\n-\n\n- If you combine this with STOMP durable subscriptions (e.g., setting durable: true in headers and using a fixed subscription id), clients can receive messages that accumulated while they were offline upon reconnection.\n\n- Suitable for scenarios requiring “at-least-once delivery” or “offline backfill”, such as:\n\n-\n\n- Critical business notifications, order status changes, task result callbacks, which should not be lost due to a broker restart.\n\nPractical Considerations\n\n- Messages must also be persistent\n\nSetting the queue to durable alone is not enough; if messages are still sent as transient (many clients default to transient), messages will still be lost on broker restart.\n\n-\n\n- You need to set deliveryMode = 2 (or the equivalent persistent option in your language) on the publisher side.\n\n- Client ack mechanism must align\n\nTo guarantee no message loss, consumers (the backend services feeding WebSocket clients) should ack to RabbitMQ only after confirming the frontend has actually received the message; otherwise, messages may still be lost or duplicated if the service crashes.\n\n- Avoid queue buildup causing WebSocket disconnections or delays\n\nAfter switching to durable, if clients are offline for long periods or consume slowly, messages can accumulate, potentially leading to:\n\n-\n\n- A large burst of messages on reconnection, causing frontend lag or connection timeouts.\n\n-\n\n- If there is a reverse proxy (e.g., nginx) with proxy buffering enabled, you may see “delayed messages” or “disconnections”; proxy settings may need adjustment.\n\n-\n\n- In practice, temporary WebSocket users are often given auto-delete queues or queues with x-expires so the broker cleans them up automatically.\n\n- Changes in RabbitMQ 4.x\n\nStarting from RabbitMQ 4.0, support for non-exclusive, non-durable queues will be removed; the trend is to encourage the use of durable or quorum queues.\n\nPractical Recommendations (for WebSocket Scenarios)\n\n- For real-time, disposable messages (e.g., live chat, real-time stock ticks):\n\n-\n\n- You can continue using non-durable or temporary queues to reduce disk I/O and the risk of message buildup.\n\n- For critical business messages that must not be lost on broker restart:\n\n-\n\n- Change the queue to durable, and at the same time:\n\n-\n\n-\n\n- Publish messages as persistent (delivery mode 2).\n\n-\n\n-\n\n- Use publisher confirms.\n\n-\n\n-\n\n- Have consumers use manual ack, and only ack after confirming the frontend has received the message.\n\n- If you are concerned about offline message accumulation:\n\n-\n\n- Use short-lived queues per WebSocket session (auto-delete or with x-expires), or periodically clean up old messages.",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS TMS Release Notes\nversion 1.2.115.0\nReleased on 7th Oct 2026\nConfidential and Internal Use Only\nInfrasys POS TMS Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\n| V1.2.115.0 | [Jira-68456] [Tech] Impact of Changing RabbitMQ createQueue durable from false to true on TMS sendMessageToMQ - Dev |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nEnhancements: [Jira-68456] [Tech] Impact of Changing RabbitMQ createQueue durable from false to true on TMS sendMessageToMQ - Dev\nDescriptions:\nChanging the durable parameter in createQueue from false to true does not directly alter WebSocket connection behavior or real-time transmission performance.\nHowever, it changes the semantics of whether queues and messages survive broker restarts, which indirectly affects how WebSocket clients experience reconnections and service restarts.\nIn TMS side, although the queue now changes the default behavior, adding the behavior for TMS can let TMS still declare a durable message queue if someone change the queue’s default later.\nSetup:\nBefore testing, please ensure the websoclet is connected.\nThe testing need to test both HKJC and TMS environment, and with two browsers.\nTest in TMS environment first, one browser go to new booking page and the other go to current page. Select the period and table in new booking page, the browser in current view should lock the selected table with the same period, outlet and date.\nElse, if unselect the table, the table lock icon will also disappear.\nNow try to make the booking.\nWhen the booking is successfully made, the other browser should update and show in the current view.\nNow please test quick table change.\nAfter table quick change, the other browser should update the table number.\nNow please test the mark arrival with POS.\nClick the mark arrival icon to do the mark arrival.\nIt should success and both operation and POS will change color.\nPlease also test the similar/same features in HKJC environment:\nUsing two browsers:\nNew bookiing + current view -> check if the table lock and unlock can sync.\nNew bookiing + current view -> check if the reservation is updated after make booking\nBoth current view -> Test quick change table in resv details\nBrowser + POS:\nTest mark arrival to see if the color of the table is changed.\nRelease: 20261007 < 1.2.115.0>>>\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Johnson Liu",
+     "email": "johnson.liu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68065",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68065_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68065",
+   "summary": "[Tech] TMS2.0 - TMS - Fix error.log with Trying to access array offset on null for TMS Module - V113",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Fix error.log warning: Trying to access array offset on null in TMS module.\n\nError\n\n| error\n| location\n\n| Trying to access array offset on null\n| ../Plugin/Tms/Controller/Component/TmsApiTableComponent.php, line 2147",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": null,
+    "qc_reviewer": null
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67826",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-67826_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-67826",
+   "summary": "TMS 2.0 - Error occurs when clicking reservation in Operation after creating or editing reservation online",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Preconditions:\n\n- The current outlet has a reservation, e.g. Confirmation No. E0007\n\nSteps:\n\n1. Login to TMS Operation > Elvar-Hong Kong (E0414) > Stay on the Current View page\n\n2. Login to Online > Click \"Retrieve Booking Record\" button > Input Reservation info and click the \"Search\" button > Click \"Edit\" button\n\n3. Change the number of people > Click the \"Submit button\"\n\n4. Immediately go back to TMS Operation >  Click the reservation with Confirmation No. E0007\n\nActual Result:\n\n- Error prompt is shown: \"Something went wrong. Error: Cannot read properties of undefined (reading 'length')\"\n\n- Reproduce video: 20260804_150135.mp4\n\nExpect Result:\n\n- Enter the Reservation Record page normally",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-67826] TMS 2.0 - Error occurs when clicking reservation in Operation after creating or editing reservation online\nDescriptions:\nAfter creating online booking data and pushing it to Operations via WebSocket, clicking to view the booking details displays an error message on the page: \"Something went wrong. Error: Cannot read properties of undefined (reading 'length')\".\nSetup:\nPrerequisite: WebSocket is enabled.\nOperation enters the Current View, stays on the booking outlet and period selection screen, and then creates an online booking.\nAfter the WebSocket pushes the booking record to Operation, click to view the booking details.\nThe page does not return an error and the booking details can be viewed normally.\nPeriod configuration payment.\nCreate an online booking and complete the payment.\nAfter the WebSocket pushes the data to Operation, click the booking to view its details, where the payment amount can be seen.",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Elvar Wu",
+     "email": "elvar.wu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    }
+   }
+  }
+ }
+]

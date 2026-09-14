@@ -1,0 +1,188 @@
+[
+ {
+  "issue_key": "HERO-60071",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-60071_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-60071",
+   "summary": "CUS017 Daily Top GC Earners Report — GC member filter not working, shows non-member checks",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Background\n\nCUS017 Daily Top GC Earners Report should only list checks related to GC members.\n\nAfter TiDB compatibility changes, the GC member filter no longer works correctly: checks without a GC member still appear in the report.\n\nRoot cause (fixed in r70368):\n\n- Member number is selected as IFNULL(ckei_member_number.ckei_value, 0) AS guest_no\n\n- On TiDB / compatible environments, non-member checks get guest_no = '0' (not empty string)\n\n- Old filter guest_no <> '' does not exclude '0', so non-member checks pass through\n\n- Fix: change filter to guest_no <> '0'\n\nReport file: Plugin/Pos/webroot/reports/daily_top_gc_earners/daily_top_gc_earners.rptdesign\n\nCustomer: shangrilagroup\n\nRelated: HERO-60152 (CUS016), HERO-60153 (CUS019)\n\nSteps to Reproduce\n\n- Prepare data for the same outlet / business day:\n\n- At least one closed check with GC membership (membership_interface / member_number filled, points earned)\n\n- At least one closed check without GC membership (no membership_interface member_number; guest_no effectively 0)\n\n- Log in to Hero Report and open CUS017 Daily Top GC Earners Report\n\n- Select the shop / outlet that has the above checks\n\n- Select the business day of those checks\n\n- Set No. Of Member (or leave default) and run the report\n\nExpected Result\n\n- Only GC member-related checks are listed\n\n- Checks without GC member number (guest_no = 0) do not appear\n\n- GC Number / Name / Tier show valid member values\n\nActual Result\n\n- Non-GC-member checks also appear in the report\n\n- Those rows may show GC Number as 0 / blank member name / blank tier\n\n- Ranking / totals can be skewed by non-member checks\n\nSuggested Verification (QA)\n\n- On build with r70368 (or later), re-run the same parameters\n\n- Confirm non-member checks are excluded and only GC earners remain\n\n- Spot-check member number / name / points against POS check extra infos",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68131",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68131_20260914_092415.docx",
+  "template": "report",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68131",
+   "summary": "Report - TMS037 Master Pre-Race Booking List with Contact Information - Add Syndicate Owner Indicator field",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "User Story\n\nAs a TMS report user, I want the Syndicate Owner Indicator field displayed in the TMS037 Master Pre-Race Booking List with Contact Information report so that I can identify the syndicate owner indicator for each reservation directly in the report without cross-referencing other systems.\n\nCurrent Behavior\n\nThe Syndicate Owner Indicator field exists on the TMS reservation record (ref. HERO-64070, HERO-67705) but is not shown in the TMS037 Master Pre-Race Booking List with Contact Information report. The report currently displays the Syndicate Owner field without its indicator.\n\nExpected Behavior\n\nThe TMS037 Master Pre-Race Booking List with Contact Information report should display a new \"Syndicate Owner Indicator\" column placed immediately to the LEFT of the existing \"Syndicate Owner\" column. The indicator should appear in all output formats — printed copy, on-screen preview, and file export. When a reservation has no indicator value (e.g., older or legacy reservations), the cell should be left blank. The field is display-only; no sorting, grouping, or filtering behaviour is required. All users who can access the report should see the indicator — no role restrictions.\n\nAcceptance Criteria\n\nDisplay Syndicate Owner Indicator column\n\n- Given the user opens the TMS037 Master Pre-Race Booking List with Contact Information report\n\n- When the report is generated\n\n- Then a new \"Syndicate Owner Indicator\" column is displayed immediately to the left of the \"Syndicate Owner\" column\n\n- And the indicator value is populated from the reservation's syndicate owner indicator data (hkjc_resv_members: rmem_syndicate_owner_indicator)\n\nShow indicator in all output formats\n\n- Given the TMS037 report contains reservations with syndicate owner indicator values\n\n- When the report is viewed on screen, printed, or exported to a file\n\n- Then the Syndicate Owner Indicator column appears in all three output formats (on-screen preview, printed copy, and file export)\n\n- But if a reservation has no syndicate owner indicator value (e.g., older or legacy reservations), the cell for that reservation is left blank in all three output formats\n\nDisplay-only field with no role restrictions\n\n- Given a user has access to the TMS037 report\n\n- When the user views the report and interacts with the Syndicate Owner Indicator column\n\n- Then the field is display-only with no sorting, grouping, or filtering behaviour applied\n\n- And the column is visible to all such users with no role-based restrictions\n\nSupporting Evidence\n\n- DB field: hkjc_resv_members: rmem_syndicate_owner_indicator (confirmed with TMS team)\n\n- Related tickets: HERO-64070, HERO-67705 (Syndicate Owner Indicator added to TMS reservation record)\n\n- Scope: This ticket covers only TMS037; the other 9 reports (TMS009, TMS015, TMS016, TMS020, TMS022, TMS024, TMS025, TMS035, TMS039) are handled in separate tickets.\n\nRequested Timeline\n\nAligned with Priority: Medium\n\nPreferred Quarter: Not specified\n\nTarget Version: Not specified\n\nNotes: No explicit deadline provided by requester.\n\nOriginal Description (preserved by INF Prod. Studio)\n\nBackground\n\nSyndicate Owner Indicator field is added to TMS reservation record (ref. HERO-64070, HERO-67705). It is also needed to show in several reports.\n\nRequirement\n\nIn the 10 reports below,\n\n| TMS009 Special Booking List (By Outlet)\n\n| TMS015 Pre-Race Booking List\n\n| TMS016 Post-Race Booking List\n\n| TMS020 Waiting List Report\n\n| TMS022 Master Pre-Race Booking List\n\n| TMS024 Waiting List Extraction\n\n| TMS025 Unsuccessful Waiting List Report (By Outlet)\n\n| TMS035 Waiting List Report (Owner Box)\n\n| TMS037 Master Pre-Race Booking List with Contact Information\n\n| TMS039 Override Date Limitation for Advance Booking\n\nTo add \"Syndicate Owner Indicator\" field on the LEFT of \"Syndicate Owner” field.\n\ne.g.\n\nNote: DB field is hkjc_resv_members: rmem_syndicate_owner_indicator (Please confirm with TMS team)",
+   "refinement_notes": "",
+   "release_notes": "Enhancement: [HERO-68131] TMS037 Master Pre-Race Booking List with Contact Information - Add Syndicate Owner Indicator field\nDescriptions:\nEnhance the Infrasys Cloud TMS037 \"Master Pre-Race Booking List with Contact Information\" report (SQL Server) to display the Syndicate Owner Indicator for each reservation.\nPreviously, the report showed the Syndicate Owner value but did not show the related Syndicate Owner Indicator stored on the reservation member record. Users needed to check other screens or systems to confirm the indicator.\nAfter this enhancement, a new \"Syndicate Owner Indicator\" column is shown immediately to the left of the existing \"Syndicate Owner\" column. Users who can run TMS037 can see the indicator in on-screen preview, print, and file export. No new sorting, grouping, or filtering behavior is added for this field.\nConfiguration / Parameter:\nNo special configuration or parameter is required.\nNo new report parameter and no new system setting is added. Use the existing TMS037 report parameters as before (for example Race Meeting Date range, Shops/Outlets, Reserve Channel / Type / Method filters).\nHow to verify:\n1. Open Reports and run TMS037 \"Master Pre-Race Booking List with Contact Information\".\n2. Select the usual parameters and generate the report.\n3. Confirm that the new column \"Syndicate Owner Indicator\" appears between \"Horse Owner\" and \"Syndicate Owner\".\n4. Check on-screen preview, print, and export (for example Excel): the column appears in all formats.\n5. For reservations with indicator Y or N, the cell shows Y or N. For empty / legacy records with no indicator, the cell is blank.\nField Definition:\nSyndicate Owner Indicator\n- Source: reservation member field Syndicate Owner Indicator.\n- Column position: immediately to the left of \"Syndicate Owner\" (between \"Horse Owner\" and \"Syndicate Owner\").\n- Display values:\n- Y: Yes\n- N: No\n- Blank: no value (including older / legacy reservations or offline profile with no indicator)\nResult / Sample:\nAfter enhancement:\nTMS037 shows the new column in the booking list layout:",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Aimee Wang",
+     "email": "aimee.wang@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67801",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-67801_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-67801",
+   "summary": "POS017 Detail Check Listing Report | Disct Amt column in Grand Total is incorrect",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [HERO-67801] POS017 Detail Check Listing Report | Disct Amt column in Grand Total is incorrect\nDescriptions:\nFix the bug in report POS017 \"Detail Check Listing Report\" where the Disct Amt value on the Grand Total row is incorrect (doubled) after the previous Grand Total correction.\nDetail rows still show the correct discount amount. Only the Grand Total Disct Amt is wrong before this fix. After the fix, the Grand Total Disct Amt matches the sum of the Disct Amt values on the detail rows.\nConfiguration / Parameter:\nNo special configuration or parameter is required.\nReproduce steps:\n1. Go to Reports and open POS017 \"Detail Check Listing Report\".\n2. Select a shop/outlet and business date range that includes checks with discount amounts.\n3. Run the report.\n4. Compare the Disct Amt column on the Grand Total row with the sum of Disct Amt on the detail rows. Before the fix, Grand Total Disct Amt is about twice the correct total.\nField Definition:\nThis case does not involve field definition.\nResult / Sample:\nAfter the fix, open POS017 with the same parameters. The Disct Amt on the Grand Total row equals the sum of Disct Amt on the detail rows.",
+   "qc_info": {
+    "qc_tester": {
+     "name": "More Luo",
+     "email": "more.luo@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-64013",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-64013_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-64013",
+   "summary": "CUS205 cover_breakdown_melco | Include Outlet in Business Day filter",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Ticket ID: #1779600\n\nSubject: (INC0683679) Infrasys Cloud - COD/SC/ATR/Mocha Issue for daily report(xlsx) on business day 28 Feb 2026\n\nDepartment: Infrasys Support\n\nURL: https://support-intl.shijigroup.com/agent/shijigroupintl/infrasys-support/tickets/details/255139000946198297",
+   "refinement_notes": "",
+   "release_notes": "",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Mike Lin",
+     "email": "mike.lin@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Eric Fang",
+     "email": "eric.fang@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-54055",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-54055_20260914_092415.docx",
+  "template": "report",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-54055",
+   "summary": "Language is incorrect if there is language override",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Ticket ID: #1466393\n\nSubject: The name of Reports under Favourite reports in Chinese language\n\nDepartment: Infrasys Support\n\nURL: https://support-intl.shijigroup.com/agent/shijigroupintl/infrasys-support/tickets/details/255139000773728327",
+   "refinement_notes": "",
+   "release_notes": "New Function:\nDescription:\nConfiguration / Parameter:\nResult / Sample:\nEnhancement:\nDescription:\nConfiguration / Parameter:\nResult / Sample:\nBug Fixing:\nDescription:\n[Jira-54055] - Language is incorrect if there is language override\nIssues description:\nFont rendering issue observed in the Traditional Chinese translations within the 'Favorite Reports' section.\nConfiguration / Parameter:\nResult / Sample:\nBefore\nAfter",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Yannis Liu",
+     "email": "yannis.liu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-50978",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-50978_20260914_092415.docx",
+  "template": "report",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-50978",
+   "summary": "POS044 Audit Control Listing Report — wrong previous-day date on UTC HQ; optimize loading performance",
+   "status": "READY FOR QA",
+   "template": "report",
+   "components": [
+    "REPORTS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Summary / Background\n\n- Report: POS044 — Audit Control Listing Report\n\n- Design: Plugin/Pos/webroot/reports/audit_control_listing/audit_control_listing.rptdesign (MySQL; SQL Server design aligned where applicable)\n\n- This case covers two issues on the same report:\n\n- Date / timezone — auto report “Previous Day” shows the wrong calendar date on UTC HQ.\n\n- Loading performance — main audit-log SQL is slow / appears to hang on large HQ DBs.\n\nIssue 1 — Auto report date incorrect (UTC HQ)\n\nProblem\n\nAuto report email sent on a local morning date (e.g. 2025-01-14 ~06:06) with Date Type = Previous Day (last_bday), but the exported report header and row dates show two calendar days earlier (e.g. 2025-01-12) instead of local yesterday (2025-01-13). Server/DB is UTC.\n\nRoot Cause\n\ncurrent_bday / last_bday used bare MySQL CURRENT_DATE() (and BIRT today() for the header). On UTC HQ, local morning can still be the previous UTC calendar day, so “yesterday” is shifted by one extra day. iTimeOffset only shifted the UTC time window of that wrong calendar day; it did not choose the shop-local calendar day first.\n\nExpected\n\n- Previous Day = hotel local yesterday (via iTimeOffset).\n\n- Header date matches the filtered local day.\n\nFix\n\n- Local today SQL: DATE(DATE_ADD(NOW(), INTERVAL iTimeOffset MINUTE)); last day = that date − 1 day; then apply existing DATE_SUB(..., iTimeOffset) for alog_time UTC bounds.\n\n- Header: localNow = BirtDateTime.addMinute(now, iTimeOffset − JVM offset), then format / addDay(..., -1) for last day.\n\n- Preset must keep a correct iTimeOffset (e.g. UTC+8 → 480).\n\nIssue 2 — Optimize loading performance\n\nProblem\n\nOn large HQ databases (very large alog_logs / alog_log_infos), POS044 can run very slowly or appear to hang for a day + multi-outlet selection.\n\nRoot Cause\n\nOptimizer often drives from out_outlets and reads alog_logs via outlet_slave (alog_olet_id, alog_slave_id), then applies alog_time as a residual filter (very low filtered). time_outlet (alog_time, alog_olet_id) is not used. Starting from alog_log_infos without a time-first hint makes this worse. Audit Log UI already forces time_outlet for similar queries.\n\nExpected\n\n- Time-first plan on alog_logs for dated listing queries.\n\n- Report completes in a reasonable time on large volumes.\n\nFix\n\n- Drive from alog_logs with FORCE INDEX (time_outlet), then join infos:\n\nFROM alog_logs FORCE INDEX (time_outlet)\nJOIN alog_log_infos ON alog_id = ainf_alog_id\n...\n\n- Same pattern as Audit Log LogsController / AuditLogGeneralComponent (forceIndex = 'time_outlet').\n\n- SQL Server design: same join order from alog_logs (no MySQL FORCE INDEX).\n\nReferences\n\n- Report code: POS044\n\n- Prior custom-report performance path: HERO-39055\n\n- Screenshots on this ticket: auto mail 2025-01-14 vs report date 2025-01-12; parameter = Previous Day",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [HERO-50978] POS044 Audit Control Listing Report - wrong Previous Day date on UTC HQ; one-day report cannot load\nDescriptions:\nThis case fixes two problems in POS044 Audit Control Listing Report on Infrasys Cloud.\nDate problem: When HQ runs on UTC time, an Auto Report with Date Type = Last day can show the wrong date. Example: the mail is sent on 2025-01-14 in the hotel local morning, but the report header and data show 2025-01-12 instead of local yesterday 2025-01-13. After this fix, Last day / Current Day follow the hotel local calendar, so the Auto Report date matches the hotel yesterday or today.\nPerformance problem: On a large HQ database, POS044 could not finish loading even when only one day one shop of data was selected. The report stayed running for a very long time and no result was returned. After this fix, a one-day POS044 report can load and show data.\nNo new report parameter is added. Existing Date Type (Current Day / Last Day / Specified) is unchanged.\nConfiguration / Parameter:\nNo new report parameter or system setting is added.\nDate problem - how the wrong date appeared (before fix):\n1. HQ database / report server time is UTC.\n2. Hotel local time is ahead of UTC (for example UTC+8).\n3. Set POS044 Auto Report Date Type = Previous Day.\n4. Let Auto Report send in the hotel local morning, before UTC has crossed midnight (for example about 06:00 local time).\n5. Open the attached POS044 Excel / PDF.\nResult before fix: the report date is one extra day earlier than hotel local yesterday (mail date 2025-01-14, report date 2025-01-12).\nPlease confirm the shop time offset used by Auto Report is correct for the hotel (for example UTC+8). If the offset is 0, Last Day / Current Day may still follow UTC.\nPerformance part: no extra configuration is required. Use the same POS044 parameters as before (one day range and selected outlets).\nField Definition:\nThis case does not involve field definition.\nResult / Sample:\nAfter fix - date:\n- Auto Report with Date Type = Previous Day shows hotel local yesterday in the report header and in the date column.\nAfter fix - performance:\n- Selecting one day of data, POS044 can load and return the listing. It no longer stays running for a whole day without result.",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Arsinoe Xie",
+     "email": "arsinoe.xie@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kiet Zou",
+     "email": "kiet.zou@shijigroup.com"
+    }
+   }
+  }
+ }
+]

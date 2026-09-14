@@ -1,0 +1,29 @@
+[
+ {
+  "issue_key": "HERO-67229",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67229_20260914_092415.docx",
+  "template": "api_portal",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-67229",
+   "summary": "POS Interface - Request to enhance External Webhook for HQ On-Premises Server  (Dev2/2)",
+   "status": "READY FOR QA",
+   "template": "api_portal",
+   "components": [
+    "API Portal",
+    "CORE",
+    "INTERFACE"
+   ],
+   "issue_type": "New Feature",
+   "is_bug": false,
+   "description": "Background：\n\nThe St. Regis Hotel is currently using the “SevenRooms” service, so our system needs to connect to SevenRooms. Our system connects to SevenRooms via an External Webhook, and it is required to use the HQ Cloud Server. However, the St. Regis Hotel’s current infrastructure does not use the HQ Cloud Server. They are using the HQ On-Premises Server and a Dummy Cloud Server instead. Our Externa Webhook does not support this setup.\n\nIssue found:\n\nThe highlighted part in screenshot-1.png was missing in the setup page\n\nRequirement：\n\n- Deploy the External Webhook module on both the HQ On-Premises Server and the Dummy Cloud Server.\n\n- The St. Regis Hotel be able to integrate with SevenRooms via the External Webhook, enabling bidirectional communication for event delivery and data exchange.",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys Cloud Backend Release Notes\nversion 1.2.115.0\nReleased at 07 October 2026\nConfidential and Internal Use Only\nInfrasys Cloud Backend Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys Cloud Release Summary\nNew Functions\n| Version | Brief Descriptions |\n| 1.2.115.0 | [JIRA-67229] POS Interface - Request to enhance External Webhook for HQ On-Premises Server (Dev2/2) |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.115.0 | 2026-10-07 |\n| Sample :  New Functions :  Enhancements :  Descriptions : Descriptions Setup : Setup Bug Fixing : |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nNew Functions : [JIRA-67229] POS Interface - Request to enhance External Webhook for HQ On-Premises Server (Dev2/2)\nDescriptions:\nCurrent Behavior\nExternal webhooks currently support Cloud HQ only. A client has requested support for SevenRooms, an external webhook vendor, on On-Premises HQ, which is not currently available.\nExpected Behavior\nOn-Premises HQ can receive external webhooks\nThe External Webhook Management nav item is shown for On-Premises HQ\nNew workflow for external webhook (On-Premises)\nSetup:\nMake sure the environment is setup with Dummy Cloud HQ server and On-Premises HQ Server\nDummy Cloud HQ server\nOn-Premises HQ Server\nNavigate to “API Management->External Webhook Management”\nCheck for the webhook rules for sevenrooms\nClick view button to enter “View Detail” page to verify the webhook\nAPI Bridge\nNavigate to ‘API Portal->Advanced Control->Rules’\nFind the Rules by matching the application name with application name set on hq’s webhook rule, for this case it’s DefaultApplication (Shiji ST Vendor (PF Testing)\nClick ‘view’ button to enter the ‘View Detail’ page\nYou can find the Secret Key here for testing for webhook later\nBuild a testing request to simulate for a sevenrooms external webhook\nurl\n{{baseUrl}}/api_portal/webhook/seven_rooms/v1/resv_update/{{secretKey}}\nRequest body\n[\n{\n\"event_type\": \"updated\",\n\"entity\": {\n\"id\": \"sr-resv-test-001\",\n\"reference_code\": \"{{shopRefId}}\",\n\"venue_id\": \"{{venueId}}\",\n\"status\": \"ARRIVED\",\n\"table_numbers\": [\"1\"],\n\"arrived_guests\": 2,\n\"seated_time\": \"2026-09-03T14:00:00+08:00\",\n\"updated\": \"2026-09-03T14:00:30+08:00\",\n\"first_name\": \"Test\",\n\"last_name\": \"Guest\",\n\"is_vip\": false,\n\"reservation_type\": \"WALK_IN\",\n\"notes\": \"\",\n\"prepayment\": 0,\n\"tags\": []\n}\n}\n]\nE.g. testing with Postman\n{{baseUrl}}\nUrl of the Api Bridge\n{{secretKey}}\nApi Bridge -> Rule\n{{shopRefId}}\n{{venueId}}\nOn-Prem HQ/Dummy HQ -> External Webhook Management -> View Detail – Webhook Rule\nFor this case the shopRefId is ShopRefId , venueId is 12345\nVerify the result by checking the log from api bridge & on-prem hq\nwebhook.log from API Bridge\n{HERO_ACCOUNT_KEYS}/tmp/logs/webhook.log\nPOST Data log\nMatch the value from the webhook rules\nreference code\nvenue_Id\nCheck for the value below\nrequestParams\nwebhook\nseven_rooms\nresv_update\nThis log shows that the api bridge receives the request correctly\nOn-Premises Call HQ via MQ log\nVerify that it pass the function call of ‘processWebhook()’ to On-Prem HQ\nVerify the shop_code and outlet_code are mapped correctly with the passed parameter reference_code and venue_id\nThis log shows that api bridge is forwarding this request with a function call of ‘processWebhook’ (which is the new route build on-prem hq)\npos_process_webhook.log from On-Prem HQ\nFrom On-Prem HQ log\nCheck for ‘send to LS’ log\n‘count’ is number of checks that’s going to be sent to local server\nFor example, if count equal to 2 the ‘Call LS’ log will appear 2 times for perform function ‘send_check” of 2 different check\nRelease: 20261007<< 1.2.115.0>>>\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": null,
+    "qc_reviewer": null
+   }
+  }
+ }
+]

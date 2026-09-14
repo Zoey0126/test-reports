@@ -1,0 +1,250 @@
+[
+ {
+  "issue_key": "HERO-62908",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-62908_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-62908",
+   "summary": "POS Feature - Enable \"Change Cover\" on mobile/ workstation view (Dev)",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Enhancement details\n\n- Support below function keys on mobile/ workstation view (Day and Night Mode)\n\n- Change Cover\n\n- Need to support:\n\n- General function key layout\n\n- Config by location > Allow Children Cover Input\n\n- Config by location > Pay Check Auto  Functions > Change Cover (Ask cover before payment)\n\n- Config by location > Pay Check Auto  Functions > Change Cover (Ask cover before payment and not allow 0)\n\n- Ask Cover\n\n- Need to support:\n\n- General function key layout\n\n- Config by location > Allow Children Cover Input\n\n- Design\n\n- Please refer to Cover Design Material.zip",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-62908] POS Feature - Enable \"Change Cover\" on mobile/ workstation view (Dev) (Steven)\nDescriptions:\nIt is available for both horizontal desktop view and vertical mobile view\nIt is supported to implement the new day and night theme to function “Change Cover”\nNew UI under day mode and night mode\nHorizontal view\n| Layouts | Day/Night Mode |\n| Ask Cover (non-bar modes, with Children) |  |\n| Ask Cover (non-bar modes, normal) |  |\n| Change Cover (all modes, with Children) |  |\n| Change Cover (all modes, normal) |  |\n| Ask Cover (Bar mode + with Children) |  |\n| Ask Cover (Bar mode + normal) |  |\nVertical view\n| Layouts | Day Mode | Night Mode |\n| Ask Cover (all modes, with Children) |  |  |\n| Ask Cover (all modes, normal) |  |  |\n| Change Cover (all modes, with Children) |  |  |\n| Change Cover (all modes, normal) |  |  |\nSetup:\nSetup for Allow Children Cover Input\nGo to Infrasys POS platform: POS System  Ordering Setup  Config by Location\nSelect setup “Allow Children Cover Input”\nClick “Add New” to configure a new setup or edit an existing setup\nSelect\nApply To = Target location\nAll Locations = For all locations\nShop = For a specific shop\nOutlet = For a specific outlet\nStation = For a specific Station\nShop = Target shop (available only if “Shop” is chosen in the row “Apply To”)\nOutlet = Target outlet (available only if “Outlet” is chosen in the row “Apply To”)\nStation = Target station (available only if “Station” is chosen in the row “Apply To”)\nSelection under section “Payment Restriction”\nSupport = Yes\nAllow Children Cover Input = Yes\nClick “Save” to save record",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Phoebe Chen",
+     "email": "phoebe.chen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-55900",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-55900_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-55900",
+   "summary": "POS Operation - Able to define payment type restriction for advanced order",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "there has special handling for some clients which is only speific payment type allow to apply on advanced order.\n\nto avoid user selecting wrong payment, system should provide options to setup allowed payment type for advanced order(whitelist), if user select wrong payment system could popup error message to alert user like: \"selected payment type not allow for advanced order\"",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-55900] POS Operation - Able to define payment type restriction for advanced order (Iris Lui)\nDescriptions:\nSystem supports adding payment method restriction for settle check where the go through function “Create Advance Order”\nWorkflow\n1. Open a new check\n2. Click function “Create Advance Order”\n3. Follow existing workflow to fill in the required information for creating advance order\n4. Click button “Confirm”\n5. Order an item\n6. Order the deposit item of advance order\n7. Click function “Paid” to proceed to cashier\n8. Select target payment method to settle check\n9. If new setting “Allowed Payment Methods” on config by location setup “Advance Order Setting” does not exist or is empty, go to step 13\n10. If new setting “Allowed Payment Methods” on config by location setup “Advance Order Setting” exists and is not empty, go to next step\n11. If the selected payment method is not included in the new setting “Allowed Payment Methods” on config by location setup “Advance Order Setting”, system prompts error message “Selected payment method not allow for advanced order” and no payment will be added to payment basket, workflow ends here\n12. If the selected payment method is included in the new setting “Allowed Payment Methods” on config by location setup “Advance Order Setting”, go to step 13\n13. Follow existing workflow to finish payment and settle the check\nSetup:\nSetup for new setup “Allowed Payment Methods”\nGo to Infrasys POS platform: POS System à Ordering Setup à Config by Location\nSelect setup “Advance Order Setting”\nClick “Add New” to configure a new setup or edit an existing setup\nSelect\nApply To = Target location\nAll Locations = For all locations\nShop = For a specific shop\nOutlet = For a specific outlet\nStation = For a specific Station\nShop = Target shop (available only if “Shop” is chosen in the row “Apply To”)\nOutlet = Target outlet (available only if “Outlet” is chosen in the row “Apply To”)\nStation = Target station (available only if “Station” is chosen in the row “Apply To”)\nSelection under section “Payment Restriction”\nAllowed Payment Methods = Target payment methods\nClick “Save” to save record",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Mila Cao",
+     "email": "mila.cao@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68315",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68315_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68315",
+   "summary": "TMS 2.0 - Incorrect change log info after change arrival cover",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Summary\n\nTMS Operation: Change Arrival Cover writes the wrong reservation change log (Table# to [Empty] instead of Arrival Cover from/to).\n\nSteps to Reproduce\n\n- Open TMS Operation.\n\n- Find a reservation that already has a table assigned (e.g. Table 5).\n\n- Mark Host Arrived and set Arrival Cover (e.g. 2). Confirm the reservation is in Host Arrived status.\n\n- Click Arrival again on the same reservation to open Change Arrival Cover.\n\n- Change Arrival Cover from 2 to 4 and click Confirm.\n\n- Open that reservation’s Change Log.\n\nExpected Result\n\n- Arrival Cover is updated successfully.\n\n- Change log records the cover change, e.g. Arrival Cover : from 2 to 4.\n\n- Table number is not logged as changed.\n\nActual Result\n\n- Arrival Cover is updated, but change log is wrong: Table# : from 5 to [Empty].\n\n- Arrival Cover from/to is not written.\n\n- Cause: updateResvField (field=arrivalGuests) reloads the reservation with tables, then setResvLog compares old tables against empty saveData['TmsResvTable'], so it treats tables as unassigned. resv_arrival_guests was not in $checkResvFields, so Arrival Cover was never logged. The original cover was also overwritten before log write, so even if it were logged, from/to would be the same.",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS TMS Release Notes\nversion 1.2.115.0\nReleased on 7th Oct 2026\nConfidential and Internal Use Only\nInfrasys POS TMS Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.115.0 | [Jira-68315] TMS 2.0 - Incorrect change log info after change arrival cover |\nRelease History\n| Version | Release Date |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nBug Fixing : [Jira-6] TMS 2.0 - Incorrect change log info after change arrival cover\nDescriptions:\nSummary\nTMS Operation: Change Arrival Cover writes the wrong reservation change log (Table# to [Empty] instead of Arrival Cover from/to).\nSteps to Reproduce\nOpen TMS Operation.\nFind a reservation that already has a table assigned (e.g. Table 5).\nMark Host Arrived and set Arrival Cover (e.g. 2). Confirm the reservation is in Host Arrived status.\nClick Arrival again on the same reservation to open Change Arrival Cover.\nChange Arrival Cover from 2 to 4 and click Confirm.\nOpen that reservation’s Change Log.\nExpected Result\nArrival Cover is updated successfully.\nChange log records the cover change, e.g. Arrival Cover : from 2 to 4.\nTable number is not logged as changed.\nActual Result\nArrival Cover is updated, but change log is wrong: Table# : from 5 to [Empty].\nArrival Cover from/to is not written.\nCause: updateResvField (field=arrivalGuests) reloads the reservation with tables, then setResvLog compares old tables against empty saveData['TmsResvTable'], so it treats tables as unassigned. resv_arrival_guests was not in $checkResvFields, so Arrival Cover was never logged. The original cover was also overwritten before log write, so even if it were logged, from/to would be the same.\nSetup:\nStep 1. Go to operation  New Reservation\nStep 2. Go to Current View  Mark Host Arrived and set Arrival Cover for the created reservation\nSet to any number (e.g. 4), then Save\nStep 3. Click the Arrival tab and change the Arrival Cover\ne.g. change to 2, instead of '4', then confirm\nStep 4. View the modified reservation, open the `Change Log` tab, you will see the log: \"Arrival Cover : From xxx To xxx\"\n***Notes\n- If the cover number is still the same as the old one, it will not show on the Change Log, e.g. \"Arrival Cover : From 4 To 4\"\nRelease: 20261007 < 1.2.115.0>>>\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Johnson Liu",
+     "email": "johnson.liu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68311",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68311_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68311",
+   "summary": "TMS 2.0 - Incorrect table number arrived after mark arrival",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Email: ASE Report | SW | Shiji Cloud | KSL | KSL / Abnormal in TMS (Shang Palace) (HK Case #3345889)\n\nInformation:\n\nIt is found that sometimes mark arrival is using the old table but not the table changed.\n\nStep to Reproduce:\n\n- Open two browsers, and one open mark arrival for the reservation and hold the dialog\n\n- Another tab change table for the reservation (either by edit booking or quick change)\n\n- After table changed, back to the first tab to mark arrival\n\nExpected Result:\n\nThe reservation will mark arrival with the changed table\n\nActual result:\n\nThe reservation will mark arrival with the table before change\n\nSolution:\n\nAdd checking before mark arrival, if the mark arrival mismatch that with the table in the reservation record, return error and close the mark arrival dialog",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS TMS Release Notes\nversion 1.2.115.0\nReleased on 7th Oct 2026\nConfidential and Internal Use Only\nInfrasys POS TMS Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| V1.2.115.0 | [Jira-68311] TMS 2.0 - Incorrect table number arrived after mark arrival |\nRelease History\n| Version | Release Date |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nBug Fixing: [Jira-68311] TMS 2.0 - Incorrect table number arrived after mark arrival\nDescriptions:\nInformation:\nIt is found that sometimes mark arrival is using the old table but not the table changed.\nStep to Reproduce:\nOpen two browsers, and one open mark arrival for the reservation and hold the dialog\nAnother tab change table for the reservation (either by edit booking or quick change)\nAfter table changed, back to the first tab to mark arrival\nExpected Result:\nThe reservation will mark arrival with the changed table\nActual result:\nThe reservation will mark arrival with the table before change\nSolution:\nAdd checking before mark arrival, if the mark arrival mismatch that with the table in the reservation record, return error and close the mark arrival dialog\nSetup:\nGo to operation, make a new reservation in current date and mark arrival. Hold on the dialog and open a new tab.\nIn the new tab, edit the reservation that opening the mark arrival dialog in another tab. Change the table.\nAfter changing the table, confirm to mark arrival.\nNow alert dialog with message “The reserved table number has been changed. Please check again.” will pop up and the Mark arrival dialog will close.\nPlease also test the below secnarios:\nSingle table\nMulitiple tables\nWith the tables, please test with:\nTable number\nTable number + Table extension\nOnly table extension\nRelease: 20261007 < 1.2.115.0>>>\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Johnson Liu",
+     "email": "johnson.liu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68259",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68259_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68259",
+   "summary": "TMS 2.0 - POS getMembersByConditions fails on SQL Server (GROUP BY memb_id with SELECT *)",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "What:\n\nPOS / TMS API getMembersByConditions (get_members_by_conditions) throws on SQL Server when the search joins membership (membership no / group no / interface code).\n\nCake find('all') selects MemMember.* (and belongsTo columns) but GROUP BY is only MemMember.memb_id. SQL Server requires every selected column to be grouped or aggregated (Msg 8120). ORDER BY membership number has the same problem.\n\nMySQL usually passes because ONLY_FULL_GROUP_BY is off. Strict MySQL would fail the same way.\n\nGROUP BY is still required: one member can match multiple membership rows, which would duplicate paging rows without it.\n\nFix:\n\nMemberApiGeneralComponent::getMembersByConditions — page distinct memb_id first (fields + GROUP BY memb_id + recursive -1, ORDER BY MIN(...) for non-id sort columns), then load full guest profiles with memb_id IN (...). POS payload unchanged. Count stays COUNT(DISTINCT memb_id).\n\nAfter fix:\n\nSQL Server and MySQL both return the same paged member list / full profile as before. Membership-no sort is deterministic (MIN(mmsh_member)) when one member matches multiple memberships.",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-68259] TMS 2.0 - POS getMembersByConditions fails on SQL Server (GROUP BY memb_id with SELECT *)\nDescriptions:\nWhen POS / TMS calls get_members_by_conditions (members_by_conditions) and the search joins membership (membership_no / membership_group_no / interface_code), SQL Server throws Msg 8120 because the query SELECT * with GROUP BY memb_id only.\nMySQL usually passes when ONLY_FULL_GROUP_BY is off; strict MySQL would fail the same way.\nAfter fix: page distinct memb_id first, then load full guest profiles. POS / TMS response payload is unchanged. SQL Server and MySQL both return the same paged member list.\nSetup:\n1. Use a SQL Server (repro target; MySQL can also be used for regression)\n2. Prepare at least 1 active member with membership record(s) (membership no / group no as needed)\n3. Optional: same member with >1 membership rows to verify paging is not duplicated\n4. No new admin config. Existing Member + Membership data is enough\nStep / Testing scope:\nCall TMS REST API members_by_conditions via Postman (or POS search that uses this API) with membership join conditions.\nConfirm HTTP 200, members[] + paging returned, no SQL Msg 8120.\nCompare same search on MySQL if available - result set / paging should match.\nEndpoint example:\nGET {base}/rest_api/tms/members_by_conditions?is_json_response=true&membership_no={membershipNo}&page=1&limit=10\nExpected result:\n- Before: SQL Server error Msg 8120 (Column is invalid in the select list because it is not contained in either an aggregate function or the GROUP BY clause)\n- After: normal reply with members[] and paging { page, current_page_record_count, total_record_count, page_count }\n- Response field contract unchanged vs pre-fix (no new / removed POS fields)",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Elvar Wu",
+     "email": "elvar.wu@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68171",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68171_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68171",
+   "summary": "TMS 2.0 - Overnight period saving fails in Config by Date with error \"overlapped_period_is_not_allowed\"",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Preconditions:\n\n- Backend > Outlet Management > Date and Period > Period > There are two types of target outlets: regular period and overnight period\n\n- regular period > E-Breakfast\n\n- Time Range of Period: 05:00:00-10:59:59\n\n- Time Range of Reservation: 05:00:00-10:55:59\n\n- overnight period > E-Overnight period\n\n- Time Range of Period: 18:00:00-05:59:59(overnight)\n\n- Time Range of Reservation: 18:00:00-21:55:59(non-overnight)\n\n2.Backend > TMS > Basic Setup > Period Sets > Create new period set \"Elvar test\", add periods E-Breakfast and E-Overnight period\n\n3.Backend > TMS > Basic Setup > Config by Date > Elvar-Hong Kong(E0414) > Select date 2026-08-29, set Period Set Replaced By to \"Elvar test\"\n\nSteps:\n\n1. Backend > TMS > Basic Setup > Config by Date > Elvar-Hong Kong(E0414) > Select date 2026-08-29 > Click “Find” button > Click “Edit” button for E-Breakfast > Change “”Time Interval of Reservation“” from 5 to 10 > Click “Save” button\n\nActual Result:\n\n- Prompts error \"overlapped_period_is_not_allowed\" when saving valid overnight period.\n\nExpect Result:\n\n- Overnight  period can be saved normally.",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-68171] Overnight period saving fails in Config by Date with overlapped period error\nDescriptions:\n• Fixed an issue in TMS 2.0 Config by Date where saving an overnight period on an operating day incorrectly showed the error \"Overlapped period is not allowed\".\n• Period overlap validation now checks only the periods already configured for that date when the date is an operating day.\n• For non-operating days, overlap validation continues to use the deployed period set periods as before.\nSetup:\nMake a overnight period\nThen put it in a period set\nMake sure the default period set is using a period that will overlap with the overnight period\nOpen Table Management System and go to Config by Date from the navigator menu.\nSelect an outlet and an operating date that doesn’t have period settings configured for that day.\nReplace the Period Set by the overnight period, then save\nedit the overnight period, then save.\nConfirm the period is saved successfully and the \"Overlapped period is not allowed\" error no longer appears when the overnight period does not actually overlap other periods on that date.",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Aimee Wang",
+     "email": "aimee.wang@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68002",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-68002_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68002",
+   "summary": "TMS 2.0 - MySQL table lock race: two users can lock / assign the same table (lock API + update resv field)",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Summary\n\nOn MySQL, two users can lock / assign the same table at the same time (same outlet, date, period).\n\nThis is not caused by HERO-67685. Both paths below use the same MySQL table-state write (updateTableState): check then insert, with no exclusive lock. MSSQL already uses sp_getapplock and is out of scope.\n\nHERO-67685 moved Quick Edit Table to server lock on save, so this race on change table is more visible.\n\nAffected paths\n\n- *Lock table API* — floor plan lock / POST table_states (updateTableStates, action lock/block)\n\n- *Update reservation field* — change table via updateResvField → __lockAndUnlockTable\n\nCustomer / Environment\n\n- MySQL / Cloud TMS (e.g. Kowloon Shangri-La – Café Kool)\n\n- MSSQL: no change\n\nSteps to Reproduce\n\n- MySQL TMS outlet, two users, same outlet / date / period.\n\n- Path A: both lock the same vacant table at the same time (floor plan or lock table API).\n\n- Path B: two reservations; both change table to the same table at the same time (update_fields).\n\nCurrent Result\n\n- Both requests can succeed.\n\n- Two lock records can exist for the same table.\n\n- Lock table API: both users can think they hold the lock.\n\n- Update resv field: both reservations can be saved on the same table.\n\nExpected Result\n\n- Second request fails with the existing locked/blocked error.\n\n- Only one lock record for that table.\n\nProposed Fix\n\nMySQL GET_LOCK only, in TmsTableState::updateTableState (one place → both paths).\n\n- GET_LOCK on outlet + period + date + table + ext (name ≤ 64 chars; timeout 30s, same as MSSQL).\n\n- Success only if return value is 1.\n\n- Under the lock: if table already locked/blocked, fail; else insert. Do not insert a second row.\n\n- Always RELEASE_LOCK in finally (GET_LOCK is not released by commit).\n\n- MSSQL path unchanged.\n\nDo not add UNIQUE index or occupancy check in this ticket.\n\nAcceptance Criteria\n\n- Two concurrent lock table API calls on the same table: one success, one locked/blocked error; one lock row only.\n\n- Two concurrent change-table saves (updateResvField) to the same table: one success, one conflict error.\n\n- MSSQL behaviour unchanged.\n\nTest plan (JMeter)\n\nQA must test concurrency with JMeter, not only two browsers.\n\nScenarios\n\n- Lock table API — N threads (e.g. 2 / 10 / 20) POST table_states action lock, same outlet / date / period / table, same second (no ramp-up).\n\n- Update resv field — N threads update_fields change table to the same target table on different reservations (or same race as production).\n\n- Repeat for different tables in parallel (no cross-table blocking).\n\nMust pass\n\n- Only *one* winner per table; others return locked/blocked (or existing conflict error). Not two success.\n\n- tms_table_states: *one* lock row for that table key after the burst.\n\n- *No deadlock* (MySQL SHOW ENGINE INNODB STATUS / error log: no deadlock; API must not hang until PHP timeout).\n\n- *No GET_LOCK / InnoDB lock held > 30s* and left in DB:\n\n- After the test, GET_LOCK is released (check performance_schema.metadata_locks / IS_USED_LOCK(name) = 0 / SHOW PROCESSLIST no waiting on named lock).\n\n- GET_LOCK timeout is 30s: waiter either gets the lock within 30s or fails; must not wait forever.\n\n- No leftover tms_table_states lock rows from a request that failed / timed out (failed acquire must not insert; failed request must still RELEASE_LOCK).\n\n- InnoDB row locks from the insert must not remain after the request ends (no trx open > 30s on tms_table_states).\n\nJMeter notes\n\n- Use two (or more) login sessions / tokens.\n\n- Ramp-up 0 for the race; then a soak (e.g. 1–2 min) to catch leaked locks.\n\n- Capture response codes/error keys and a DB snapshot of tms_table_states + IS_USED_LOCK before/after.\n\nOut of Scope\n\n- UNIQUE index / duplicate-row cleanup\n\n- Extra occupancy validation on standard TMS\n\n- HERO-67685 FE lock storm",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-68002] TMS 2.0 - MySQL table lock race: two users can lock / assign the same table (lock API + update resv field)\nDescriptions:\nOn MySQL, two users can lock / assign the same table at the same time (same outlet, date, period)\nAffected paths\n*Lock table API* — floor plan lock / POST table_states\n*Update reservation field* — change table via updateResvField\nSetup:\nLock table API\nTest environment: 10 threads concurrently lock the same table, Ramp-up = 0 (released simultaneously)\nOnly one request succeeds; the other 9 fail, returning \"table_is_already_blocked\"\nUpdate reservation field (Quick Edit Table)\nCreate two or more reservation records for the same period\nIn JMeter, set up two Thread Groups to represent two reservations for testing\nOnly one reservation modification request succeeds\nIS_USED_LOCK returned NULL — lock released\nDuring a quick table change for a reservation, if the target table is already locked, the error message returned will include the table number",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Bunny Chen",
+     "email": "bunny.chen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Alisa Chen",
+     "email": "alisa.chen@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-67950",
+  "sprint_folder": "Sprint20260824-20260904",
+  "output_rel_path": "Sprint20260824-20260904/HERO-67950_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-67950",
+   "summary": "Fixing undefined array key issues on PHP 8 (Owner Box Waitlist user + period oper_id)",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "RESERVATION"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Summary\n\nTwo PHP 8 Undefined array key failures from the same pattern: copy a field that may not exist on the source array.\n\nCase 1 — testGetOwnerBoxWaitlistReservations\n\n- Symptom: Undefined array key \"UserUser\"\n\n- Location: Plugin/Hkjc/Controller/Component/HkjcApiReservationComponent.php — getOwnerBoxWaitlistReservations\n\n- Root Cause: Race schedule has rasc_waitlist_status_modify_by_user_id, so the code calls UserUser->findActiveById() and then uses $userUser['UserUser'][...] after only checking $userUser != ''. When findActiveById does not return the expected Cake structure (no UserUser key), PHP 8 raises Undefined array key \"UserUser\".\n\n- Expected: If the modifier user cannot be loaded, name fields stay empty string. API still returns waitlist data. No PHP warning/error.\n\nCase 2 — testGetPeriodOptions / testGetTableStatistics\n\nSymptom: Undefined array key \"oper_id\" (same path can also miss oday_id)\n\nLocation: Plugin/Tms/Model/Behavior/TmsPeriodBehavior.php — buildPeriodArrayForSpecialMode (foreach over $periodInfoKeys copying $tmsPeriod[$periodInfoKey]). Called from TmsResvDateBehavior::loadPeriodsForSpecialMode.\n\nRoot Cause:\n\nBoth tests go through loadPeriodsForSpecialMode. For TmsOperatingPeriod, the behavior always copies oper_id / oday_id off the period row. That row does not always have oper_id (non-operating / deployed path). PHP 8 then fails on the copy loop.\n\nExpected:\n\nPeriod options / table statistics still return. Missing oper_id / oday_id is treated as empty/default. No PHP warning/error.",
+   "refinement_notes": "",
+   "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS HKJC Release Notes\nversion 1.2.115.0\nReleased on 7th Oct 2026\nConfidential and Internal Use Only\nInfrasys POS HKJC Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.115.0 | [Jira-67950] Fixing undefined array key issues on PHP 8 (Owner Box Waitlist user + period oper_id) |\nRelease History\n| Version | Release Date |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nBug Fixing : [Jira-67950] Fixing undefined array key issues on PHP 8 (Owner Box Waitlist user + period oper_id)\nDescriptions:\nSummary\nTwo PHP 8 Undefined array key failures from the same pattern: copy a field that may not exist on the source array.\nCase 1 — testGetOwnerBoxWaitlistReservations\nSymptom: Undefined array key \"UserUser\"\nLocation: Plugin/Hkjc/Controller/Component/HkjcApiReservationComponent.php — getOwnerBoxWaitlistReservations\nRoot Cause: Race schedule has rasc_waitlist_status_modify_by_user_id, so the code calls UserUser->findActiveById() and then uses $userUser['UserUser'][...] after only checking $userUser != ''. When findActiveById does not return the expected Cake structure (no UserUser key), PHP 8 raises Undefined array key \"UserUser\".\nExpected: If the modifier user cannot be loaded, name fields stay empty string. API still returns waitlist data. No PHP warning/error.\nCase 2 — testGetPeriodOptions / testGetTableStatistics\nSymptom: Undefined array key \"oper_id\" (same path can also miss oday_id)\nLocation: Plugin/Tms/Model/Behavior/TmsPeriodBehavior.php — buildPeriodArrayForSpecialMode (foreach over $periodInfoKeys copying $tmsPeriod[$periodInfoKey]). Called from TmsResvDateBehavior::loadPeriodsForSpecialMode.\nRoot Cause:\nBoth tests go through loadPeriodsForSpecialMode. For TmsOperatingPeriod, the behavior always copies oper_id / oday_id off the period row. That row does not always have oper_id (non-operating / deployed path). PHP 8 then fails on the copy loop.\nExpected:\nPeriod options / table statistics still return. Missing oper_id / oday_id is treated as empty/default. No PHP warning/error.\nSetup:\nFor Case 1 — testGetOwnerBoxWaitlistReservations\nPrepare Job:\nA race schedule\nA Testing User in admin page\nAfter testing look at the tmp/log/error.log should not see the following\nUndefined array key \"UserUser\"\nUndefined array key \"date\"\nUndefined variable $trimedMemberTmsResvs\nFor the below testing scenario, Suggested order: B → C → A\nScenario A. Missing modifier user (!empty($userUser))\nSet rasc_waitlist_status_modify_by_user_id to a user that findActiveById cannot load (invalid / deleted / inactive). Open Owner Box Waitlist for that race date.\nStep 1. Go to Operation (Log in as a Testing User)  New Wait-list Reservation (Race-Day Outlet)  Save Reservation  Open Owner Box Waitlist Reservation\nStep 2. Freeze the Waitlist by using the Testing User (In my example is \"Chan Siu Man\")\nStep 3. Go to Admin Page  User Management  User  Suspend the user\nStep 4. Go back to Operation  Login other admin user  Open Owner Box Waitlist Reservation  Choose Step 1). that race day\nAs the picture below, the User Name will not showing, as it is suspended\nStep 5. Check the log\n|  | Before Bug Fixed | After Bug Fixed |\n| Log | Undefined array key \"UserUser\" | No warning |\n| Result | API/page can fail | Page loads; name fields are empty |\nScenario B. No date param (isset($params['date']))\nOpen Owner Box Waitlist without picking a date\n|  | Before | After |\n| Log | Undefined array key \"date\" | No warning |\n| Result | Still tries nearest race date, with warning | Same nearest race date, no warning |\nScenario C. No waitlist rows ($trimedMemberTmsResvs)\nOpen a race date that has a schedule but no waitlist reservations.\n|  | Before | After |\n| Log | Undefined variable $trimedMemberTmsResvs | No warning |\n| Result | Empty/odd resvs | resvs is [], empty table, freeze/unfreeze still works |\nFor Case 2 — testGetPeriodOptions / testGetTableStatistics\nPrepare Job:\nMake two testing race day:\none of the date is has period set deployment & no operating day\nanother one of the date is has operating day + has period set deployment\nUI steps (Special Mode)\nOpen Race Day Special Mode\nSelect an outlet\nSelect a date → calls special_mode_periods (getPeriodOptions)\nWhen the period dropdown is filled, it auto-calls table_statistic (getTableStatistics)\nChange period → table_statistic is called again\n| Case | Which date | Expected |\n| Non-operating | Has period set deployment, no tms_operating_days | Periods + table statistics show; no PHP Warning |\n| Operating | Has tms_operating_days + periods | Same — baseline / control |\n*** Notes\nUI: No period_not_found alert; period dropdown has options; table statistics display\nLog: error.log has no Undefined array key \"oper_id\" / \"full_status\" / \"active\" from TmsPeriodBehavior / loadPeriodsForSpecialMode\nRelease: 20261007 < 1.2.115.0>>>\n********************************************************************************",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Sooki Shan",
+     "email": "sooki.shan@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Johnson Liu",
+     "email": "johnson.liu@shijigroup.com"
+    }
+   }
+  }
+ }
+]

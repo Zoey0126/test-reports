@@ -1,0 +1,246 @@
+[
+ {
+  "issue_key": "HERO-68800",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68800_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68800",
+   "summary": "General V3 membership interface - Incorrect request ID for prepare refund coupon if there are multiple check discount coupon with the same discount type",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "It is available for General V3 membership interface\n\nSystem posts incorrect requestCompletionId for external API \"Prepare Refund Coupon\" when doing coupon refund\n\nSystem applied multiple coupons. Each of them belongs to the same check discount type.\n\nWorkflow\n\n1. Open a check attached with General V3 member\n\n2. Click function \"SVC Coupon Enquiry\"\n\n3. Input coupon number for enquiry\n\n4. Click button \"Apply Coupon\"\n\n5. System triggers external API “Prepare Redeem Coupon” and apply the coupon discount with type as check discount\n\n6. Select another target coupon\n\n7. Click button “Apply Coupon”\n\n8.  System triggers external API “Prepare Redeem Coupon” and apply the coupon discount with type as check discount\n\n9. Return to ordering panel\n\n10. Click function “Void Check Discount” or “Void Multiple Item Discount” to void the discount coupons\n\n11.  System triggers external API \"Prepare Refund Coupon\" with the requestCompletionId from the last coupon \"Redeem Coupon\" response\n\nExpected Result:\n\nSystem should use the requestCompletionId from corresponding \"Redeem Coupon\" response in “Prepare Refund Coupon”",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-68800] General V3 membership interface - Incorrect request ID for prepare refund coupon if there are multiple check discount coupon with the same discount type (Teresa)\nDescriptions:\nIt is available for General V3 membership interface\nSystem posts incorrect requestCompletionId for external API \"Prepare Refund Coupon\" when doing coupon refund for checks having multiple coupon check discount\nWorkflow\n1. Open a check attached with General V3 member\n2. Click function \"SVC Coupon Enquiry\"\n3. Input coupon number for enquiry\n4. Click button “Apply Coupon”\n5. System triggers external API “Prepare Redeem Coupon” and apply the coupon discount with type as check discount\n6. Select another target coupon\n7. Click button “Apply Coupon”\n8. System triggers external API “Prepare Redeem Coupon” and apply the coupon discount with type as check discount\n9. Return to ordering panel\n10. Click function “Void Check Discount” or “Void Multiple Item Discount” to void the discount coupons\n11. System triggers external API \"Prepare Refund Coupon\" with the requestCompletionId from the last coupon \"Redeem Coupon\" response\nExpected result:\nSystem should use the requestCompletionId from corresponding \"Redeem Coupon\" response in “Prepare Refund Coupon”\nIt is fixed in current version\nSetup:\nFor detailed setup of General V3 (HMC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_64_0(Infrasys Cloud v1.2.64.0).docx”\nEnhancements: [Jira-25567,Jira-25568,Jira-25570,Jira-25571,Jira-27361,Jira-27362,Jira-27883,Jira-28134/Epic-24544] POS Feature – Support HMC online interface\nFor detailed setup of General V3 (DailyPoint) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_69_0(Infrasys Cloud v1.2.69.0).docx”\nEnhancements: [Jira-28111,Jira-28112,Jira-28176,Jira-28177,Jira-28178,Jira-28191,Jira-30071/Epic-26097] Infrasys Integration for DailyPoint Loyalty system\nFor detailed setup of General V3 (AWE) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_71_0(Infrasys Cloud v1.2.71.0).docx”\nEnhancements: [Jira-30611,Jira-31678] POS – Support for Interface with new CRM system for AWE using General v3\nFor detailed setup of General V3 (Eber) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_73_0(Infrasys Cloud v1.2.73.0).docx”\nEnhancements: [Jira-28224,Jira-28226,Jira-29512,Jira-29513,Jira-31128,Jira-31129,Jira-31130,Jira-31131/Epic-27926] POS Interface - Middleware v3 - [Eber]\nFor detailed setup of General V3 (CIRSA) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_74_0(Infrasys Cloud v1.2.74.0).docx”\nEnhancements: [Jira-30523,Jira-31808,Jira-31810,Jira-31811,Jira-31812,Jira-31813,Jira-31814/Epic-22215] POS Interface - Cirsa - Player Tracking integration\nFor detailed setup of General V3 (Eber) membership interface coupon mapping setting, please refer to “Infrasys_cloud_pos_release_note_1_0_76_0(Infrasys Cloud v1.2.76.0).docx”\nEnhancements: [Jira-34365/Epic-27926] POS Interface - Middleware v3 - [Eber] Enhance Coupon Mapping with POS\nFor detailed setup of General V3 (HMC) membership interface adjust tips operation, please refer to “Infrasys_cloud_pos_release_note_1_0_77_0(Infrasys Cloud v1.2.77.0).docx”\nEnhancements: [Jira-34645] POS - Allow for Adjust Tips with General V3 Interface Member (without post to HMC interface)\nFor detailed setup of General V3 (MCC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_81_0(Infrasys Cloud v1.2.81.0).docx”\nEnhancements: [Jira-30186,Jira-30187,Jira-30188/Epic-29236] POS Interface - CRM - MCC under general_v3\nFor detailed setup of General V3 (MCC) membership interface auto apply first item discount, please refer to “Infrasys_cloud_pos_release_note_1_0_83_0(Infrasys Cloud v1.2.83.0).docx”\nEnhancements: [Jira-38660/Epic-29236] POS Interface - CRM Middleware V3 - Show discount list and auto apply first item discount\nFor detailed setup of General V3 (HardRock) membership interface , please refer to “Infrasys_cloud_pos_release_note_1_0_83_0(Infrasys Cloud v1.2.83.0).docx”\nEnhancements: [Jira-36242,Jira-37136,Jira-37137,Jira-37138,Jira-37139,Jira-37140,Jira-37141,Jira-37142/Epic-25448] POS Interface - Middleware v3 - [HardRock] Coupon Redemption\nFor detailed setup of General V3 (MCC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_85_0(Infrasys Cloud v1.2.85.0).docx”\nEnhancements: [Jira-41639/Epic-29236] POS Interface - CRM Middleware V3 - Show discount list and auto apply first item discount by External API (v1.2.81 Hotfix included)\nFor detailed setup of General V3 (AWE) membership interface support SVC Coupon Enquiry with discount code only, please refer to “Infrasys_cloud_pos_release_note_1_0_86_0(Infrasys Cloud v1.2.86.0).docx”\nEnhancements: [Jira-41378] POS interface – General v3 membership interface – Vsoloop integration enhancement\nFor detailed setup of General V3 (COMO) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_87_0(Infrasys Cloud v1.2.87.0).docx”\nEnhancements: [Jira-42370,Jira-42578/Epic-32687] POS Interface - Middleware v3 - [COMO] Call discounts/query on Discount Tab\nFor detailed setup of auto apply coupon for SVC Coupon Enquiry, please refer to “Infrasys_cloud_pos_release_note_1_0_88_0(Infrasys Cloud v1.2.88.0).docx”\nEnhancement: [Jira-43124] POS - Automation of \"Apply Coupon\" after searching for valid coupon (Vsoloop)\nFor detailed setup of Activation / Deactivation (Refund All Items) Coupon, please refer to “Infrasys_cloud_pos_release_note_1_0_89_0(Infrasys Cloud v1.2.89.0).docx”\nEnhancements: [Jira-44796,Jira44797/Epic-43675] POS Interface - Middleware v3 - Activation/Deactivation Coupon (Phase 1 Dev 2/2)",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Phoebe Chen",
+     "email": "phoebe.chen@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68680",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68680_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68680",
+   "summary": "POS Client (Windows) - Update pos version desc for reference",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "POS version information for dev team internal reference regular update",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-68680] Update pos version desc for reference\nDescriptions:\nRegular update the POS local server version (1.2.115.0) in POS Client for internal reference\nThe version number is showing in Setting -> Other Information -> Best POS Server version\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Yumia Tang",
+     "email": "yumia.tang@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Kathy Kuang",
+     "email": "kathy.kuang@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68637",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68637_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68637",
+   "summary": "General V3 membership interface - SVC coupon enquiry prompts error \"Incorrect category type\" if interface setup \"Discount Details From\" value as \"Infrasys POS discount setup\"",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "It is available for General V3 membership.\n\nError message \"Incorrect category type\" is shown during SVC Coupon Enquiry if Discount Details From is set as \"Infrasys POS discount setup\"\n\nThe remark \"Only for category \"item\" or \"check\"\" should be removed\n\nPrerequisite:{\n\n- Location: Interface Control > Interfaces\n\n- Discount Details From = Infrasys POS discount setup\n\nWorkflow:\n\n- Open a new check\n\n- Add an item\n\n- Click function \"SVC Coupon Enquiry\"\n\n- Input coupon number\n\n- Click button \"Enquiry\"\n\n- System shows error \"Incorrect category type\"\n\nActual result:\n\nSystem should not show error \"Incorrect category type\" and show coupon information\n\nThe remark should be removed",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-68637] General V3 membership interface - SVC coupon enquiry prompts error \"Incorrect category type\" if interface setup \"Discount Details From\" value as \"Infrasys POS discount setup\" (Teresa)\nDescriptions:\nIt is available for General V3 interface\nIf the value of interface outlet config “Discount Details From” is set as “Infrasys POS discount setup”, system fails to apply coupon discount\nWorkflow\n1. Open a new check\n2. Add an item\n3. Click function “SVC Coupon Enquiry”\n4. Input target coupon number\n5. Click button “Enquiry”\n6. The system triggers external party API to enquire coupon\n7. The system shows error “Incorrect category type” and aborts applying corresponding coupon discount\nExpected result:\nSystem should not show error “Incorrect category type”\nSystem shows coupon information\nThe coupon discount from Infrasys POS can be applied\nRemarks of interface outlet config “Discount Details From” is set as “Infrasys POS discount setup” is updated to ‘Only for function “SVC Coupon Enquiry”’\nIt is fixed in current version\nSetup:\nSetting discount details from Infrasys POS discount setup for General V3 interface\nGo to Infrasys POS platform: Interface Control à Interfaces\nSelect target General v3 membership interface setting\nClick “Add New” to add a new record or select an existing interface record\nSelect section “Coupon Setup”\nDiscount Details From = Infrasys POS discount setup\nClick “Save” to save the record\nFor detailed setup of General V3 (HMC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_64_0(Infrasys Cloud v1.2.64.0).docx”\nEnhancements: [Jira-25567,Jira-25568,Jira-25570,Jira-25571,Jira-27361,Jira-27362,Jira-27883,Jira-28134/Epic-24544] POS Feature – Support HMC online interface\nFor detailed setup of General V3 (DailyPoint) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_69_0(Infrasys Cloud v1.2.69.0).docx”\nEnhancements: [Jira-28111,Jira-28112,Jira-28176,Jira-28177,Jira-28178,Jira-28191,Jira-30071/Epic-26097] Infrasys Integration for DailyPoint Loyalty system\nFor detailed setup of General V3 (AWE) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_71_0(Infrasys Cloud v1.2.71.0).docx”\nEnhancements: [Jira-30611,Jira-31678] POS – Support for Interface with new CRM system for AWE using General v3\nFor detailed setup of General V3 (Eber) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_73_0(Infrasys Cloud v1.2.73.0).docx”\nEnhancements: [Jira-28224,Jira-28226,Jira-29512,Jira-29513,Jira-31128,Jira-31129,Jira-31130,Jira-31131/Epic-27926] POS Interface - Middleware v3 - [Eber]\nFor detailed setup of General V3 (CIRSA) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_74_0(Infrasys Cloud v1.2.74.0).docx”\nEnhancements: [Jira-30523,Jira-31808,Jira-31810,Jira-31811,Jira-31812,Jira-31813,Jira-31814/Epic-22215] POS Interface - Cirsa - Player Tracking integration\nFor detailed setup of General V3 (Eber) membership interface coupon mapping setting, please refer to “Infrasys_cloud_pos_release_note_1_0_76_0(Infrasys Cloud v1.2.76.0).docx”\nEnhancements: [Jira-34365/Epic-27926] POS Interface - Middleware v3 - [Eber] Enhance Coupon Mapping with POS\nFor detailed setup of General V3 (HMC) membership interface adjust tips operation, please refer to “Infrasys_cloud_pos_release_note_1_0_77_0(Infrasys Cloud v1.2.77.0).docx”\nEnhancements: [Jira-34645] POS - Allow for Adjust Tips with General V3 Interface Member (without post to HMC interface)\nFor detailed setup of General V3 (MCC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_81_0(Infrasys Cloud v1.2.81.0).docx”\nEnhancements: [Jira-30186,Jira-30187,Jira-30188/Epic-29236] POS Interface - CRM - MCC under general_v3\nFor detailed setup of General V3 (MCC) membership interface auto apply first item discount, please refer to “Infrasys_cloud_pos_release_note_1_0_83_0(Infrasys Cloud v1.2.83.0).docx”\nEnhancements: [Jira-38660/Epic-29236] POS Interface - CRM Middleware V3 - Show discount list and auto apply first item discount\nFor detailed setup of General V3 (HardRock) membership interface , please refer to “Infrasys_cloud_pos_release_note_1_0_83_0(Infrasys Cloud v1.2.83.0).docx”\nEnhancements: [Jira-36242,Jira-37136,Jira-37137,Jira-37138,Jira-37139,Jira-37140,Jira-37141,Jira-37142/Epic-25448] POS Interface - Middleware v3 - [HardRock] Coupon Redemption\nFor detailed setup of General V3 (MCC) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_85_0(Infrasys Cloud v1.2.85.0).docx”\nEnhancements: [Jira-41639/Epic-29236] POS Interface - CRM Middleware V3 - Show discount list and auto apply first item discount by External API (v1.2.81 Hotfix included)\nFor detailed setup of General V3 (AWE) membership interface support SVC Coupon Enquiry with discount code only, please refer to “Infrasys_cloud_pos_release_note_1_0_86_0(Infrasys Cloud v1.2.86.0).docx”\nEnhancements: [Jira-41378] POS interface – General v3 membership interface – Vsoloop integration enhancement\nFor detailed setup of General V3 (COMO) membership interface, please refer to “Infrasys_cloud_pos_release_note_1_0_87_0(Infrasys Cloud v1.2.87.0).docx”\nEnhancements: [Jira-42370,Jira-42578/Epic-32687] POS Interface - Middleware v3 - [COMO] Call discounts/query on Discount Tab\nFor detailed setup of auto apply coupon for SVC Coupon Enquiry, please refer to “Infrasys_cloud_pos_release_note_1_0_88_0(Infrasys Cloud v1.2.88.0).docx”\nEnhancement: [Jira-43124] POS - Automation of \"Apply Coupon\" after searching for valid coupon (Vsoloop)\nFor detailed setup of Activation / Deactivation (Refund All Items) Coupon, please refer to “Infrasys_cloud_pos_release_note_1_0_89_0(Infrasys Cloud v1.2.89.0).docx”\nEnhancements: [Jira-44796,Jira44797/Epic-43675] POS Interface - Middleware v3 - Activation/Deactivation Coupon (Phase 1 Dev 2/2)\nFor detailed setup of displaying message before coupon enquiry for SVC Coupon Enquiry, please refer to “Infrasys_cloud_pos_release_note_1_0_94_0(Infrasys Cloud v1.2.94.0).docx”\nEnhancements [Jira-48543/Epic-47999] POS - Additional information display at General V3 membership interface coupon enquiry page\nFor detailed setup of “Membership Registration”, please refer to “Infrasys_cloud_pos_release_note_1_0_94_0(Infrasys Cloud v1.2.94.0).docx”\nEnhancements: [Jira-46584,Jira-46585,Jira-46586,Jira-46587,Jira-46588/Epic-43413] Loyalty Middleware Interface - Integration to IHG Apigee (Phase 1)\nFor detailed setup of “Member Enquiry” and “Member List”, please refer to “Infrasys_cloud_pos_release_note_1_0_98_0(Infrasys Cloud v1.2.98.0).docx”\nEnhancements: [Jira-50436, Jira-51398, Jira-51297, Jira-51298/Epic-47101] POS Interface - Middleware CRM - [Basic9] Enhance Member Inquiry & Add Member Listing (INF-1010)",
+   "qc_info": {
+    "qc_tester": {
+     "name": "More Luo",
+     "email": "more.luo@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68624",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68624_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": true,
+  "requirement": {
+   "key": "HERO-68624",
+   "summary": "Unexpected set menu parent item added to ordering basket if continuously fast clicking parent item in menu lookup page",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [],
+   "issue_type": "Bug",
+   "is_bug": true,
+   "description": "Pre-condition:\n\n- Mobile view\n\n- Self-select set menu in Menu Lookup page\n\n- Fast clicking\n\nWorkflow\n\n1. Login POS client in mobile view\n\n2. Open a check\n\n3. Click a Menu button to open a menu lookup page\n\n4. Continuously fast click the set menu parent item before the set menu lookup page prompted for child item selection\n\n5. Select target child item and click button \"OK\"\n\n6. Duplicated set menu parent item is added to ordering basket\n\nExpected result:\n\n- Redundant set menu parent item should not be added in ordering basket",
+   "refinement_notes": "",
+   "release_notes": "Bug Fixing: [Jira-68624] Unexpected set menu parent item added to ordering basket if continuously fast clicking parent item in menu lookup page\nDescriptions:\nThe system added an unexpected set menu parent item in ordering basket if the following criteria are met:\nUnder mobile view\nClick a self-select set menu parent item rapidly on the menu lookup page\nWorkflow\n1. Login POS client in mobile view\n2. Open a check\n3. Click a Menu button to open a menu lookup page\n4. Continuously click rapidly on the set menu parent item on the menu lookup page before the set menu lookup page prompts for child item selection\n5. Select target child item and click button “OK”\n6. Duplicated set menu parent item is added to ordering basket\nExpected result:\nRedundant set menu parent item should not be added in ordering basket\nIt is fixed in current version\nSetup:\nAdd set menu parent item to Menu\nGo to Infrasys POS platform: Menu Management  Item Properties  Menus\nEdit Content for an existing menu ()\nAdd target set menu parent item as below:\nClick “Save” to save record\nAdd a Menu button to the display panel page\nGo to Infrasys POS platform: POS System à Station Setup à Display Panels\nSelect the target ordering display panel zone\nEdit content () of the target display panel page\nClick button “Add New Button” to add new button\nSelect\nType = Menu\nAvailable Options = Target menu created in previous step\nFill in the remaining details\nClick “Submit” at the bottom\nClick “Save” at the top of the page to save the changes",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Mila Cao",
+     "email": "mila.cao@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Briana Li",
+     "email": "briana.li@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68516",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68516_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68516",
+   "summary": "Update external libraries of printing service in 2026 Q4",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "Below external libraries are upgraded in printing service:\n\n| Library\n| Update to target version\n\n| json\n| 20260814\n\n| commons-logging\n| 1.4.0\n\n| pdfbox\n| 3.0.8\n\n| fontbox\n| 3.0.8\n\n| log4j-api\n| 2.26.1\n\n| log4j-core\n| 2.26.1\n\n| amqp-client\n| 5.35.0",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-6xxxx] Update external libraries of printing service in 2026 Q4 (Teresa)\nDescriptions:\nBelow external libraries are upgraded in printing service:\njson\ncommons-logging\nfontbox\npdfbox\nlog4j-api\nlog4j-core\namqp-client\n| Library | Update to target version |\n| json | 20260522 |\n| commons-logging | 1.4.0 |\n| fontbox | 3.0.8 |\n| pdfbox | 3.0.8 |\n| log4j-api | 2.26.1 |\n| log4j-core | 2.26.1 |\n| amqp-client | 5.35.0 |\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Forrest Lin",
+     "email": "forrest.lin@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68491",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68491_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68491",
+   "summary": "Libraries Upgrade 2026 Q4 IP2COM",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "It is required to update following external libraries to target version for IP2COM:\n\n| Library\n| Update to target version\n\n| pdfbox\n| 3.0.8\n\n| json\n| 20260814\n\n| log4j-api\n| 2.26.1\n\n| log4j-core\n| 2.26.1",
+   "refinement_notes": "",
+   "release_notes": "## Enhancements: [Jira-68491] Libraries Upgrade 2026 Q4 IP2COM\nDescriptions:\nThe following external libraries of IP2COM is updated\npdfbox – 3.0.8\njson – 20260814\nlog4j-api – 2.26.1\nlog4j-core – 2.26.1\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Forrest Lin",
+     "email": "forrest.lin@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68415",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68415_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68415",
+   "summary": "Update external libraries of android client in 2026 Q4",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [
+    "POS"
+   ],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "It is available in android client\n\nBelow external libraries are updated:\n\n| Library\n| Update to target version\n\n| appcompat\n| 1.8.0\n\n| commons-codec\n| 1.22.1\n\n| jackson-core\n| 2.22.2\n\n| jackson-annotations\n| 2.22\n\n| jackson-databind\n| 2.22.2",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-68415] Update external libraries of android client in 2026 Q4\nDescriptions:\nBelow external libraries are upgraded in android client:\nappcompat\ncommons-codec\njackson-core\njackson-annotations\njackson-databind\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Forrest Lin",
+     "email": "forrest.lin@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    }
+   }
+  }
+ },
+ {
+  "issue_key": "HERO-68414",
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68414_20260914_092415.docx",
+  "template": "infrasys",
+  "is_bug": false,
+  "requirement": {
+   "key": "HERO-68414",
+   "summary": "Update external libraries of window client in 2026 Q4",
+   "status": "READY FOR QA",
+   "template": "infrasys",
+   "components": [],
+   "issue_type": "Improvement",
+   "is_bug": false,
+   "description": "It is available in window client\n\nBelow external libraries are updated:\n\n| Library\n| Update to target version\n\n| jackson-core\n| 2.22.2\n\n| jackson-databind\n| 2.22.2\n\n| bcprov-jdk18on\n| 1.85.2\n\n| json\n| 20260814\n\n| jna\n| 5.19.1\n\n| jna-platform\n| 5.19.1\n\n| commons-codec\n| 1.22.1\n\n| commons-logging\n| 1.4.0",
+   "refinement_notes": "",
+   "release_notes": "Enhancements: [Jira-68414] Update external libraries of window client in 2026 Q4\nDescriptions:\nBelow external libraries are upgraded in window client:\njackson-core\njackson-databind\nbcprov-jdk18on\njson\njna\njna-platform\ncommons-codec\ncommons-logging\nSetup:\nNone",
+   "qc_info": {
+    "qc_tester": {
+     "name": "Forrest Lin",
+     "email": "forrest.lin@shijigroup.com"
+    },
+    "qc_reviewer": {
+     "name": "Tian Xie",
+     "email": "tian.xie@shijigroup.com"
+    }
+   }
+  }
+ }
+]
