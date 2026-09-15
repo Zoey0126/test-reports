@@ -319,6 +319,16 @@
       "path": "Sprint20260907-20260918/HERO-68062_20260915_095320.docx",
       "template": "infrasys",
       "generated_at": "2026-09-15T09:53:40"
+    },
+    "HERO-68158": {
+      "path": "Sprint20260824-20260904/HERO-68158_20260915_143244.docx",
+      "template": "infrasys",
+      "generated_at": "2026-09-15T14:32:51"
+    },
+    "HERO-68129": {
+      "path": "Sprint20260907-20260918/HERO-68129_20260915_143244.docx",
+      "template": "report",
+      "generated_at": "2026-09-15T14:32:51"
     }
   }
 }
