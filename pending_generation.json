@@ -1,65 +1,195 @@
 {
-  "generated_at": "2026-09-16T09:06:09",
+  "generated_at": "2026-09-18T15:24:06",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
-  "total_pending": 5,
-  "total_skipped": 38,
+  "total_pending": 14,
+  "total_skipped": 26,
   "pending": [
     {
-      "issue_key": "HERO-68275",
-      "sprint_id": "65587",
-      "sprint_name": "Report - 20260824-20260904",
-      "sprint_folder": "Sprint20260824-20260904",
-      "output_filename": "HERO-68275_20260916_090609.docx",
-      "output_rel_path": "Sprint20260824-20260904/HERO-68275_20260916_090609.docx",
-      "template": "report",
-      "is_bug": true,
+      "issue_key": "HERO-68470",
+      "sprint_id": "65589",
+      "sprint_name": "Platform - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-68470_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-68470_20260918_152406.docx",
+      "template": "infrasys",
+      "is_bug": false,
       "requirement": {
-        "key": "HERO-68275",
-        "summary": "POS028 Monthly Revenue Report - optimize loading performance and fix last/current month timezone",
+        "key": "HERO-68470",
+        "summary": "KDS2.0 - Support to view ticket when disconnect with internet",
         "status": "READY FOR QA",
-        "template": "report",
+        "template": "infrasys",
         "components": [
-          "REPORTS"
+          "KDS"
         ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "- When the scheduled task executes on September 1st, the report is expected to fetch data for August. However, the generated report incorrectly contains data for July.\n\n- optimize loading performance\n\nTicket ID: #1924232\n\nSubject: CS | JUMBO GROUP | REPORT | Auto Report generating incorrect data\n\nDepartment: Infrasys Support\n\nURL: https://support-intl.shijigroup.com/agent/shijigroupintl/infrasys-support/tickets/details/255139001012136614",
+        "issue_type": "New Feature",
+        "is_bug": false,
+        "description": "After Internet Connection resume or AWS available:\n\nKDS client should update all tickets according to the latest status from AWS cloud after connection returns normal.\n\nAcceptance Criteria:\n\nAll screens should be able to view existing tickets after when offline\n\nAll screens should be able to receive notifications or alert when any other screens offline/disconnect from KDS cloud\n\nSystem should prompt alert when current screen disconnect from KDS cloud\n\nThe connection icon will change when current screen disconnect from KDS cloud",
         "refinement_notes": "",
-        "release_notes": "",
+        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nKDS Release Notes\nversion [Not Included In STD Release]\n[Not Included In STD Release]\nConfidential and Internal Use Only\nKDS Release Notes\nversion [Not Included In STD Release]\nTable of Contents\n<<< [Not Included In STD Release] >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\n| [Not Included In STD Release] | [JIRA-68470] KDS2.0 - Support to view ticket when disconnect with internet |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.xxx.0 | 2026-xx-xx |\n| Sample:  New Functions:  Descriptions: Descriptions  Setup: Setup  Enhancements: Descriptions: Descriptions  Setup: Setup  Bug Fixing:  Descriptions: Descriptions  Setup: Setup |\n********************************************************************************\n# <<< [Not Included In STD Release] >>>\nNew Functions: [JIRA-68470] KDS2.0 - Support to view ticket when disconnect with internet\nDescriptions:\nChanged the KDS client frontend to build as a Progressive Web App (PWA). Browser will cache the page data in local storage and allow opening the page without internet access.\nAs the site is cached, to use the latest version of the KDS client, user needs to do a full page reload. The KDS client will automatically check if a new version is published during the initial set up stage after login. If an upgrade is available, users will be able to see a notification when entering the tickets page.\nFor data loading from backend without internet access (e.g. display list, device info), we will use the data stored in IndexedDB if the HTTP API call failed.\nSetup:\nWhen opening the KDS client, a service worker is automatically registered, managing the cache for the site’s page data.\nSign in is an online action, the KDS Client must acquire the access token from KDS backend to be able to sign in. When offline, users cannot sign in. Offline mode support only works when network is available.\n* For page reload of a signed in client in offline mode, the KDS client will automatically skip the sign in page.\nUsers can normally view tickets, switch pages, select/unselect processing statuses, change display when offline.\nAt this stage, a page refresh will load the same data and show back this page normally even if offline.\n\nThe cloud and signal icon will turn red when disconnected to the KDS backend and MQTT respectively.\nWhen there is a new published version of the KDS Client, and the user does not do any refresh on the page, a notification box will pop up in the bottom right. Clicking the upgrade button will trigger a page reload.\nThe upgrade button will also exist in settings -> System Information menu in tickets page.\nAfter the internet access is restored. The KDS Client will try to call API from backend to load the latest tickets.\nRelease: [Not Included In STD Release]\n********************************************************************************",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-68262",
+      "sprint_id": "65591",
+      "sprint_name": "POS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-68262_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-68262_20260918_152406.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-68262",
+        "summary": "SJM - Gaming System - Wording Issue for Triggering the Scan Barcode Function",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "POS"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "Vender Key: sjm\n\nRelated enhancement cases: JIRA-63889, JIRA-64200, JIRA-64742 and JIRA-67883 implemented the trigger of the scan barcode function.\n\nThe function itself is working correctly. However, when the system prompts the user to scan a barcode, the popup message currently displays:\n\n\"Scan barcode / Swipe card\"\n\n\"Please scan barcode / swipe card\"\n\nThis wording is incorrect and causes confusion. At present the system only supports barcode scanning and does not support card swipe(MSR). Displaying the “swipe card” option misleads users.\n\nRequested change:\n\nUpdate the popup message text from\n\n\"Scan barcode / Swipe card\"\n\n\"Please scan barcode / swipe card\"\n\nto\n\n\"Scan barcode\"\n\n\"Please scan barcode\"\n\nThis wording correction will eliminate user confusion and align the prompt with the actual supported functionality.\n\nEnquiry functions and Payment interfaces:\n\nEnquiry Functions:\n\nGaming Enquiry\n\nComp Inquiry\n\nPatron Tier Discount\n\nPayment Interfaces:\n\nRedeem Dollar\n\nRedeem Comp By Account Number\n\nRedeem Comp By Physical Silp",
+        "refinement_notes": "",
+        "release_notes": "Enhancements: [Jira-68262] SJM - Gaming System - Wording Issue for Triggering the Scan Barcode Function\nDescriptions:\nIt is available for SJM gaming interface\nThe icon for scanning barcode is updated as follows:\nThe popup message for scanning barcode is updated as follows:\nThe updates are available for the functions and payments below:\nGaming Enquiry\nComp Inquiry\nGaming Tier Enquiry\nPatron Tier Discount\nRedeem Dollar\nRedeem Comp By Account Number\nIt is not available in vertical mobile view because there is not workflow for scanner devices in mobile view\nSetup:\nFor detailed setup of SJM gaming interface, please refer to “infrasys_cloud_pos_release_note_1_0_24_0(Infrasys Cloud v1.2.24.0).doc” and “Infrasys_pos_release_note_1_0_111_0(Infrasys POS v1.2.111.0).docx”\nEnhancements: Support SJM gaming interface enquiry (3320)\nEnhancements: [Jira-63889] POS Interface - Gaming Interface - Support scan barcode on card number\nFor detailed setup of SJM payment methods, please refer to “Infrasys_cloud_pos_release_note_1_0_26_0 (Infrasys Cloud v1.2.26.0).doc”\nEnhancements: Support SJM redeem dollar payment (7116)\nEnhancements: Support SJM redeem comp payment (7120)",
         "qc_info": {
           "qc_tester": {
-            "name": "Mila Cao",
-            "email": "mila.cao@shijigroup.com"
+            "name": "Zephyr Ji",
+            "email": "zephyr.ji@shijigroup.com"
           },
           "qc_reviewer": {
-            "name": "Briana Li",
-            "email": "briana.li@shijigroup.com"
+            "name": "Kathy Kuang",
+            "email": "kathy.kuang@shijigroup.com"
           }
         }
       }
     },
     {
-      "issue_key": "HERO-61720",
-      "sprint_id": "65587",
-      "sprint_name": "Report - 20260824-20260904",
-      "sprint_folder": "Sprint20260824-20260904",
-      "output_filename": "HERO-61720_20260916_090609.docx",
-      "output_rel_path": "Sprint20260824-20260904/HERO-61720_20260916_090609.docx",
-      "template": "report",
+      "issue_key": "HERO-68074",
+      "sprint_id": "65591",
+      "sprint_name": "POS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-68074_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-68074_20260918_152406.docx",
+      "template": "infrasys",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-68074",
+        "summary": "Many errors about \"Undefined array keys\" and \"Undefined variables\" -V113",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "POS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Fix the error.log with \"Undefined array keys\", like as Undefined array key \"result\", Undefined variable $langPath... etc.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined array key \"page_bottom_margin\"\n| ../Plugin/Pos/Controller/Component/PosPrintChecksComponent.php, line 6654\n\n| Undefined array key \"DiscountOnScTotal\"\n| ../webroot/data/pos_print_formats/print_format_html_14016.ctp, line 2549\n\n| Undefined array key \"CheckCloseEmployeeLastName\"\n| ../webroot/data/pos_print_formats/print_format_html_14016.ctp, line 2374",
+        "refinement_notes": "",
+        "release_notes": "Bug Fixing: [Jira-68074] Many errors about \"Undefined array keys\" and \"Undefined variables\" -V113\nDescriptions:\nError logs contain a lot of undefined information\nSunCoverAccountExportShell\nUndefined array key “walk_in_custom_type_code”\nUndefined array key “in_house_account_code”\nUndefined array key “export_file_naming_and_type_setting”\nUndefined array key “custom_type_code”\nUndefined array key “account_code”\nGeneralSalesV2ExportShell\nUndefined array key “dateMode”\nPosPrintChecksComponent\nUndefined array key “page_bottom_margin”\nExpected result:\nThe system should not generate error log for above information\nIt is fixed in current version\nSetup:\nNone",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Viktor Peng",
+            "email": "viktor.peng@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Tian Xie",
+            "email": "tian.xie@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-67901",
+      "sprint_id": "65591",
+      "sprint_name": "POS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-67901_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-67901_20260918_152406.docx",
+      "template": "infrasys",
       "is_bug": false,
       "requirement": {
-        "key": "HERO-61720",
-        "summary": "CUS214 Employee Detail Check Report | Optimize this report with export",
+        "key": "HERO-67901",
+        "summary": "Handling the deprecated features for RabbitMQ 4.3.X about creating queue",
         "status": "READY FOR QA",
-        "template": "report",
+        "template": "infrasys",
         "components": [
-          "REPORTS"
+          "POS"
         ],
         "issue_type": "Improvement",
         "is_bug": false,
-        "description": "Use an export program instead of a report engine to output CUS214.",
+        "description": "With planing to upgrade to RabbitMQ 4.3.X, feature 'transient_nonexcl_queues' (durable = false and exclusive = false) is deprecated and it is not permitted by default anymore.\n\nThis deprecated features causing system gets \"Fail to create queue\" error because system uses transient_nonexcl_queues as default queue creation.\n\nIt is required to set durable as true and apply reasonable x-expires argument if necessary for all transient_nonexcl_queues usage in POS module related as below\n\n- Shell of publish notification: Create queue with durable as true since it is long-holding queue\n\n- Shell of central push notification: Create queue with durable as true since it is long-holding queue\n\n- Shell of IPTV interface: With MQ host exist, create response queue with durable as true and keeping auto delete as true (auto delete is true currently)\n\n- Shell of portal station load test: Create response queue with durable as true and keeping auto delete as true (auto delete is true currently)\n\n- API portal: Create response queue with durable as true and keeping auto delete as true (auto delete is true currently)\n\n- Shell of download sales data: Create queue with durable as true since it is long-holding queue",
         "refinement_notes": "",
-        "release_notes": "Improvement: [Jira-61720] CUS214 Employee Detail Check Report | Optimize this report with export\nDescriptions:\nOptimize the running speed of CUS214 Employee Detail Check Report,\nReplace \"related subqueries\" with \"LEFT JOIN + pre-aggregation\",\nGroup and aggregate pos_check_extra_infos based on different business conditions, and then perform a one-time JOIN operation with the main table.\nConfiguration / Parameter:\nResult / Sample:",
+        "release_notes": "Bug Fixing: [Jira-67901] Handling the deprecated features for RabbitMQ 4.3.X about creating queue (Eli)\nDescriptions:\nRabbitMQ 4.3.X will deny feature transient_nonexcl_queues by default\nIt is required to change transient_nonexcl_queues usage in POS module from durable false to true for below workflow\nPublish notification\nCentral push notification\nIPTV interface\nPortal station load test\nPortal station\nDownload sales data from master for smart station\nExpected result:\nSystem work normally without “Fail to create queue” error after upgrading RabbitMQ to 4.3.X version\nIt is fixed in current version\nSetup:\nNone",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Forrest Lin",
+            "email": "forrest.lin@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Tian Xie",
+            "email": "tian.xie@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-67376",
+      "sprint_id": "65591",
+      "sprint_name": "POS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-67376_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-67376_20260918_152406.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-67376",
+        "summary": "POS Interface - HTNG (HotelIFC/Shiji Box) - Block check modifications after partial payment",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "POS"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "User Story\n\nAs a POS operator, I want the system to block all modifications to a check after the first partial payment is settled so that posting calculations to the guest folio remain accurate and incorrect charges are prevented.\n\nCurrent Behavior\n\nWhen using the HTNG (HotelIFC/Shiji Box) PMS posting interface, a check can be modified after a partial payment has been settled. This can cause calculation discrepancies between the POS check total and the amount posted to the guest folio, resulting in incorrect posting amounts. This issue was observed in support case #1777313 from the EU regional team.\n\nExpected Behavior\n\nAll modifications to a check must be blocked after the first completed payment transaction (including partial tenders, deposits, and pre-authorizations) has been settled. A warning message must be displayed explaining that modifications are not allowed after partial payment, and the action must be prevented. This restriction applies to all user roles with no override or bypass capability.\n\nAcceptance Criteria\n\nBlock all check modifications after first partial payment\n\n- Given the check has at least one completed payment transaction (partial tender, deposit, or pre-authorization) settled against it\n\n- When a user attempts any modification to the check, including but not limited to: adding an item, deleting an item, changing item quantity, applying an item discount, applying a check discount, voiding a discount, changing the cover count, adding an extra charge, voiding an extra charge, changing the price level, overriding an item price, adding a modifier, changing a modifier, splitting the check, merging the check, transferring the check to another table, changing the meal period, or assigning a member\n\n- Then the system displays a warning message: 'Modifications are not allowed after partial payment'\n\n- And the modification action is blocked and no change is applied to the check\n\n- But if the user attempts to add a further payment or complete the remaining balance, the payment action is allowed and proceeds normally\n\nRestriction applies to all user roles with no override\n\n- Given the check has at least one completed payment transaction settled against it\n\n- When a user of any role — including cashier, server, supervisor, and manager — attempts to modify the check\n\n- Then the modification is blocked with the same warning message\n\n- And no override prompt, manager authorization flow, or bypass mechanism is presented or available\n\nPartial payment trigger definition — all completed payment types activate the restriction\n\n- Given the check has no completed payment transactions\n\n- When any of the following payment transactions is completed and settled on the check: a partial tender for any amount, a deposit (via Add Deposit function key), a pre-authorization (via Payment Interface Card Authorization), or a full tender that leaves a remaining balance on a multi-tender check\n\n- Then the check modification restriction is activated immediately upon settlement of that transaction\n\n- And the check enters a locked state for all modification operations\n\n- But if the payment transaction is voided (via Void Payment) before any additional payments are made, the restriction is lifted and modifications are allowed again\n\nRestriction does not apply to checks with no payment or fully paid checks\n\n- Given the check has zero completed payment transactions (no payment has been applied yet)\n\n- Then all modifications to the check are allowed as normal\n\n- And no warning message is displayed\n\n- But if the check has been fully paid and closed (balance reaches zero), the check is already in a closed state and standard closed-check modification rules apply independently\n\nSupporting Evidence\n\nSupport case #1777313 from EU regional team reported incorrect posting amounts when using partial payment with HTNG posting in production.\n\nOriginal Description (preserved by INF Prod. Studio)\n\nEnhancement Details\n\nIf the check is modified after a partial payment has been settled, it may affect the posting calculation and result in incorrect posting amounts.\n\nTo prevent calculation discrepancies, modification of the check should not be allowed after the first partial payment is settled.\n\nUpdated on 10 Aug 2026\n\nUpdate for TBC\n\n- Agree to follow the handling process for unpaid checks after generating a negative check.\n\n- Agree to add a new setup option to enable this feature, which can be configured in the HTNG interface settings.\n\nOriginal Request / Use Case / Background\n\nWe received a support case #1777313 from EU regional team, mentioned about seem when using partial payment with HTNG posting, some related amount is incorrect\n\nTherefore, based on this, we need to think out a solution to fix the related issues",
+        "refinement_notes": "",
+        "release_notes": "Enhancements: [Jira-67376/Epic-67207] POS Interface - HTNG (HotelIFC/Shiji Box) - Block check modifications after partial payment (Yannie)\nDescriptions:\nIt is available for all types of HTNG PMS interface\nSystem support to block user from modifying the check if the check has been partial paid with HTNG PMS interface payment\nWorkflow for open check\n1. Open an old check partially paid with HTNG PMS interface payment\n2. If new setup 1 does not exist or has the value “No”, system follows existing workflow to displays the ordering panel as usual\n3. If the setup 1 has the value “Yes”, the system displays the check review screen with “Print” and “Paid Check” functions\n4. Click button “Print” to print the check and return to table floor plan\n5. Click button “Paid check” to open the check in cashier\nWorkflow for “Split Item To Other Table” / “Split Item With Quantity”\n1. Open an old check\n2. Click function “Split Item To Other Table” or “Split Item With Quantity”\n3. Select the item to be split\n4. Input the table number of the check partially paid with HTNG PMS interface payment\n5. If setup 1 does not exist or has value “No”, system continues existing workflow for split item\n6. If setup 1 has the value “Yes”, system prompt error dialog “Action not allow for check with HTNG PMS payment”\nWorkflow for Split Table\n1. Open an old check\n2. Click function “Split Table”\n3. System shows the confirmation dialog for split table\n4. Click “Yes” to continue split table\n5. System shows the list of available tables\nSystem hides the tables from available tables list if setup 1exists and has the value “Yes”\nSetup:\nFor detailed setup of HTNG PMS interface, please refer to\nInfrasys Cloud POS - HTNG (Shiji Type) PMS Setup and Workflow Document v1.0.0.15\nSetting Show Basic Information In Payment Workflow\nGo to Infrasys Cloud platform: Interface Control  Interfaces\nEdit the target HTNG pms interface record\nFill in the interface setup\n| Field Name | Description | Mandatory |\n| Payment Setting | Payment Setting | Payment Setting |\n| Block Updating Check After Partial Payment (Setup 1) | Block user from modifying the check if the check has been partial paid with HTNG PMS payment  Options provided No (Default value) Yes | No |\nClick “Save” to save the record",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Yumia Tang",
+            "email": "yumia.tang@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Kathy Kuang",
+            "email": "kathy.kuang@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-67008",
+      "sprint_id": "65591",
+      "sprint_name": "POS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-67008_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-67008_20260918_152406.docx",
+      "template": "infrasys",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-67008",
+        "summary": "LPS voucher interface - Triggers void posting incorrectly if fails to redeem payment voucher",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "INTERFACE"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "It is available for LPS voucher interface\n\nSystem triggers the void posting incorrectly if it is fail to redeem payment coupon\n\nSteps to simulate:\n\n1. Open a printed check\n\n2. Click function \"Paid\" to go to cashier\n\n3. Select payment method attached with LPS voucher interface\n\n4. Follow existing workflow to perform coupon enquiry and apply coupon\n\n5. System settle check\n\n6. System triggers external party API for coupon redeem\n\n7. External party returns error message\n\n8. System triggers external party API for void redeem\n\nExpected result:\n\nSystem does not trigger external party API for void redeem if the cause of voiding payment is error from coupon redeem API. System should only trigger external party API for void redeem API if the involved payment needs to be removed but not due to failure of previous coupon redeem API",
+        "refinement_notes": "",
+        "release_notes": "Bug Fixing: [Jira-67008] LPS voucher interface – Triggers void posting incorrectly if fails to redeem payment voucher (Sam)\nDescriptions:\nIt is available for lps_voucher voucher interface\nSystem wrongly triggers void posting after receiving timeout or error from redeem coupon API for its own payment voucher\nWorkflow\n1. Open a printed check\n2. Click function “Paid” to enter cashier panel\n3. Select payment method attached with LPS Voucher voucher interface\n4. Save payment and settle check\n5. System triggers redeem coupon API to external party\n6. External party returns timeout or error\n7. System cannot save the payments, so perform void posting to LPS Voucher voucher interface as rollback\nExpected result:\nThe system should not trigger void posting if the failure of saving payment is caused by redeem coupon API error from LPS Voucher voucher interface\nIt is fixed in current version\nSetup:\nNone",
         "qc_info": {
           "qc_tester": {
             "name": "More Luo",
@@ -73,45 +203,85 @@
       }
     },
     {
-      "issue_key": "HERO-68359",
-      "sprint_id": "65589",
-      "sprint_name": "Platform - 20260907-20260918",
+      "issue_key": "HERO-65106",
+      "sprint_id": "65591",
+      "sprint_name": "POS - 20260907-20260918",
       "sprint_folder": "Sprint20260907-20260918",
-      "output_filename": "HERO-68359_20260916_090609.docx",
-      "output_rel_path": "Sprint20260907-20260918/HERO-68359_20260916_090609.docx",
+      "output_filename": "HERO-65106_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-65106_20260918_152406.docx",
       "template": "infrasys",
-      "is_bug": false,
+      "is_bug": true,
       "requirement": {
-        "key": "HERO-68359",
-        "summary": "HQ - Migrate system_tools functions to admin page (Platform Dev)",
+        "key": "HERO-65106",
+        "summary": "Display Control (Kitchen Display) - Quantity for items with open description modifier increased wrongly after applying pantry message",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
-          "CORE"
+          "POS"
         ],
-        "issue_type": "New Feature",
-        "is_bug": false,
-        "description": "Enhancement Details\n\n- Platform Dev case for https://jira.shijidev.com/browse/HERO-67972\n\nOur major account customer has a security policy that does not allow user account creation for Shiji staff in Infrasys POS HQ to be assigned the Administrator role.\n\nHowever, the local server backend tool (aka system_tools) has a few functions that require users with the \"Administrator\" role; this creates a scenario where the hotel IT needs to temporarily assign the \"Administrator\" role to Shiji support staff to run these functions.\n\nTo move the following functions from system_tools to Infrasys POS admin page\n\n- Recover Sales Data\n\n- Request Export Transaction File in HQ\n\n- Request Data Recovery\n\nThe functions above should be moved into \"POS System > Data In\". They should be available only in the local transaction server's admin page.\n\nThe above functions should also have their corresponding configuration for access control. Under User Management > Access Control > System",
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Wrong quantity shown after applying pantry message on same parent item with open description modifier, or same child item with open description modifier\n\ne.g. for 2 items:\n\nApple Juice, modifier: Drink - Sugar 0%11, quantity: 1\n\nApple Juice, modifier: Drink - Sugar 0%22, quantity: 1\n\nQuantity increased wrongly after selecting pantry messages for them, which became:\n\nApple Juice, modifier: Drink - Sugar 0%11, quantity: 2\n\nApple Juice, modifier: Drink - Sugar 0%22, quantity: 1\n\nSetup\n\n1. Setting action print queue for pantry message\n\n* Location: POS System > Printing Setup> Action Print Queue\n\n* Setup name:  Action Type\n\n> Setting value as \"Pantry Message\"\n\n* Setup name:  Display Mode\n\n> Setting value as \"Combined Items\"\n\n2. Setting pantry message action slip print format\n\n* Location: POS System > Printing Setup> Print Formats\n\n* Setup name: Type\n\n> Setting value as \"Action Slip\"\n\n* Setup name: Item Grouping Method\n\n> Setting value as \"Combine same item to one line\"\n\nWorkflow for item with open description modifier\n\n1. Open new check\n\n2. Order 2 item separately with open description modifiers\n\n3. Enter different description for modifiers\n\n4. Click function \"Send Check\"\n\n5. Check kitchen display screen that displays 2 separate items with correct quantity\n\n6. Back to POS workstation\n\n7. Open the check sent above\n\n8. Click function \"Pantry Message\"\n\n9. Select target pantry message\n\n10. Check kitchen display screen displays incorrect item quantity for first item and only display pantry message for the first item\n\nFor action slip:\n\nSystem wrongly combines the modifiers with different descriptions into 1 item in the printed action slip\n\nExpected result\n\nSystem should show items with pantry message with correct quantity\n\nReferred to above example, system should show:\n\nApple Juice, modifier: Drink - Sugar 0%11, quantity: 1, <Pantry message>\n\nApple Juice, modifier: Drink - Sugar 0%22, quantity: 1, <Pantry message>\n\nSystem should not combine the items and print the items and modifier separately if modifiers are with different descriptions\n\nWorkflow for set menu with child item and child item open description modifier\n\n1. Open new check\n\n2. Order 2 set menu item separately with child item and child item open description modifier\n\n3. Enter different descriptions for child item ** modifiers\n\n4. Click function \"Send Check\"\n\n5. Check kitchen display screen that displays 2 separate set menu item with correct quantity\n\n6. Back to POS workstation\n\n7. Open the check sent above\n\n8. Click function \"Pantry Message\"\n\n9. Select target pantry message\n\n10. Check kitchen display screen displays incorrect item quantity for first set menu item and its child item and only display pantry message for the first set menu item and its child item\n\nFor action slip:\n\nSystem wrongly combines the modifiers of child items with different descriptions into 1 item in the printed action slip\n\nExpected result\n\nSystem should show items with pantry message with correct quantity\n\nReferred to above example, system should show:\n\nSet menu:\n\nTest Set Menu , quantity: 1, <Pantry message>\n\nTest Set Menu , quantity: 1, <Pantry message>\n\nChild item:\n\nApple, modifier: modifier: Drink - Sugar 0%11, quantity: 1, <Pantry message>\n\nApple, modifier: modifier: Drink - Sugar 0%22, quantity: 1, <Pantry message>\n\nSystem should not combine the items and print the set menu items, child items and child item modifiers separately if child items modifiers are with different descriptions",
         "refinement_notes": "",
-        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS Platform Release Notes\nversion 1.2.116.0\nReleased at 04 November 2026\nConfidential and Internal Use Only\nInfrasys POS Platform Release Notes\nversion 1.2.116.0\nTable of Contents\n<<< 1.2.116.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.116.0 | [Jira-68359] HQ - Migrate system_tools functions to admin page (Platform Dev) |\nRelease History\n| Version | Release Date |\n| 1.2.116.0 | 2026-11-04 |\n| Sample :  New Functions :  Enhancements :  Bug Fixing: Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.116.0 >>>\nBug Fixing:[Jira- 68359] HQ - Migrate system_tools functions to admin page (Platform Dev)\nDescription:\nMove the Recover Sales Data function from System tools to the Data In section of the POS system.\nSetup:\nLS POS System->Data In->Sales Data Recovery\nCheck the \"Request Export Transaction File\" and \"Request Data Recovery\" functions,Includes access control and audit logs\nRelease: 20261007 <<< 1.2.116.0>>>\n********************************************************************************",
+        "release_notes": "Bug Fixing: [Jira-65106] Display Control (Kitchen Display) - Quantity for items with open description modifier increased wrongly after applying pantry message (Teresa)\nDescriptions:\nSystem displays the wrong quantity of items after applying pantry message on the same parent item with open description modifier with different description on display control\nSystem wrongly to combine items with open description modifier with different description on action slip\nIt is available for\nItem with different descriptions on modifier\nSet menu Item with child item and different descriptions on child item modifier\nWorkflow\n1. Open a new check or existing check\n2. Order 2 items separately with open description modifiers\n3. Enter different description for modifiers, for example,\nItem 1: Open price item, modifier with open description: Drink – Sugar 0%zz, quantity:1\nItem 2: Open price item, modifier with open description: Drink – Sugar 0%xx, quantity: 1\n4. Click function “Send Check”\n5. Check display control screen that displays 2 separate items with correct quantity\n6. Back to POS workstation\n7. Open the check sent before\n8. Click function “Pantry Message”\n9. Select target pantry message for both items\n10. System wrongly to combine items with open description modifier\nSystem combines 2 items with different open description modifier into an item on action slip\nSystem displays incorrect item quantity for first item and only displays the pantry message for first item on display control\nExpected result:\nSystem does not combine items with different open description modifier into an item on action slip\nSystem displays correct item quantity for first item and displays the pantry message for target items on display control\nIt is fixed in current version\nSetup:\nSetup for action print queue for pantry message\nGo to Infrasys POS platform: POS System à Printing Setup à Action Print Queues\nClick “Add New” to add record OR select existing action print queue\nSelect\nAction Type = Pantry Message\nPrint Format = Target action slip print format\nFill in the remaining details\nClick “Save” to save the record\nSetup for pantry message action slip print format\nGo to Infrasys POS platform: POS System à Printing Setup à Print Formats\nClick “Add New” to add record OR select existing check or receipt format\nSelect the tab “General”\nSelect\nItem Grouping Method = Combine same item to one line / Combine same based on item sorting method 1\nClick “Save” to save the record",
         "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
+          "qc_tester": {
+            "name": "Yannis Liu",
+            "email": "yannis.liu@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Tian Xie",
+            "email": "tian.xie@shijigroup.com"
+          }
         }
       }
     },
     {
-      "issue_key": "HERO-68437",
+      "issue_key": "HERO-65092",
       "sprint_id": "65591",
       "sprint_name": "POS - 20260907-20260918",
       "sprint_folder": "Sprint20260907-20260918",
-      "output_filename": "HERO-68437_20260916_090609.docx",
-      "output_rel_path": "Sprint20260907-20260918/HERO-68437_20260916_090609.docx",
+      "output_filename": "HERO-65092_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-65092_20260918_152406.docx",
+      "template": "infrasys",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-65092",
+        "summary": "Open description modifiers are combined wrongly into same modifier in guest check and receipt",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "POS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Description\n\nIt is available for check and receipt.\n\nSystem wrongly combines open description modifiers with same parent item into same modifier in guest check and receipt\n\ne.g. For 2 items: A (modifier: m111),  A (modifier: m222)\n\nSystem combines them into A (modifier: m111) with quantity 2\n\nSetup\n\n- Setting check or receipt print format\n\n* Location: POS System > Printing Setup> Print Formats\n\n* Setup name: Type\n\n> Setting value as \"Guest check\" or \"Receipt\"\n\n-       * Setup name: Item Grouping Method\n\n> Setting value as \"Combine same item to one line\"\n\nWorkflow\n\n- Open a new check\n\n2. Order 1 new item\n\n3. Order an open description modifier for the above item\n\n4. Enter description for the modifier e.g. a1\n\n5. Order another new item which is same item as step 2\n\n6. Order an open description modifier for the above item\n\n7. Enter different description to step 4 for the modifier e.g. b2\n\n8. Click function \"Print and Paid\"\n\n9. The modifiers with different open description are wrongly combined into one modifier for printed check\n\n10. Follow existing workflow to settle the check by payment\n\n11. Issue same with step 9 happens to printed receipt\n\nExpected result\n\nSystem should not combine the items and print the items in separate lines\n\ne.g. For 2 items: A (modifier: m111),  A (modifier: m222)\n\nSystem should print:\n\nA (modifier: m111)\n\nA (modifier: m222)",
+        "refinement_notes": "",
+        "release_notes": "Bug Fixing: [Jira-65092] POS Printing - Open description modifiers are combined wrongly into same modifier (Iris Lui)\nDescriptions:\nIt is available for guest check and receipt print format\nSystem wrongly combines the modifiers or child items if:\nThe modifiers or child items are the same menu item settings\nThe modifiers or child items belong to parent item from the same menu item settings\nThe item setup “Input Item Name” of the modifiers or child items are set as either one of below and the inputted item names are different:\nAllow to change item name\nAllow to append text after item name\nAllow to append text after item name (By click panel button)\nAllow to change item name and append text after item name\nThe setup “Item Grouping Method” of the target print format is set as “Combine same item to one line” or “Combine same item based on item sorting method 1”\nWorkflow for print check\n1. Open a new check\n2. Order one item with open description modifier or child item, or set menu item with child item open description modifier\n3. Input description for the item\n4. Repeat step 2\n5. Input different item description from step 3 for modifier or child item\n6. Click function “Print and Paid”\n7. System wrongly combines the modifiers or child items or modifiers of child items with different descriptions into 1 item in printed check\nSame modifiers with different descriptions and same child item with different descriptions:\nSame child item modifiers with different descriptions:\nWorkflow for print receipt\n1. Open a printed check which contains either of below:\n2 or more items in same type and each with same type of modifiers but different descriptions\n2 or more items in same type and each with same type of modifiers but different descriptions\n2 or more set menu items in same type and each of their child items are with same type of modifiers but different descriptions\n2. Click function “Paid” to go to the cashier\n3. Select target payment method\n4. Follow existing workflow to settle the check\n5. System wrongly combines the modifiers or child items or modifiers of child items with different descriptions into 1 item in printed receipt, similar to that for printed check above\nExample workflow for action slip (pantry message)\n1. Open a old check which contains either of below:\n2 or more items in same type and each with same modifiers but different descriptions\n2 or more set menu items in same type and their child items are with same modifiers but different descriptions\n2. Click function “Pantry Message”\n3. Select target items which matches the condition mentioned at step 1\n4. Click “Confirm”\n5. System wrongly combines the modifiers or modifiers of child items with different descriptions into 1 item in printed action slip\nSame modifiers with different:\nSame child item modifiers with different descriptions:\nExpected result\nSystem should not combine the items and print the items separately if:\nTheir modifiers are with different descriptions\nTheir child items are with different descriptions\nTheir child items modifiers are with different descriptions\nIt is fixed in current version\nSetup:\nSetup for print format item grouping method\nGo to Infrasys POS platform: POS System  Printing Setup  Print Formats\nClick “Add New” to add record or select existing check or receipt format\nUnder section “Special Settings”, select\nItem Grouping Method = “Combine same item to one line” or “Combine same item based on item sorting method 1”\nClick “Save” to save the record\nSetup for item open description\nGo to Infrasys POS Platform: Menu Management  Item Properties  Items\nClick “Add New” to add a new record or edit an existing record\nSelect tab “General”,\nUnder section “Ordering Control”, select\nInput Item Name = either one of below:\nAllow to change item name\nAllow to append text after item name\nAllow to append text after item name (By click panel button)\nAllow to change item name and append text after item name\nFill in other information\nClick “Save” to save record",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Forrest Lin",
+            "email": "forrest.lin@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Tian Xie",
+            "email": "tian.xie@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-62063",
+      "sprint_id": "65591",
+      "sprint_name": "POS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-62063_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-62063_20260918_152406.docx",
       "template": "infrasys",
       "is_bug": false,
       "requirement": {
-        "key": "HERO-68437",
-        "summary": "POS API - accept API user number as employee id if request mark delivery from Shiji KDS（QA Testing）",
+        "key": "HERO-62063",
+        "summary": "POS Interface - Support for Multiple Advance Orders applied in the same POS check",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
@@ -119,53 +289,176 @@
         ],
         "issue_type": "Improvement",
         "is_bug": false,
-        "description": "Enhancement:\n\nAdd interface code as request parameter in POS mark delivery API.\n\nIf interface = shiji_KDS, the employee id and emlpoyee password will follow the application user number.",
+        "description": "Background:-\n\nThe current system restriction allowing only one deposit (i.e. Advance Order) to be applied to a single check must be removed.\n\nThe system needs to support applying or writing off multiple deposit records on the same check.\n\nExample:\n\nA single check may correspond to multiple deposit entries, and users must be able to write them off individually.\n\n→ This is a common scenario in both operations and financial auditing. If not addressed, it results in incomplete reporting and additional manual reconciliation work.\n\nPlease treat this as a high-priority enhancement and include it in the development plan.\n\nAs-is:-\n\nCurrently only one deposit (i.e. Advance Order) to be applied to a single check in operation\n\nTo-be:-\n\nThe system needs to allow for multiple deposits (i.e. Advance Order) to be applied to a single check",
         "refinement_notes": "",
-        "release_notes": "Enhancements: [Jira-67630/Epic-56913] POS API - accept API user number as employee id if reuest mark delivery from Shiji KDS (Jaylen)\nDescriptions:\nIt is available for Api portal and Shiji KDS interface only\nSystem to use default user defined in interface for the mark delivery function through API portal\nAdd a new field - interface code in Mark Delivery\nThe target Shiji KDS interface needs to be attached in the outlet setting\nSystem overwrites the value of “applieduserno” by the value in “Default API Portal Request User No.”\nIf the value of “Default API Portal Request User No.” is empty, system follows the existing handling to process mark delivery\nIf the value of “Default API Portal Request User No.” is invalid user number, system returns error message\nWorkflow\n1. System receives API portal request for mark delivery\n2. If the new field about interface code exists, go to next step\n3. If “interfacecode” does not exist, follow the existing handling to process mark delivery\n4. If the interface code value is not a Shiji KDS interface. go to step 8\n5. If the interface code value is a Shiji KDS interface, go to next step\n6. If the “Default API Portal Request User No.” value is empty, go to step 8\n7. If the “Default API Portal Request User No.” value is NOT empty, the system will use the value as the “applieduserno” to verify the user, go to step 9\n8. The system will use the “applieduserno” from the request\n9. System validates if the function apply user is a valid user\n10. If it is not a valid user, system follow existing handling to return error message for invalid user\n11. If it is a valid user, system continues to the existing handling of mark delivery\nSetup:\nFor detailed setup of Shiji KDS interface, please refer to “infrasys_cloud_pos_release_note_1_0_104_0(Infrasys Cloud v1.2.104.0).doc”\nEnhancements: [Jira-57492,Jira-57493,Jira-57494,Jira-58836/Epic-56913] POS - New KDS interface\nSetting Default API Portal Request User No.\nGo to Infrasys POS platform: Interface Control à Interfaces\nEdit the target Shiji KDS interface record\nFill in the interface setup\n| Field Name | Description | Mandatory |\n| General Setup | General Setup | General Setup |\n| Default API Portal Request User No. | Default mark delivery API portal request user no. Only available for Mark Delivery function in API Portal | No |\nClick “Save” to save the record",
+        "release_notes": "Enhancements: [Jira-62063/Epic-47408] POS Interface - Support for Multiple Advance Orders applied in the same POS check (Iris Lui)\nDescriptions:\nIt is available for FAS advance order interface\nSystem supports to retrieve multiple advance order returned form external party by function “Retrieve Advance Order” or “Search Advance Order” to same check\nSystem supports multiple values for below printing variables for guest check and receipt with maximum count as 10:\nCheck Advance Order Interface Balance Amount\nCheck Advance Order Interface Fax Number\nCheck Advance Order Interface Customer Name\nCheck Advance Order Interface Customer Phone\nCheck Advance Order Interface Deposit Amount\nCheck Advance Order Interface Deposit Number\nCheck Advance Order Interface Pickup Date\nCheck Advance Order Interface Note1\nCheck Advance Order Interface Note2\nCheck Advance Order Interface Used Amount\nWorkflow for retrieve or search advance order\n1. Open a check\n2. Click function “Retrieve Advance Order” or “Search Advance Order”\n3. Follow existing workflow to search and retrieve target advance order\n4. If any advanced order is retrieved and attached to the check before, system continues retrieving the new advance order and attaching it to the check without any confirmation and process of clearing previously attached advance orders\n5. If no advance order is retrieved and attached to the check before, system follows existing workflow to retrieve the new advance order and attach it to the check\n6. Repeat step 2 to 5 if necessary\n7. Click function “Print and Paid”\n8. Follow existing workflow to settle the check with default payment method specified in interface setup\n9. System triggers external API call “writeOffDeposit” with information of all advance orders retrieved on the check\n10. Follow existing handling to save the check\nSetup:\nSetup for printing variables\nGo to Infrasys POS platform: POS System  Printing Setup  Print Formats\nClick “Add New” to add record OR select existing check or receipt format\nSelect the tab “Print Format”\nAdd the printing variables\n| Printing Variable | Loop belonged to | Available Slip | Description |\n| CheckAdvanceOrderIntfBalanceAmount1~10 | N/A | Guest Check Receipt | Remain balance |\n| CheckAdvanceOrderIntfCustomerFaxNumber1~10 | N/A | Guest Check Receipt | Customer fax number |\n| CheckAdvanceOrderIntfCustomerName1~10 | N/A | Guest Check Receipt | Customer name |\n| CheckAdvanceOrderIntfCustomerPhone1~10 | N/A | Guest Check Receipt | Customer phone |\n| CheckAdvanceOrderIntfDepositAmount1~10 | N/A | Guest Check Receipt | Deposit amount |\n| CheckAdvanceOrderIntfDepositNumber1~10 | N/A | Guest Check Receipt | Deposit number |\n| CheckAdvanceOrderIntfPickupDate1~10 | N/A | Guest Check Receipt | Pickup Date |\n| CheckAdvanceOrderIntfNote11~10 | N/A | Guest Check Receipt | Note 1 |\n| CheckAdvanceOrderIntfNote21~10 | N/A | Guest Check Receipt | Note 2 |\n| CheckAdvanceOrderIntfUsedAmount1~10 | N/A | Guest Check Receipt | Used amount |\nDefine other printing content accordingly\nClick “Save” to save the record\nFor detailed setup of FAS Advance order interface, please refer to “Infrasys_cloud_pos_release_note_1_0_100_0(Infrasys Cloud v1.2.100.0).docx”\nNew Functions: [Jira-47961,Jira-47962,Jira-50457,Jira-50458,Jira-52906,Jira-53395,Jira-53396,Jira-53400,Jira-54327,Jira-54472,Jira-54941/Epic-47408] POS interface - API Integration with FAS Taiwan Deposits System",
         "qc_info": {
           "qc_tester": {
-            "name": "Arsinoe Xie",
-            "email": "arsinoe.xie@shijigroup.com"
+            "name": "Ryan Xie",
+            "email": "ryan.xie@shijigroup.com"
           },
           "qc_reviewer": {
-            "name": "Kiet Zou",
-            "email": "kiet.zou@shijigroup.com"
+            "name": "Eric Fang",
+            "email": "eric.fang@shijigroup.com"
           }
         }
       }
     },
     {
-      "issue_key": "HERO-67817",
+      "issue_key": "HERO-44937",
       "sprint_id": "65591",
       "sprint_name": "POS - 20260907-20260918",
       "sprint_folder": "Sprint20260907-20260918",
-      "output_filename": "HERO-67817_20260916_090609.docx",
-      "output_rel_path": "Sprint20260907-20260918/HERO-67817_20260916_090609.docx",
+      "output_filename": "HERO-44937_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-44937_20260918_152406.docx",
       "template": "infrasys",
       "is_bug": false,
       "requirement": {
-        "key": "HERO-67817",
-        "summary": "POS - Allow KDS to trigger POS mark delivery for printing - Dev(QA Testing)",
+        "key": "HERO-44937",
+        "summary": "POS Feature - Enable \"Item Reminder\" on mobile/ workstation view (Dev)",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
-          "API Portal",
           "POS"
         ],
-        "issue_type": "New Feature",
+        "issue_type": "Improvement",
         "is_bug": false,
-        "description": "",
+        "description": "Enhancement details\n\n- Support below function keys on mobile/ workstation view (Day and Night Mode)\n\n- Item reminder\n\n- Follow layout design mockup\n\n- 44937-Design-V1.zip\n\n- Design specification-v1.zip\n\nUpdate on 22 Sep 2025\n\nAnswer TBC\n\n- Use pagination\n\n- Cart icon and Day picker design find in the document:\n\nDesign-Day picker.zip\n\nOriginal Request / Use Case / Background\n\nWhen using Mobile Portait mode, system not support Item Remind Rules, all the pre-defined rules will not be trigger, this need to enahnce.",
         "refinement_notes": "",
-        "release_notes": "Enhancements: [Jira-67146/Epic-60066] POS - Allow KDS to trigger POS mark delivery for printing - Dev (Jaylen)\nDescriptions:\nIt is available for Api portal\nSystem supports a new API request for mark delivery for Shiji KDS interface usage\nUse existing API Cloud logic to let Shiji KDS interface to trigger the mark delivery action\nOnly available for old items\nSupport multiple items in one request\nSystem support mark delivery for all items of a check when no items are given in the request\nSystem supports a new action print queue for mark delivery\nIt is available for API portal only, not required to support normal POS workstations\nWorkflow for API portal\n1. System receives API portal request for mark delivery\n2. If target table is not occupied, system returns the error message and action abort\n3. If target table is locked by others, system return existing error message and action abort\n4. Open target table\n5. System validate is any Shiji KDS interface attached outlet\n6. If Shiji KDS interface is attached, system uses the provided internal check item ID to identify the target item\n7. If Shiji KDS interface NOT attached, system use the item unique key (related to setup 1) to identify the target item\n8. System verify whether the corresponding item exists in check or not\n9. If the corresponding item is not found, the system skips this item and goes to step 13\n10. If the corresponding items of the provided the item unique keys are found, go to step 11\n11. If the corresponding items marked as delivered previously, treats as failed item for step 15, the system skips this item and goes to step 13\n12. If the corresponding item is NOT marked as delivered, system marks it as delivered\n13. Back to step 8 for next item OR go to step 14 if it is last item\n14. If setup 2 exists, system prints the slip mark delivery action slip\nSystem ignores the record of setup 2 with value set as “Mark Delivery” as this is for normal workstation only\n15. If any items are successfully marked as delivered, the system returns a successful response\nIf there are items that fail to be marked as delivered, the system returns the successful response with failed items and the corresponding reasons\n16. If all items fail to be marked as delivered, the system returns an error response\nSetup:\nFor detailed setup of Shiji KDS interface, please refer to “infrasys_cloud_pos_release_note_1_0_104_0(Infrasys Cloud v1.2.104.0).doc”\nEnhancements: [Jira-57492,Jira-57493,Jira-57494,Jira-58836/Epic-56913] POS - New KDS interface\nSetup for action print queue\nGo to Infrasys POS platform: POS System à Printing Setup à Action Print Queues\nSelect\nAvailable in Locations = Target shop or outlet\nAction Type = Target action type for mark delivery (Api Portal)\nPrint Format = Target print format\nClick “Save” to save record\nSetup for “Item References Settings” under Config by Location\nGo to Infrasys POS platform: POS System à Ordering Setup à Config by Location\nSelect setup “Item References Settings”\nClick “Add New” to add new record or edit existing record\nSelect\nApply To = Target location\nAll Locations = For all locations\nShop = For a specific shop\nOutlet = For a specific outlet\nStation = For a specific station\nShop = Target shop (available only if “Shop” is chosen in the row “Apply To”)\nOutlet = Target outlet (available only if “Outlet” is chosen in the row “Apply To”)\nStation = Target station (available only if “Station” is chosen in the row “Apply To”)\nEnable API portal generate item unique key = Yes (Setup 1)\nClick “Save” to save record",
+        "release_notes": "Enhancements: [JIRA-44937/Epic-59882] POS Feature - Enable “Item Reminder” on mobile/workstation view (Dev) (Andy)\nDescriptions:\nSystem supports new Day / Night mode UI for function “Item Reminder”\nNight mode is not supported in horizontal view\nThe function is available for both horizontal desktop view and vertical mobile view\nNew UI under day mode and night mode\nHorizontal view\n| Layouts | Day/Night Mode |\n| Item Reminder Page (Item list and Ordered item) |  |\nVertical view\n| Layouts | Day Mode | Night Mode |\n| Item Reminder Page (Item list) |  |  |\n| Item Reminder Page (Ordered item) |  |  |\nWorkflow for function “Item Reminder” in horizontal view\n1. Open a table\n2. Click function “Send Check”, “Print Check” or “Print And Paid” (depends on Show Reminder Settings)\n3. System follows existing behavior to retrieve the unsatisfied active Item Remind rules\n4. If any unsatisfied force to order rules exist, go to step 5. If not, go to step 9\n5. System shows the Item Reminder page and the ordering basket, with button “Send Or Print Check” and section “Must Select”\n6. Click the cart icon of the target item\n7. System adds the target item to the ordering basket\n8. Click button “Send Or Print Check” and go to step 3\n9. If any unsatisfied suggest to order rules exist, go to step 10. If not, go to step 14\n10. System shows the Item Reminder page with button “Ignore And Send” and section “Advice To Select”\n11. Click the cart icon of the target item\n12. System adds the target item to the ordering basket\n13. Click button “Ignore And Send”\n14. System follows existing behavior to continue the function\nWorkflow for function “Item Reminder” in vertical mobile view\n1. Open a table\n2. Click function “Send Check”, “Print Check” or “Print And Paid” (depends on Show Reminder Settings)\n3. System follows existing behavior to retrieve the unsatisfied active Item Remind rules\n4. If any unsatisfied rules exist, the system shows the Item Reminder page and a button to switch between item list and ordering basket\nClick button “Ordered Item”, system shows the ordering basket\nClick button “Item List”, system shows the item list of the rule\n5. If any unsatisfied force to order rules exist, go to step 6. If not, go to step 10\n6. System shows the Item Reminder page with button “Send Or Print Check” and section “Must Select”\n7. Click the cart icon of the target item\n8. System adds the target item to the ordering basket.\n9. Click button “Send Or Print Check” and go to step 3\n10. If any unsatisfied suggest to order rules exist, go to step 11. If not, go to step 15\n11. System shows the Item Reminder page with button “Ignore And Send” and section “Advice To Select”\n12. Click the cart icon of the target item\n13. System adds the target item to the ordering basket\n14. Click button “Ignore And Send”\n15. System follows existing behavior to continue the function\nSetup:\nSetup Item Remind Rules\nGo to Infrasys POS platform: POS System  Ordering Setup  Item Remind Rules\nClick “Add New” to add a new record or edit an existing record\nSelect\nAvailable in Locations = Target Shop or Outlet\nItem / Menu = Item or menu type the rule applies to\nAvailable Options = Target item or menu the rule applies to\nSuggestion = Suggest to Order / Force to Order\nFill in the remaining details\nClick “Save” to save the record",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-67779",
+      "sprint_id": "65590",
+      "sprint_name": "Report - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-67779_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-67779_20260918_152406.docx",
+      "template": "report",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-67779",
+        "summary": "Report - New - Menu Item Sale Report (with Employee Details)",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "User Story\n\nAs a restaurant manager, I want a new custom Menu Item Sale Report derived from POS153 that adds Employee Name and Reference columns, defaults Show Cost and Show Table Number to selected, and provides a Revenue/Non-Revenue filter, so that I can analyze menu item sales with employee and payment detail for Narendra Bhawan Bikaner.\n\nCurrent Behavior\n\nThe existing Menu Item Sale Report (POS153) does not include Employee Name or Reference columns. The \"Show Cost\" and \"Show Table No\" parameters are unticked by default and must be manually selected each time. There is no Revenue/Non-Revenue parameter, so the report cannot filter transactions by revenue classification.\n\nExpected Behavior\n\nA new custom report, \"Menu Item Sale Report (with Employee Details)\", is created as a separate report entry based on POS153. It retains the existing POS153 structure, columns, and reporting logic, with the following enhancements:\n\n- Adds an \"Employee Name\" column showing the employee/user who closed the bill for every transaction, regardless of payment type.\n\n- Adds a \"Reference\" column showing the pay reference manually entered by the operator at bill closure, populated for all payment types.\n\n- \"Show Cost\" and \"Show Table Number\" parameters are selected by default.\n\n- Adds a \"Revenue/Non-Revenue\" parameter with options All / Revenue / Non-Revenue / Revenue+Non-Revenue / Advance Order, defaulting to All. When a specific option is selected, only the matching transactions are shown.\n\n- The new columns appear in both the on-screen report and any exported file formats.\n\n- The existing POS153 report remains unchanged.\n\nAcceptance Criteria\n\nNew custom report created\n\n- Given the report list is opened\n\n- When the new custom report 'Menu Item Sale Report (with Employee Details)' is accessed\n\n- Then a separate report entry exists based on POS153 with its structure, columns, and reporting logic retained\n\n- And the existing POS153 Menu Item Sale Report remains unchanged\n\nEmployee Name and Reference columns\n\n- Given the new custom report is run\n\n- When the report output is generated\n\n- Then an 'Employee Name' column displays the employee/user who closed the bill for every transaction regardless of payment type\n\n- And a 'Reference' column displays the pay reference manually entered by the operator at bill closure for all payment types\n\n- And both new columns appear in the on-screen report and any exported file formats\n\n- But if no employee was selected at bill closure, the Employee Name column is blank rather than showing an error or incorrect value\n\n- But if no reference was manually entered at bill closure, the Reference column is blank rather than showing an error or incorrect value\n\nDefault parameter selection\n\n- Given the new custom report is opened\n\n- When the report parameters are displayed\n\n- Then 'Show Cost' is selected by default\n\n- And 'Show Table Number' is selected by default\n\nRevenue/Non-Revenue parameter\n\n- Given the new custom report is opened\n\n- When the Revenue/Non-Revenue parameter is viewed\n\n- Then the parameter offers options All / Revenue / Non-Revenue / Revenue+Non-Revenue / Advance Order\n\n- And the default selection is All\n\nRevenue/Non-Revenue filtering\n\n- Given the Revenue/Non-Revenue parameter is set to a specific option other than All\n\n- When the report is run\n\n- Then only matching transactions are included in the report output\n\n- And Revenue transactions are identified where Non Revenue Payment = NO\n\n- And Non-Revenue transactions are identified where Non Revenue Payment = YES\n\n- But if the parameter is set to All, both Revenue and Non-Revenue transactions are included\n\n- But if a transaction's payment method has no Non Revenue Payment configuration, it is excluded from Revenue and Non-Revenue filtered results\n\nSupporting Evidence\n\nPOS153 – Menu Item Sale Report (base report)\n\nPOS114 – Detail Check Report (with Items) – provides field mapping reference for Payment Employee Name and Pay Reference columns\n\nRequested Timeline\n\nAligned with Priority: Medium\n\nPreferred Quarter: Q4\n\nNotes: Custom report requested for Narendra Bhawan Bikaner (AP region). No hard deadline specified.\n\nAlternatives Considered\n\nEnhancing the existing POS153 report directly was considered, but rejected in favor of keeping POS153 as-is and adding a completely new separate report entry.\n\nOriginal Description (preserved by INF Prod. Studio)\n\nEnhancement Details\n\n- CUS Report: Menu Item Sale Report (with Employee Details)\n\n- based on POS153\n\n- Add column 'Employee Name': Employee/User who close the bill (refer to POS114)\n\n- Add column 'Reference': Pay Reference (refer to POS114)\n\n- Parameters 'Show Cost' & 'Show Table Number' default tick\n\n- Add new parameter 'Revenue/Non Revenue', default 'All'\n\n_______________________________________________________________________________________________\n\nSummary\n\nCreate a new Custom Report for Narendra Bhawan Bikaner, derived from the existing Menu Item Sale Report (POS153).\n\nThe report should retain the existing POS153 structure, columns, and reporting logic, with the following enhancements:\n\nCUS Report Name : Menu Item Sale Report (with Employee Details)\n\n1. New Columns\n\nAdd the following two columns to the report:\n\n| Column\n| Requirement\n\n| Employee Name\n| Display the employee/user selected while closing the bill when the Payment Type = Duty Meal.\n\n| Reference\n| Display the reference manually entered by the operator while closing the bill.\n\nThese two fields are already available in POS114 – Detail Check Report (with Items) Column (Payment Employee Name, Pay Reference) and can be used as a reference for the required data and field mapping.\n\n2. Report Parameters – Default Selection\n\nIn the existing POS153 report \"Show Cost\" and \"Show Table No\" field exist but remain untick until user manually select it.\n\nIn the new custom report parameters, the following options should be selected by default:\n\n- Show Cost\n\n- Show Table Number\n\n3. Revenue / Non-Revenue Parameter\n\nExisting POS153 parameter does not have selection of Revenue / Non-Revenue.\n\nIn new custom report add a parameter to allow the user to select between Revenue and Non-Revenue transactions. The report should segregate transactions based on the Non Revenue Payment configuration under the payment method:\n\n- Revenue: Non Revenue Payment = NO\n\n- Non-Revenue: Non Revenue Payment = YES\n\nThe selected parameter should determine which transactions are included in the report output.\n\nSample Screenshot\n\n6. Acceptance Criteria\n\n- New custom report is created based on POS153.\n\n- Employee Name and Reference columns are added and populated with the correct transaction-level data.\n\n- Employee Name is displayed based on the employee/user selected during bill closure for Duty Meal payments.\n\n- Reference displays the value manually entered by the operator during bill closure.\n\n- Show Cost and Show Table Number are selected by default in report parameters.\n\n- Revenue/Non-Revenue selection is available as a report parameter.\n\n- Revenue transactions are identified where Non Revenue Payment = NO.\n\n- Non-Revenue transactions are identified where Non Revenue Payment = YES.\n\n- Existing POS153 report logic and columns remain unchanged apart from the requested enhancements.",
+        "refinement_notes": "",
+        "release_notes": "Improvement: [Jira- 67779] CUS381 Report - New - Menu Item Sale Report (with Employee Details).\nDescriptions:\nCUS381\nCUS Report: Menu Item Sale Report (with Employee Details) based on POS153\nAdd column 'Employee Name': Employee/User who close the bill\nAdd column 'Reference': Pay Reference (refer to POS114)\nParameters 'Show Cost' & 'Show Table Number' default tick\nAdd new parameter 'Revenue/Non Revenue', default 'All'\nConfiguration / Parameter:\nField Definition:",
         "qc_info": {
           "qc_tester": {
-            "name": "Kiet Zou",
-            "email": "kiet.zou@shijigroup.com"
+            "name": "Yumia Tang",
+            "email": "yumia.tang@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Kathy Kuang",
+            "email": "kathy.kuang@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-58596",
+      "sprint_id": "65590",
+      "sprint_name": "Report - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-58596_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-58596_20260918_152406.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-58596",
+        "summary": "POS240 Revenue Report (By Station) | Unusual rounding issues and optimize loading performance",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Ticket ID: #1438109\n\nSubject: [CHILD-Ticket] #1250010 |  Report - Explanation Required - Rounding DOHCL\n\nDepartment: Infrasys Support\n\nURL: https://support-intl.shijigroup.com/agent/shijigroupintl/infrasys-support/tickets/details/255139000755222113\n\n- Unexpected rounding\n\n- Below are some of the slow queries identified in the report.",
+        "refinement_notes": "",
+        "release_notes": "Improvement: [Jira-58596] POS240 Revenue Report (By Station) | Unusual rounding issues and optimize loading performance\nDescriptions:\nOptimize the running speed of POS240 Revenue Report (By Station),\nFix the rounding error issue.\nConfiguration / Parameter:\nResult / Sample:\nafter fix",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Kathy Kuang",
+            "email": "kathy.kuang@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Niko Xie",
+            "email": "niko.xie@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-68901",
+      "sprint_id": "75475",
+      "sprint_name": "TMS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-68901_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-68901_20260918_152406.docx",
+      "template": "infrasys",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-68901",
+        "summary": "TMS 2.0 - Revert the durable to false when send message to RabbitMQ",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "It is found that the changed for the queue is correct, but until the MQ upgrade, the queue cannot send message as the queue behavior is different.\n\nSolution:\n\nSet back the durable to false until the MQ version upgrade.",
+        "refinement_notes": "",
+        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS TMS Release Notes\nversion 1.2.115.0\nReleased on 7th Oct 2026\nConfidential and Internal Use Only\nInfrasys POS TMS Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| V1.2.115.0 | [Jira-68901] TMS 2.0 - Revert the durable to false when send message to RabbitMQ |\nRelease History\n| Version | Release Date |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nEnhancements: [Jira-68901] TMS 2.0 - Revert the durable to false when send message to RabbitMQ\nDescriptions:\nIt is found that the changed for the queue is correct, but until the MQ upgrade, the queue cannot send message as the queue behavior is different.\nSolution:\nSet back the durable to false until the MQ version upgrade.\nSetup:\nBefore testing, please ensure the websoclet is connected.\nThe testing need to test both HKJC and TMS environment, and with two browsers.\nTest in TMS environment first, one browser go to new booking page and the other go to current page. Select the period and table in new booking page, the browser in current view should lock the selected table with the same period, outlet and date.\nElse, if unselect the table, the table lock icon will also disappear.\nNow try to make the booking.\nWhen the booking is successfully made, the other browser should update and show in the current view.\nNow please test quick table change.\nAfter table quick change, the other browser should update the table number.\nNow please test the mark arrival with POS.\nClick the mark arrival icon to do the mark arrival.\nIt should success and both operation and POS will change color.\nRelease: 20261007 < 1.2.115.0>>>\n********************************************************************************",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Johnson Liu",
+            "email": "johnson.liu@shijigroup.com"
           },
           "qc_reviewer": {
             "name": "Alisa Chen",
             "email": "alisa.chen@shijigroup.com"
           }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-68148",
+      "sprint_id": "75475",
+      "sprint_name": "TMS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-68148_20260918_152406.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-68148_20260918_152406.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-68148",
+        "summary": "HKJC - TMS - Support setting up Reservation Listing Columns by User in frontend - Dev - 2/2",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "20260729 Update: Comments on HERO-64805 Study Result (20260805 further updated)\n\n- UI design Method B\n\n- Merge \"Current\" & \"Calendar\"\n\n- Sequence of tabs follow as-is sequence at TBL frontend, i.e. Pending, Waitlist, Host Arrived, Guest Arrived, No Show, Cancelled, All\n\n- Add Copy function: allow copy the column arrangement to other tabs, e.g. from Pending to Host Arrived + Guest Arrived + No Show\n\n- Suggest to add \"Copy\" function button and let user select copy to which tab(s) (only to those allow to copy to)\n\n- (20260805 supplement) The seven tabs can be divided into 3 sets, each set having the same columns, expect allow to copy between tabs within each set.\n\n- Set 1: Pending, Host Arrived, Guest Arrived, No Show\n\n- Set 2: Waitlist\n\n- Set 3: Cancelled, All\n\n- (20260805 updated) Default select ALL the tabs allow to copy to (within the set)\n\n- (20260805 updated) Copy function also support to copy between Search View and Member View\n\n- \"Hide\" and \"Unhide\" function instead of remove and add columns: Use \"Hide\"/\"Unhide\" button to set the columns that don't want to display. In the Edit Column dialog, if click \"Hide\" to a column, turn it to grey and show \"Unhide\" button. After save, the hidden columns will put to the bottom of the list.\n\n- (20260805 supplement) Mandatory column is not necessary. But to avoid hiding all columns, add checking and IF all columns are hidden, prompt alert when save, \"Please select to show at least 1 column.\"\n\n20260518 Updated:\n\nQuestion:\n\n1, It is save the setting under browser can meet the requirement? can you give some use case for it? **\n\n2, Is it only by user or user group can meet the requirement?\n\n20260504 Update:\n\nThis study case focus on Option 1, save columns setup by user account.\n\n- Current View / Calendar View: need to save different sets for different pages (Pending, Waitlist, Host Arrived, etc...)\n\n- Search View: one set of columns\n\n- Member View: one set of columns\n\n- Save by user account. Can show in backend or not. Expect not editable in backend though.\n\n- List all column headers for drag and drop rearrangement (No need to +/-)\n\n- Set hide/show columns OR  Idea: Function key to put unwanted columns at the last\n\n- Have a default list of columns headers\n\n- Suggest solution if adding new columns in the future\n\nFor HKJC HK,\n\nBackground\n\nCurrently the columns in reservation listing in Current/Calendar/Search/Member Views are with global default. Different outlets/users, however, will have different preferences for columns and sorting.\n\nRequirement\n\nTo add a configuration to set up which columns to show in reservation listing, and sorting.\n\nOption 1: By User\n\n- Suggestion: in the front or end of the reservation list, add a \"Save Columns Set\" button\n\n- User can drag and drop to rearrange columns (as-is)\n\n- When User clicks \"Save Columns Set\" button, system save the current columns and sorting into user profile\n\n- By Views and page (Current View - Pending page has different set from Current View - Waitlist page)\n\nOption 2: By Outlet Type\n\n- Backend TMS --> Config by Location --> add config to set up Reservation Listing's columns and sorting (reference from TMS 2.0 \"Reservation List's Headers on Current/Calendar View\")\n\n- Support config by Outlet Type (7 Day Outlet VS Race Day Outlet)\n\n- \"Reservation List's Headers on Current/Calendar View (for HKJC)\"\n\n- \"Reservation List's Headers on Search View (for HKJC)\"\n\n- \"Reservation List's Headers on Member View (for HKJC)\"\n\n- Need to consider \"Pending\", \"Waitlist\", \"Host Arrived\", etc. differences.",
+        "refinement_notes": "",
+        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS HKJC Release Notes\nversion 1.2.115.0\nReleased on 7th Oct 2026\nConfidential and Internal Use Only\nInfrasys POS HKJC Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.115.0 | [Jira-67950] Fixing undefined array key issues on PHP 8 (Owner Box Waitlist user + period oper_id) |\nRelease History\n| Version | Release Date |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nBug Fixing : [Jira-68148] HKJC - TMS - Support setting up Reservation Listing Columns by User in frontend - Dev - 2/2\nDescriptions:\nFor HKJC HK,\nBackground\nCurrently the columns in reservation listing in Current/Calendar/Search/Member Views are with global default. Different outlets/users, however, will have different preferences for columns and sorting.\nRequirement\nTo add a configuration to set up which columns to show in reservation listing, and sorting.\nOption 1: By User\nSuggestion: in the front or end of the reservation list, add a \"Save Columns Set\" button\nUser can drag and drop to rearrange columns (as-is)\nWhen User clicks \"Save Columns Set\" button, system save the current columns and sorting into user profile\nBy Views and page (Current View - Pending page has different set from Current View - Waitlist page)\nSetup:\nStep 1: Test the normal flow\n\nGo to HKJC operation  Click the Settings (gear) menu and select Custom Header.\nThe Reservation List - Edit Columns dialog opens.\nDrag a column (for example First Name) to a new position.\n(Optional) Click Copy to, keep the other status tabs selected (Host Arrived / Guest Arrived / No Show), then Confirm.\nWaitlist has no Copy button; Cancelled / All is a separate copy set.\nClick Save. The dialog closes.\nReturn to Current View → Pending.\nConfirm the column order matches the change, and the hidden column is gone.\nSwitch to Host Arrived (if you used Copy to).\nConfirm the same column set appears.\nOpen Search (or Member), then reopen Custom Header.\nSwitch to the Search tab, hide or reorder a column, Save, then open Search view and confirm the list follows the new headers.\nCheckbox / Edit / Duplicate stay on the list and cannot be edited in Custom Header\nReset check (optional): reopen Custom Header → Reset to Default on that tab → Save. The list returns to the original columns for that tab only.\nIn search view (example) reset to default\nNotes for testing:\nCurrent View and Calendar View share the same column settings.\nColumns marked (*) can still be hidden by the reservation list itself; at least one column without (*) must stay visible before Save.\nSettings are per user. Another login should still see the original columns.\nStep 2: Test the special fields\nCase 1: `waitlist_preference` — Race Day + waitlist quota\n\nSelect a Race Day outlet (outletType = s) with waitlist quota control on\nCustom Header → Waitlist (also test Cancelled / All) → keep Waitlist Preference visible → Save.\nCurrent View, same outlet → Waitlist (or Cancelled / All).\nExpect: Waitlist Preference is on the list\n\n\n.\nCase 2: Round No. (owner box / isHorseOwnerSyndicate only)\nSelect an owner-box / horse-owner syndicate outlet (in admin setting, see picture below)\nCustom Header → Waitlist → keep Round No. visible → Save.\nCurrent View, same outlet → Waitlist\nExpect: Round No. is on the list.\nCase 3: Preference (tab only; not Race Day)\nAny outlet (7-Day or Race Day)\nCustom Header → Waitlist (also Cancelled, All) → keep Preference visible → Save.\nCurrent View → Waitlist / Cancelled / All\nExpect: Preference (Table Size Wait For) is on the list. Race Day is irrelevant.\nCase 4: Priority\nOnly in the Waitlist pool. so Waitlist does not mark *. Other Current/Calendar tabs do not include Priority.\nCustom Header → Waitlist → keep Priority visible → Save.\nCurrent View → Waitlist\nExpect: Priority is on the list.\nCase 5: PDR Table / Priority Booking Table / Disallow App Cancel·Amend\nThese three are not in the Waitlist pool (Custom Header Waitlist does not list them). They are in Pending / Host / Guest / No Show / Cancelled / All and Search / Member, and are not marked * there\nCustom Header → Pending (also Cancelled or All) → keep all three visible → Save.\nCurrent View → Pending (or Cancelled / All).\nExpect: PDR Table, Priority Booking Table, and Disallow App Cancel/Amend are on the list.\nOn Race Day the cell may show No; the column still appears.\nStep 3: Columns marked (*) can be hidden by the reservation list and do not count as the required\n***Note\nUser must show (not hide) at least one normal header (not marked as (*))\nCase 1: Display at least one header that is not marked with an asterisk (*).\nExpect: Can save the header list and will not show the alert popup\nCase 2: Display none header that is not marked with an asterisk (*).\nExpect: Click `Save` will show the alert popup\nRelease: 20261007 < 1.2.115.0>>>\n********************************************************************************",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
         }
       }
     }
