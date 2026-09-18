@@ -1,0 +1,30 @@
+{
+  "issue_key": "HERO-67550",
+  "template": "report",
+  "is_bug": false,
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_filename": "HERO-67550_20260918_174348.docx",
+  "output_rel_path": "Sprint20260907-20260918/HERO-67550_20260918_174348.docx",
+  "requirement": {
+    "key": "HERO-67550",
+    "summary": "InterfaceApiSalesEnquiryBirchStreetComponent : Performance Optimization",
+    "status": "READY FOR QA",
+    "template": "report",
+    "components": [],
+    "issue_type": "Improvement",
+    "is_bug": false,
+    "description": "1.Performance Optimization\n\n2.Log Enhancement",
+    "refinement_notes": "",
+    "release_notes": "",
+    "qc_info": {
+      "qc_tester": {
+        "name": "Niko Xie",
+        "email": "niko.xie@shijigroup.com"
+      },
+      "qc_reviewer": {
+        "name": "Zoey Xie",
+        "email": "zoey.xie@shijigroup.com"
+      }
+    }
+  }
+}

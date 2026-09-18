@@ -1,0 +1,26 @@
+{
+  "issue_key": "HERO-68130",
+  "template": "report",
+  "is_bug": false,
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_filename": "HERO-68130_20260918_174348.docx",
+  "output_rel_path": "Sprint20260907-20260918/HERO-68130_20260918_174348.docx",
+  "requirement": {
+    "key": "HERO-68130",
+    "summary": "Report - Add Syndicate Owner Indicator field into TMS035 Waiting List Report (Owner Box) Report",
+    "status": "READY FOR QA",
+    "template": "report",
+    "components": [
+      "REPORTS"
+    ],
+    "issue_type": "Improvement",
+    "is_bug": false,
+    "description": "Background\n\nSyndicate Owner Indicator field is added to TMS reservation record (ref. HERO-64070, HERO-67705). It is also needed to show in several reports.\n\nRequirement\n\nIn the 10 reports below,\n\n| TMS009 Special Booking List (By Outlet)\n\n| TMS015 Pre-Race Booking List\n\n| TMS016 Post-Race Booking List\n\n| TMS020 Waiting List Report\n\n| TMS022 Master Pre-Race Booking List\n\n| TMS024 Waiting List Extraction\n\n| TMS025 Unsuccessful Waiting List Report (By Outlet)\n\n| TMS035 Waiting List Report (Owner Box)\n\n| TMS037 Master Pre-Race Booking List with Contact Information\n\n| TMS039 Override Date Limitation for Advance Booking\n\nTo add \"Syndicate Owner Indicator\" field on the LEFT of \"Syndicate Owner” field.\n\ne.g.\n\nNote: DB field is hkjc_resv_members: rmem_syndicate_owner_indicator (Please confirm with TMS team)",
+    "refinement_notes": "",
+    "release_notes": "",
+    "qc_info": {
+      "qc_tester": null,
+      "qc_reviewer": null
+    }
+  }
+}

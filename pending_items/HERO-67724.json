@@ -1,0 +1,30 @@
+{
+  "issue_key": "HERO-67724",
+  "template": "report",
+  "is_bug": false,
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_filename": "HERO-67724_20260918_174348.docx",
+  "output_rel_path": "Sprint20260907-20260918/HERO-67724_20260918_174348.docx",
+  "requirement": {
+    "key": "HERO-67724",
+    "summary": "POS Export - SUN Cover Export v2 Support TXT Export Format",
+    "status": "READY FOR QA",
+    "template": "report",
+    "components": [],
+    "issue_type": "Improvement",
+    "is_bug": false,
+    "description": "Background / Current Situation\n\nThe SUN cover v2 (sun_cover_account_v2_export) currently supports export in NDF format only.\n\nFor Swire Hotels, the exported file is required in TXT format. At present, the NDF file has to be manually converted to TXT before it can be used.\n\nRequirement\n\nEnhance the SUN POS Export Program to support selection of the export file format.\n\nIn the Export File Setup section, add a new Export File Format option with the following selections:\n\n- NDF – Default\n\n- TXT\n\nThe default value should remain NDF to maintain the current system behavior and compatibility with existing customers.\n\nWhen TXT is selected, the export program should generate the export file in TXT format accordingly.\n\nAcceptance Criteria\n\n- A new Export File Format selection is available in the SUN POS Export Program configuration.\n\n- The available options are NDF and TXT.\n\n- NDF is selected by default.\n\n- When NDF is selected, the existing export behavior remains unchanged.\n\n- When TXT is selected, the exported file is generated in TXT format.\n\n- No other existing export logic or configuration is affected.",
+    "refinement_notes": "",
+    "release_notes": "",
+    "qc_info": {
+      "qc_tester": {
+        "name": "Zephyr Ji",
+        "email": "zephyr.ji@shijigroup.com"
+      },
+      "qc_reviewer": {
+        "name": "Kathy Kuang",
+        "email": "kathy.kuang@shijigroup.com"
+      }
+    }
+  }
+}

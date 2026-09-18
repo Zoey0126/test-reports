@@ -1,0 +1,32 @@
+{
+  "issue_key": "HERO-65765",
+  "template": "report",
+  "is_bug": true,
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_filename": "HERO-65765_20260918_174348.docx",
+  "output_rel_path": "Sprint20260907-20260918/HERO-65765_20260918_174348.docx",
+  "requirement": {
+    "key": "HERO-65765",
+    "summary": "POS056 Detail Check Payment - optimize loading performance",
+    "status": "READY FOR QA",
+    "template": "report",
+    "components": [
+      "REPORTS"
+    ],
+    "issue_type": "Bug",
+    "is_bug": true,
+    "description": "",
+    "refinement_notes": "",
+    "release_notes": "",
+    "qc_info": {
+      "qc_tester": {
+        "name": "Jacqueline Wei",
+        "email": "jacqueline.wei@shijigroup.com"
+      },
+      "qc_reviewer": {
+        "name": "Eric Fang",
+        "email": "eric.fang@shijigroup.com"
+      }
+    }
+  }
+}
