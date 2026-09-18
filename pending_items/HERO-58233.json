@@ -1,0 +1,26 @@
+{
+  "issue_key": "HERO-58233",
+  "template": "infrasys",
+  "is_bug": false,
+  "sprint_folder": "Sprint20260907-20260918",
+  "output_filename": "HERO-58233_20260918_174348.docx",
+  "output_rel_path": "Sprint20260907-20260918/HERO-58233_20260918_174348.docx",
+  "requirement": {
+    "key": "HERO-58233",
+    "summary": "POS - Training Mode - Relocate switch training mode to Admin page in Operation screen (dev)",
+    "status": "READY FOR QA",
+    "template": "infrasys",
+    "components": [
+      "POS"
+    ],
+    "issue_type": "Improvement",
+    "is_bug": false,
+    "description": "Enhancement Details\n\nStudy of https://jira.shijidev.com/browse/HERO-42353\n\ncurrent training mode entrance is in workstation configuration page, normally such page is only accessable by IT or Shiji support, outlet manager may need to arrange training at any time without rely on IT support , the function key need to move to manager screen and apply user rights control.\n\nadd function key to allow user enter the training mode at production manager screen, if this workstation no training server configed or invalid URL, show error message\"can not find valid training server setting, please check with system administrator\".\n\nadd function key to allow user exit the training mode at training mode manager screen\n\nabove 2 function keys need user rights control and record operation history into audit or action logs.",
+    "refinement_notes": "",
+    "release_notes": "Jira-58233 POS Training Mode Release Note\n\nEnhancements: [Jira-58233] POS - Training Mode - Relocate switch training mode to Admin page in Operation screen (dev)\n\nDescriptions:\n\n- – It is available for Training Mode and Windows Client\n\n- – System changes client setup name from “Enable Training Mode Server” to “Default Enter Training Mode”\n\n- – System supports new function key “Toggle Training Mode” at admin mode “General” tab to allow user switch to training mode and switch back to original server\n\n- Function “Toggle Training Mode” support user authority control\n\n- Function “Toggle Training Mode” is added to admin page if one of the below conditions is match\n\n- Client setup “Default Enter Training Mode” is turned off and “Training mode server” has non-empty value\n\n- Client setup “Default Enter Training Mode” is turned on\n\n- – Workflow for entering training mode\n\n1. Login POS workstation\n\n2. Click button “Admin”\n\n3. If there is value in client setup “Training mode server” and client setup “Default Enter Training Mode” is turn off, system shows function key “Toggle Training Mode” in tab “General”\n\n4. Click function “Toggle Training Mode”\n\n5. System follows existing behavior to validate the authority control of function “Toggle Training Mode”\n\n6. If authority validation is not passed, workflow end here\n\n7. If authority validation passes, go to step 8\n\n8. System adds audit log for function “Toggle Training Mode”\n\n9. System turns on client setup “Default Enter Training Mode”\n\n10. System logouts to original server automatically\n\n11. Client shows login page with “Training Mode” watermark on top\n\n12. User input login information\n\n13. System logins to training mode server\n\n- – Workflow for leaving training mode\n\n1. Login POS workstation\n\n2. Click button “Admin”\n\n3. If client setup “Default Enter Training Mode” is turn on, system shows function key “Toggle Training Mode” in tab “General”\n\n4. Click function “Toggle Training Mode”\n\n5. System follows existing behavior to validate the authority control of function “Toggle Training Mode”\n\n6. If authority validation is not passed, workflow end here\n\n7. If authority validation passes, go to step 8\n\n8. System adds audit log for function “Toggle Training Mode”\n\n9. System turns off client setup “Default Enter Training Mode”\n\n10. System logouts to training server automatically\n\n11. Client shows login page and hide the “Training Mode” watermark\n\n12. User input login information\n\n13. System logins to original server\n\nSetup:\n\n- – None",
+    "qc_info": {
+      "qc_tester": null,
+      "qc_reviewer": null
+    }
+  }
+}
