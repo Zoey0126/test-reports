@@ -1,39 +1,39 @@
 {
-  "generated_at": "2026-09-21T11:05:12",
+  "generated_at": "2026-09-21T15:05:48",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
   "total_pending": 1,
-  "total_skipped": 34,
+  "total_skipped": 30,
   "pending": [
     {
-      "issue_key": "HERO-68271",
-      "sprint_id": "65590",
-      "sprint_name": "Report - 20260907-20260918",
-      "sprint_folder": "Sprint20260907-20260918",
-      "output_filename": "HERO-68271_20260921_110512.docx",
-      "output_rel_path": "Sprint20260907-20260918/HERO-68271_20260921_110512.docx",
-      "template": "report",
+      "issue_key": "HERO-68343",
+      "sprint_id": "65592",
+      "sprint_name": "POS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-68343_20260921_150548.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-68343_20260921_150548.docx",
+      "template": "infrasys",
       "is_bug": true,
       "requirement": {
-        "key": "HERO-68271",
-        "summary": "Vulnerability Issues - JWT Token Contains Sensitive Internal Infrastructure Information and Is Transmitted via URL",
+        "key": "HERO-68343",
+        "summary": "Platform setup page (HQ) - Unable to open config by location setup \"Ordering Limitation Settings\"",
         "status": "READY FOR QA",
-        "template": "report",
+        "template": "infrasys",
         "components": [
-          "REPORTS"
+          "CORE"
         ],
         "issue_type": "Bug",
         "is_bug": true,
-        "description": "Issue from: pentest-report-HQ-Pentest-env-1781148005691 1.pdf\n\nFinding 6: JWT Token Contains Sensitive Internal Infrastructure Information and is Transmitted via URL Parameters\n\n- Stop putting the report session token and callback address in the browser URL, so internal server hostnames are not visible in Network.\n\n- When BIRT package is new enough (check version.txt: 1.1.11 Rev#290 or higher): the first open uses POST with rptSession / rptOrigin instead of URL query parameters.\n\n- The session value starts with enc1. (encrypted). Later page flips / re-runs use cookies rptSes / rptOrg under /birt.\n\n- If only PHP or only BIRT is upgraded, the other side still accepts the old parameter names, so mixed packages do not break report open.\n\n- On failure, the screen shows a short message with Ref: …; details stay in server logs (birt_security / birt_api).\n\nThese functionalities involve:\n\n- Auto reports\n\n- Favorite reports\n\n- Preset parameter reports\n\n- Client-side reports\n\n- Viewing reports after printing\n\nQC Test Scope (Finding 6)\n\nHow to tell PHP / BIRT package version\n\n- PHP (HQ Report plugin): use the package / build under test for this release.\n\n- BIRT (Java report viewer): open BIRT version.txt. If it shows 1.1.11 Rev#290 or higher → new BIRT. If the version is lower → old BIRT.\n\nEnvironment\n\n- A — both new (main test): new PHP + new BIRT (version.txt has 1.1.11 Rev#290 or higher). This is the required full check.\n\n- B — new PHP + old BIRT: version.txt is below 1.1.11 Rev#290. Only a quick check: open 1 report and confirm it still opens (compatibility).\n\n- C — old PHP + new BIRT: PHP not yet upgraded, BIRT already new. Only a quick check: open 1 report and confirm it still opens (compatibility).\n\nP0 — Must test (Environment A; sample 1–2 reports per entry)\n\n- Standard HQ report preview (Reports listing → View): first BIRT request is POST; body has rptSession starting with enc1. and rptOrigin; no internal ELB / internal hostname on the URL; no plaintext jwt= / callbackUrl= on the URL; report renders.\n\n- Favorite reports: open a favourite; same checks as above; report renders.\n\n- Preset parameter reports: add preset from BIRT toolbar (no wrong_param_format); run report via preset; report renders.\n\n- Client-side reports: open from POS/client; same checks; report renders.\n\n- Viewing reports after printing: print / print queue then view result; report/print path works.\n\n- Export: Excel/PDF download OK; Network URL must not contain duplicated frameset?__report=&https://.../frameset?__report=; Legacy CSV export succeeds (no The report file : does not exist or contains errors.).\n\n- Pagination / second request: after open, cookies rptSes and rptOrg exist under /birt; flip page / re-run still works.\n\nP1 — Recommended\n\n- Error path: generic message + (Ref: xxxxxxxx), no internal hostname / stack in UI.\n\n- Environments B and C: open one report each — report must still open (mixed package allowed).\n\nP2 — Sample only\n\n- Auto reports: one scheduled/manual run still succeeds (no browser JWT Network check required).\n\n- Optional: one drill-down report; one EN + one ZH open.\n\nOut of scope for full matrix\n\n- Do not retest every POS/CUS/TMS report design.\n\n- Do not retest report designer / ACL listing / unrelated modules.\n\nPass criteria (Environment A)\n\nBrowser Network shows no internal hostname and no plaintext JWT on first open; first request is POST with enc1. token; cookies work for follow-up; Favorite / Preset / Client / Print-view / Export checks above pass.",
+        "description": "Platform Config by Location \"Ordering Limitation Settings\" in big account HQ (such as ihg, hyatt, marriott) cannot open.\n\nerror.log\n\n2026-08-27 04:16:01 Error: [1.2.105.0][hero][1] [InternalErrorException] Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194312 bytes)\n\nRequest URL: /hero/admin/eng/pos/location_configs/config/ordering_limitation_settings\n\nStack Trace:\n\n#0 C:\\infrasys\\local\\cakephp\\cake\\lib\\Cake\\Error\\ErrorHandler.php(214): AppErrorHandler::handleFatalError()\n\n#1 C:\\infrasys\\local\\cakephp\\cake\\lib\\Cake\\Core\\App.php(970): ErrorHandler::handleError()\n\n#2 C:\\infrasys\\local\\cakephp\\cake\\lib\\Cake\\Core\\App.php(943): App::_checkFatalError()\n\n#3 [internal function]: App::shutdown()\n\n#4 {main}\n\nRelated SQL:\n\n1. First SQL to get the item_id\n\nSELECT `MenuItem`.`item_id`, `MenuItem`.`item_code`, `MenuItem`.`item_name_l1`, `MenuItem`.`item_as_basic`, `MenuItem`.`item_as_child`, `MenuItem`.`item_as_modifier` FROM `hero_system`.`menu_items` AS `MenuItem`   WHERE `item_status` <> 'd'   ORDER BY `MenuItem`.`item_code`\n\nihg HQ db's result have more than 100000 records.\n\n2. Second SQL will use the item_id to select , the line length is more than 750000 in this case and cause php fatal error.\n\nSELECT `MenuGbOverride`.`gbov_id`, `MenuGbOverride`.`gbov_table`, `MenuGbOverride`.`gbov_record_id`, `MenuGbOverride`.`gbov_field`, `MenuGbOverride`.`gbov_value`, `MenuGbOverride`.`gbov_gb_cz1_cfgz_id`, `MenuGbOverride`.`gbov_gb_cz2_cfgz_id`, `MenuGbOverride`.`gbov_gb_cz3_cfgz_id`, `MenuGbOverride`.`created`, `MenuGbOverride`.`modified` FROM `hero_system`.`menu_gb_overrides` AS `MenuGbOverride`   WHERE `gbov_table` = 'items' AND `gbov_record_id` IN (8787, 9106,...,77140) AND gbov_gb_cz1_cfgz_id = (0) AND gbov_gb_cz2_cfgz_id = (0) AND gbov_gb_cz3_cfgz_id = (0)\n\nRemark:\n\nAdding the php memory from 128M to 2048M can open the CBL.",
         "refinement_notes": "",
-        "release_notes": "Bug Fixing: [HERO-68271] Fix the issue that report session token and internal server address are exposed in the browser URL when opening a report\nDescriptions:\nFix the security issue that when a user opens a report in Infrasys Cloud, the report session token and callback address were passed in the browser URL. This could expose internal server hostnames in the browser address bar or Network panel.\nAfter this fix, when both the Infrasys Cloud Report package and the BIRT report viewer package are upgraded together, the first open of a report no longer puts the session token or the callback address in the URL. The report still opens and works as before (preview, favorite, preset, client-side open, print view, export, and page flip).\nIf only one of the two packages is upgraded, report open remains compatible. The full security improvement (no token / internal hostname in the URL) applies when both packages are new. For the BIRT side, version.txt should show 1.1.11 Rev#290 or higher.\nConfiguration / Parameter:\nNo special configuration or parameter is required.\nThis case does not add any new report parameter or system setting. Both the Infrasys Cloud Report package and the BIRT report viewer package should be deployed for the full fix.\nHow to reproduce the issue (before fix):\n1. Log in to Infrasys Cloud.\n2. Open Report module and open any standard report (for example: Reports listing -> View).\n3. Open the browser developer tools Network panel while the report viewer loads.\n4. Check the first request to the report viewer.\nResult before fix:\n- The first request URL contains jwt and/or callbackUrl query parameters.\n- The URL or token content may show an internal server hostname.\n- The report can still open, but sensitive information is visible in the browser.\nField Definition:\nThis case does not involve field definition.\nResult / Sample:\nAfter fix (both packages upgraded; BIRT version.txt is 1.1.11 Rev#290 or higher):\n1. Log in to Infrasys Cloud.\n2. Open a standard report from Reports listing -> View.\n3. Check the browser Network panel for the first report viewer request.\nExpected result:\n- The first request is a POST. The URL does not contain plaintext jwt= or callbackUrl=.\n- No internal server hostname is visible on the report open URL.\n- The report renders normally.\n- Favorite reports, preset parameter reports, client-side reports, viewing after printing, Excel/PDF/CSV export, and page flip / re-run still work.\n- If an error occurs, the screen shows a short message with a Ref code. No internal hostname or technical stack is shown to the user.",
+        "release_notes": "Bug Fixing: [Jira-68343] Platform setup page (HQ) - Unable to open config by location setup \"Ordering Limitation Settings\"\nDescriptions:\nWhen the item data volume is excessively large, the system is unable to open the “Ordering Limitation Settings” for config by location normally\nExpected result:\nThe Ordering Limitation Settings configuration page opens normally\nIt is fixed in current version\nSetup:\nAdd a setup under Config by Location\nGo to Infrasys POS platform: POS System  Ordering Setup  Config by Location\nSelect setup “Ordering Limitation Settings”\nClick “Add New” to add new record\nSelect\nApply To = Target location\nOutlet = For a specific outlet\nOutlet = Target outlet (available only if “Outlet” is chosen in the row “Apply To”)\nSupport = Yes\nClick “Save” to save record",
         "qc_info": {
           "qc_tester": {
-            "name": "Zephyr Ji",
-            "email": "zephyr.ji@shijigroup.com"
+            "name": "Mike Lin",
+            "email": "mike.lin@shijigroup.com"
           },
           "qc_reviewer": {
-            "name": "Kathy Kuang",
-            "email": "kathy.kuang@shijigroup.com"
+            "name": "Eric Fang",
+            "email": "eric.fang@shijigroup.com"
           }
         }
       }
