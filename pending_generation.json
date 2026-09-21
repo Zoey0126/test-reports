@@ -1,35 +1,35 @@
 {
-  "generated_at": "2026-09-21T15:05:48",
+  "generated_at": "2026-09-21T19:05:06",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
   "total_pending": 1,
-  "total_skipped": 30,
+  "total_skipped": 29,
   "pending": [
     {
-      "issue_key": "HERO-68343",
+      "issue_key": "HERO-68691",
       "sprint_id": "65592",
       "sprint_name": "POS - 20260921-20261002",
       "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68343_20260921_150548.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68343_20260921_150548.docx",
+      "output_filename": "HERO-68691_20260921_190506.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-68691_20260921_190506.docx",
       "template": "infrasys",
       "is_bug": true,
       "requirement": {
-        "key": "HERO-68343",
-        "summary": "Platform setup page (HQ) - Unable to open config by location setup \"Ordering Limitation Settings\"",
+        "key": "HERO-68691",
+        "summary": "Does not reload business setup completely if executing daily start platform page",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
-          "CORE"
+          "POS"
         ],
         "issue_type": "Bug",
         "is_bug": true,
-        "description": "Platform Config by Location \"Ordering Limitation Settings\" in big account HQ (such as ihg, hyatt, marriott) cannot open.\n\nerror.log\n\n2026-08-27 04:16:01 Error: [1.2.105.0][hero][1] [InternalErrorException] Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194312 bytes)\n\nRequest URL: /hero/admin/eng/pos/location_configs/config/ordering_limitation_settings\n\nStack Trace:\n\n#0 C:\\infrasys\\local\\cakephp\\cake\\lib\\Cake\\Error\\ErrorHandler.php(214): AppErrorHandler::handleFatalError()\n\n#1 C:\\infrasys\\local\\cakephp\\cake\\lib\\Cake\\Core\\App.php(970): ErrorHandler::handleError()\n\n#2 C:\\infrasys\\local\\cakephp\\cake\\lib\\Cake\\Core\\App.php(943): App::_checkFatalError()\n\n#3 [internal function]: App::shutdown()\n\n#4 {main}\n\nRelated SQL:\n\n1. First SQL to get the item_id\n\nSELECT `MenuItem`.`item_id`, `MenuItem`.`item_code`, `MenuItem`.`item_name_l1`, `MenuItem`.`item_as_basic`, `MenuItem`.`item_as_child`, `MenuItem`.`item_as_modifier` FROM `hero_system`.`menu_items` AS `MenuItem`   WHERE `item_status` <> 'd'   ORDER BY `MenuItem`.`item_code`\n\nihg HQ db's result have more than 100000 records.\n\n2. Second SQL will use the item_id to select , the line length is more than 750000 in this case and cause php fatal error.\n\nSELECT `MenuGbOverride`.`gbov_id`, `MenuGbOverride`.`gbov_table`, `MenuGbOverride`.`gbov_record_id`, `MenuGbOverride`.`gbov_field`, `MenuGbOverride`.`gbov_value`, `MenuGbOverride`.`gbov_gb_cz1_cfgz_id`, `MenuGbOverride`.`gbov_gb_cz2_cfgz_id`, `MenuGbOverride`.`gbov_gb_cz3_cfgz_id`, `MenuGbOverride`.`created`, `MenuGbOverride`.`modified` FROM `hero_system`.`menu_gb_overrides` AS `MenuGbOverride`   WHERE `gbov_table` = 'items' AND `gbov_record_id` IN (8787, 9106,...,77140) AND gbov_gb_cz1_cfgz_id = (0) AND gbov_gb_cz2_cfgz_id = (0) AND gbov_gb_cz3_cfgz_id = (0)\n\nRemark:\n\nAdding the php memory from 128M to 2048M can open the CBL.",
+        "description": "When the \"Daily start force reload business setup\" configuration is turned on, executing daily‑start via the platform fails to load the business setup correctly.\n\nPre-condition:\n\n1. Setting force reload business day for daily start\n\n* Location: System Management > System Configuration\n\n* Select POS Module\n\n* Section: Under Basic Configuration\n\n> Setup name: Daily start force reload business setup\n\n>> Setting value as \"Yes\" (Modifying this configuration requires a service restart for the changes to take effect)\n\nWorkflow:\n\n1. Go to platform setup page: POS System > Tools\n\n2. Select \"Daily Start and Close\" or \"Auto Daily Start and Close\"\n\n3. Daily Close with target outlet if necessary\n\n4. Go to platform setup page: POS System > Ordering Setup > Split Revenue Settings\n\n5. Add a new Split Revenue Item\n\n6. Proceed with step 1 and step 2\n\n7. Execute daily start with target outlet\n\n8. After the daily start is completed\n\n10. Login POS Client with the outlet\n\nActual result : Inspection reveals that the newly added split revenue item failed to take effect\n\nExpected result: :\n\n- Daily start through the platform; the system will load business setup normally and the newly‑added split revenue item will work as expected.",
         "refinement_notes": "",
-        "release_notes": "Bug Fixing: [Jira-68343] Platform setup page (HQ) - Unable to open config by location setup \"Ordering Limitation Settings\"\nDescriptions:\nWhen the item data volume is excessively large, the system is unable to open the “Ordering Limitation Settings” for config by location normally\nExpected result:\nThe Ordering Limitation Settings configuration page opens normally\nIt is fixed in current version\nSetup:\nAdd a setup under Config by Location\nGo to Infrasys POS platform: POS System  Ordering Setup  Config by Location\nSelect setup “Ordering Limitation Settings”\nClick “Add New” to add new record\nSelect\nApply To = Target location\nOutlet = For a specific outlet\nOutlet = Target outlet (available only if “Outlet” is chosen in the row “Apply To”)\nSupport = Yes\nClick “Save” to save record",
+        "release_notes": "Bug Fixing: [Jira-68691] Does not reload business setup completely if executing daily start platform page (Paker)\nDescriptions:\nSystem failed to load the business setup when daily start via the platform if the setting “Daily start force reload business setup” is turned ON\nWorkflow\n1. Go to platform setup page: POS System  Tools\n2.\tSelect “Daily Start and Close” or “Auto Daily Start and Close”\n3.\tDaily Close with target outlet if necessary\n4.\tGo to platform setup page: POS System  Ordering Setup  Split Revenue Settings\n5.\tAdd a new Split Revenue record\n6.\tProceed with step 1 and step 2\n7.\tExecute daily start with target outlet\n8.\tAfter the daily start is completed\n9.\tLogin POS Client with the outlet\n10. Inspection reveals that the newly added split revenue item failed to take effect\nExpected result:\nDaily start through the platform, the system will load business setup normally and the newly added split revenue item will work as expected\nIt is fixed in current version\nSetup:\nAdd a setup under Config by Location\nGo to Infrasys POS platform: System Management  System Configuration  Config by Location\nSelect “POS Module”\nClick button “Edit”\nUnder section “Basic Configuration”, select\nDaily start force reload business setup = Yes\nClick “Save” to save record",
         "qc_info": {
           "qc_tester": {
-            "name": "Mike Lin",
-            "email": "mike.lin@shijigroup.com"
+            "name": "Ryan Xie",
+            "email": "ryan.xie@shijigroup.com"
           },
           "qc_reviewer": {
             "name": "Eric Fang",
