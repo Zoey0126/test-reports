@@ -1,40 +1,270 @@
 {
-  "generated_at": "2026-09-21T19:05:06",
+  "generated_at": "2026-09-22T11:05:12",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
-  "total_pending": 1,
-  "total_skipped": 29,
+  "total_pending": 9,
+  "total_skipped": 27,
   "pending": [
     {
-      "issue_key": "HERO-68691",
-      "sprint_id": "65592",
-      "sprint_name": "POS - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68691_20260921_190506.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68691_20260921_190506.docx",
+      "issue_key": "HERO-68944",
+      "sprint_id": "75475",
+      "sprint_name": "TMS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-68944_20260922_110512.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-68944_20260922_110512.docx",
       "template": "infrasys",
       "is_bug": true,
       "requirement": {
-        "key": "HERO-68691",
-        "summary": "Does not reload business setup completely if executing daily start platform page",
+        "key": "HERO-68944",
+        "summary": "TMS2.0 - Online booking language switcher missing when the site has no config zone",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
-          "POS"
+          "RESERVATION"
         ],
         "issue_type": "Bug",
         "is_bug": true,
-        "description": "When the \"Daily start force reload business setup\" configuration is turned on, executing daily‑start via the platform fails to load the business setup correctly.\n\nPre-condition:\n\n1. Setting force reload business day for daily start\n\n* Location: System Management > System Configuration\n\n* Select POS Module\n\n* Section: Under Basic Configuration\n\n> Setup name: Daily start force reload business setup\n\n>> Setting value as \"Yes\" (Modifying this configuration requires a service restart for the changes to take effect)\n\nWorkflow:\n\n1. Go to platform setup page: POS System > Tools\n\n2. Select \"Daily Start and Close\" or \"Auto Daily Start and Close\"\n\n3. Daily Close with target outlet if necessary\n\n4. Go to platform setup page: POS System > Ordering Setup > Split Revenue Settings\n\n5. Add a new Split Revenue Item\n\n6. Proceed with step 1 and step 2\n\n7. Execute daily start with target outlet\n\n8. After the daily start is completed\n\n10. Login POS Client with the outlet\n\nActual result : Inspection reveals that the newly added split revenue item failed to take effect\n\nExpected result: :\n\n- Daily start through the platform; the system will load business setup normally and the newly‑added split revenue item will work as expected.",
+        "description": "Email/ ZOHO Title:\n\nTMS2.0 - Online booking language switcher missing when the site has no config zone\n\nUse Case:\n\nGuest opens TMS online booking. The language switcher and shared media path should still work when the site does not use enterprise config zones, or the outlet/shop has no config zone assigned.\n\nSteps to Reproduce:\n\nOpen online booking on a site without enterprise config zones>Open the booking form (classic theme)>Click the language switcher\n\nCurrent Result:\n\nThe language switcher has no language list (classic theme may show a broken icon). Shared media URL is also empty on the new theme. [Unexpected]\n\nExpected Result:\n\nThe language switcher still shows the system languages. Shared media URL still follows the system shared data URL. [Expected]\n\nRoot Cause [Optional]:\n\nWhen the outlet or shop has no config zone, the booking page skips loading the system language list and shared data URL, so the language switcher has nothing to show.",
         "refinement_notes": "",
-        "release_notes": "Bug Fixing: [Jira-68691] Does not reload business setup completely if executing daily start platform page (Paker)\nDescriptions:\nSystem failed to load the business setup when daily start via the platform if the setting “Daily start force reload business setup” is turned ON\nWorkflow\n1. Go to platform setup page: POS System  Tools\n2.\tSelect “Daily Start and Close” or “Auto Daily Start and Close”\n3.\tDaily Close with target outlet if necessary\n4.\tGo to platform setup page: POS System  Ordering Setup  Split Revenue Settings\n5.\tAdd a new Split Revenue record\n6.\tProceed with step 1 and step 2\n7.\tExecute daily start with target outlet\n8.\tAfter the daily start is completed\n9.\tLogin POS Client with the outlet\n10. Inspection reveals that the newly added split revenue item failed to take effect\nExpected result:\nDaily start through the platform, the system will load business setup normally and the newly added split revenue item will work as expected\nIt is fixed in current version\nSetup:\nAdd a setup under Config by Location\nGo to Infrasys POS platform: System Management  System Configuration  Config by Location\nSelect “POS Module”\nClick button “Edit”\nUnder section “Basic Configuration”, select\nDaily start force reload business setup = Yes\nClick “Save” to save record",
+        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys Cloud TMS Release Notes\nVersion 1.2.115.0\nReleased on 5 Aug 2026\nConfidential and Internal Use Only\nInfrasys Cloud TMS Release Notes\nVersion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t3\nInfrasys Cloud Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.115.0 | [Jira-68944] TMS2.0 - Online booking language switcher missing when the site has no config zone |\nRelease History\n| Version | Release Date |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n<<< 1.2.115.0 >>>\nBug Fixing: [Jira-68944] TMS2.0 - Online booking language switcher missing when the site has no config zone\nDescriptions:\nFixed an issue where the language switcher icon was not displayed on TMS 2.0 online booking pages when the outlet's shop had no config zone assigned.\nPreviously, when no config zone was available, the system skipped loading booking language settings and the language dropdown was not rendered on the online booking page.\nThe system now loads booking language settings without requiring a config zone, and falls back to default booking languages when no config-zone-specific languages are configured.\nAffected flow: TMS 2.0 online booking pages that include a language switcher in the theme layout.\nSetup:\nBefore\nOpen the TMS 2.0 online booking page for an outlet whose shop has no config zone configured.\nThe language switcher icon is not shown on the booking page.\nAfter\nOpen the same TMS 2.0 online booking URL after applying this fix.\nVerify the language switcher icon is displayed on the booking page.\nSelect another language from the switcher and confirm the page reloads in the selected language.\nRelease: 2026<<< 1.2.115.0>>>\n********************************************************************************",
         "qc_info": {
           "qc_tester": {
-            "name": "Ryan Xie",
-            "email": "ryan.xie@shijigroup.com"
+            "name": "Aimee Wang",
+            "email": "aimee.wang@shijigroup.com"
           },
           "qc_reviewer": {
-            "name": "Eric Fang",
-            "email": "eric.fang@shijigroup.com"
+            "name": "Bunny Chen",
+            "email": "bunny.chen@shijigroup.com"
           }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-68829",
+      "sprint_id": "75475",
+      "sprint_name": "TMS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-68829_20260922_110512.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-68829_20260922_110512.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-68829",
+        "summary": "TMS 2.0 - Payment method export/edit leaks password, client_secret and keys",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "Problem:\n\nPayment Methods admin export downloaded the full paym_settings JSON, including Shiji password, Payby client_secret, and SilverStone/Astral key. Export also skipped the payment-method read ACL. Edit put those secrets into HTML (client_secret as a text field). View showed Payby client_secret and SilverStone key in plaintext.\n\nFix:\n\nPaymentMethodsController::admin_export now checks payment-method read access and strips password / client_secret / key from exported JSON. Edit no longer sends stored secrets to the browser (password inputs stay empty; save keeps the DB value if the field is blank). Payby client_secret is a password field. View masks Payby client_secret and SilverStone key.\n\nAfter fix:\n\nExported JSON does not include credentials. Import onto an existing method keeps stored secrets if those fields are empty; a new method still requires secrets to be entered.",
+        "refinement_notes": "",
+        "release_notes": "",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Bunny Chen",
+            "email": "bunny.chen@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Alisa Chen",
+            "email": "alisa.chen@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-66019",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-66019_20260922_110512.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-66019_20260922_110512.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-66019",
+        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - DisplayControl - V111",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Please check and fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| foreach() argument must be of type array|object, null given\n| ../Plugin/DisplayControl/View/Displays/main.ctp, line 111\n\n| Undefined variable $width\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 4\n\n| Undefined variable $top\n| ./Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 2\n\n../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 5\n\n| Undefined variable $left\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 3\n\n../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 4\n\n| Undefined variable $pantrymessagecode0 ~10\n| ../Plugin/DisplayControl/View/Displays/main.ctp, line 1106 ~ 1116\n\n| Undefined variable $enablepinlogin\n| ../Plugin/DisplayControl/View/Elements/display_job_listing.ctp, line 626\n\n| Undefined variable $definepin\n| ../Plugin/DisplayControl/View/Elements/display_job_listing.ctp, line 627\n\n| Undefined variable $blockWidth\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 414\n\n| Undefined variable $blockHeight\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 415\n\n| Undefined variable $backgroundColor\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 455\n\n| Undefined variable $bShowOvercookedLabel\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 433\n\n| Undefined global variable $themeWidth\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 92\n\n../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 117\n\n| Undefined global variable $themeHeight\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 127\n\n../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 101\n\n| Undefined global variable $scnWidth\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 93\n\n../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 118\n\n| Undefined global variable $scnHeight\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 128\n\n../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 102\n\n| Undefined global variable $defBlockWidth\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 164\n\n../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 158\n\n| Undefined global variable $blockContentWidth\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 165\n\n| Undefined global variable $blockContentHeight\n| ../Plugin/DisplayControl/View/DisplayJobs/listing.ctp, line 159\n\n| Undefined array key \"kds_timeout_24\"\n| ../Plugin/DisplayControl/Controller/DisplaysController.php, line 2635\n\n| Undefined array key \"check_infos\"\n| ../Plugin/DisplayControl/View/Elements/display_job_listing.ctp, line 24\n\n| Trying to access array offset on null\n| ../Plugin/DisplayControl/View/Elements/display_job_listing.ctp, line 21\n\n../Plugin/DisplayControl/View/Elements/display_job_listing.ctp, line 22\n\n../Plugin/DisplayControl/View/Elements/display_job_listing.ctp, line 23\n\n../Plugin/DisplayControl/View/Elements/display_job_listing.ctp, line 24",
+        "refinement_notes": "",
+        "release_notes": "Bug fixing: [Jira-66019] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - DisplayControl - V111\nDescription:\n-      Display screen and job history pages read pantry message codes, job-block size, screen globals, and PIN settings before those values were set. Missing theme-block sections were also read as arrays.\n-      PIN session check read kds_timeout_{screenId} when the session key was not present.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded foreach() on null, Undefined variable, Undefined global variable, Undefined array key \"check_infos\" and \"kds_timeout_24\", and Trying to access array offset on null in DisplayControl display and job listing pages.\n-      After: These warnings are no longer written to the error log.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-65339",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-65339_20260922_110512.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-65339_20260922_110512.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-65339",
+        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V110",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Please check and fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined variable $startTime\n| ../Plugin/Messaging/Controller/Component/MessagingSmsComponent.php, line 1522",
+        "refinement_notes": "",
+        "release_notes": "Bug fixing: [Jira-65339] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V110\nDescription:\n-      CTM SMS job wrote mjob_start_time from $startTime, but that variable was never set in __runCtmJob().\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined variable $startTime in MessagingSmsComponent.php when a CTM SMS job finished.\n-      After: These warnings are no longer written to the error log.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-64268",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-64268_20260922_110512.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-64268_20260922_110512.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-64268",
+        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V109",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Please check and fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined array key \"tenant_id\"\n| ../Plugin/Messaging/Controller/Component/MessagingEmailComponent.php, line 238\n\n| Undefined array key \"client_secret\"\n| ../Plugin/Messaging/Controller/Component/MessagingEmailComponent.php, line 237\n\n| Undefined array key \"client_id\".\n| ../Plugin/Messaging/Controller/Component/MessagingEmailComponent.php, line 236\n\n| Trying to access array offset on value of type null\n| ../Plugin/Messaging/Controller/Component/MessagingEmailComponent.php, line 266\n\n| Trying to access array offset on null\n| ../Plugin/Report/Controller/ReportsController.php, line 811\n\n../Plugin/Report/Controller/ReportsController.php, line 812\n\n| [TypeError] Symfony\\Component\\Mailer\\Transport\\Smtp\\EsmtpTransport::setPassword()\n| ../Plugin/Messaging/Controller/Component/MessagingEmailComponent.php(266)\n\n| [BadRequestException] The request has been black-holed\n| Request URL: /accounts/shangrilagroup/admin/eng/report/auto_report_settings/listing/page:1/sort:schd_next_run_time/direction:asc",
+        "refinement_notes": "",
+        "release_notes": "Bug fixing: [Jira-64268] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V109\nDescription:\n-      OAuth2 email sending read client_id, client_secret, and tenant_id without checking that the mail settings contain those keys. A failed token response was also passed to setPassword(), which raised Trying to access array offset on null and a TypeError.\n-      Opening a report read date format, time format, and config-zone ids when the config array was null, which raised Trying to access array offset on null.\n-      Auto report settings listing was blocked by SecurityComponent, and the missing blackhole callback threw BadRequestException into error.log.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined array key \"client_id\", \"client_secret\", and \"tenant_id\", Trying to access array offset on null, TypeError from setPassword(), and BadRequestException The request has been black-holed on the auto report settings listing.\n-      After: These warnings are no longer written to the error log.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-63470",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-63470_20260922_110512.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-63470_20260922_110512.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-63470",
+        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V108",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Please check and fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined array key \"SysModule\"\n| ../Plugin/Report/View/PresetParams/listing.ctp, line 49\n\n../Plugin/Report/Controller/PresetParamsController.php, line 252\n\n| Trying to access array offset on null\n| ../Plugin/Report/View/PresetParams/listing.ctp, line 49\n\n../Plugin/Report/Controller/PresetParamsController.php, line 252\n\n| [MissingControllerException] Controller class ReportsController could not be found.\n| Request URL: /accounts/shangrilagroup/pos/reports/exception/resources_en_US.properties\n\nRequest URL: /accounts/ihg/menu/reports/common%20-%20menu.rptlibrary\n\n| [MissingControllerException] Controller class ReportController could not be found.\n| Request URL: /accounts/ihg/eng/report/\n\n| [MissingActionException] Action FavouritesController::ws() could not be found.\n| Request URL: /accounts/ihg/eng/report/favourites/ws/ws",
+        "refinement_notes": "",
+        "release_notes": "Bug fixing: [Jira-63470] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V108\nDescription:\n-      Preset parameter listing read SysModule from a module record that was missing or empty. That raised Undefined array key \"SysModule\" and Trying to access array offset on null in PresetParamsController and the listing page.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined array key \"SysModule\" and Trying to access array offset on null on the preset parameter listing.\n-      After: These warnings are no longer written to the error log.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-63199",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-63199_20260922_110512.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-63199_20260922_110512.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-63199",
+        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\"  for Report Module - V107",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| foreach() argument must be of type array|object, string given\n| ../Plugin/Signage/View/Elements/display_static_info.ctp, line 98\n\n| Undefined array key \"stationId\"\n| ../Plugin/Signage/View/Displays/main.ctp, line 129",
+        "refinement_notes": "",
+        "release_notes": "Bug fixing: [Jira-63199] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V107\nDescription:\n-      A signage static-info block that is not an outlet display does not carry stationId or an outlet list. The display page still read themeBlock[\"stationId\"] and passed an empty string as outlets.\n-      Root cause: the static info element then ran foreach on that string, which raised foreach() argument must be of type array|object, string given, and the missing stationId raised Undefined array key \"stationId\".\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded foreach() argument must be of type array|object, string given in display_static_info.ctp, and Undefined array key \"stationId\" in the signage display page.\n-      After: These warnings are no longer written to the error log.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-61817",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-61817_20260922_110512.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-61817_20260922_110512.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-61817",
+        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\"  for Report Module - V106",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined array key \"disable_report_code\"\n| ../Plugin/Report/View/Reports/listing.ctp, line 164\n\n../Plugin/Report/View/Reports/listing.ctp, line 145\n\nAnd pleae check if the request URL is correct as below:\n\n| error\n| location\n\n| [InternalErrorException] Maximum execution time of 360 seconds exceeded\n| Request URL: /accounts/shangrilagroup/eng/report/export/export\n\n| Fatal Error (1): Maximum execution time of 360 seconds exceeded\n| ../Plugin/Report/Controller/Component/ReportExportExceptionReportDelayOpeningExportComponent.php, line 860\n\n../Plugin/Report/Controller/Component/ReportExportExceptionReportDelayOpeningExportComponent.php, line 857",
+        "refinement_notes": "",
+        "release_notes": "Bug fixing: [Jira-61817] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V106\nDescription:\n-      The report listing reads disable_report_code only when that key exists on the report row, so a report without this flag no longer raises Undefined array key \"disable_report_code\".\n-      Exception Report - Delay Opening export ran under the default 360-second PHP limit. The nested business-day, period, and payment loops exceeded that limit and wrote Maximum execution time of 360 seconds exceeded to error.log. The request URL /report/export/export is the export action.\n-      Root cause: generateContent() did not extend the execution time, unlike the other exception export components.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined array key \"disable_report_code\" on the report listing, and Maximum execution time of 360 seconds exceeded while exporting Delay Opening.\n-      After: These warnings are no longer written to the error log.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-60847",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-60847_20260922_110512.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-60847_20260922_110512.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-60847",
+        "summary": " [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\"  for Report Module - V105",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined array key 1\n| ../Plugin/Report/Controller/Component/ReportExportExceptionDelayInSettlementExportComponent.php, line 1675\n\n| Undefined array key \"iUserId\"\n| ../Plugin/Report/Controller/ReportContentsController.php, line 260\n\n| Undefined array key \"UserUser\"\n| ../Plugin/Report/Controller/ReportContentsController.php, line 271\n\n| Undefined array key \"\"\n| ../Plugin/Report/View/Configs/admin_listing.ctp, line 17\n\nAnd pleae check if the request URL is correct as below:\n\n| error\n| location\n\n| [MissingControllerException] Controller class ReportsController could not be found\n| Request URL: /accounts/shangrilagroup/menu/reports/common%20-%20menu.rptlibrary\n\nRequest URL: /accounts/shangrilagroup/pos/reports/discount_by_outlet/resources_en_US.properties\n\nRequest URL: /accounts/shangrilagroup/pos/reports/fnb_void/resources_en_US.properties\n\n| [MissingControllerException] Controller class ReportController could not be found.\n| Request URL: /accounts/shangrilagroup/eng/report/",
+        "refinement_notes": "",
+        "release_notes": "Bug fixing: [Jira-60847] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V105\nDescription:\n-      Delay-in-settlement time threshold lines that do not contain a comma were split into one value, and reading the second value raised Undefined array key 1.\n-      Report content generation read iUserId from preset parameters and UserUser from the session without checking that the keys exist.\n-      The report system configuration page looked up Yes/No labels with an empty stored value, which raised Undefined array key \"\".\n-      BIRT requests for missing report resources (resources_*.properties and *.rptlibrary) were routed as controllers and logged as MissingControllerException. /{language}/report was also routed to a non-existent ReportController.\n-      Menu Listing by Display Panel referenced library file common - menu.rptlibrary, while the file on disk is common.rptlibrary.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined array key 1, Undefined array key \"iUserId\", Undefined array key \"UserUser\", Undefined array key \"\", and MissingControllerException for the report resource URLs in this case.\n-      After: These warnings are no longer written to the error log.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
         }
       }
     }

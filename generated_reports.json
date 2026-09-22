@@ -544,6 +544,51 @@
       "path": "Sprint20260921-20261002/HERO-68691_20260921_190506.docx",
       "template": "infrasys",
       "generated_at": "2026-09-21T19:06:32"
+    },
+    "HERO-68944": {
+      "path": "Sprint20260907-20260918/HERO-68944_20260922_110512.docx",
+      "template": "infrasys",
+      "generated_at": "2026-09-22T11:06:51"
+    },
+    "HERO-68829": {
+      "path": "Sprint20260907-20260918/HERO-68829_20260922_110512.docx",
+      "template": "infrasys",
+      "generated_at": "2026-09-22T11:08:36"
+    },
+    "HERO-66019": {
+      "path": "Sprint20260921-20261002/HERO-66019_20260922_110512.docx",
+      "template": "report",
+      "generated_at": "2026-09-22T11:09:27"
+    },
+    "HERO-65339": {
+      "path": "Sprint20260921-20261002/HERO-65339_20260922_110512.docx",
+      "template": "report",
+      "generated_at": "2026-09-22T11:12:08"
+    },
+    "HERO-64268": {
+      "path": "Sprint20260921-20261002/HERO-64268_20260922_110512.docx",
+      "template": "report",
+      "generated_at": "2026-09-22T11:12:10"
+    },
+    "HERO-63470": {
+      "path": "Sprint20260921-20261002/HERO-63470_20260922_110512.docx",
+      "template": "report",
+      "generated_at": "2026-09-22T11:12:11"
+    },
+    "HERO-63199": {
+      "path": "Sprint20260921-20261002/HERO-63199_20260922_110512.docx",
+      "template": "report",
+      "generated_at": "2026-09-22T11:12:12"
+    },
+    "HERO-61817": {
+      "path": "Sprint20260921-20261002/HERO-61817_20260922_110512.docx",
+      "template": "report",
+      "generated_at": "2026-09-22T11:12:14"
+    },
+    "HERO-60847": {
+      "path": "Sprint20260921-20261002/HERO-60847_20260922_110512.docx",
+      "template": "report",
+      "generated_at": "2026-09-22T11:12:16"
     }
   }
 }
