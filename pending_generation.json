@@ -1,118 +1,40 @@
 {
-  "generated_at": "2026-09-22T15:07:54",
+  "generated_at": "2026-09-22T19:06:18",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
-  "total_pending": 4,
-  "total_skipped": 36,
+  "total_pending": 1,
+  "total_skipped": 37,
   "pending": [
     {
-      "issue_key": "HERO-68883",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
+      "issue_key": "HERO-66233",
+      "sprint_id": "75476",
+      "sprint_name": "TMS - 20260921-20261002",
       "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68883_20260922_150754.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68883_20260922_150754.docx",
-      "template": "report",
+      "output_filename": "HERO-66233_20260922_190618.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-66233_20260922_190618.docx",
+      "template": "infrasys",
       "is_bug": true,
       "requirement": {
-        "key": "HERO-68883",
-        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V114",
+        "key": "HERO-66233",
+        "summary": "TMS2.0 - Deleted columns still display on Reservation List headers on the Print View",
         "status": "READY FOR QA",
-        "template": "report",
+        "template": "infrasys",
         "components": [
-          "REPORTS"
+          "RESERVATION"
         ],
         "issue_type": "Bug",
         "is_bug": true,
-        "description": "Please check and fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined array key 1\n| ../Plugin/Report/Controller/Component/ReportExportExceptionDelayInSettlementExportComponent.php, line 1675\n\n| Trying to access array offset on false\n| ../Plugin/Report/Controller/AutoReportSettingsController.php, line 514\n\n| Undefined array key \"citm_info\"\n| ../Plugin/Pos/Console/Command/GalaxyAveroExportShell.php, line 1264\n\n| Trying to access array offset on null\n| ../Plugin/Pos/Console/Command/GalaxyAveroExportShell.php, line 1264\n\n| [MissingControllerException] Controller class ReportsController could not be found\n| Request URL: /accounts/shangrilagroup/tms/reports/reservation_summary/resources_en_US.properties",
+        "description": "Scenario 1: Deleted columns still display on Reservation List headers\n\nPrerequisites:\n\n- There are some reservations created on the current date(e.g.,2026-06-24).\n\nSteps:\n\n- Admin > Table Management System > Other Settings > Config by Location >\n\nReservation List's Headers on Current / Calendar View > find your outlet setting, add \"Table No.\" column on your outlet config.\n\n- Go to TMS2.0 operation > Current View, click the print icon on the Reservation List.\n\n- Print Reservation List Dialog, select to show \"Table No.\"\n\n- Click the [Print] button.\n\n- Admin > Table Management System > Other Settings > Config by Location >\n\nReservation List's Headers on Current / Calendar View > find your outlet setting, delete \"Table No.\" column on your outlet config.\n\n- Logout TMS2.0 operation,Login again > Calender View(Pick the date 2026-06-26), click the print icon on the Reservation List.\n\nActual result:\n\nThe Reservation List still shows the\"Table No.\" column, though  the show column option  is without the \"Table No.\" option\n\nExpect result:\n\nFields that have been set to be hidden should not be displayed.\n\nScenario 2: The reservation list order before and after printing is different.\n\nPrerequisites:\n\n- There are some reservations created on a date(e.g.,2026-06-26).\n\n- Admin > Table Management System > Other Settings > Config by Location >\n\nReservation List's Headers on Current / Calendar View > find your outlet setting, add \"Table No.\" column on your outlet config.\n\nSteps:\n\n- Go to TMS2.0 operation > Calendar View(2026-06-26), click the print icon on the Reservation List.\n\n- Print Reservation List Dialog, select to show \"Table No.\"\n\n- Click the \"Table No.\" column title twice to make the reservation list descend by\"Table No.\"\n\n- Click the [Print] button.\n\nActual result:\n\nThe order of the dialog and the printer view is different.\n\nStep 3 shows the reservation list order\n\nStep 4 shows the reservation list order\n\nExpect result:\n\nThe Reservation List sorting before and after printing is consistent.",
         "refinement_notes": "",
-        "release_notes": "Bug fixing: [Jira-68883] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V114\nDescription:\n-      Auto report preset list read the report name when the related report record was missing, and read the user name when that user was not found. The displayed text stays empty in those cases.\n-      Galaxy Avero item-discount rows without a matched check item are still skipped.\n-      A missing TMS report properties file, such as resources_en_US.properties, now returns HTTP 404. Files that exist on disk are still served as before. Delay-in-settlement array key 1 was already guarded in an earlier fix.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined array key 1 and \"citm_info\", Trying to access array offset on false or null, and MissingControllerException for tms/reports/.../resources_en_US.properties.\n-      After: These warnings are no longer written to the error log.",
+        "release_notes": "Bug Fixing: [Jira-66233] TMS2.0 - Deleted columns still display on Reservation List headers on the Print View\nDescriptions:\nThe reservation list order before and after printing is different.\nIn the print preview page, when there are many columns, they will not automatically shrink.\nDeleted columns still display on Reservation List headers\nSetup:\nCreate multiple bookings in a period, where two of the bookings use the same table number. For example, Booking A's table is 120, and Booking B's tables are 120 and 122.\nClick the print icon on the Reservation List.\nPrint Reservation List Dialog, select to show \"Table No.\"\nClick the \"Table No.\" column title twice to make the reservation list descend by \"Table No.\"\nClick the [Print] button, the Reservation List sorting before and after printing is consistent\nGo to Table Management System > Other Settings > Config by Location > Reservation List's Headers on Current / Calendar View > find your outlet setting, delete \"Table No.\" column on your outlet config.\nLogout TMS2.0 operation, Login again > Current View, click the print icon on the Reservation List.\nThe cached data will be cleared, and the default fields will be displayed.\nThe Reservation Status field will not be removed just because it does not exist in the Current / Calendar View booking list headers\nPrint Reservation List – select approximately 12 headers.\nClick the [Print] button, the print preview will automatically shrink to display more columns.\nReminder: The print data is limited by a threshold based on the paper size, so if many headers are selected, they will not all be displayed in the print preview.\nBefore fix:\nAfter fix:",
         "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-68071",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68071_20260922_150754.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68071_20260922_150754.docx",
-      "template": "report",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-68071",
-        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V113",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Please check and fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined array key \"suspended\"\n| ../Plugin/Report/View/PresetParams/listing.ctp, line 196\n\n| Undefined array key \"sOutlets\"\n| ../Plugin/Report/Console/Command/AutoReportShell.php, line 831\n\n../Plugin/Report/Console/Command/AutoReportShell.php, line 830\n\n| Undefined array key 3\n| ../Plugin/Report/Lib/ReportExport/ReportExportHandler.php, line 43\n\n../Plugin/Report/Lib/ReportExport/ReportExportHandler.php, line 42\n\n| Trying to access array offset on null\n| ../Plugin/Report/Lib/ReportExport/ReportExportHandler.php, line 43\n\n../Plugin/Report/Lib/ReportExport/ReportExportHandler.php, line 42\n\n| Undefined array key \"export_file_setup\"\n| ../Plugin/Pos/Console/Command/CrossOutletRevenueFixedLayoutExportShell.php, line 174\n\n| Trying to access array offset on null\n| ../Plugin/Pos/Console/Command/CrossOutletRevenueFixedLayoutExportShell.php, line 174\n\n| Undefined array key \"walk_in_custom_type_code_status\"\n| ../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 339\n\n| Undefined array key \"in_house_custom_type_code_status\"\n| ../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 335\n\n| Undefined array key \"custom_type_code_status\"\n| ../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 331\n\n| Trying to access array offset on null\n| ../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 339\n\n../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 335\n\n../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 331",
-        "refinement_notes": "",
-        "release_notes": "Bug fixing: [Jira-68071] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V113\nDescription:\n-      Preset parameter listing checked UserUser.suspended when the key was absent. A user without that flag is still shown in the normal name style.\n-      Export report language index 3 was read when that language was not configured. The language URL and code stay empty.\n-      Cross-outlet revenue export read export_file_setup when the interface had no export path. The shell still stops with the empty export path message.\n-      Auto report sOutlets and Sun cover custom type status were already guarded in an earlier fix.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined array key \"suspended\", \"sOutlets\", 3, \"export_file_setup\" and the Sun cover custom type status keys, plus Trying to access array offset on null.\n-      After: These warnings are no longer written to the error log.",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-66755",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-66755_20260922_150754.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-66755_20260922_150754.docx",
-      "template": "report",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-66755",
-        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V112",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Please check and fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined variable $bSend\n| ../Plugin/Messaging/Controller/Component/MessagingEmailComponent.php, line 529\n\n| Trying to access array offset on null\n| ../Plugin/Interface/Controller/InterfacesController.php, line 502",
-        "refinement_notes": "",
-        "release_notes": "Bug fixing: [Jira-66755] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V112\nDescription:\n-      OAuth2 email sending returned $bSend when the send threw an exception and the variable had not been set. The return value stays null, so the job is still treated as failed.\n-      Creating an interface copied a password from the existing interface record. A new interface has no record, and the password is still left empty.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined variable $bSend in MessagingEmailComponent.php and Trying to access array offset on null in InterfacesController.php.\n-      After: These warnings are no longer written to the error log.",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-66028",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-66028_20260922_150754.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-66028_20260922_150754.docx",
-      "template": "report",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-66028",
-        "summary": "[Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V111",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Please check and fix the error.log with below issues.\n\nPlease related the Undefined_Error_Calculate_List.xlsx\n\n| error\n| location\n\n| Undefined variable $outputFileFormat\n| ../Plugin/Report/Controller/ReportContentsController.php, line 529\n\n../Plugin/Report/Controller/ReportContentsController.php, line 528\n\n| Undefined variable $editId\n| ../Plugin/Report/Controller/ReportContentsController.php, line 436\n\n| Undefined array key \"toFormatParameters\"\n| ../Plugin/Report/Controller/ReportContentsController.php, line 94\n\n| Trying to access array offset on null\n| ../Plugin/Report/Controller/ReportsController.php, line 814\n\n../Plugin/Report/Controller/ReportsController.php, line 813\n\n| Undefined array key 0\n| ../Plugin/Report/Console/Command/AutoReportShell.php, line 682\n\n| Undefined array key \"sShops\"\n| ../Plugin/Report/Console/Command/AutoReportShell.php, line 828\n\n../Plugin/Report/Console/Command/AutoReportShell.php, line 827\n\n../Plugin/Report/Console/Command/AutoReportShell.php, line 826\n\n| Undefined array key \"sOutlets\"\n| ../Plugin/Report/Console/Command/AutoReportShell.php, line 845\n\n../Plugin/Report/Console/Command/AutoReportShell.php, line 844\n\n| Undefined array key \"OutShop\"\n| ../Plugin/Report/Console/Command/AutoReportShell.php, line 845\n\n../Plugin/Report/Console/Command/AutoReportShell.php, line 844\n\n| Trying to access array offset on value of type null\n| ../Plugin/Report/Console/Command/AutoReportShell.php, line 845\n\n../Plugin/Report/Console/Command/AutoReportShell.php, line 844\n\n| Undefined variable $startTime\n| ../Plugin/Messaging/Controller/Component/MessagingSmsComponent.php, line 1545\n\n| Undefined variable $errorKey\n| ../Plugin/Report/Console/Command/AutoReportShell.php, line 1219\n\n| Undefined array key \"walk_in_custom_type_code_status\"\n| ../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 339\n\n| Undefined array key \"in_house_custom_type_code_status\"\n| ../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 335\n\n| Undefined array key \"custom_type_code_status\"\n| ../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 331\n\n| Trying to access array offset on null\n| ../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 339\n\n../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 335\n\n../Plugin/Pos/Console/Command/SunCoverAccountV2ExportShell.php, line 331\n\n| Undefined array key \"type\"\n| ../Plugin/Pos/Console/Command/GeneralSalesV2ExportShell.php, line 377\n\n| Undefined array key \"passive_mode\"\n| ../Plugin/Pos/Console/Command/GeneralSalesV2ExportShell.php, line 378\n\n| Undefined array key \"debug\"\n| ../Plugin/Pos/Console/Command/GeneralSalesV2ExportShell.php, line 383\n\n| Undefined array key \"MsgInterface\"\n| ../Plugin/Pos/Console/Command/GeneralSalesV2ExportShell.php, line 317\n\n| Trying to access array offset on null\n| ../Plugin/Pos/Console/Command/GeneralSalesV2ExportShell.php, line 317",
-        "refinement_notes": "",
-        "release_notes": "Bug fixing: [Jira-66028] [Tech] Fix error.log with \"Undefined array keys\" and \"Undefined variables\" for Report Module - V111\nDescription:\n-      Report content, auto report naming, Sun cover custom type, and general sales FTP setup read array keys and variables that are not always present. Missing values still follow the previous empty result: no page-overflow parameter, edit link not taken, HTML content disposition unchanged, shop code left blank, custom type status F, and FTP type left empty.\n-      Opening a report with a null config and the CTM SMS start time were already guarded in earlier fixes.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before: error.log recorded Undefined variable $outputFileFormat, $editId, $errorKey and $startTime, Undefined array key toFormatParameters, 0, sShops, sOutlets, OutShop, custom type status, type, passive_mode, debug and MsgInterface, and Trying to access array offset on null.\n-      After: These warnings are no longer written to the error log.",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
+          "qc_tester": {
+            "name": "Sooki Shan",
+            "email": "sooki.shan@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Johnson Liu",
+            "email": "johnson.liu@shijigroup.com"
+          }
         }
       }
     }
