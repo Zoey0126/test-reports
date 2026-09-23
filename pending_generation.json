@@ -1,21 +1,118 @@
 {
-  "generated_at": "2026-09-22T19:06:18",
+  "generated_at": "2026-09-23T19:04:43",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
-  "total_pending": 1,
-  "total_skipped": 37,
+  "total_pending": 7,
+  "total_skipped": 32,
   "pending": [
     {
-      "issue_key": "HERO-66233",
-      "sprint_id": "75476",
-      "sprint_name": "TMS - 20260921-20261002",
+      "issue_key": "HERO-69102",
+      "sprint_id": "65592",
+      "sprint_name": "POS - 20260921-20261002",
       "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-66233_20260922_190618.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-66233_20260922_190618.docx",
+      "output_filename": "HERO-69102_20260923_190443.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-69102_20260923_190443.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-69102",
+        "summary": "Reserve sessions for each client login to improve overall login performance",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "POS"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "To resolve slow login times when creating new sessions, this enhancement introduces a configurable session reservation pool.\n\n- Configurable Session Pool: The system now allows defining a specific number of reserved, pre-established sessions.\n\n- Performance Improvement: Upon workstation login, the system utilizes an available reserved session directly, improving login speed and performance.",
+        "refinement_notes": "",
+        "release_notes": "Enhancements: [Jira-69102] Reserve sessions for each client login to improve overall login performance (Sunny)\nDescriptions:\nTo resolve slow login times when creating new sessions, this enhancement introduces a configurable session reservation pool.\nConfigurable Session Pool: The system now allows defining a specific number of reserved, pre-established sessions.\nPerformance Improvement: Upon workstation login, the system utilizes an available reserved session directly, improving login speed and performance.\nSetup:\nSetup for total number of sessions reserved and number of sessions for each client\n<Drive>:\\infrasys\\local\\hero_pos\\cfg\\config.ini\n[setup]\nreserved_php_session_pool_size=<Total number of sessions reserved>\nreserved_php_session_per_client=<Number of sessions for each client>\nE.g.\nreserved_php_session_pool_size=16\nreserved_php_session_per_client=8\n*** POS Launcher Service is required to restart",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Niko Xie",
+            "email": "niko.xie@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Zoey Xie",
+            "email": "zoey.xie@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-67966",
+      "sprint_id": "65592",
+      "sprint_name": "POS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-67966_20260923_190443.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-67966_20260923_190443.docx",
       "template": "infrasys",
       "is_bug": true,
       "requirement": {
-        "key": "HERO-66233",
-        "summary": "TMS2.0 - Deleted columns still display on Reservation List headers on the Print View",
+        "key": "HERO-67966",
+        "summary": "API Portal - Check maximum quantity to order of set menu incorrectly and cause bypassing price level change for child item",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "POS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Issue 1:\n\nSystem wrongly apply \"Max. quantity to order\" API portal. System uses the n-1 th child item in the \"childitems\" payload as qty\n\nPrerequisite:\n\n1. Setting menu maximum quantity\n\n* Location: Menu Management > Item Properties > Menus\n\n* Section name: Ordering Control - Set Menu Ordering\n\n* Setup name: Max. quantity to order\n\n> Setting value as 1 or larger\n\nWorkflow:\n\n1. System receives request \"Send check\" (including \"Send and pay\") to order a self-selection set menu with child item \"belong to lookup list\" included with quantity is larger than allowed maximum\n\n2. System pass the checking of maximum quantity to order even if the quantity is larger than maximum quantity (first child item = 1 - 1 = 0, so the first child item always pass the checking)\n\nActual result:\n\nSystem pass the checking of Max. qty to order even if the qty is larger than Max. qty\n\nExpected result:\n\nSystem return error if the qty is larger than Max. qty\n\nReturns error when quantity is larger than Max. quantity to order in API portal AND Support Max Ordering Quantity Validation for Self-Selection Set Menu Child Items = Yes\n\nNew setups:\n\nProvide new setup in config by location to keep existing behavior:\n\n* Location: POS System > Ordering Setup > Conifg by Location\n\n* Setup name: Set Menu Setting for API Portal\n\n> Sub setting name: Support Max Ordering Quantity Validation for Self-Selection Set Menu Child Items\n\n> Default: No\n\nIssue 2:\n\nSystem cannot change price level for child item in self-selection set menu when the n-1th child item in request equal to or larger than \"Max. quantity to order\" in menu setup\n\nPrerequisite:\n\n1. Setting menu maximum quantity\n\n* Location: Menu Management > Item Properties > Menus\n\n* Section name: Ordering Control - Set Menu Ordering\n\n* Setup name: Max. quantity to order\n\n> Setting value as 1 or larger\n\n2. Setting change price level for self-select menu\n\n* Location: Menu Management > Item Properties > Set Menu\n\n* Select target self-select menu\n\n* Setup name: Change Price Level\n\n> Setting value as \"Yes\"\n\n> Setting target price level as non default price level\n\nWorkflow:\n\n1. System receive request \"Send check\" to order a self-selection set menu with child item \"belong to lookup list\" provided and the n-1th child item in request equal to or larger than the \"Max. quantity to order\" in menu setup\n\n2. System check the maximum quantity condition incorrectly (system check the condition  nth child item in request equal to or larger than \"Max. quantity to order\"), and so bypass the change price level handling\n\n3. System cannot get the correct price level and change the price level\n\nActual result:\n\nSystem doesn't change the price level of child item even if the quantity of child item doesn't exceed the maximum quantity to order\n\nExpected result:\n\nSystem changes the price level of child item for the applied self-select child item",
+        "refinement_notes": "",
+        "release_notes": "Bug Fixing: [Jira-67966] API Portal - Check maximum quantity to order of set menu incorrectly and cause bypassing price level change for child item (Christopher)\nDescriptions:\nSystem checks the maximum order quantity for self-selection child item incorrectly by using the (N-1)-th child item Json object in the \"childitems\" payload, and this causes:\nSystem bypasses set menu price level change handling for the self-selection child item which is the M-th (M = the value in Setup 1) child item Json object in the \"childitems\" payload\nSystem applies the self-selection child item that exceeds the child item order quantity limit from Setup 1\nWorkflow\n1. System receives the \"Send check\" / \"Send and pay\" / \"Park order by station\" / \"Park order by table\" request that order the self-selection set menu with the child item that belongs to a lookup list and the total child item quantity is larger than the value in Setup 1\n2. If Setup 3 does not exist or exists with value as “No”, system will bypass the maximum order quantity validation for self-selection child items, and go to step 6\n3. If Setup 3 exists with values as “Yes”, system will perform maximum order quantity validation for self-selection child items, and go to step 4\n4. If the total quantity of self-selection child items is larger than the value in Setup 1, system will return the error response\n5. If the total quantity of self-selection child items is NOT larger than the value in Setup 1, go to step 6\n6. System will change price level for the applied self-selection child items by the price level value in Setup 2\n7. System continues the existing workflow\nExpected Result:\nSystem returns an error message “Exceed child max order limit” if that total quantity of the self-selection child items is larger than the value in Setup 1 and Setup 3 exists with values as “Yes”\nSystem changes the price level for the applied self-selection child items\nIt is fixed in current version\nSetup:\nSet the maximum quantity to order for the menu [Setup 1]\nGo to Menu Management à Item Properties à Menus\nSelect the section \"Ordering Control - Set Menu Ordering\"\nSelect setup \"Max. quantity to order\"\nSet the target value\nClick “Save” to save the record\nSet the price level for the self-selection set menu [Setup 2]\nGo to Menu Management à Item Properties à Set Menu\nSelect the target self-selection set menu\nSelect setup \"Change Price Level\"\nSet the target price level value\nClick “Save” to save the record\nSetup to support max Ordering Quantity Validation for Self-Selection Set Menu Child Items [Setup 3]\nGo to POS System à Ordering Setup à Config by Location\nSelect setup \"Set Menu Setting for API Portal\"\nSet “Support Max Ordering Quantity Validation for Self-Selection Set Menu Child Items” = Yes\nClick “Save” to save the record",
+        "qc_info": {
+          "qc_tester": {
+            "name": "Viktor Peng",
+            "email": "viktor.peng@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Tian Xie",
+            "email": "tian.xie@shijigroup.com"
+          }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-68112",
+      "sprint_id": "65594",
+      "sprint_name": "Platform - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-68112_20260923_190443.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-68112_20260923_190443.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-68112",
+        "summary": "HQ - Handling Deletion for Entities with Historical Sales Data (Platform Dev)",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "POS",
+          "REPORTS"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "Enhancement Detail\n\n- Platform Dev case for https://jira.shijidev.com/browse/HERO-63824",
+        "refinement_notes": "",
+        "release_notes": "",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-69083",
+      "sprint_id": "75476",
+      "sprint_name": "TMS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-69083_20260923_190443.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-69083_20260923_190443.docx",
+      "template": "infrasys",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-69083",
+        "summary": "TMS 2.0 - Payby Access Token globally cached for all outlets",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
@@ -23,18 +120,102 @@
         ],
         "issue_type": "Bug",
         "is_bug": true,
-        "description": "Scenario 1: Deleted columns still display on Reservation List headers\n\nPrerequisites:\n\n- There are some reservations created on the current date(e.g.,2026-06-24).\n\nSteps:\n\n- Admin > Table Management System > Other Settings > Config by Location >\n\nReservation List's Headers on Current / Calendar View > find your outlet setting, add \"Table No.\" column on your outlet config.\n\n- Go to TMS2.0 operation > Current View, click the print icon on the Reservation List.\n\n- Print Reservation List Dialog, select to show \"Table No.\"\n\n- Click the [Print] button.\n\n- Admin > Table Management System > Other Settings > Config by Location >\n\nReservation List's Headers on Current / Calendar View > find your outlet setting, delete \"Table No.\" column on your outlet config.\n\n- Logout TMS2.0 operation,Login again > Calender View(Pick the date 2026-06-26), click the print icon on the Reservation List.\n\nActual result:\n\nThe Reservation List still shows the\"Table No.\" column, though  the show column option  is without the \"Table No.\" option\n\nExpect result:\n\nFields that have been set to be hidden should not be displayed.\n\nScenario 2: The reservation list order before and after printing is different.\n\nPrerequisites:\n\n- There are some reservations created on a date(e.g.,2026-06-26).\n\n- Admin > Table Management System > Other Settings > Config by Location >\n\nReservation List's Headers on Current / Calendar View > find your outlet setting, add \"Table No.\" column on your outlet config.\n\nSteps:\n\n- Go to TMS2.0 operation > Calendar View(2026-06-26), click the print icon on the Reservation List.\n\n- Print Reservation List Dialog, select to show \"Table No.\"\n\n- Click the \"Table No.\" column title twice to make the reservation list descend by\"Table No.\"\n\n- Click the [Print] button.\n\nActual result:\n\nThe order of the dialog and the printer view is different.\n\nStep 3 shows the reservation list order\n\nStep 4 shows the reservation list order\n\nExpect result:\n\nThe Reservation List sorting before and after printing is consistent.",
+        "description": "Email/Zoho title:\n\n-\n\nUse Case:\n\nPayby Access Token is globally cached without idendically saved for differernt setting on outlets.\n\nSteps to Reproduce:\n\n1. Setup different PayBy in two outlets.\n\n2. Go to operation mode, use outlet a call for payment method (get outlet A PayBy access token)\n\n3. Close dialog and switch outlet to Outlet B, get access token again\n\nCurrent Result:\n\nPopup error: \"Error fetching 3rd party payment methods: third_party_error: client is not found\"\n\n[Unexpected]\n\nExpected Result:\n\nNo error popup\n\n[Expected]",
         "refinement_notes": "",
-        "release_notes": "Bug Fixing: [Jira-66233] TMS2.0 - Deleted columns still display on Reservation List headers on the Print View\nDescriptions:\nThe reservation list order before and after printing is different.\nIn the print preview page, when there are many columns, they will not automatically shrink.\nDeleted columns still display on Reservation List headers\nSetup:\nCreate multiple bookings in a period, where two of the bookings use the same table number. For example, Booking A's table is 120, and Booking B's tables are 120 and 122.\nClick the print icon on the Reservation List.\nPrint Reservation List Dialog, select to show \"Table No.\"\nClick the \"Table No.\" column title twice to make the reservation list descend by \"Table No.\"\nClick the [Print] button, the Reservation List sorting before and after printing is consistent\nGo to Table Management System > Other Settings > Config by Location > Reservation List's Headers on Current / Calendar View > find your outlet setting, delete \"Table No.\" column on your outlet config.\nLogout TMS2.0 operation, Login again > Current View, click the print icon on the Reservation List.\nThe cached data will be cleared, and the default fields will be displayed.\nThe Reservation Status field will not be removed just because it does not exist in the Current / Calendar View booking list headers\nPrint Reservation List – select approximately 12 headers.\nClick the [Print] button, the print preview will automatically shrink to display more columns.\nReminder: The print data is limited by a threshold based on the paper size, so if many headers are selected, they will not all be displayed in the print preview.\nBefore fix:\nAfter fix:",
+        "release_notes": "Enhancement : [HERO-69083] TMS 2.0 - Payby Access Token globally cached for all outlets\nDescriptions :\nThe Payby access token is stored and identified by payment method ID. An outlet can have more than one Payby payment method. Each method keeps its own cached access token.\nThis was verified on Infrasys Restaurant. Two new Payby payment methods were created with the same credential settings as the existing Payby payment method. Creating payment in operation for each method produced two separate token cache files.\nSetup :\n1. Log in to TMS Operation and select outlet Infrasys Restaurant.\n2. Open TMS Payment Methods for Infrasys Restaurant. The existing Payby payment method can stay. Create two more Payby payment methods (Type = Interface, Interface = Payby Payment). Use the same gateway, resort, grant type, and client credentials as the existing Payby payment method. Save both as Active.\n3. Confirm the listing shows multiple Payby payment methods for the same outlet, all Active. In this test: existing payby payment (ID 5), Payby RN Test A (ID 7), Payby RN Test B (ID 8).\n4. Open TMS Operation for Infrasys Restaurant. Open a reservation (new reservation or Search View). Open Deposit Details, click +, and create payment using Payby RN Test A, then create payment using Payby RN Test B. The first call of each method requests an access token.\n5. Check the access token cache folder accounts/{account_name}/tmp/cache. There must be one file per payment method ID:\ncake_86400_secs_third_party_payment_access_token_payby_7\ncake_86400_secs_third_party_payment_access_token_payby_8\n6. Confirm the two files exist at the same time and the stored token values are not the same. The outlet must not share one token file.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-68781",
+      "sprint_id": "75476",
+      "sprint_name": "TMS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-68781_20260923_190443.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-68781_20260923_190443.docx",
+      "template": "infrasys",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-68781",
+        "summary": "[Tech] TMS 2.0 - Disable Master Server URL on Dummy Cloud HQ (Mix)",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Since the On-Premises Dummy HQ (sever type = mix, and is Dummy), by design, does not need to synchronize data from the Master Server.\n\nPlease disable the Master Server configuration section to prevent users from mistakenly filling it in and causing synchronization failures.\n\nAdditionally, remove the “required” validation for the Master Server URL field from both Data Update (Add On) and Schedule Auto Data Update (Add On) under Admin Page > TMS > Data Synchronization.",
+        "refinement_notes": "",
+        "release_notes": "Bug Fixing: [Jira-68781] TMS 2.0 - Disable Master Server URL on Dummy Cloud HQ (Mix)\nDescriptions:\nSince the On-Premises Dummy HQ (server type = mix, and is Dummy) by design does not need to synchronize data from the Master Server, disable the Master Server configuration section to prevent users from mistakenly filling it in and causing synchronization failures.\nRemove the \"required\" validation for the Master Server URL field from both Data Update (Add On) and Schedule Auto Data Update (Add On) under Admin Page > TMS > Data Synchronization.\nSetup:\nTest environment: Dummy Cloud HQ (Mix)\nGo to System Management > System Configuration > Global Settings, hide the Master Server section\nOn the first subsequent edit and save of the system configuration, the existing Master Server fields (URL, Security Key, Login Name, Password) will be automatically cleared.\nGo to Table Management System > Data Synchronization > Data Update (Add On)\nThe required indicator and required-field validation have been removed from the Master Server URL, FTP / HTTP Interface, and HTTP Interface fields, allowing them to be left empty\nGo to Table Management System > Data Synchronization > Schedule Auto Data Update (Add On),\nThe required-field checks for Master Server URL, FTP / HTTP Interface, and HTTP Interface have been removed when saving data, allowing them to be saved as empty.",
         "qc_info": {
           "qc_tester": {
-            "name": "Sooki Shan",
-            "email": "sooki.shan@shijigroup.com"
-          },
-          "qc_reviewer": {
             "name": "Johnson Liu",
             "email": "johnson.liu@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Alisa Chen",
+            "email": "alisa.chen@shijigroup.com"
           }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-68546",
+      "sprint_id": "75476",
+      "sprint_name": "TMS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-68546_20260923_190443.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-68546_20260923_190443.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-68546",
+        "summary": "TMS 2.0 - Support free text input extra options for special occasions - Dev (2/2)",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "",
+        "refinement_notes": "",
+        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys Cloud TMS Release Notes\nVersion 1.2.116.0\nReleased on 21 September 2026\nConfidential and Internal Use Only\nInfrasys Cloud TMS Release Notes\nVersion 1.2.116.0\nTable of Contents\n<<< 1.2.116.0 >>>\t3<<< 1.2.115.0 >>>\t3\nInfrasys Cloud Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\n| V1.2.116.0 | [Jira-68546] TMS 2.0 - Support free text input extra options for special occasions – Dev |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.116.0 | 21 September 2026 |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n<<< 1.2.116.0 >>>\nEnhancements: [Jira-68546] TMS 2.0 - Support free text input extra options for special occasions – Dev\nDescriptions:\nThis task is to support free text input on Extra Options (optional selection). Guest / operator can select an extra option (for example Birthday) and type extra details after the option. Typical use is special occasion remarks that cannot be covered by a fixed option list.\nNew Extra Option setting: Allow Custom Value.\nNo (empty) — existing behaviour. Only the option can be selected. No text box.\nYes (y) — a text box is shown under the extra option dropdown. Typed text is saved together with the selected option.\nDisplay format is: Option name - typed text. Example: Birthday - 50th birthday, cake with candles.\nTyped text is stored in reservation extra info value (tms_resv_extra_infos.rvei_value). System only keeps the text when the selected extra option has Allow Custom Value = Yes. If the option does not allow custom value, typed text is ignored / cleared.\nSetup:\nHQ – Extra Options\nGo to Admin Page -> “Table Management System” (TMS) -> Extra Options\nListing adds column Allow Custom Value. Tick = Yes, cross = No.\nThe Extra Options listing is as below.\nAdd New / Edit Extra Option adds field Allow Custom Value. Value No / Yes (empty = No, y = Yes).\nAdd New Extra Option is as below.\nEdit Extra Option is as below.\nDefault is No. Existing extra options stay No after upgrade until user sets Yes.\nView Extra Option also shows Allow Custom Value.\nView Extra Option is as below.\nDatabase: tms_extra_options.eopt_allow_custom_value, char(1), not null, default empty. Value y = Yes.\nOnline Booking – Add / Edit Reservation\nWhen the selected extra option has Allow Custom Value = Yes, a text box is shown under the dropdown. Placeholder: custom extra option.\nOnline Booking extra option with custom text is as below.\nWhen the selected extra option has Allow Custom Value = No, the text box is hidden and the typed text is cleared.\nIf user changes to another option then changes back to the original option, the original typed text is restored. If user selects a different option that also allows custom value, the text box is empty.\nConfirmation page and booking find result show Option name - typed text. Line break in typed text is kept.\nTMS Operation – Add / Edit / View Reservation and Walk-in\nSame behaviour as online. When the selected extra option allows custom value, a text box is shown under the extra option dropdown.\nChanging the extra option always clears the typed text. User needs to type again after changing option.\nReservation list extra info column, reservation side panel / view, and advanced search result details also show Option name - typed text.\nMessage / Reservation change log\nNotification / message extra option variable uses the same display: Option name - typed text.\nReservation change log records extra option change and typed text change. Example: [Special Occasion] from Birthday - 40th to Birthday - 50th birthday.\nIf only typed text is changed and the extra option is not changed, change log is still written.\nOpen API\ngetOutletSettings\nVersion 1.5 adds extra_options.allow_custom_value under outlet extra_infos. Version below 1.5 does not return this key (old extra_infos structure is unchanged).\nallow_custom_value: empty = No, y = Yes.\nResponse extra_infos extra_options example\n| JSON Sample File – getOutletSettings extra_infos |\n| {    \"status\": \"success\",    \"data\": {       \"outlet_settings\": {          \"extra_infos\": [             {                \"key\": \"special_occasion\",                \"type\": \"o\",                \"name\": \"Special Occasion\",                \"extra_options\": [                   {                      \"code\": \"BIRTHDAY\",                      \"name\": \"Birthday\",                      \"allow_custom_value\": \"y\"                   },                   {                      \"code\": \"ANNIVERSARY\",                      \"name\": \"Anniversary\",                      \"allow_custom_value\": \"\"                   }                ]             }          ]       }    } } |\n| Variable Name | Value | Data Type | Mandatory | Description |\n| allow_custom_value | y | String | N | New from getOutletSettings version 1.5. Empty = No. y = Yes. Omitted when version < 1.5. |\n| code | BIRTHDAY | String | Y | Extra option code (eopt_code) |\n| name | Birthday | String | Y | Extra option name |\nAdd / Edit reservation extra_infos (type = o)\nFor extra type optional selection (type o), pass extra option by code. Typed custom text is extra_infos.value. System only saves value when the matched extra option has allow_custom_value = y. If the option does not allow custom value, or value is empty / null, rvei_value is saved as empty.\ncode can be top-level extra_infos.code, or extra_options[0].code (same shape as getOutletSettings / find reservation reply).\nRequest extra_infos example\n| JSON Sample File – addResv / editResv extra_infos |\n| {    \"interface\": \"openapi\",    \"module\": \"tms\",    \"fcn\": \"addResv\",    \"body\": {       \"shop_code\": \"SHOP01\",       \"outlet_code\": \"OUT01\",       \"extra_infos\": [          {             \"key\": \"special_occasion\",             \"code\": \"BIRTHDAY\",             \"value\": \"50th birthday, cake with candles\"          }       ]    } } |\n| Variable Name | Value | Data Type | Mandatory | Description |\n| key | special_occasion | String | Y | Extra type key (etyp_key) |\n| code | BIRTHDAY | String | Y | Extra option code. Required for type o. Can also pass extra_options[0].code |\n| value | 50th birthday, cake with candles | String | N | Custom text for type o. Only accepted when allow_custom_value = y. For type f this is still the free text value |\nFind / get reservation extra_infos\nFor type o, value is the typed custom text. If no custom text, value is null. extra_options still returns the selected option code / name.\nextra_info_value is also returned when type o has custom text (same value as value).\nResponse extra_infos example (type o with custom text)\n| JSON Sample File – extra_infos in reservation reply |\n| {    \"key\": \"special_occasion\",    \"type\": \"o\",    \"name\": \"Special Occasion\",    \"value\": \"50th birthday, cake with candles\",    \"extra_info_value\": \"50th birthday, cake with candles\",    \"extra_options\": [       {          \"code\": \"BIRTHDAY\",          \"name\": \"Birthday\"       }    ] } |\n| Variable Name | Value | Data Type | Mandatory | Description |\n| key | special_occasion | String | Y | Extra type key |\n| type | o | String | Y | o = optional selection, f = free text |\n| name | Special Occasion | String | Y | Extra type name |\n| value | 50th birthday, cake with candles | String | N | For type o: custom text, or null when empty. For type f: free text |\n| extra_info_value | 50th birthday, cake with candles | String | N | Returned only when type o has custom text |\n| extra_options | [{}] | Array | N | Selected extra option code / name |\nresv_extra_infos (Open API version 2.3 or above) also returns extra_info_value when the saved extra info has typed text.\n| JSON Sample File – resv_extra_infos |\n| {    \"resv_extra_info_id\": \"8af0ccdf-fcde-46d6-885f-3e659dbf3b06\",    \"extra_type_id\": \"12\",    \"extra_option_id\": \"34\",    \"extra_info_value\": \"50th birthday, cake with candles\" } |\n| Variable Name | Value | Data Type | Mandatory | Description |\n| resv_extra_info_id | 8af0ccdf-fcde-46d6-885f-3e659dbf3b06 | String | Y | TmsResvExtraInfo Id |\n| extra_type_id | 12 | String | Y | TmsExtraType Id |\n| extra_option_id | 34 | String | N | TmsExtraOption Id. Omitted when empty / 0 |\n| extra_info_value | 50th birthday, cake with candles | String | N | Typed custom text. Omitted when empty |\nRelease: 2026<<< 1.2.116.0>>>\n********************************************************************************",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-58101",
+      "sprint_id": "75476",
+      "sprint_name": "TMS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-58101_20260923_190443.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-58101_20260923_190443.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-58101",
+        "summary": "TMS 2.0 - Add Aspen owner code and status on Aspen display ",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "20260313 updates:\n\nneed dev after HERO-58373\n\nRequest to add one column Owner Code (to POS and TMS) at Apsen search member result.  the value is from POS searchmember function, by ario_code",
+        "refinement_notes": "",
+        "release_notes": "Enhancements: [Jira-58101] - TMS 2.0 - Add Aspen owner code and status on Aspen display\nDescription:\nAdd a new result display field \"Owens Code\" for Aspen.\nSetup:\nGo to Table Management System > Other Settings > Config by Location page, find the \"Interface Result Fields On New Reservation\" setting and edit it.\nAdded a new field \"Owner Code\" in the \"Interface Result Fields On New Reservation\" settings(Note: The \"Status\" field does not need to be added as \"Member Status\" field that already exists).\nWhen editing or adding interfaces set by aspen, can find the newly added fields in the fields.\nTick it and save the settings.\nGo to Other Settings > Themes page, edit a \"New Reservation\" or \"Walk In\" Section within an existing theme.\nCan find \"aspen\" newly added \"[Result] Owner Code\" under the \"Interface\" in the \"Field\" tab on the right.\nDrag it to the tag belonging to member aspen and save the theme.\nGo to TMS Operation > New Reservation page, switch the right-hand tab to \"member aspen\" and can find the newly added \"Owner Code\" field in the fields below.\nUse the search button under Aspen to search for members, if the member has an \"Owner Code\", it will be displayed in the \"[Result] Owner Code\" input box.\nSave reservation, this information will not be saved in the profile.\nGo to Walk In, use Aspen search button to search for members, and if there is an \"Owner Code\" content, it will also be displayed in the input box.\nSave reservation, this information will not be saved in the profile.\nRelease: 20261104< 1.2.116.0>>>\n********************************************************************************",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
         }
       }
     }
