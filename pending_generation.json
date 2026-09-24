@@ -1,73 +1,39 @@
 {
-  "generated_at": "2026-09-24T11:06:33",
+  "generated_at": "2026-09-24T15:06:58",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
-  "total_pending": 2,
-  "total_skipped": 31,
+  "total_pending": 1,
+  "total_skipped": 30,
   "pending": [
     {
-      "issue_key": "HERO-68245",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68245_20260924_110633.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68245_20260924_110633.docx",
-      "template": "report",
-      "is_bug": true,
+      "issue_key": "HERO-63345",
+      "sprint_id": "65591",
+      "sprint_name": "POS - 20260907-20260918",
+      "sprint_folder": "Sprint20260907-20260918",
+      "output_filename": "HERO-63345_20260924_150658.docx",
+      "output_rel_path": "Sprint20260907-20260918/HERO-63345_20260924_150658.docx",
+      "template": "infrasys",
+      "is_bug": false,
       "requirement": {
-        "key": "HERO-68245",
-        "summary": "POS160 Cashier Settlement Report(By Outlet) - Missing Outlet filtering condition in Business Day data retrieval",
+        "key": "HERO-63345",
+        "summary": "Support to sync SLC Member Information from TMS to POS for auto Set Member",
         "status": "READY FOR QA",
-        "template": "report",
+        "template": "infrasys",
         "components": [
-          "REPORTS"
+          "POS"
         ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "",
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "Refer to HERO-43809, the auto set member function for SLC member is not working when Seat-in from TMS and open the check in POS.\n\nRequest the further development to fix this feature.\n\nHere is the original request on this feature request:\n\nEnhancement Details:\n\nwhen mark arrival for the reservation in TMS, pass the SLC Member Number and Last Name and Email to POS, then attach member to the check\n\nSLC Member Number = membership number",
         "refinement_notes": "",
-        "release_notes": "",
+        "release_notes": "Enhancements: [Jira-63345] Support to sync SLC Member Information from TMS to POS for auto Set Member\nDescriptions:\nIt is available for Golden Circle membership interface (SLC)\nSystem supports attaching SLC member in the following API portal requests:\nSend Check\nMark Arrival\nWorkflow of send check via API portal\n1. System receives API portal send check request with SLC member number and member last name\n2. System processes send check request\n3. If the interface code is NOT given in request OR the code is NOT SLC, go to step 11\n4. If the interface code is SLC, go to step 5\n5. System triggers external party API for Member Enquiry API with using the SLC member number and member last name\n6. If there is connection problem OR external party returned error OR invalid response, go to step 11\n7. If the external party returned success but there is no member profile exists in the response, go to step 11\n8. If the external party returned success but there is at least one member profile exists in the response, system uses the first member profile to trigger external party API for Fetch Profile\n9. If there is connection problem / external party returned error / invalid response, go to step 11\n10. If the external party returned success, system attaches SLC member into the check\n11. System continues the remaining procedures of send check\n12. If API send check request is successfully done but cannot attach member because of step 6 / step 7 / step 9, API response include “fail_to_attach_member” as warning message\nWorkflow of mark arrival via API portal\n1. System receives API portal mark arrival request with SLC member number and member last name\n2. System follows existing handling to save the interface ID and new param about SLC member number and member last name into POS outlet table\n3. Click a table with mark arrival status at POS client\n4. If the POS outlet table saved membership interface ID is NOT as SLC membership interface, follow existing handling that workflow ends here\n5. If the POS outlet table saved membership interface ID is as SLC membership interface, go to step 6\n6. If the new param about SLC member number is NOT in POS outlet table record, go to step 14\n7. If the new param about SLC member number is in POS outlet table record, go to step 8\n8. System triggers external party API for Member Enquiry API with using the SLC member number\n9. If there is connection problem / external party returned error / invalid response, system follows existing handling to write station log about fail to attach member and go to step 14\n10. If the external party returned success but there is no member profile exists in the response, system follows existing handling to write station log about fail to attach member and go to step 14\n11. If the external party returned success but there is at least one member profile exists in the response, system uses the first member profile to trigger external party API Fetch Profile\n12. If there is connection problem / external party returned error / invalid response, system follow existing handling to write station log about fail to attach member and go to step 14\n13. If the external party returned success, system attach SLC member into the check\n14. System continues remaining procedures of open a check\n15. Click function “SVC Enquiry”\n16. Select target SLC membership interface\n17. If SLC member is attached to check already because of step 13, system follows existing handling to show the attached member in the member enquiry UI\nSetup:\nNone",
         "qc_info": {
           "qc_tester": {
-            "name": "Zephyr Ji",
-            "email": "zephyr.ji@shijigroup.com"
+            "name": "Kiet Zou",
+            "email": "kiet.zou@shijigroup.com"
           },
           "qc_reviewer": {
-            "name": "Kathy Kuang",
-            "email": "kathy.kuang@shijigroup.com"
-          }
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-57532",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-57532_20260924_110633.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-57532_20260924_110633.docx",
-      "template": "report",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-57532",
-        "summary": "POS043 Audit Control Report | PDF can not show whole report",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Email: CASE Report SW HERO 海口喜来登温泉度假酒店 POS043查账管理报表",
-        "refinement_notes": "",
-        "release_notes": "Bug Fixing: [HERO-57532] POS043 Audit Control Report | PDF can not show whole report\nDescriptions:\nFix the layout issue on POS043 \"Audit Control Report\" when exporting to PDF with the Auto page size option. Previously, the report table was wider than the available page width on the current paper size (A3 portrait), so the rightmost column \"Fiscal Number\" was truncated and could not be shown completely. After this fix, the column widths are adjusted to fit within the existing paper size, and the full Fiscal Number header and values can be displayed in the PDF.\nConfiguration / Parameter:\nReproduce steps:\n1. Open Infrasys Cloud and go to the report module.\n2. Select report POS043 \"Audit Control Report\".\n3. Enter the required report parameters (for example Business Day and Check No.) and run the report.\n4. Export the result to PDF and choose the Auto page size option.\n5. Open the exported PDF and check the table header on the right side.\nBefore the fix, the column \"Fiscal Number\" is cut off (for example only \"Fiscal Num\" is visible).\nNo new report parameter or system configuration is added for this fix.\nField Definition:\nThis case does not involve field definition. Existing columns remain the same: Time, Outlet, Employee, Action, and Fiscal Number. Only the column widths are adjusted so that Fiscal Number fits on the page.\nResult / Sample:\nAfter the fix, when POS043 is exported to PDF with the Auto page size option on the current paper size, the full \"Fiscal Number\" column header and values are visible within the page margins.\nPOS043 PDF export after fix - Fiscal Number shown completely",
-        "qc_info": {
-          "qc_tester": {
-            "name": "Zephyr Ji",
-            "email": "zephyr.ji@shijigroup.com"
-          },
-          "qc_reviewer": {
-            "name": "Kathy Kuang",
-            "email": "kathy.kuang@shijigroup.com"
+            "name": "Briana Li",
+            "email": "briana.li@shijigroup.com"
           }
         }
       }

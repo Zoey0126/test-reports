@@ -659,6 +659,11 @@
       "path": "Sprint20260921-20261002/HERO-57532_20260924_110633.docx",
       "template": "report",
       "generated_at": "2026-09-24T11:08:42"
+    },
+    "HERO-63345": {
+      "path": "Sprint20260907-20260918/HERO-63345_20260924_150658.docx",
+      "template": "infrasys",
+      "generated_at": "2026-09-24T15:09:04"
     }
   }
 }
