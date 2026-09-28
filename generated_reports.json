@@ -664,6 +664,31 @@
       "path": "Sprint20260907-20260918/HERO-63345_20260924_150658.docx",
       "template": "infrasys",
       "generated_at": "2026-09-24T15:09:04"
+    },
+    "HERO-66685": {
+      "path": "Sprint20260921-20261002/HERO-66685_20260928_090032.docx",
+      "template": "infrasys",
+      "generated_at": "2026-09-28T09:12:54"
+    },
+    "HERO-67793": {
+      "path": "Sprint20260921-20261002/HERO-67793_20260928_090032.docx",
+      "template": "report",
+      "generated_at": "2026-09-28T09:12:54"
+    },
+    "HERO-56614": {
+      "path": "Sprint20260921-20261002/HERO-56614_20260928_090032.docx",
+      "template": "report",
+      "generated_at": "2026-09-28T09:12:54"
+    },
+    "HERO-56451": {
+      "path": "Sprint20260921-20261002/HERO-56451_20260928_090032.docx",
+      "template": "report",
+      "generated_at": "2026-09-28T09:12:54"
+    },
+    "HERO-69086": {
+      "path": "Sprint20260921-20261002/HERO-69086_20260928_090032.docx",
+      "template": "infrasys",
+      "generated_at": "2026-09-28T09:12:54"
     }
   }
 }

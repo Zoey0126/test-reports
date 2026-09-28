@@ -1,40 +1,152 @@
 {
-  "generated_at": "2026-09-24T15:06:58",
+  "generated_at": "2026-09-28T09:00:32",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
-  "total_pending": 1,
-  "total_skipped": 30,
+  "total_pending": 5,
+  "total_skipped": 32,
   "pending": [
     {
-      "issue_key": "HERO-63345",
-      "sprint_id": "65591",
-      "sprint_name": "POS - 20260907-20260918",
-      "sprint_folder": "Sprint20260907-20260918",
-      "output_filename": "HERO-63345_20260924_150658.docx",
-      "output_rel_path": "Sprint20260907-20260918/HERO-63345_20260924_150658.docx",
+      "issue_key": "HERO-66685",
+      "sprint_id": "65592",
+      "sprint_name": "POS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-66685_20260928_090032.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-66685_20260928_090032.docx",
       "template": "infrasys",
-      "is_bug": false,
+      "is_bug": true,
       "requirement": {
-        "key": "HERO-63345",
-        "summary": "Support to sync SLC Member Information from TMS to POS for auto Set Member",
+        "key": "HERO-66685",
+        "summary": "Last PIN logged-in user records lost if setup data sync from HQ to LS",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
           "POS"
         ],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "Refer to HERO-43809, the auto set member function for SLC member is not working when Seat-in from TMS and open the check in POS.\n\nRequest the further development to fix this feature.\n\nHere is the original request on this feature request:\n\nEnhancement Details:\n\nwhen mark arrival for the reservation in TMS, pass the SLC Member Number and Last Name and Email to POS, then attach member to the check\n\nSLC Member Number = membership number",
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Prerequisites:\n\n1. Setting PIN rules\n\n* Location: System Management > System Configuration > User Module\n\n* Using default is ok\n\n2. Setting target station to use PIN login\n\n* Location: POS System > Station Setup > Stations\n\n* Setup name: User Login Method\n\n>Select option \"Login name and Password\" and \"User Pin\"\n\n3. Prepare users for using PIN\n\n4. Assign user to target user group for PIN usage\n\n* Location: User Management > Users group\n\n* Include target user and / or user department\n\n5. Setting PIN login\n\n* Location: POS System > Ordering Setup > Config by Location\n\n* Config Name: PIN Login Settings\n\n* Setup name: Apply To\n\n> Select target location accordingly\n\n* Setup name: User List Display Info\n\n> Select \"First Name and Last Name\"\n\n* Setup name: Default Tab\n\n> Select \"Last Users\"\n\n* Setup name: User Groups Allowed to Log In by PIN\n\n> Select target user group\n\n6. Setting client to use \"Direct Login\"\n\n* Go to client\n\n* Revise the setup at location: General > Server Setting\n\n* Setup name: Log-in type\n\n> Select value \"Direct connect\"\n\nWorkflow\n\n1. Click button \"Direct Connect\" at the initial page of the POS client\n\n2. Click portrait icon\n\n3. System shows Select PIN Login User page\n\n4. Select \"All Users\" tab\n\n5. System shows list of users that are allowed to log in with PIN\n\n6. Select target user to login\n\n7. Input the PIN\n\n8. Click button \"Enter\"\n\n9. System processes user login and displays floor plan\n\n10. At the background, system runs sync data publish data from HQ to LS so the table recent PIN login user content is cleared\n\n11. Click button \"Exit\"\n\n12. Click portrait icon\n\n13. System shows Select PIN Login User page\n\n14. Select \"Last Users\" tab\n\nActual result\n\nSystem shows an empty list\n\nExpected result\n\nSystem shows target user who logged in step 6 in a list",
         "refinement_notes": "",
-        "release_notes": "Enhancements: [Jira-63345] Support to sync SLC Member Information from TMS to POS for auto Set Member\nDescriptions:\nIt is available for Golden Circle membership interface (SLC)\nSystem supports attaching SLC member in the following API portal requests:\nSend Check\nMark Arrival\nWorkflow of send check via API portal\n1. System receives API portal send check request with SLC member number and member last name\n2. System processes send check request\n3. If the interface code is NOT given in request OR the code is NOT SLC, go to step 11\n4. If the interface code is SLC, go to step 5\n5. System triggers external party API for Member Enquiry API with using the SLC member number and member last name\n6. If there is connection problem OR external party returned error OR invalid response, go to step 11\n7. If the external party returned success but there is no member profile exists in the response, go to step 11\n8. If the external party returned success but there is at least one member profile exists in the response, system uses the first member profile to trigger external party API for Fetch Profile\n9. If there is connection problem / external party returned error / invalid response, go to step 11\n10. If the external party returned success, system attaches SLC member into the check\n11. System continues the remaining procedures of send check\n12. If API send check request is successfully done but cannot attach member because of step 6 / step 7 / step 9, API response include “fail_to_attach_member” as warning message\nWorkflow of mark arrival via API portal\n1. System receives API portal mark arrival request with SLC member number and member last name\n2. System follows existing handling to save the interface ID and new param about SLC member number and member last name into POS outlet table\n3. Click a table with mark arrival status at POS client\n4. If the POS outlet table saved membership interface ID is NOT as SLC membership interface, follow existing handling that workflow ends here\n5. If the POS outlet table saved membership interface ID is as SLC membership interface, go to step 6\n6. If the new param about SLC member number is NOT in POS outlet table record, go to step 14\n7. If the new param about SLC member number is in POS outlet table record, go to step 8\n8. System triggers external party API for Member Enquiry API with using the SLC member number\n9. If there is connection problem / external party returned error / invalid response, system follows existing handling to write station log about fail to attach member and go to step 14\n10. If the external party returned success but there is no member profile exists in the response, system follows existing handling to write station log about fail to attach member and go to step 14\n11. If the external party returned success but there is at least one member profile exists in the response, system uses the first member profile to trigger external party API Fetch Profile\n12. If there is connection problem / external party returned error / invalid response, system follow existing handling to write station log about fail to attach member and go to step 14\n13. If the external party returned success, system attach SLC member into the check\n14. System continues remaining procedures of open a check\n15. Click function “SVC Enquiry”\n16. Select target SLC membership interface\n17. If SLC member is attached to check already because of step 13, system follows existing handling to show the attached member in the member enquiry UI\nSetup:\nNone",
+        "release_notes": "Bug Fixing: [Jira-66685] Last PIN logged-in user records lost if setup data sync from HQ to LS\nDescriptions:\nWhen data update is performed on a local server after the HQ server publishes setup data, the previous PIN login records on the local server are erased\nWorkflow\n1. Go to Manage Date Release on the platform of HQ server to publish data\n2. Go to Data Update on the platform of local server to download data from HQ server\n3. Click the button “Direct Connect” on the initial screen of POS client\n4. Click the portrait icon\n5. Select “Last Users” tab\n6. System displays an empty list\nExpected result:\nUsers previously logged into the station should be displayed in the last users list\nIt is fixed in current version\nSetup:\nFor detailed setup of last PIN user logins, please refer to \"Infrasys_cloud_pos_release_note_1_0_73_0(Infrasys Cloud v1.2.73.0).docx\"\n[Jira-30354,Jira-31280,Jira-31281/Epic-30236] POS Feature - Show last 10 PIN user logins (POS Dev 3/3)",
         "qc_info": {
           "qc_tester": {
-            "name": "Kiet Zou",
-            "email": "kiet.zou@shijigroup.com"
+            "name": "Yannis Liu",
+            "email": "yannis.liu@shijigroup.com"
           },
           "qc_reviewer": {
-            "name": "Briana Li",
-            "email": "briana.li@shijigroup.com"
+            "name": "Tian Xie",
+            "email": "tian.xie@shijigroup.com"
           }
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-67793",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-67793_20260928_090032.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-67793_20260928_090032.docx",
+      "template": "report",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-67793",
+        "summary": "POS Report - New CUS Report \"Detail Check Listing Report (with APC)\" with dynamic Item Department APC columns",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "User Story\n\nAs a report user, I want a new custom report derived from the existing Detail Check Listing Report (POS017) that adds dynamic Item Department APC (Average Per Cover) columns, so that I can view per-department sales-per-cover performance without altering the existing POS017 report.\n\nCurrent Behavior\n\nThe existing Detail Check Listing Report (POS017) displays check details with its standard columns and reporting logic. It does not include any Average Per Cover (APC) calculation at the Item Department level, and there is no report variant that surfaces per-department sales-per-cover figures.\n\nExpected Behavior\n\nA new custom report named \"Detail Check Listing Report (with APC)\" is created based on POS017, keeping the existing POS017 structure, columns, and reporting logic unchanged. The new report adds dynamic APC columns for each Item Department present in the report data, calculated as Department Sales ÷ Cover Count, with corresponding APC totals. APC columns appear only at the check total and grand total levels (not on each line item), and are included in both the on-screen view and all export formats. The report is available to all users who can run any report.\n\nAcceptance Criteria\n\nNew custom report created based on POS017\n\n- Given the user has access to run reports\n\n- When the user opens the report list\n\n- Then a new custom report named 'Detail Check Listing Report (with APC)' is available\n\n- And the existing POS017 'Detail Check Listing Report' remains unchanged and available\n\nDynamic Item Department APC columns\n\n- Given a report run contains sales for specific Item Departments (e.g., Food, Soft Beverage, Alcohol)\n\n- When the report is generated\n\n- Then an APC column is displayed for each Item Department that has sales in the report data\n\n- And no APC column is displayed for Item Departments with no sales in the report data\n\n- But if a department has sales in one outlet but not another, the APC column appears only for the outlet where that department has sales\n\nAPC calculation at check total and grand total levels\n\n- Given a check has department sales and a cover count greater than zero\n\n- When the APC is calculated for a department\n\n- Then the department APC equals the department sales divided by the check's total cover count\n\n- And the APC columns appear only at the check total and grand total levels, not on each line item\n\n- And each department's APC uses the same total cover count of the check\n\n- But if a department has no sales on a check, its APC cell is blank or omitted rather than zero\n\nAPC handling when cover count is zero\n\n- Given a check has a cover count of zero\n\n- When the APC is calculated for a department on that check\n\n- Then the APC column displays a dash (—) or 'N/A' instead of a division error\n\n- And the report generation completes without error\n\nAPC totals\n\n- Given a report run with APC columns generated\n\n- When the report totals are displayed\n\n- Then a corresponding APC total is displayed for each department APC column\n\n- And the APC total is calculated as the sum of the individual department APC values per check\n\n- But if a check's APC value is a dash or 'N/A' due to zero cover count, that check is excluded from the APC total sum\n\nAPC columns in on-screen view and exports\n\n- Given the report has been generated with APC columns and totals\n\n- When the report is exported to Excel or CSV\n\n- Then the APC columns and totals are included in all export formats\n\n- And the APC columns and totals are also displayed in the on-screen report view\n\nSupporting Evidence\n\nRegion: AP\n\nComponent: Report\n\nNew Custom Report Name: Detail Check Listing Report (with APC)\n\nBase report: POS017 – Detail Check Listing Report\n\nAPC formula: Department Sales ÷ Cover Count\n\nAPC placement: check total and grand total levels only (not on line items)\n\nAPC total: sum of individual department APC values per check\n\nCover count used: the check's total cover count (same for all departments)\n\nZero cover count: display dash (—) or 'N/A'\n\nExports: APC columns and totals appear in on-screen view and all export formats\n\nAccess: available to all users who can run any report\n\nRequested Timeline\n\nAligned with Priority: Medium\n\nPreferred Quarter: Q3 2025\n\nNotes: No fixed deadline provided by the requester.\n\nAlternatives Considered\n\nNot provided by the requester.\n\nOriginal Description (preserved by INF Prod. Studio)\n\nEnhancement Details\n\n- CUS Report: Detail Check Listing Report (with APC)\n\n- based on POS017 & add new dynamic columns based on number of item department at the end\n\n- Department APC: Sales/Cover, dynamic columns, show only departments on report with Total for each Department APC\n\n- Column Name: Department Name APC\n\n- Add remark on the report header: APC=Average Per Cover\n\n_______________________________________________________________________________________________\n\nSummary\n\nCreate a new custom report derived from the existing Detail Check Listing Report (POS017) with an additional APC (Average Per Cover) calculation for each Item Department.\n\nThe existing POS017 report structure, columns, and reporting logic should remain unchanged, with the addition of dynamic Item Department APC columns.\n\nNew Custom Report Name = Detail Check Listing Report (with APC)\n\n1. Dynamic Item Department APC Columns\n\nAdd an APC column for each Item Department available in the report output.\n\nThe APC columns should be dynamic, meaning only the Item Departments having sales in the respective report should have a corresponding APC column.\n\nExample:\n\n- Outlet 1: Food + Soft Beverage\n\n→ Food APC + Soft Beverage APC\n\n- Outlet 2: Food + Soft Beverage + Alcohol\n\n→ Food APC + Soft Beverage APC + Alcohol APC\n\nThe report should not display APC columns for Item Departments that are not present in the report data.\n\n2. APC Calculation\n\nAPC should be calculated at the Item Department level using the following formula:\n\nDepartment APC = Department Sales / Cover Count\n\nExample:\n\n- Food Sales = 1,000\n\n- Cover Count = 2\n\n- Food APC = 1,000 / 2 = 500\n\nSimilarly, each Item Department APC should be calculated using the respective department's sales divided by the applicable cover count.\n\n3. APC Total\n\nA corresponding Total should also be displayed for the APC columns, following the report's existing total structure.\n\nThe total APC should be calculated based on summing the individual APC values.\n\n4. Acceptance Criteria\n\n- New custom report is created based on POS017 – Detail Check Listing Report.\n\n- Existing POS017 structure, columns, and reporting logic remain unchanged.\n\n- APC columns are generated dynamically based on the Item Departments available in the report data.\n\n- Each Item Department has a corresponding APC column.\n\n- APC is calculated as: Department Sales ÷ Cover Count.\n\n- Departments with no sales in the report are not displayed as APC columns.\n\n- APC totals are displayed in the report.\n\n- APC total is the sum of individual APC values.\n\n- The APC calculation should correctly handle cases where the cover count is zero to avoid calculation/division errors.",
+        "refinement_notes": "",
+        "release_notes": "",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-56614",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-56614_20260928_090032.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-56614_20260928_090032.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-56614",
+        "summary": "CUS245/CUS371 Report |  Grand Total's Incl Sc value is incorrect",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "CUS245 Cross Outlet Revenue Report with Cost and Payment Group\n\nCUS371 Cross Outlet Revenue Report\n\nIssue1:Grand Total's Incl Sc value is incorrect",
+        "refinement_notes": "",
+        "release_notes": "",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-56451",
+      "sprint_id": "65593",
+      "sprint_name": "Report - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-56451_20260928_090032.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-56451_20260928_090032.docx",
+      "template": "report",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-56451",
+        "summary": "The Autoreport interface settings need to be configured according to the cofig zone",
+        "status": "READY FOR QA",
+        "template": "report",
+        "components": [
+          "REPORTS"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "The Autoreport interface settings need to be configured according to the cofig zone",
+        "refinement_notes": "",
+        "release_notes": "",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-69086",
+      "sprint_id": "75476",
+      "sprint_name": "TMS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-69086_20260928_090032.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-69086_20260928_090032.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-69086",
+        "summary": "BYOD Module - Add Takeaway Box Setup - Dev",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "Background\n\nNew function to add takeaway box to item is needed for OGS, i.e. ordering a relevant item, system auto add a takeaway box to the order.\n\nSetup is needed in POS backend (in BYOD Module or Menu Module) and subsequently sync to OGS through menu sync.\n\nRequirement:\n\n1. Add Setup in POS backend\n\n- New \"Takeaway Box Setting\" tab under the BYOD Module\n\nMock up:\n\n- Steps to Add New\n\n- Select \"Outlet\"\n\n- Select \"Item\" [Within selected outlet's API Menu (POS Module-> API Settings-> Outlet Menu Settings)]: this is the takeaway box item\n\n- Listing\n\n- Edit Content button\n\n- Delete button\n\n- Name (item name of the takeaway box)\n\n- Code (item code of the takeaway box)\n\n- Can reference \"Mix and Match Rules\" page to section by outlet\n\nMock up:\n\n- Can reference \"Menu\" page to show items bind to each takeaway box\n\nMock up:\n\n- Edit the items bind to the takeaway box\n\n- Click \"Edit Content\"\n\n- Only show items within selected outlet's API Menu (POS Module-> API Settings-> Outlet Menu Settings)\n\n- One food item cannot be mapped to more than one takeaway box\n\n2. New API to sync the takeaway box settings to OGS",
+        "refinement_notes": "",
+        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS Backend Release Notes\nversion 1.2.115.0\nReleased on\nConfidential and Internal Use Only\nInfrasys POS Backend Release Notes\nversion 1.2.115.0\nTable of Contents\n<<< 1.2.115.0 >>>\t4\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.115.0 | 2026-09-25 |\n| Sample:  New Functions:  Descriptions: Descriptions  Setup: Setup  Enhancements: Descriptions: Descriptions  Setup: Setup  Bug Fixing:  Descriptions: Descriptions  Setup: Setup |\n********************************************************************************\n# <<< 1.2.115.0 >>>\nNew Functions: [Jira-69086] BYOD Module - Takeaway Box Setting\nDescription:\nAdds Takeaway Box Settings under BYOD Management.\nSet one takeaway box item per outlet, then bind foods from that outlet's API menu. One food can belong to only one box.\nThe list is grouped by outlet, with edit, delete, search, and expand to show bound foods.\nSetup:\nDeploy HERO version 1.2.115.0.\nGo to [BYOD Management > Takeaway Box Settings].\nOn the listing page, click + beside the box name to show bound foods.\nOn the add page, select the outlet and the takeaway box item, then Save.\nOn the edit page, move foods between Available and Selected, then Save. Delete removes the box.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
         }
       }
     }
