@@ -1,251 +1,31 @@
 {
-  "generated_at": "2026-09-30T12:02:14",
+  "generated_at": "2026-09-30T15:12:26",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
-  "total_pending": 19,
-  "total_skipped": 30,
+  "total_pending": 5,
+  "total_skipped": 59,
   "pending": [
     {
-      "issue_key": "HERO-69284",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
+      "issue_key": "HERO-68390",
+      "sprint_id": "65592",
+      "sprint_name": "POS - 20260921-20261002",
       "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69284_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69284_20260930_120214.docx",
+      "output_filename": "HERO-68390_20260930_151226.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-68390_20260930_151226.docx",
       "template": "infrasys",
       "is_bug": true,
       "requirement": {
-        "key": "HERO-69284",
-        "summary": "KDS - The customer's time data is abnormal, resulting in the failure of the comparison function",
+        "key": "HERO-68390",
+        "summary": "HTNG PMS interface - Unable to use same echo token in retry void posting after no response in PMS interface",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
-          "KDS"
+          "POS"
         ],
         "issue_type": "Bug",
         "is_bug": true,
-        "description": "The customer's time data is abnormal, in array mode. Normal time data is in date format or string format. If it is in array mode, it will cause fatal errors in the comparison of time in the controller.\n\nIt is currently unclear how the client will store array data in the time section, so code unrelated to comparison will be optimized and deleted.",
+        "description": "It is appeared in HTNG PMS interface\n\nSystem is unable to reuse echo token in retry void posting after no response in PMS interface\n\nSetup:\n\n1. Turn on partial payment features\n\n* Location: POS System > Ordering Setup > Config by Location\n\n* Setup name: Support Partial Payment\n\n> Sub-setting name: Support Partial Payment\n\n>> Setting value as \"Yes\"\n\n> Sub-setting name: Print Receipt Only When Finish All Payment\n\n>> Setting value as \"Yes\"\n\n2. Setting to use new echo token checking rules\n\n* Location: Interface Control > Interfaces\n\n* Vendor: HTNG PMS interface\n\n* Setup name: Apply New EchoToken Checking Rule\n\n> Setting value as \"Yes\"\n\nWorkflow:\n\n1. Click button \"Admin\"\n\n2. Select tab \"Check Operation\"\n\n3. Click function \"Check Listing\"\n\n4. Select tab \"Paid Check Listing\"\n\n5. Select a check settled with HTNG PMS interface\n\n6. Select receipt print format\n\n7. Click function \"Release Payment\"\n\n8. Click \"Confirm\" button\n\n9. Select void reason\n\n10. System triggers external part API for void posting\n\n11. External party no response\n\n12. System fails to save the retry packet\n\n13. Repeat step 1-10\n\n14. System using new echo token and trigger external party API\n\nExpected result:\n\n- System able to save the retry detail in extra info and reuse the echo token in retry PMS void posting",
         "refinement_notes": "",
-        "release_notes": "",
-        "qc_info": {
-          "qc_tester": {
-            "name": "Yannis Liu",
-            "email": "yannis.liu@shijigroup.com"
-          },
-          "qc_reviewer": {
-            "name": "Tian Xie",
-            "email": "tian.xie@shijigroup.com"
-          }
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69167",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69167_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69167_20260930_120214.docx",
-      "template": "report",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-69167",
-        "summary": "POS176 Revenue Report (EMEA) may report errors when running",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "POS176 Revenue Report (EMEA) may report errors when running\n\nA BIRT exception occurred. See next exception for more information.\n\nInvalid field name: bper_pdtp_id.",
-        "refinement_notes": "",
-        "release_notes": "Bug: [Jira-69167] POS176 Revenue Report (EMEA) may report errors when running.\nDescriptions:\nPOS176 Revenue Report (EMEA) may report errors when running\nConfiguration / Parameter:\nResult / Sample:\nFixed\nNormal operation report",
-        "qc_info": {
-          "qc_tester": {
-            "name": "Kathy Kuang",
-            "email": "kathy.kuang@shijigroup.com"
-          },
-          "qc_reviewer": {
-            "name": "Niko Xie",
-            "email": "niko.xie@shijigroup.com"
-          }
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69133",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69133_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69133_20260930_120214.docx",
-      "template": "report",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-69133",
-        "summary": "POS Report - Fixing the garbage print out in Chinese for report on mobile view",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Project team implement the feature for report slip format for plain text and found there is an issue on printing garbage characters.\n\nAfter checking with L3, they suggest to create a new case to handle. Below is the conversation for this case:\n\nCase report on 20260918:\n\nWe have identified an issue with the Chinese format in reports generated from enhancement 61163 on our P5 device. The characters are currently displayed as garbled. During testing, we found that encoding the text to UTF-8 resolves the issue, and this format works correctly for our P5.\n\nPS: This problem only affects reports and does not impact our receipts.\n\nReply from L3 Jerry\n\nAt present, only printers and reports associated with requirement CASE61163 are supported. If modifications and adjustments are needed, you need to contact the Product Team.\n\nAttached the printout with issue",
-        "refinement_notes": "",
-        "release_notes": "",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69132",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69132_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69132_20260930_120214.docx",
-      "template": "report",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-69132",
-        "summary": "Correct the HTTP response header of *.rptdesign & *.rptlibrary to application/xml",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Correct the HTTP response header of *.rptdesign & *.rptlibrary to application/xml",
-        "refinement_notes": "",
-        "release_notes": "Bug fixing: [Jira-69132] Correct the HTTP response header of *.rptdesign & *.rptlibrary to application/xml\nDescription:\n-      Correct the HTTP response header of *.rptdesign & *.rptlibrary to application/xml.\nConfiguration / Parameter:\n-      No special configuration or parameter is required.\nField Definition:\n-      This case does not involve field definition.\nResult / Sample:\n-      Before:\n.\n-      After:\n.",
-        "qc_info": {
-          "qc_tester": {
-            "name": "Eric Fang",
-            "email": "eric.fang@shijigroup.com"
-          },
-          "qc_reviewer": {
-            "name": "Niko Xie",
-            "email": "niko.xie@shijigroup.com"
-          }
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69126",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69126_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69126_20260930_120214.docx",
-      "template": "report",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-69126",
-        "summary": "Calling queue occasionally shows an 'Invalid QR code' error when scanning.",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Calling queue occasionally shows an 'Invalid QR code' error when scanning.\n\nOpen the meal pickup delay setting, and the frequency of \"invalid QR code\" prompts will be very frequent.",
-        "refinement_notes": "",
-        "release_notes": "Bug: [Jira-69126] Calling queue occasionally shows an 'Invalid QR code' error when scanning.\nDescriptions:\nCalling queue occasionally shows an 'Invalid QR code' error when scanning.\nConfiguration / Parameter:\nResult / Sample:\nFixed\nChange the status normally when the queue number is correct.",
-        "qc_info": {
-          "qc_tester": {
-            "name": "Yannis Liu",
-            "email": "yannis.liu@shijigroup.com"
-          },
-          "qc_reviewer": {
-            "name": "Tian Xie",
-            "email": "tian.xie@shijigroup.com"
-          }
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-68771",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68771_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68771_20260930_120214.docx",
-      "template": "report",
-      "is_bug": false,
-      "requirement": {
-        "key": "HERO-68771",
-        "summary": "Audit Log-POS module-Type \"Change status\"- show calling no. status change from XX to YY",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "Base on HERO-59496 & HERO-63866, system support to show calling no. change status as below:\n\nRequirement:\n\nAdd message to clarify the calling no. status change from XXX to YYY.\n\nIncluding undo action. for example, from preparing to ready to pickup, from ready to pickup to pickup already, ..",
-        "refinement_notes": "HERO-68771 Audit Log POS module Type \"Change status\" show\ncalling no. status change from XX to YY\nGeneral Information\nBased on HERO-59496 & HERO-63866: Calling Queue already writes audit log for calling number\nstatus change\nCurrent Type Change Status:\nDescription (unchanged): Change the status of the call number\nExtra Information already has ainf_variable: calling_queue_id, call_number,\ntriggered_by\nAfter change: add a new Extra Information row (ainf_variable) to show status transition from\nXX to YY\nLocation: Audit Log Record → Extra Information (same block as Calling Queue Id / Call Number /\nTriggered By)\nSame rule applies to undo (reverse status change)\nAudit log module: POS\nAudit log type: Change Status\nFields\nExisting Extra Information (ainf_variable) — unchanged:\nainf_variable Extra Information Label Value\ncalling_queue_id Calling Queue Id Calling Queue Id\ncall_number Call Number Calling number\ntriggered_by Triggered By Manually / System\nNew Extra Information (ainf_variable) — add:\nainf_variable Extra Information Label Value\ncnum_status Status Change from {XX} to {YY}\nXX = previous calling number status (display name)\nYY = new calling number status (display name)\nDescription stays Change the status of the call number (do not put from/to in\nDescription)\nRegister the new ainf_variable on type change_status so Extra Information can display the\nlabel\nExamples (including undo):\nPreparing → Ready to pickup → Extra Information cnum_status = from preparing to ready\nto pickup\nReady to pickup → Pickup already → Extra Information cnum_status = from ready to pickup\nto pickup already\nUndo Ready to pickup → Preparing → Extra Information cnum_status = from ready to pickup\nto preparing\nUndo Pickup already → Ready to pickup → Extra Information cnum_status = from pickup\nalready to ready to pickup\nLast update:2026/09/18",
-        "release_notes": "Improvement: [Jira-68771] Audit Log-POS module-Type \"Change status\"- show calling no. status change from XX to YY\nDescriptions:\nAdd message to clarify the calling no. status change from XXX to YYY.\nConfiguration / Parameter:\nResult / Sample:\nafter fix",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-68770",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68770_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68770_20260930_120214.docx",
-      "template": "report",
-      "is_bug": false,
-      "requirement": {
-        "key": "HERO-68770",
-        "summary": "Audit Log-POS module- To record fail to scan calling no",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "Base on HERO-59496 & HERO-63866, system can record new calling  number and calling number status change issues, but missing fail scan calling number handling.\n\nRequirement:\n\nSuggest to add new type in audit log under pos module to handle fail scan calling number issue, the field should including:\n\n- detail error message, such as invalid QR code,...\n\n- in which calling queue\n\n- captured calling no.\n\n- issue occur date/time\n\n- who",
-        "refinement_notes": "HERO-68770 Audit Log record fail to scan calling number\nGeneral Information\nBased on HERO-59496 & HERO-63866 (audit log already covers new call number and call number\nstatus change); missing fail scan call number handling\nCalling Queue: when scan call number fails, record an audit log\nAudit log module: POS\nAudit log type: fail_scan_call_number\nDate/Time and User are not extra fields: use the existing Audit Log Record Creation Time and User\n(do not add triggered_by or a separate date/time ainf_variable)\nFields\nField Definition / Source / Calculation\nError message Detail error message (e.g. invalid QR code, …)\ncalling_queue_id Which Calling Queue the fail scan occurred in\ncall_number Call number captured from the scan attempt\nLast update:2026/09/30",
-        "release_notes": "Improvement: [Jira-68770] Audit Log-POS module- To record fail to scan calling no\nDescriptions:\nAdd Audit Log-POS module- To record fail to scan calling no.\nConfiguration / Parameter:\nResult / Sample:\nafter fix",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-67693",
-      "sprint_id": "65593",
-      "sprint_name": "Report - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-67693_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-67693_20260930_120214.docx",
-      "template": "report",
-      "is_bug": false,
-      "requirement": {
-        "key": "HERO-67693",
-        "summary": "Build new custom report base on CUS083 Sales Summary Report",
-        "status": "READY FOR QA",
-        "template": "report",
-        "components": [
-          "REPORTS"
-        ],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "Requirement:\n\n1. Add date range in report parameters\n\n2. Support export by xlsx (no merging for report row / column)\n\n3. Add Tax column (Add before “Catering & Non Catering Total”)\n\n4. Add tax value in field value \"Catering & Non Catering Total\"\n\n5. Department name/payment method showing in report should get from department group definition(base on Language), especially for Chinese format\n\n6. Update report title in Chinese format\n\n7. Summary tax total\n\n8. report name should be add suffix （CN)/(中国)\n\nAttached sample report for study, Thanks.",
-        "refinement_notes": "HERO-67693 Sales Summary Report (CN) - New Export Report\nbased on CUS083\nGeneral Information\nNew Export Report (MSSQL), refer CUS083 Sales Summary Report\nReport name: Sales Summary Report (CN) / 销售摘要报表（中国）\nReplace existing CUS381 BIRT report with Export Report (BIRT cannot export this layout to xlsx\nwithout merged rows/columns)\nSupport xlsx export with no merging for report row / column\nLayout, grouping, and payment columns follow CUS083\nDepartment name / payment method from department group definition (by language), especially\nChinese\nChinese column headers must match attached sample CUS sales_summary_cn.xlsx\nParameters\nDate type & date range (add date range vs CUS083)\nShops\nOutlets\nOutlet Groups\nReport Header\nShop name (same as CUS083)\nOutlet Group name (same as CUS083)\nReport title in Chinese format: 销售摘要报表（中国）\nBusiness day / date range\nGrouping / Breakdown\nGroup by Outlet Group, then Outlet (same as CUS083)\nTotal Sales per Outlet Group\nGrand Total\nFields\nField Definition / Source / Calculation\nOutlet / 营业区 Outlet name (by language)\nPayment methods\n(dynamic)\nFollow CUS083: show all payment methods, names from department/payment group\ndefinition by language (sample: Cash / 现⾦ , Member Card / 会员卡 )\nTotal Sales / ⼩结 Same as CUS083\nCover / 顾客数 Same as CUS083\nField Definition / Source / Calculation\nFood / ⻝品 Same as CUS083\nBeverage / 饮品 Same as CUS083\nTakeaway Food / 外带⻝\n品\nSame as CUS083\nTakeaway Beverage / 外\n带饮品\nSame as CUS083\nTob. / ⾹烟 Same as CUS083\nMisc. / 杂项 Same as CUS083\nOthers (Catering) / 其他\n餐饮\nSame as CUS083\nService Charge / 服务费 Same as CUS083\nRnd / 舍⼊ Same as CUS083\nCatering Total / 餐饮⼩\n结\nSame as CUS083\nNon Catering / ⾮餐饮 Same as CUS083\nTax / 税 New column before Catering & Non Catering Total; add-on tax only (not inclusive tax);\ninclude in summary tax total\nCatering & Non\nCatering Total / 总计\nSame as CUS083, plus include Tax value\nFood Average / ⻝品⼈均 Same as CUS083\nF&B Average / ⻝品饮品\n⼈均\nSame as CUS083\nLast update:2026/09/18",
-        "release_notes": "Enhancement: [Jira-67693] Build new custom report based on Sales Summary Report\nDescription:\n-      [CUS381] Sales Summary Report (CN)\n-      New MSSQL custom report based on CUS083 Sales Summary Report. Existing CUS083 is unchanged.\n-      Adds Begin Date and End Date parameters so the report can be run for a date range instead of a single business day.\n-      Supports xlsx export without merged rows or columns.\n-      Adds a Tax column immediately before Catering & Non Catering Total; that total (and the Grand Total) includes tax.\n-      Department group names and payment method names follow the selected language from the department / payment definition, especially for Chinese.\n-      Chinese report title uses the suffix （CN） / （中国）.\nConfiguration / Parameter:\n-      The report is registered under POS Module > Desktop Format as CUS381 Sales Summary Report (CN).\n-      Report parameters include Begin Date and End Date to select the business date range.\nField Definition:\n-      Tax / 税: sum of item tax amounts; displayed as a new column immediately before Catering & Non Catering Total / 总计.\n-      Catering & Non Catering Total / 总计: catering total + non-catering + tax.\n-      Payment columns: the first two payment methods (by payment ID); header names come from the payment definition in the selected language (for example 现金, 会员卡).\n-      Department group columns: header names come from the department group definition in the selected language (for example 食品, 饮品).\nResult / Sample:\n-      Sample: CUS381 is listed under POS Module > Desktop Format in Supreme Config Zone.\n-\n-      Sample result: the report runs with a date range, shows the Tax column and a tax Grand Total, and formats amounts according to the report decimal-place setting.\n-",
+        "release_notes": "Bug Fixing: [Jira-68390] HTNG PMS interface - Unable to use same echo token in retry void posting after no response in PMS interface (Teresa)\nDescriptions:\nIt is available for HTNG PMS interface, type Shiji, Shiji Template 1 and ShijiConnect+\nAfter receiving timeout or error from void posting, system:\nfails to save the original posting packet for later retry and reuse of echo token if the packet itself has string length shorter than 65535\nwrongly saves the same value under multiple retry packet indices if the packet itself has string length longer than 65535\nWorkflow\n1. Click button \"Admin\"\n2. Select tab \"Check Operation\"\n3. Click function \"Check Listing\"\n4. Select tab \"Paid Check Listing\"\n5. Select a check settled with HTNG PMS interface\n6. Select receipt print format\n7. Click function \"Release Payment\"\n8. Click \"Confirm\" button\n9. Select void reason\n10. System triggers external part API for void posting\n11. External party returns no response or error\n12. System fails to save the retry packet\n13. Repeat step 1-10\n14. System using new echo token and trigger external party API\nExpected result:\nSystem able to save the retry detail in extra info and reuse the echo token in subsequent retry PMS void posting\nIf the retry packet is too long, the system will gather all cropped parts to form a complete retry detail for void posting\nIt is fixed in current version\nSetup:\nFor detailed setup of HTNG PMS interface, please refer to\nInfrasys Cloud POS - HTNG (Shiji Type) PMS Setup and Workflow Document v1.0.0.21",
         "qc_info": {
           "qc_tester": {
             "name": "Yumia Tang",
@@ -259,114 +39,51 @@
       }
     },
     {
-      "issue_key": "HERO-68848",
+      "issue_key": "HERO-68924",
       "sprint_id": "65594",
       "sprint_name": "Platform - 20260921-20261002",
       "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68848_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68848_20260930_120214.docx",
-      "template": "api_portal",
-      "is_bug": true,
+      "output_filename": "HERO-68924_20260930_151226.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-68924_20260930_151226.docx",
+      "template": "infrasys",
+      "is_bug": false,
       "requirement": {
-        "key": "HERO-68848",
-        "summary": "[Bug Fix] API Portal - POSgAPI - Fix Discount Type Status Override not Applied in Sub Config Zone",
+        "key": "HERO-68924",
+        "summary": "SDP Interface - Data transfer for ER migration (2)",
         "status": "READY FOR QA",
-        "template": "api_portal",
+        "template": "infrasys",
         "components": [
-          "API Portal",
           "CORE"
         ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Affected Endpoint\n\n- GET /shops/{shopCode}/discount_types\n\nRetrieve all discount types.\n\n- GET /shops/{shopCode}/extra_charges\n\nRetrieve all extra charges.\n\nIssue\n\nThese endpoint should return only active discount types for the shop’s config zone.\n\nIn enterprise, discount type status can be overridden in a sub config zone. Current logic filters active status on the supreme/base record only, then loads overrides, but does not re-filter by the overridden status.\n\n| #\n| Supreme (base)\n| Sub config zone override\n| Current\n| Expected\n\n| 1\n| Active\n| (none)\n| Returned\n| Returned\n\n| 2\n| Active\n| Suspended\n| Returned\n| Not returned\n\n| 3\n| Suspended\n| (none)\n| Not returned\n| Not returned\n\n| 4\n| Suspended\n| Active\n| Not returned\n| Returned",
+        "issue_type": "New Feature",
+        "is_bug": false,
+        "description": "Original Description (preserved by INF Prod. Studio)\n\n报表编号 表名/字段名 表类型\n\n| 报表编号\n| 表名/字段名\n| 表类型\n\n| POS016\n| pos_check_print_logs\n| Fact Table\n\n| POS045\n| pos_interface_configs\n| Dimension Table\n\n| POS115\n| pos_access_rights\n\npos_access_right_acls\n| Dimension Table\n\n| POS057\n| pos_config\n| Dimension Table\n\n| POS115\n| pos_access_right_group_lookup\n| Dimension Table\n\nHyatt has raised the request: the ER report needs to display the room number for the HTGN PMS room charge payment method. In addition, the POS045 report migration requires this data to be pushed to SDP.\n\n| 报表编号\n| 表名/字段名\n| 表类型\n\n| POS045\n| pos_check_extra_infos.ckei_value where ckei_section = 'pms' and ckei_variable in ('room', ‘guest_name’)\n| Fact Table\n\n| POS114\n| mem_members:\n\nmemb_last_name_l1~2\n\nmemb_first_name_l1~2\n\nmemb_display_name\n| Dimension Table",
         "refinement_notes": "",
-        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS API Release Notes\nversion 1.2.116.0\nReleased at 4 November 2026\nConfidential and Internal Use Only\nInfrasys POS API Release Notes\nversion 1.2.116.0\nTable of Contents\n<<< POSGAPI – 10.21.0 >>> (INFRASYS POS VERSION 1.2.116.0 OR ABOVE)\t4\nInfrasys POS Release Summary\nPOSGAPI – 10.21.0 (Infrasys POS version 1.2.116.0 or above)\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.116.0 | [Jira-68848] [Bug Fix] API Portal - POSgAPI - Fix Discount Type Status Override not Applied in Sub Config Zone |\nRelease History\n| Version | Release Date |\n| 1.2.116.0 | 2026-11-04 |\n| Sample :  New Functions :  Enhancements : Bug Fixing :  Descriptions : Descriptions  Swagger : Swagger Setup  Setup |\n********************************************************************************\n# <<< POSGAPI – 10.21.0 >>> (INFRASYS POS VERSION 1.2.116.0 OR ABOVE)\nBug Fixing: [Jira-68848] [Bug Fix] API Portal - POSgAPI - Fix Discount Type Status Override not Applied in Sub Config Zone\nDescriptions:\nFixed an issue where the overridden \"Status\" field in the sub-config zone was not applied, in the following API Endpoints:\nRetrieve all discount types.\nRetrieve all extra charges.\nSwagger:\nGET/shops/{shopCode}/discount_types\nGET/shops/{shopCode}/extra_charges\nRelease: 20261104- <<< 1.2.116.0 >>>\n********************************************************************************",
+        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys Cloud Backend Release Notes\nversion 1.2.116.0\nReleased at 04 November 2026\nConfidential and Internal Use Only\nInfrasys Cloud Backend Release Notes\nversion 1.2.116.0\nTable of Contents\n<<< 1.2.116.0 >>>\t3\nInfrasys Cloud Release Summary\nNew Functions\n| Version | Brief Descriptions |\n| 1.2.116.0 | [JIRA-68924] SDP Interface - Data transfer for ER migration (2) |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.116.0 | 2026-11-04 |\n| Sample :  New Functions :  Descriptions : Descriptions Setup : Setup Enhancements :  Bug Fixing : |\n********************************************************************************\n# <<< 1.2.116.0 >>>\nNew Functions : [JIRA-68924] SDP Interface - Data transfer for ER migration (2)\nDescriptions:\nUser Story\nAs an integration operator, I want the SDP data transfer interface to include the pos_check_print_logs, pos_interface_configs, pos_access_rights, pos_access_right_acls, pos_config and pos_access_right_group_lookup data sets. The room number also needs to be displayed for the HTGN PMS room charge payment method. In addition, the POS045 report migration requires this data to be pushed to SDP.\n| Report No. | Table Name | Table Type |\n| POS016 | pos_check_print_logs | Fact Table |\n| POS045 | pos_interface_configs | Dimension Table |\n| POS115 | pos_access_rights pos_access_right_acls | Dimension Table |\n| POS057 | pos_config | Dimension Table |\n| POS115 | pos_access_right_group_lookup | Dimension Table |\n| Report No. | Table Name | Table Type |\n| POS045 | pos_check_extra_infos: pos_check_extra_infos.ckei_value where ckei_section = 'pms' and ckei_variable in ('room', ‘guest_name’) | Fact Table |\n| POS114 | mem_members: memb_last_name_l1~2 memb_first_name_l1~2 memb_display_name | Dimension |\nCurrent Behavior\nThe existing SDP data transfer interface transfers a limited set of data sets and does not include pos_check_print_logs, pos_interface_configs, pos_access_rights, pos_access_right_acls, pos_config and pos_access_right_group_lookup.\nAs a result, these four data sets are not available to the ER reporting/analytics platform.\nExpected Behavior\nThe SDP data transfer interface is extended to transfer four additional data sets pos_check_print_logs, pos_interface_configs, pos_access_rights, pos_access_right_acls, pos_config and pos_access_right_group_lookup\nAdd unmask rule for table pos_check_/extra_info records to displays for the HTGN PMS room charge payment method\nAdd columns exported for table mem_members\nSetup:\nTo have a test run Sdp data, please navigate to PATHTOHERO\\account\\{ACOUNT}\\console\nRun the following command\nphp.exe cake.php Sdp.SdpDataExportSub -o -l 2 -m PosCheckPrintLog,PosCheckExtraInfo,PosInterfaceConfig,PosAccessRight,PosAccessRightAcl,PosConfig,PosAccessRightGroupLookup,MemMember\nNavigate to PATHTOHERO\\account\\{ACOUNT}\\tmp\\logs\\sdp\nYou should see the sdp_full_log_per_table_XXXXX.log\nEach newly configured table should gets its own file, look for:\nsdp_full_log_per_table_PosCheckPrintLog.log\nsdp_full_log_per_table_PosCheckExtraInfo.log\nsdp_full_log_per_table_PosInterfaceConfig.log\nsdp_full_log_per_table_PosAccessRight.log\nsdp_full_log_per_table_PosAccessRightAcl.log\nsdp_full_log_per_table_PosAccessRightGroupLookup.log\nsdp_full_log_per_table_PosConfig.log\nsdp_full_log_per_table_MemMember.log\nsdp_full_log_per_table_PosCheckExtraInfo.log Checking\npos_check_extra_infos.ckei_value where ckei_section = 'pms' and ckei_variable in ('room', ‘guest_name’)\nplease check and make sure the POST data’s ckei_value is unmasked (meaning not null value) for the condition below:\nckei_section: “pms”\nckei_variable: “room” / “guest_name”\nCheck for ckei_variable: “room”\nCheck for ckei_variable: “guest_name”\nmem_members Checking\nopen the sdp_full_log_per_table_MemMember.log\nmake sure the following columns appear and the value is not masked:\nmemb_last_name_l1\nmemb_last_name_l2\nmemb_first_name_l1\nmemb_first_name_l2\nmemb_display_name\nRelease: 20261104<< 1.2.116.0>>>\n********************************************************************************",
         "qc_info": {
           "qc_tester": {
-            "name": "Forrest Lin",
-            "email": "forrest.lin@shijigroup.com"
+            "name": "Jacqueline Wei",
+            "email": "jacqueline.wei@shijigroup.com"
           },
           "qc_reviewer": {
-            "name": "Tian Xie",
-            "email": "tian.xie@shijigroup.com"
-          }
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-68702",
-      "sprint_id": "65594",
-      "sprint_name": "Platform - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68702_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68702_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-68702",
-        "summary": "[Bug Fix] Outdated Logic for Checking the Existence of the PII Module",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "CORE"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Expected behavior:\n\nCheck if PII module exists in sys_modules and active",
-        "refinement_notes": "",
-        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS Platform Release Notes\nversion 1.2.116.0\nReleased at 04 November 2026\nConfidential and Internal Use Only\nInfrasys POS Platform Release Notes\nversion 1.2.116.0\nTable of Contents\n<<< 1.2.116.0 >>>\t3\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.116.0 | [Jira-68702] [Bug Fix] Outdated Logic for Checking the Existence of the PII Module |\nRelease History\n| Version | Release Date |\n| 1.2.116.0 | 2026-11-04 |\n| Sample :  New Functions :  Enhancements :  Bug Fixing: Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.116.0 >>>\nBug Fixing:[Jira- 68702] [Bug Fix] Outdated Logic for Checking the Existence of the PII Module\nDescription:\nAn error occurs when entering user configuration if the PII module is not active.\nSetup:\nChange the status of the PII module in sys_modules to D\nGo to System Management->System Configuration->User Module\nBefore repair: An error occurred\nAfter repair:Enter normally\nRelease: 20261007 <<< 1.2.116.0>>>\n********************************************************************************",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-68403",
-      "sprint_id": "65594",
-      "sprint_name": "Platform - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-68403_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-68403_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-68403",
-        "summary": "[Bug Fix] Error in extra language settings when exporting Recipes",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "CORE"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Current behaviour\n\nAn error occurred in the extra language setting of the form after exporting Recipes at the sub config zone.\n\nSetup\n\n- Supreme config zone has 5 languages configured.\n\n- A sub config zone has 5 languages configured (1 base languages + 4 extra languages).\n\n- Example:\n\n| Config Zone\n| l1\n| l2\n| l3\n| l4\n| l5\n\n| Supreme\n| en\n| zh-hk\n| zh-cn\n|  jpn\n|  kor\n\n| Sub config zone\n| en\n|   tha\n|    fr\n|   fr1\n| spa\n\n- Navigate to Menu Management > Menu Tools > Import and Export > Recipes, and click the Export button in the Export section to export the data.\n\n1. After exporting Recipes from a child config zone, you will obtain all records in the current system (because Recipes content does not support overwriting).\n\n2. When observing the records in the supreme config zone after export, we found that languages ​​l2-l5 are using the settings of the supreme config zone;\n\nThis result is not as expected, because these languages ​​are not set in the current config zone.\n\nExpected behaviour\n\n- When exporting data, records from other config zone should use the language of the current config zone.\n\n- If a record does not have a corresponding language in the current config zone, it will be automatically completed in English by default.",
-        "refinement_notes": "",
-        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS Platform Release Notes\nversion 1.2.116.0\nReleased at 4 November 2026\nConfidential and Internal Use Only\nInfrasys POS Platform Release Notes\nversion 1.2.116.0\nTable of Contents\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.116.0 | [Jira-68403] [Bug Fix] Error in extra language settings when exporting Recipes |\nRelease History\n| Version | Release Date |\n| 1.2.116.0 | 2026-11-04 |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.116.0 >>>\nBug Fixing: [Jira-68403] [Bug Fix] Error in extra language settings when exporting Recipes\nDescription:\nFixed an issue where additional language settings were incorrect when exporting Recipes.\nPrior to the fix, records in other configuration areas did not use the current language setting or additional languages ​​were not completed using English.\nSetup:\nThe supreme config zone only has 2 languages.\nThe sub config zone is set to 5 languages.\nExport operations are performed in the Recipes tab.\nRecords in the supreme config zone used both English and Simplified Chinese from the current config zone; records in other extra languages ​​were completed in English.\nThe fixed scope includes \"Unit\", \"Supplier\", and \"Ingredient\".\nRelease: 20261104<<< 1.2.116.0 >>>\n********************************************************************************",
-        "qc_info": {
-          "qc_tester": {
             "name": "Eric Fang",
             "email": "eric.fang@shijigroup.com"
-          },
-          "qc_reviewer": {
-            "name": "Niko Xie",
-            "email": "niko.xie@shijigroup.com"
           }
         }
       }
     },
     {
-      "issue_key": "HERO-69248",
+      "issue_key": "HERO-69271",
       "sprint_id": "75476",
       "sprint_name": "TMS - 20260921-20261002",
       "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69248_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69248_20260930_120214.docx",
+      "output_filename": "HERO-69271_20260930_151226.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-69271_20260930_151226.docx",
       "template": "infrasys",
       "is_bug": true,
       "requirement": {
-        "key": "HERO-69248",
-        "summary": "TMS 2.0 - Period Set Lookup overlap check ignores seconds",
+        "key": "HERO-69271",
+        "summary": "Reservation Edit Floor Plan - AJAX reload fails when switching outlet / period / floor plan",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
@@ -374,218 +91,74 @@
         ],
         "issue_type": "Bug",
         "is_bug": true,
-        "description": "Use Case:\n\nPeriod Set Lookup does not allow overlapped periods when Allow Overlapped Period is disabled. Periods that do not share any second should still be saved. Example: Breakfast ends at 12:00:00 and Lunch starts at 12:00:01.\n\nSteps to Reproduce:\n\n1. In TMS system config, set Allow Overlapped Period to disabled.\n\n2. On an outlet, prepare two periods:\n\n- Breakfast: 06:00:00 - 12:00:00\n\n- Lunch: 12:00:01 - 17:00:00\n\n3. Open a Period Set that already includes Breakfast.\n\n4. Add Lunch to the same Period Set and click Save.\n\nCurrent Result:\n\nSave is blocked by the alert \"Overlapped Period is Not Allowed\".\n\nSelected Period: Lunch (12:00:01 - 17:00:00)\n\nOverlapped Periods: Breakfast (06:00 - 12:00)\n\nThe save check drops the seconds and compares HH:mm as a closed interval, so 12:00:01 and 12:00:00 both become 12:00 and are treated as overlapping.\n\nExpected Result:\n\nLunch starting at 12:00:01 does not overlap Breakfast ending at 12:00:00, and Save succeeds.\n\nPeriods that touch on the same second (for example both 12:00:00) are still treated as overlapping.",
+        "description": "Use Case\n\nEdit Floor Plan under Reservation Operation. When the user changes Outlet, Period, or Floor Plan from the dropdowns at the top of the page, the system reloads the floor plan HTML fragment via AJAX.\n\nSteps to Reproduce\n\n- Log in to Reservation Operation and open Edit Floor Plan.\n\n- Select a valid Outlet, Period, and Floor Plan; confirm the floor plan renders correctly.\n\n- Change Outlet, Period, or Floor Plan (repeat 2–3 times if needed).\n\n- Observe the page and the browser console (F12).\n\nCurrent Result (before fix)\n\n- After switching, the floor plan may fail to load or behave incorrectly.\n\n- The browser console may show JavaScript errors, e.g. top-level const / let redeclaration (Identifier '…' has already been declared).\n\n- Document-level PBG / Table Module change handlers may bind more than once, causing duplicate checkbox behaviour.\n\n- When AJAX loads floor_plan_view, some PHP variables were not passed in, which can trigger undefined variable notices on PHP 8+.\n\n- jQuery UI widgets (draggable / resizable / dialog) and window resize listeners may not be torn down before reload, leading to leaks or duplicate behaviour.\n\nExpected Result\n\n- Outlet / Period / Floor Plan can be switched multiple times; the floor plan reloads correctly each time.\n\n- No JavaScript console errors.\n\n- No duplicate event handlers or leftover widgets.\n\n- HKJC Table Module / Export UI is not shown in Reservation when module data is not loaded (incomplete UI avoided).\n\nRoot Cause\n\n- Incomplete reload lifecycle in edit_floor_plan.ctp: New HTML was injected without clearing old DOM, jQuery handlers, or jQuery UI widgets. Inline scripts in floor_plan_view.ctp used top-level const / let, which throw on re-execution.\n\n- Event leakage: PBG-related $(document).on('change', …) in floor_plan_view.ctp were not namespaced; handlers from the previous load were not removed.\n\n- Missing backend/view variables: load_edit_floor_plan did not pass outTableModuleInfos, exportTableFields, or bSupportHkjc into the floor_plan_view element, and the controller did not set them explicitly.\n\n- Outlet-side fix (incidental): FloorPlanTablesController::__updateTableModuleInfo() ignored its $tableModuleInfos argument and read $this->data['TableModuleInfo'] directly; admin_add could hit an undefined index when TableModuleInfo was absent from POST.",
         "refinement_notes": "",
-        "release_notes": "Bug Fixing: [Jira-69248] Period set overlap check includes seconds\nDescriptions:\n• When Allow Overlapped Period is set to No, a period that starts one second after another period ends can be saved in the same period set. For example, Breakfast ending at 12:00:00 and Lunch starting at 12:00:01 are no longer treated as overlapped.\n• Two periods that meet on the same second, such as one ending at 12:00:00 and the next starting at 12:00:00, are still not allowed.\nSetup:\nGo to Admin→ Table Management System→ System Configuration and set Allow Overlapped Period to No.\nGo to Admin→ Outlet→ Periods and confirm start and end times include seconds.\nGo to Admin→ Table Management System→ Period Sets and open the period set. Lunch ending at 18:00:00 and Dinner starting at 18:00:01 are saved together, without the alert Overlapped Period is Not Allowed.",
+        "release_notes": "Bug Fixing: [Jira-69271] Reservation Edit Floor Plan – AJAX reload fails when switching outlet/period/floor plan\nDescription:\nEdit Floor Plan under Reservation Operation. When the user changes Outlet, Period, or Floor Plan from the dropdowns at the top of the page, the system reloads the floor plan HTML fragment via AJAX.\nSetup:\nReservation Operation: navigate to [Edit Floor Plan] page.\nChange Outlet, Period, or Floor Plan.\nAdd/edit/move table no., click “Save” icon.",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-69226",
+      "sprint_id": "75476",
+      "sprint_name": "TMS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-69226_20260930_151226.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-69226_20260930_151226.docx",
+      "template": "infrasys",
+      "is_bug": false,
+      "requirement": {
+        "key": "HERO-69226",
+        "summary": "[Tech] TMS 2.0 - Rename TMS direct-delete housekeeping to TmsDataPurgeHousekeepingComponent",
+        "status": "READY FOR QA",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Improvement",
+        "is_bug": false,
+        "description": "User story:\n\nPlatform archive housekeeping discovers a class named exactly after the plugin plus HousekeepingComponent, and that class must extend SysHousekeepingBaseComponent. TMS already had TmsHousekeepingComponent, which extends TmsCollectionComponent and hard-deletes tms_table_states, tms_messages, and empty pos_outlet_tables in obsoleteDataPurge(). HousekeepingShell loaded that class and called that method.\n\nIssue:-\n\nKeeping that class name blocks the archive component. If the same class is later changed to extend SysHousekeepingBaseComponent while cake Housekeeping -p Tms is still scheduled, the old job runs the new copy-verify-purge flow.\n\nWhat changed:\n\n- Plugin/Tms/Controller/Component/TmsHousekeepingComponent.php is renamed to TmsDataPurgeHousekeepingComponent.php. The class is TmsDataPurgeHousekeepingComponent. obsoleteDataPurge() is unchanged.\n\n- HousekeepingShell.__callPluginComponent() loads PluginName + DataPurgeHousekeeping instead of PluginName + Housekeeping.\n\nAfter the change:\n\ncake Housekeeping -p Tms still direct-deletes those tables. TmsHousekeepingComponent is free for the archive component that extends SysHousekeepingBaseComponent. A plugin with no DataPurgeHousekeeping component is skipped.",
+        "refinement_notes": "",
+        "release_notes": "",
+        "qc_info": {
+          "qc_tester": null,
+          "qc_reviewer": null
+        }
+      }
+    },
+    {
+      "issue_key": "HERO-68960",
+      "sprint_id": "75476",
+      "sprint_name": "TMS - 20260921-20261002",
+      "sprint_folder": "Sprint20260921-20261002",
+      "output_filename": "HERO-68960_20260930_151226.docx",
+      "output_rel_path": "Sprint20260921-20261002/HERO-68960_20260930_151226.docx",
+      "template": "infrasys",
+      "is_bug": true,
+      "requirement": {
+        "key": "HERO-68960",
+        "summary": "TMS 2.0 - Online booking fails with \"Fail to update segment allotment\" when outlet requires payment and Period Segment Allotment is configured",
+        "status": "QA In Progress",
+        "template": "infrasys",
+        "components": [
+          "RESERVATION"
+        ],
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Online reservation user completes a booking on an outlet that has both Payment enabled and Period Segment Allotment configured. After submitting the booking form, the guest should be redirected to the payment page. Pre-order flow with segment allotment works; payment flow does not.\n\nSteps to reproduce:\n\n1. Go to Config by Date page, edit a period, add settings for \"Payment Settings\" and \"Period Segment Allotment\" and save.\n\n2. Go to Online Reservation page, fill in the reservation information and guest information, then click the save button.\n\nActual result:\n\nBooking does not continue to the payment page. An error is shown: \"Fail to update segment allotment\". [Unexpected]\n\nExpected result:\n\nGuest proceeds to payment. Segment quota is reserved on submit and associated with the confirmed booking after payment, without double deduction.",
+        "refinement_notes": "",
+        "release_notes": "Bug Fixing: [Jira-68960] - TMS 2.0 - Online booking fails with \"Fail to update segment allotment\" when outlet requires payment and Period Segment Allotment is configured\nDescription:\nFixed online booking failure with \"Fail to update segment allotment\" when payment is required and Period Segment Allotment is configured.\nSetup:\nGo to Table Management System > Basic Setup > Config by Date page, add payment settings for the current time period.\nSimultaneously switch to the \"Period Segment Allotment\" tab and add the \"Period Segment Allotment (Online)\" setting.\nGo to the outlet during this time period.\nAfter repair.\nBefore repair.\nRelease: 20261104< 1.2.116.0>>>\n********************************************************************************",
         "qc_info": {
           "qc_tester": {
-            "name": "Elvar Wu",
-            "email": "elvar.wu@shijigroup.com"
+            "name": "Aimee Wang",
+            "email": "aimee.wang@shijigroup.com"
           },
           "qc_reviewer": {
             "name": "Bunny Chen",
             "email": "bunny.chen@shijigroup.com"
           }
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69236",
-      "sprint_id": "75476",
-      "sprint_name": "TMS - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69236_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69236_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-69236",
-        "summary": "TMS - Period Set auto-deletes first Advanced Allotment row when Segment Allotment is set",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "RESERVATION"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Zoho:\n\nAdvanced Allotment Settings not match with outlet period\n\nUse Case:\n\nPeriod Set auto-deletes first Advanced Allotment row when Segment Allotment is set\n\nSteps to Reproduce:\n\n1. Go to period set and set segment allotment\n\n2. save\n\nCurrent Result:\n\nPeriod Set auto-deletes first Advanced Allotment row when Segment Allotment is set\n\nExpected Result:\n\nPeriod Set not auto-deletes first Advanced Allotment row when Segment Allotment is set\n\nRoot Cause [Optional]:\n\n-",
-        "refinement_notes": "",
-        "release_notes": "",
-        "qc_info": {
-          "qc_tester": {
-            "name": "Bunny Chen",
-            "email": "bunny.chen@shijigroup.com"
-          },
-          "qc_reviewer": {
-            "name": "Alisa Chen",
-            "email": "alisa.chen@shijigroup.com"
-          }
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69149",
-      "sprint_id": "75476",
-      "sprint_name": "TMS - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69149_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69149_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-69149",
-        "summary": "TMS 2.0 - Infinite Loading when mark arrival with POS return error 'Member ID mismatch. Cannot link check'",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "RESERVATION"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Email:\n\nTMS 2.0 Mark Arrival stays on the loading dialog when POS returns an error, instead of showing the error alert.\n\nUse Case:\n\nMember X990-99-01 is marked arrived on table 41 and has already sent items to the kitchen. The check will be settled by another member, X758-97-01. After the first booking is set to Completed and the original member is cleared on the POS check, Mark Arrival for X758-97-01 never leaves the loading dialog.\n\nSteps to Reproduce:\n\n- Member X990-99-01 books table 41 at 06:15.\n\n- Mark Arrival for that booking and open table 41.\n\n- Order and send the check to the kitchen.\n\n- Create another booking for member X758-97-01 at 07:15 on table 41.\n\n- Mark Arrival for X758-97-01 is blocked because the POS member and the TMS member are different.\n\n- Set the X990-99-01 booking to Completed, then clear member X990-99-01 on table 41 in POS.\n\n- Mark Arrival again for the 07:15 booking of X758-97-01 on table 41.\n\nCurrent Result:\n\nThe operation screen stays on the loading dialog. The error returned by POS / the mark-arrival API is not shown. [Unexpected]\n\nExpected Result:\n\nWhen Mark Arrival gets an error back from the API, close the loading dialog and show that error alert (for example \"Member ID mismatch. Cannot link check.\"). [Expected]\n\nRoot Cause [Optional]:\n\nMark Arrival turns on the saving loader before the request. A response body that contains error was not treated as a failure, so the loader stayed up and the alert was never opened. A rejected request also left the loader up across the error alert.\n\nFix:\n\nOperation UI only. In mark-arrival save, if the API response contains error, turn the loader off immediately and open the alert with that message. On a rejected request, turn the loader off before the existing error alert. No backend change. An open-check list with an empty error is unchanged.",
-        "refinement_notes": "",
-        "release_notes": "",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69139",
-      "sprint_id": "75476",
-      "sprint_name": "TMS - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69139_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69139_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-69139",
-        "summary": "TMS2.0 - Online booking auto-assigns lower-rated table when two same-size tables have different ratings",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "RESERVATION"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Email/ ZOHO Title:\n\nTMS - Table Rating Issue | The Clearwater Bay Golf & Country Club\n\nUse Case:\n\nUser reported that two same-size tables were set with rating 1 and rating 2. When making an online reservation, the system auto-assigned the table with rating 1 instead of the higher-rated table.\n\nSteps to Reproduce:\n\nSet two same-size tables to rating 1 and 2>Enable online auto assign table for the period>Make an online reservation that fits that table size>Check assigned table\n\nCurrent Result:\n\nThe booking is assigned to the table with rating 1 [Unexpected]\n\nExpected Result:\n\nThe booking is assigned to the table with the higher rating (rating 2) [Expected]\n\nRoot Cause [Optional]:\n\nWhen several same-size tables are free, auto-assign does not keep the highest rating as the winner. It can pick the last table it checks instead, so a lower-rated table is assigned.",
-        "refinement_notes": "",
-        "release_notes": "Bug Fixing : [HERO-69139] Online booking auto-assigns lower-rated table when two same-size tables have different ratings\nDescriptions :\nWhen making an online reservation, if two tables of the same size are available with different ratings, the system could assign the lower-rated table. After this fix, auto-assign chooses the table with the higher rating.\nSetup :\n1. Go to Outlet > Floor Plans. Open the floor plan used by the outlet, then open the Floor Plan Map table layout. Click two tables of the same size. In the Edit Table dialog, set Table Rating to 1 on one table and 2 on the other, then save.\n2. Go to TMS > Period Sets. Open the period set and edit the Period. Set Auto Assign Table (Online) to Yes, then save.\n3. If the test date already has operating records, go to TMS > Config by Date, open that date and period, set Auto Assign Table (Online) to Yes, then save.\n4. Open the Online Reservation page. Make a booking for a guest count that fits those two tables, while both tables are free.\n5. Go to TMS Operation, open the new reservation, and check Table No. It should be the table with rating 2.",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69101",
-      "sprint_id": "75476",
-      "sprint_name": "TMS - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69101_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69101_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": false,
-      "requirement": {
-        "key": "HERO-69101",
-        "summary": "[Tech] Compatibility Testing for System Upgrade to PHP 8.5 - HKJC",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "RESERVATION"
-        ],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "",
-        "refinement_notes": "",
-        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS HKJC Release Notes\nversion 1.2.116.0\nReleased on 7th Oct 2026\nConfidential and Internal Use Only\nInfrasys POS HKJC Release Notes\nversion 1.2.116.0\nTable of Contents\n<<< 1.2.116.0 >>>\t4\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.116.0 | 2026-10-07 |\n| Sample:  New Functions:  Descriptions: Descriptions  Setup: Setup  Enhancements: Descriptions: Descriptions  Setup: Setup  Bug Fixing:  Descriptions: Descriptions  Setup: Setup |\n********************************************************************************\n# <<< 1.2.116.0 >>>\nEnhancement: [Jira-69101] PHP 8.3/8.5 Compatibility Hardening – HKJC Module\nDescription:\nReplaced non-standard (integer) cast with (int) in Language Zones admin for PHP 8.5 compliance.\nGuarded getPeriodId() return value before list destructuring in budget day model to prevent TypeError when period lookup fails.\nReplaced foreach list() with array index access in HKJC reservation API POS check batch lookup, with is_array() validation.\nAdded shell_exec output helper in POS Service Monitor shell to handle null shell_exec results safely on PHP 8.3/8.5.\nSetup:\nNo configuration change is required. Make sure below is run normally in PHP 8.3 or 8.5 env.\nFor testing 4 types of updated coding:\nReplaced non-standard (integer) cast with (int)\nGo to [HKJC Management > Language Zones] (CRC only) page for an outlet with language zones linked to tables; confirm the listing loads and used-zone indicators display without PHP errors.\nReference jira-59563\nGuarded getPeriodId() return value before list destructuring\nGo to [HKJC Management > Budget Tools > Import and Export], import budget CSV with valid/invalid Period Code. Run HKJC budget day import with valid outlet/period data; confirm import completes.\nReference jira-6864\nAdded shell_exec\nRun POS Service Monitor shell in staging; confirm monitor output when ping or shell commands succeed, and confirm no TypeError when a command returns empty output.\nReference HERO-57597\nforeach list() → array index\nSearch HKJC reservations at a POS-enabled outlet; confirm POS check info loads on the listing without PHP errors.\nReference JIra-65694",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69100",
-      "sprint_id": "75476",
-      "sprint_name": "TMS - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69100_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69100_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": false,
-      "requirement": {
-        "key": "HERO-69100",
-        "summary": "[Tech] Compatibility Testing for System Upgrade to PHP 8.5 - Reservation Module",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "RESERVATION"
-        ],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "",
-        "refinement_notes": "",
-        "release_notes": "Enhancement: [Jira-69100] [Tech] Compatibility Testing for System Upgrade to PHP 8.5 – Reservation Module\nDescription:\nHardens string parsing (list/explode/strpos) in Booking, Operation, Resvs, and Functions controllers to prevent PHP 8 TypeError/ValueError on malformed input. Improves PayPal PDT/IPN response handling (empty cURL response, CRLF line endings). Adds BookingDate validation and safer timestamp parsing in bulk availability check. Compatible with PHP 8.0+; includes PHP 8.4 http_get_last_response_headers() support in Operation table status sync.\nSetup:\nBackend: Login admin system and then navigate to [Reservation Management > Authority Control > Functions] page.\n[Reservation System > Message Setup > Message Formats] page, add an email message format record and add “$EditBookingLink$”.\n[Reservation System > Basic Setup > Payment Methods] page, add a real interface payment setting which interface is “Paypal”.\n[Reservation System > Basic Setup > Config by Date / Period Sets] page, select a period to edit, set “Formula for Payment Calculation” to click “Save” button.\n[Reservation System > Basic Setup > Outlet Settings] page, select a record to edit, enable “POS Interface” and Email, click “Save” button.\nReservation Operation: [Current View] page, select a table no. to make a reservation and then change status to “Arrived”.\nSelect table no. to Walk In.\nGo to POS client, complete check for these two tables.\nSelect a table to make a reservation with message and preferences and then edit this reservation with message.\n[Bulk Reservation] page, search for member information and check preferences and input required fields to check available to make reservations.\nLogout reservation operation.\nBackend: [Messaging Control > Job Tools > Job History] page, select amendment message to view details, click link in body and jump to [Online Reservation > Retrieve Booking Record] page, click “Search” button\nOnline Reservations: make a reservation with payments.",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69098",
-      "sprint_id": "75476",
-      "sprint_name": "TMS - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69098_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69098_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": false,
-      "requirement": {
-        "key": "HERO-69098",
-        "summary": "[Tech] Compatibility Testing for System Upgrade to PHP 8.5 - TMS",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "RESERVATION"
-        ],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "",
-        "refinement_notes": "",
-        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS Tms Release Notes\nversion 1.2.116.0\nReleased on 7th Oct 2026\nConfidential and Internal Use Only\nInfrasys POS Tms Release Notes\nversion 1.2.116.0\nTable of Contents\n<<< 1.2.116.0 >>>\t4\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\nRelease History\n| Version | Release Date |\n| 1.2.116.0 | 2026-10-07 |\n| Sample:  New Functions:  Descriptions: Descriptions  Setup: Setup  Enhancements: Descriptions: Descriptions  Setup: Setup  Bug Fixing:  Descriptions: Descriptions  Setup: Setup |\n********************************************************************************\n# <<< 1.2.116.0 >>>\nEnhancement: [Jira-69098] PHP 8.3/8.5 Compatibility Hardening – TMS Module\nDescription:\nHardened TMS backend PHP code for PHP 8.3 and 8.5 by replacing deprecated list() destructuring with safe array index access in reservation import jobs, API components, theme setup, and admin listing pages. Business logic on valid data paths is unchanged.\nAdded guards before reading keys from json_decode() results in Open API reservation and table allotment flows, preventing TypeError when decoded JSON is invalid or empty.\nNormalized admin cookie sorting parsing on Functions, Print Variables, and Message Variables listing pages without changing sort behavior when cookie data is valid.\nSetup:\nNo configuration change is required. Make sure below is run normally in PHP 8.3 or 8.5 env.\nFor testing 3 types of updated coding:\nlist() / foreach list() → array index\nRun Gourmate Table reservation import with a sample file containing pipe-delimited fields; confirm import completes without PHP errors.\n| Refer to [Jira-48003] TMS2.0 - Enhancement of Gourmate Table Import Reservation Shell for Data Mapping - Shell |\n| C:\\infrasys\\www\\accounts\\herohq\\Console\\cake -working C:\\infrasys\\www\\accounts\\herohq Tms.ImportReservationForGourmateTable -r C:\\Users\\renee_chan\\Downloads\\gourmateTable\\testDummy\\Past_Reservation_from_dubai_20190101_20240926\\ -p Reservation_Related -s 1 -i 1 -l 1 -o DYAccountNo |\njson_decode()[key] guards\n| Function | Test JSON | Reference Jira |\n| deposit receipt guard → edit reservation + update deposit | API deposits.edit + DB rpay_receipt | Jira-68441 |\n| outs_params guard → walk-in edit reservation (turn on outlet suspend_pos_table_status_update) | Admin outs_params + API walk-in POST | Jira-68441 |\n| Test table allotment with book_limit_children in JSON params; confirm child booking limits apply as before. | Admin tbal_params + API children | Jira-20880 |\nAdmin cookie sorting\nGo to [Table Management System > Authority Control > Functions] page, click a column header to sort the listing, refresh the page, and confirm the sort order persists.\nGo to [Table Management System > Printing Setup > Print Variables] page, repeat the column sort and refresh test.\nGo to [Table Management System > Message Setup > Message Variables] page, repeat the column sort and refresh test.",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        }
-      }
-    },
-    {
-      "issue_key": "HERO-69030",
-      "sprint_id": "75476",
-      "sprint_name": "TMS - 20260921-20261002",
-      "sprint_folder": "Sprint20260921-20261002",
-      "output_filename": "HERO-69030_20260930_120214.docx",
-      "output_rel_path": "Sprint20260921-20261002/HERO-69030_20260930_120214.docx",
-      "template": "infrasys",
-      "is_bug": false,
-      "requirement": {
-        "key": "HERO-69030",
-        "summary": "TMS2.0 - Show detail check information in TMS Cart view - Dev (2/2)",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "User Story:\n\nAs a TMS user with floorplan access, I want to view detailed check information in a cart view so that I can monitor table status and guest details at a glance in a tabular format, without relying on the floorplan layout.\n\nCurrent Behavior:\n\nTMS currently only supports the floorplan view. There is no cart view available to display detailed check information in a tabular format. The floorplan view already assigns colors to represent table status; these status colors are the source of truth that the new cart view must reuse.\n\nExpected Behavior:\n\nTMS should support a cart view similar to POS, using the same status colors as the existing floorplan view. Users can toggle between floorplan view and cart view, keeping both available. The cart view should display Table Number (with extensions), Table Name, Table Reference, First Name, Last Name, Cover, Member Number, Membership Number, Member group account, Check total, and Last order time, controlled by per-location backend configuration. Users can sort by table number, status, cover, check total, and last order time. All columns sort ascending by default, with null/empty values always placed last. The cart view auto-refreshes periodically to keep status and totals current without user action.\n\nAcceptance Criteria:\n\nToggle between floorplan and cart view\n\n> - Given a TMS user with floorplan access is on the floorplan view\n\n> - When the user activates the cart view toggle/button\n\n> - Then the cart view is displayed with table and check details in a tabular format\n\n> - And the user can toggle back to the floorplan view\n\n> - And both views remain available for the user\n\n> - But a TMS user without floorplan access cannot see or activate the cart view toggle\n\nDisplay check detail columns per location configuration\n\n> - Given the cart view is open and the per-location backend configuration defines the visible columns\n\n> - When tables with open checks are loaded\n\n> - Then each row shows Table Number (with extensions), Table Name, Table Reference, First Name, Last Name, Cover, Member Number, Membership Number, Member group account, Check total, and\n\nLast order time\n\n> - And only the columns enabled in the per-location backend configuration are displayed\n\n> - But if a table has no open check, the row still appears with the table number and status, and check-related fields are empty\n\nRepresent table status with floorplan colors\n\n> - Given the cart view is open and tables are displayed\n\n> - When a table has a given status\n\n> - Then the table row uses the same status color as the existing TMS floorplan view for that status\n\nSort tables by column\n\n> - Given the cart view is open and multiple tables are displayed\n\n> - When the user sorts by table number\n\n> - Then tables are sorted numerically by base table number, then alphabetically by extension (e.g., 101, 101A, 101B, 102)\n\n> - And the user can also sort by status, cover, check total, and last order time\n\n> - And all columns sort ascending by default\n\n> - But if a table has no value for the selected sort column (e.g., no open check), it is placed at the end of the sort order\n\nAuto-refresh cart view data\n\n> - Given the cart view is open\n\n> - When a periodic refresh interval elapses\n\n> - Then the cart view auto-refreshes to keep table status and check totals current without user action\n\n> - And the user's active sort order and column configuration are preserved after the refresh",
-        "refinement_notes": "",
-        "release_notes": "",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
         }
       }
     }
