@@ -1,0 +1,77 @@
+# HERO-69343 Test Report
+
+## Functional Testing
+
+### F1.POS Client (Android) Version Description Reference Update
+
+#### F1.1.Verify POS Client (Android) Version Description Is Updated For Internal Reference
+
+**Prerequisite(s):**
+1. The fixed POS Client (Android) build is deployed on a Hi20 (Android 13) / iPad (OS 27) / iPhone 15 (OS 27) mobile device
+2. The POS Client (Android) is able to start and connect to the local server (Cloud / Local / Wireless network)
+3. Test environment: Local test environment with the fixed build installed
+
+**Step(s):**
+1. Launch the POS Client (Android) on the target mobile device and log in with a valid operator account
+2. Open the POS client "About" / version info screen (or any reference location that displays the POS client version description)
+3. Verify the POS client version description string is updated to the new value for dev team internal reference
+4. Compare the displayed version description with the expected reference value defined for this release
+
+**Test Result(s):**
+1. The POS Client (Android) launches and logs in successfully on the target mobile device
+2. The POS client version description displayed on the "About" / version info screen matches the expected updated reference value for the current release
+3. The updated version description is shown consistently across mobile device types (Hi20 Android 13, iPad OS 27, iPhone 15 OS 27)
+
+#### F1.2.Verify POS Client Version Is Reported Correctly On HQ Station Reports
+
+**Prerequisite(s):**
+1. The fixed POS Client (Android) build is deployed on a mobile device and connected to the LS
+2. The LS and HQ environment are connected (Cloud / Local network)
+3. The launcher is running on the LS so the periodic device info sync (including POS client version) from LS to HQ is active
+4. Test environment: Local / HQ test environment
+
+**Step(s):**
+1. Launch the POS Client (Android) on the mobile device and log in
+2. Allow the launcher to run on the LS and wait for the periodic device info sync cycle
+3. Open the HQ Summary of Workstations Report by Shop (POS0280) and locate the row for the Android mobile device
+4. Verify the "POS Client Version" column shows the updated POS client version description for the Android mobile device
+5. Repeat the verification on the Summary of Workstations Report by Merchant (POS0258) for cross-validation
+
+**Test Result(s):**
+1. The POS Client (Android) version description is uploaded to HQ via the periodic device info sync
+2. The HQ Summary of Workstations Report by Shop (POS0280) shows the updated POS client version description in the "POS Client Version" column for the Android mobile device
+3. The Summary of Workstations Report by Merchant (POS0258) shows the same updated POS client version description, confirming consistent reporting across station reports
+
+### F2.Regression — POS Client (Android) Functional Flows After Version Description Update
+
+#### F2.1.Verify Standard POS Operations Are Preserved After The Version Description Update
+
+**Prerequisite(s):**
+1. The fixed POS Client (Android) build is deployed on a mobile device
+2. A valid operator account and an outlet with menu / item / payment setup are available
+3. Test environment: Local test environment
+
+**Step(s):**
+1. Launch the POS Client (Android) and log in
+2. Perform a sequence of standard POS operations (open outlet, daily start, open check, order items, apply payment, close check, daily close)
+3. Verify all standard POS operations complete successfully and there are no errors related to the version description update
+4. Inspect the POS client and LS logs for any errors
+
+**Test Result(s):**
+1. All standard POS operations (open outlet, daily start, open check, order items, apply payment, close check, daily close) complete successfully on the POS Client (Android)
+2. No errors related to the version description update are observed in the POS client or LS logs
+3. The version description update does not impact existing POS Client (Android) functional flows
+
+## Test Environment Information
+
+- Local test environment
+- HQ test environment
+
+## Appendix
+
+**JIRA Acceptance Criteria (HERO-69343):**
+
+- POS version information for dev team internal reference regular update.
+- The POS Client (Android) version description must be updated to the new reference value and displayed consistently on the "About" / version info screen.
+- The updated POS client version description must be reported correctly on HQ station reports (POS0280, POS0258) after the periodic device info sync.
+- The version description update must not impact existing POS Client (Android) functional flows.
