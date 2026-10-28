@@ -1,69 +1,40 @@
 {
-  "generated_at": "2026-10-26T15:45:03",
+  "generated_at": "2026-10-28T08:32:57",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/public-reports",
-  "total_pending": 2,
-  "total_skipped": 20,
+  "total_pending": 1,
+  "total_skipped": 18,
   "pending": [
     {
-      "issue_key": "HERO-69805",
-      "sprint_id": "65598",
-      "sprint_name": "POS - 20261019-20261030",
-      "sprint_folder": "Sprint20261019-20261030",
-      "output_filename": "HERO-69805_20261026_154503.docx",
-      "output_rel_path": "Sprint20261019-20261030/HERO-69805_20261026_154503.docx",
-      "template": "infrasys",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-69805",
-        "summary": "Block add item, delete item, Paid, and Print and Pay on a fully paid check",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "POS"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "After a check is fully paid, the user can still add an item, delete an item, or run Paid or Print and Pay due to UI out-sync. Saving that change can damage the paid check and cause an integrity error.\n\nA check that is only partly paid can still be changed and paid. The block applies when the check is fully paid.\n\nWhat to change\n\nOn a fully paid check, stop these actions and show \"check is already paid\":\n\n- Add item, including from the menu, item code, barcode, and item search\n\n- Delete item, delete last item, delete whole last item, and delete multiple items\n\n- Paid\n\n- Print and Paid\n\nThese existing flows stay available:\n\n- Split revenue on a paid check can still add and remove the split items, then save\n\n- Direct refund can still refund selected items from a paid check\n\n- Release payment, void paid check, adjust payment, print paid check, and add or edit paid check info\n\n- After release payment, the check can be changed and paid again\n\nAcceptance criteria\n\n- Adding or deleting an item on a fully paid check is stopped, with the message \"Check is already paid\".\n\n- Paid and Print and Pay on a fully paid check are stopped with the same message.\n\n- A partly paid check can still be changed and paid.\n\n- Split revenue and direct refund on a paid check still work.\n\n- After release payment, the check can be changed and paid again.",
-        "refinement_notes": "",
-        "release_notes": "Bug Fixing: [Jira-69805] Block add item, delete item, Paid, and Print and Pay on a fully paid check (Sunny Kong)\nDescriptions:\nAfter a check is fully paid, the user can still add an item, delete an item, or run Paid or Print and Pay due to UI out-sync. Saving that change can damage the paid check and cause an integrity error.\nA check that is only partly paid can still be changed and paid. The block applies when the check is fully paid.\nExpected result:\nOn a fully paid check, stop these actions and show \"check is already paid\":\nAdd item, including from the menu, item code, barcode, and item search\nDelete item, delete last item, delete whole last item, and delete multiple items\nPaid\nPrint and Paid\nThese existing flows stay available:\nSplit revenue on a paid check can still add and remove the split items, then save\nDirect refund can still refund selected items from a paid check\nRelease payment, void paid check, adjust payment, print paid check, and add or edit paid check info\nAfter release payment, the check can be changed and paid again\nIt is fixed in current version\nSetup:\nNone",
-        "qc_info": {
-          "qc_tester": {
-            "name": "More Luo",
-            "email": "more.luo@shijigroup.com"
-          },
-          "qc_reviewer": {
-            "name": "Briana Li",
-            "email": "briana.li@shijigroup.com"
-          }
-        },
-        "knowledge_base": []
-      }
-    },
-    {
-      "issue_key": "HERO-68358",
+      "issue_key": "HERO-69160",
       "sprint_id": "75478",
       "sprint_name": "TMS - 20261019-20261030",
       "sprint_folder": "Sprint20261019-20261030",
-      "output_filename": "HERO-68358_20261026_154503.docx",
-      "output_rel_path": "Sprint20261019-20261030/HERO-68358_20261026_154503.docx",
+      "output_filename": "HERO-69160_20261028_083257.docx",
+      "output_rel_path": "Sprint20261019-20261030/HERO-69160_20261028_083257.docx",
       "template": "infrasys",
-      "is_bug": false,
+      "is_bug": true,
       "requirement": {
-        "key": "HERO-68358",
-        "summary": "HKJC - TMS - Update the Get Timeslot API to add several fields for Staggered Booking - Dev",
+        "key": "HERO-69160",
+        "summary": "TMS 2.0-In the online mode, Search Member is unable to obtain the Membership No.",
         "status": "READY FOR QA",
         "template": "infrasys",
         "components": [
           "RESERVATION"
         ],
-        "issue_type": "Improvement",
-        "is_bug": false,
-        "description": "20260910 updated:\n\nAdditional requirement added:\n\n- Retrieve and return next reservation start time (next_resv_start_time) for each available table. IF NO next reservation, THEN return period end time.\n\n- Return reservation duration with cleaning time (duration_with_cleaning_time) for each table size. **\n\n20260907 updated:\n\nQuestion:\n\n1, Should apply to Race day or 7 day ?\n\n[Project] Only apply to 7 day.\n\n2, Which Reservation Status should included in this case? eg. should No Show count ?\n\n[Project] Since [No Show] should appear after Target booking time. So this can be ignore.\n\nSince [Canceled Reservation] will release the Table, this case can also be ignore.\n\n*For only 1 [Canceled Reservation] before the target booking time, the expected return last_resv_end_time should be the same as the period start time.\n\n3, API confirmation edit\n\nBackground\n\nCurrently the Get Timeslot API for INSW only returns free tables without indicating when each table’s previous reservation ends (including cleaning time), so INSW can only assign tables according to table number. This leads to less optimal table utilization.\n\nTo improve table utilization when using staggered booking, the system needs to know when each table becomes free so it can assign the available table with closest last reservation end time to the target booking time.\n\nE.g. Target booking time is 13:00.\n\n| Table\n| Last Reservation End Time\n\n| 101\n| 12:45\n\n| 102\n| 13:00\n\nAs-is: System will assign Table 101 first. But if later another member wants to book 12:45, there will be no option.\n\nExpected: System should assign the table with closest last reservation end time to the target booking time, which is Table 102, so that Table 101 can be available for possible 12:45 booking, maximizing utilities.\n\nTBL need to provide last reservation end time to INSW, who will assign the best table according to the above logic.\n\nRequirement\n\nUpdate the existing [GET] Get Timeslot API response for staggered booking to include the new fields \"duration_with_cleaning_time\", \"last_resv_end_time\" (including cleaning time) and \"next_resv_start_time\"  for every available table under each timeslot.\n\nTake the last reservation end time right BEFORE the timeslot ONLY (or equal to timeslot start time).\n\n(If no last reservation BEFORE the timeslot, return period start time as last_resv_end_time.)\n\nTake the next reservation start time right AFTER the timeslot ONLY (or equal to timeslot end time).\n\n(If NO next reservation AFTER the timeslot, return period end time as next_resv_start_time.)\n\nExample response structure:\n\n{\n\"status\": \"success\",\n\"data\": {\n\"periods\": [\n{\n\"period_code\": 2,\n\"period_name_en\": \"Lunch\",\n\"timeslots\": [],\n\"tables\": [],\n\"timeslots_tables\": [\n{\n\"timeslot\": \"13:00\",\n\"status\": \"available\",\n\"tables\": [\n{\n\"table_no\": \"1\",\n\"capacity\": 4,\n\"last_resv_end_time\": \"12:45\", // <-- NEW FIELD (include cleaning time)\n\"next_resv_start_time\": \"15:45\" // <-- NEW FIELD\n},\n{\n\"table_no\": \"2\",\n\"capacity\": 4,\n\"last_resv_end_time\": \"12:45\", // <-- NEW FIELD (include cleaning time)\n\"next_resv_start_time\": \"15:00\" // <-- NEW FIELD\n}\n]\n}\n],\n\"reservation_duration\": [\n{\n\"table_size\": 2,\n\"duration\": 90,\n\"duration_with_cleaning_time\": 105 // <-- NEW FIELD\n},\n{\n\"table_size\": 4,\n\"duration\": 90,\n\"duration_with_cleaning_time\": 105 // <-- NEW FIELD\n},\n{\n\"table_size\": 6,\n\"duration\": 120,\n\"duration_with_cleaning_time\": 135 // <-- NEW FIELD\n},\n{\n\"table_size\": 8,\n\"duration\": 150,\n\"duration_with_cleaning_time\": 165 // <-- NEW FIELD\n}\n]\n}\n]\n}\n}",
+        "issue_type": "Bug",
+        "is_bug": true,
+        "description": "Steps To Reproduce:\n\nTest in (trunk env) https://test-multi-hq.hero-cloud.cn/accounts/hqqccn7/admin/eng/home       (both hqqccn5)\n\n1.Login Backend>Table Management System>Other Settings > Config by Loaction:\n\nAdd configuration (The specific configuration can be found in the attachment.):\n\n1.Online Reservation using Member Verification\n\n2.Auto Member Profile Matching\n\n2. Add the \"Search Member\" button field to the online theme.\n\n3. Open the online reservation page. Enter the reservation information，\n\n4. Click the \"Search Member\" button，Enter \"Member No.\" and \"Mobile No.\".\n\n5. Click \"Confirm\" button\n\nExpect result:\n\nMembership No. shows the corresponding value.\n\nActual result:\n\nDisplay is empty。",
         "refinement_notes": "",
-        "release_notes": "Enhancement: [Jira-68358] HKJC - TMS - Update the Get Timeslot API to add several fields for Staggered Booking - Dev\nDescription:\nEnhanced existing Open API: GET /rest_api/hkjc/shops/{shop_code}/outlets/{outlet_code}/periods (get_shops_outlets_periods) for 7-day outlets under staggered (multi-reservation) booking.\nWhen staggered booking applies:\ntimeslots_tables[].tables[] adds last_resv_end_time and next_resv_start_time (HH:mm).\nreservation_duration[] adds duration_with_cleaning_time per table_size (minutes, includes cleaning).\nSetup:\nTable Management System> Other Settings> Config by Location, set Multi-Reservation Validation Start Date\nTable Management System> Basic Setup> Period Sets, set Cleaning Time, Last Arrival Time and Max Reservations Per Arrival Time\nSample request: GET /rest_api/hkjc/shops/{shop_code}/outlets/{outlet_code}/periods?date=2026-10-21&languages=en\nHeader: secretkey: <valid Open API key>\ntimeslots_tables (staggered mode)\nFor each available table in a timeslot: last_resv_end_time is the latest end time (book_time + occupancy minutes) of prior reservations on that table ending on or before the timeslot arrival.\nIf none reservations , period start time is used. next_resv_start_time is the earliest later book_time on that table after the timeslot arrival\nLast/next includes completed reservations and excludes no-show and cancelled.\nEach reservation_duration entry contains table_size, duration (dining minutes excluding cleaning), and duration_with_cleaning_time\nIf Multi-Reservation Status is Suspended\nScenario 1: Time status exceeding Last Arrival Time is Full\nScenario 2: When resv_number is supplied, that reservation is ignored for per-timeslot quota counting and table occupancy removal, so the member can see the same table/slot while modifying the booking.\nIf params has resv_number\nIn this case, if resv_number and other reservations are in the same table, then this table will not be displayed in the available tables",
+        "release_notes": "",
         "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
+          "qc_tester": {
+            "name": "Sooki Shan",
+            "email": "sooki.shan@shijigroup.com"
+          },
+          "qc_reviewer": {
+            "name": "Alisa Chen",
+            "email": "alisa.chen@shijigroup.com"
+          }
         },
         "knowledge_base": []
       }
