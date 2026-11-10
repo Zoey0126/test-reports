@@ -1,37 +1,7 @@
 {
-  "generated_at": "2026-11-10T09:25:02",
+  "generated_at": "2026-11-10T09:31:15",
   "output_root": "/Users/zoey/Desktop/AI_Agent/TRAE-JIRA/generator_review/public-reports",
-  "total_pending": 1,
-  "total_skipped": 25,
-  "pending": [
-    {
-      "issue_key": "HERO-70047",
-      "sprint_id": "65601",
-      "sprint_name": "Platform - 20261102-20261113",
-      "sprint_folder": "Sprint20261102-20261113",
-      "output_filename": "HERO-70047_20261110_092502.docx",
-      "output_rel_path": "Sprint20261102-20261113/HERO-70047_20261110_092502.docx",
-      "template": "infrasys",
-      "is_bug": true,
-      "requirement": {
-        "key": "HERO-70047",
-        "summary": "[Bug fix] The general user does not have the System Configuration module",
-        "status": "READY FOR QA",
-        "template": "infrasys",
-        "components": [
-          "CORE"
-        ],
-        "issue_type": "Bug",
-        "is_bug": true,
-        "description": "Steps To Reproduce:\n\n- Use the general user login system\n\n- Go to System Management -> System Configuration\n\nActual result :\n\n- The system does not display the \"System Configuration\" module\n\nExpected result:\n\n- Authorized general users are able to use the System Configuration module",
-        "refinement_notes": "",
-        "release_notes": "Shiji Information Technology (Hong Kong) Limited\nInfrasys POS Platform Release Notes\nversion 1.2.117.0\nReleased at 2nd December 2026\nConfidential and Internal Use Only\nInfrasys POS Platform Release Notes\nversion 1.2.117.0\nTable of Contents\nInfrasys POS Release Summary\nNew Functions\n| Version | Brief Descriptions |\nEnhancements\n| Version | Brief Descriptions |\nBug Fixing\n| Version | Brief Descriptions |\n| 1.2.117.0 | [Jira-70047] [Bug fix] The general user does not have the System Configuration module |\nRelease History\n| Version | Release Date |\n| 1.2.117.0 | 2026-12-02 |\n| Sample :  New Functions :  Enhancements :  Bug Fixing :  Descriptions : Descriptions  Setup : Setup |\n********************************************************************************\n# <<< 1.2.117.0 >>>\nBug Fixing: [Jira-70047] [Bug fix] The general user does not have the System Configuration module\nDescription:\nFixed the issue where the system configuration navigation was not displayed for regular users.\nSetup:\nWhen a regular user logs into the system, if the \"System Configuration\" navigation is not hidden in the \"Function Permission Filter\" feature, then it should be displayed.\nIf the update fails to display after retrieving it, please try performing the \"Clear Cache\" operation in \"Infrasys POS System Tools\" and then log back into your account.\nRelease: 20261202<<< 1.2.117.0 >>>\n********************************************************************************",
-        "qc_info": {
-          "qc_tester": null,
-          "qc_reviewer": null
-        },
-        "knowledge_base": []
-      }
-    }
-  ]
+  "total_pending": 0,
+  "total_skipped": 26,
+  "pending": []
 }
